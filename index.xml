@@ -3,9 +3,17 @@
         <title>ThanhLD Site</title>
         <link>https://ducthanh98.github.io/</link>
         <description>Hi, My name&#39;s Thanh</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Nov 2022 22:58:35 &#43;0700</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 29 Nov 2022 11:17:12 &#43;0700</lastBuildDate>
             <atom:link href="https://ducthanh98.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Cka</title>
+    <link>https://ducthanh98.github.io/posts/cka/</link>
+    <pubDate>Tue, 29 Nov 2022 11:17:12 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/cka/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Amazon Solution Architect Professional Note</title>
     <link>https://ducthanh98.github.io/posts/aws-sap/</link>
     <pubDate>Mon, 28 Nov 2022 22:58:35 &#43;0700</pubDate>
