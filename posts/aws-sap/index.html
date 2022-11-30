@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  1661 ,
+        },"genre": "posts","wordcount":  1875 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1661 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1875 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -122,6 +122,8 @@
         <li><a href="#lambda">Lambda</a></li>
         <li><a href="#load-balancer">Load Balancer</a></li>
         <li><a href="#api-gateway">Api Gateway</a></li>
+        <li><a href="#aws-appsync">AWS AppSync:</a></li>
+        <li><a href="#route-53">Route 53</a></li>
       </ul>
     </li>
   </ul>
@@ -620,7 +622,102 @@
 </ul>
 <h3 id="api-gateway">Api Gateway</h3>
 <ul>
-<li></li>
+<li>Limit:  29 seconds, 10MB payload</li>
+<li>Integrations: * HTTP
+* Lambda
+* AWS Service</li>
+<li>Endpoint Types:
+<ul>
+<li>Edge-Optimized: For global clients
+<ul>
+<li>Request are routed through CloudFront(improve latency)</li>
+<li>Still lives only one region</li>
+</ul>
+</li>
+<li>Regional: For same region
+<ul>
+<li>Manually combine with CloudFront</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cache: 0 - 300 sec. invalidate the cache with header: Cache-Control: max-age=0</li>
+<li>Errors:
+<ul>
+<li>400 Bad Request</li>
+<li>403: Access Denied. WAF Filter</li>
+<li>429: Quota exceeded</li>
+<li>502: Incompatible output</li>
+<li>504: Timeout</li>
+</ul>
+</li>
+<li>Security:
+<ul>
+<li>Load SSL</li>
+<li>Resource based policy: Control who can access the API</li>
+<li>IAM Execution Role</li>
+<li>CORS</li>
+</ul>
+</li>
+<li>Authentication:
+<ul>
+<li>IAM based access: Pass IAM Credentials in headers through Sig V4</li>
+<li>Lambda Authorizer: Verify Oauth, third party, SAML</li>
+<li>Cognito User Pools: Client authenticates with Cognito</li>
+</ul>
+</li>
+<li>Logs:
+<ul>
+<li>Cloudwatch Logs:</li>
+<li>IntegrationLatency, Latency, CacheHitCount, CacheMissCount</li>
+</ul>
+</li>
+<li>X-ray:
+<ul>
+<li>Tracing extra information</li>
+<li>Xray API gateway, Lambda gives you the full picture</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-appsync">AWS AppSync:</h3>
+<ul>
+<li>Grapql support</li>
+<li>Realtime with websocket or MQTT</li>
+<li>For mobile: local data acess and synchronization</li>
+</ul>
+<h3 id="route-53">Route 53</h3>
+<ul>
+<li>Record Types:
+<ul>
+<li>A: IPV4</li>
+<li>AAAA: Ipv6</li>
+<li>CNAME: map hostname to another hostname and can&rsquo;t create CNAME for the top node of a DNS namespace</li>
+<li>NS: name servers for hosted zone</li>
+</ul>
+</li>
+<li>Targets:
+<ul>
+<li>ELB</li>
+<li>Cloudfront</li>
+<li>API GW</li>
+<li>Beanstalk</li>
+<li>S3</li>
+<li>VPC Interface Endpoint</li>
+<li>Global Accelerator</li>
+<li>Route53</li>
+</ul>
+</li>
+<li>Zones:
+<ul>
+<li>Public zones: Route traffic on the internet</li>
+<li>Private zones: Route traffic within one or more vpcs</li>
+</ul>
+</li>
+<li>DNSSEC:
+<ul>
+<li>Protects against Man in Middle Atk</li>
+</ul>
+</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
