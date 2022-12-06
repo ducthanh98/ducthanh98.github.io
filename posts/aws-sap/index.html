@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  1875 ,
+        },"genre": "posts","wordcount":  2444 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1875 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2444 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -124,6 +124,16 @@
         <li><a href="#api-gateway">Api Gateway</a></li>
         <li><a href="#aws-appsync">AWS AppSync:</a></li>
         <li><a href="#route-53">Route 53</a></li>
+        <li><a href="#aws-global-accelerator">AWS Global Accelerator</a></li>
+        <li><a href="#aws-outposts">AWS Outposts:</a></li>
+        <li><a href="#aws-wavelength">AWS WaveLength</a></li>
+        <li><a href="#aws-local-zones">AWS Local Zones</a></li>
+      </ul>
+    </li>
+    <li><a href="#storage">Storage</a>
+      <ul>
+        <li><a href="#ec2-1">EC2</a></li>
+        <li><a href="#efs">EFS</a></li>
       </ul>
     </li>
   </ul>
@@ -583,8 +593,13 @@
 </ul>
 </li>
 <li>Synchronous Invocations: Cli,sdk,api gateway</li>
-<li>Asynchronous Invocations: S3,SNS, Event Bridge</li>
+<li>Asynchronous Invocations:
+<ul>
+<li>S3,SNS, Event Bridge</li>
+<li>Can define a DLQ: SNS or SQS</li>
 <li>Attempts to retry on 3 errors</li>
+</ul>
+</li>
 </ul>
 <h3 id="load-balancer">Load Balancer</h3>
 <ul>
@@ -715,7 +730,165 @@
 </li>
 <li>DNSSEC:
 <ul>
-<li>Protects against Man in Middle Atk</li>
+<li>Protects against Man in Middle Atks</li>
+<li>Works only with Public Hosted Zone</li>
+</ul>
+</li>
+<li>Resolver Endpoint:
+<ul>
+<li>Inbound: DNS Resolver on your network can forward DNS queries to Route 53</li>
+<li>Outbound: Use Resolver Rule to forward DNS queries to your DNS Resolver</li>
+<li>Each endpoint supports up to 10 000 queries/second/ip</li>
+</ul>
+</li>
+<li>Rules:
+<ul>
+<li>Forwarding Rule: Forward DNS queries for a specified domain or all its subdomain to target IP addresses</li>
+<li>System Rules: Overrides the Forwarding Rules</li>
+<li>Auto-defined System Rules: Defines how DNS queries for selected domains are resolved(eg AWS internal domain names, Privated Hosted Zones, &hellip;)</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-global-accelerator">AWS Global Accelerator</h3>
+<ul>
+<li>Good fit for non HTTP use cases: UDP,TCP,Voice over IP</li>
+<li>Good for use cases that require static IP(2 Anycast IP)</li>
+<li>Good for use cases that require deterministic, fast regional failover</li>
+</ul>
+<h3 id="aws-outposts">AWS Outposts:</h3>
+<ul>
+<li>Server racks that offers the same aws infrastructure, services, APIs and tools to build your own system just as in the cloud.</li>
+<li>You are responsible for the Outposts Rack physical security</li>
+<li>Benefits:
+<ul>
+<li>Low-latency access to on-premises systems</li>
+<li>Local data processing</li>
+<li>Data residency</li>
+<li>Easier migration from on-permises to cloud</li>
+<li>Fully managed service</li>
+</ul>
+</li>
+<li>Some services that work on Outposts:
+<ul>
+<li>EC2</li>
+<li>EBS</li>
+<li>S3
+<ul>
+<li>Use S3 APIs to store and retrieve</li>
+<li>S3 Storage class named s3 outposts</li>
+<li>Default encryption: SSE-S3</li>
+<li>S3 outposts -&gt; s3 access point &lt;- ec2</li>
+<li>S3 outposts -&gt; datasync -&gt; S3</li>
+</ul>
+</li>
+<li>EKS</li>
+<li>ECS</li>
+<li>RDS</li>
+<li>EMR</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-wavelength">AWS WaveLength</h3>
+<ul>
+<li>Bridge AWS services to the edge of 5G networks</li>
+<li>Ec2, EBS,VPC</li>
+<li>Ultra-low latency applications through 5G</li>
+<li>No additional charges or service agreements.</li>
+<li>Use cases: Smart cities, Conntected vehicles, real-time gaming, AR/VR</li>
+</ul>
+<h3 id="aws-local-zones">AWS Local Zones</h3>
+<ul>
+<li>Place AWS compute, storage, database, &hellip; closer to end users to run latency-sensitive applications.</li>
+<li>Extend your VPC to more locations - extension of an AWS Region</li>
+<li>Compatible with EC2, RDS, ECS, EBS, Elastic Cache,Direct Connect</li>
+<li>Example:
+<ul>
+<li>AWS Region: us-east-1</li>
+<li>AWS Local Zones: Boston, Chicago</li>
+</ul>
+</li>
+</ul>
+<h2 id="storage">Storage</h2>
+<h3 id="ec2-1">EC2</h3>
+<ul>
+<li>Network drive you attach to 1 instance only</li>
+<li>Can be resized</li>
+<li>Only gp2/gp3 and io1/io2 can be used as boot volume</li>
+<li>EBS Backup
+<ul>
+<li>Only backup changed blocks</li>
+<li>Use IO so you shouldn&rsquo;t run them while your application is handling a lot of traffic</li>
+<li>Snapshots will be stored in s3</li>
+<li>Copy snapshots across region</li>
+<li>Make AMI from snapshots</li>
+</ul>
+</li>
+<li>Data Lifecyle Manager
+<ul>
+<li>Automate the creation, retention and deletion of EBS snapshots and EBS-backed AMIs</li>
+<li>Use resource tags to identify the resources</li>
+<li>Can&rsquo;t be used to manage snapshots/AMIS created outside DLM</li>
+</ul>
+</li>
+<li>AWS Backup
+<ul>
+<li>Manages and monitors backups across the AWS services you use from a single place</li>
+</ul>
+</li>
+<li>io1/io2:
+<ul>
+<li>Attach the same EBS to mutiple EC2 instances in the same AZ</li>
+<li>Must use a file system that&rsquo;s cluster-aware</li>
+</ul>
+</li>
+<li>Local Instance Store:
+<ul>
+<li>Very high IOPS</li>
+<li>Disks up to 7.5TB, stripped to reach 60TB</li>
+<li>Can not be increased in size</li>
+<li>Risk of data loss if hardware fails</li>
+</ul>
+</li>
+</ul>
+<h3 id="efs">EFS</h3>
+<ul>
+<li>Can be mounted to many EC2 in multi A-Z</li>
+<li>Expensive(3x gp2), pay per GB used</li>
+<li>Compatible with Linux, POSIX compliant, NFSv4.1</li>
+<li>Attach to one VPC, create one ENI per zone</li>
+<li>Scale up to 1000s, 10gb/s throughput</li>
+<li>Mode:
+<ul>
+<li>Performance Mode:
+<ul>
+<li>General purpose: latency-sensitive(web server, CMS)</li>
+<li>Max IO: higher latency, throughput, highly parallel, &hellip;</li>
+</ul>
+</li>
+<li>Throughput Mode:
+<ul>
+<li>Bursting(1 TB = 50Mb/s + burst up to 100Mb/s)</li>
+<li>Provisioned: set your throughput regardless of storage size, &hellip;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Storage Tiers:
+<ul>
+<li>Stand and EFS-IA.</li>
+<li>Life cycle policy: Maximum 30 days</li>
+</ul>
+</li>
+<li>Access Points:
+<ul>
+<li>Easily manage applications access to NFS environments</li>
+<li>Restrict access from NFS clients using IAM policies</li>
+</ul>
+</li>
+<li>File system policies:
+<ul>
+<li>Grants full access to all clients</li>
+<li>Same S3 bucket policy .</li>
 </ul>
 </li>
 </ul>
