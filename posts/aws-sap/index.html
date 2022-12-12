@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  2444 ,
+        },"genre": "posts","wordcount":  2992 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2444 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2992 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -134,6 +134,10 @@
       <ul>
         <li><a href="#ec2-1">EC2</a></li>
         <li><a href="#efs">EFS</a></li>
+        <li><a href="#s3-1">S3</a></li>
+        <li><a href="#amazon-fsx">Amazon Fsx</a></li>
+        <li><a href="#datasync">DataSync</a></li>
+        <li><a href="#aws-transfer">AWS Transfer</a></li>
       </ul>
     </li>
   </ul>
@@ -889,6 +893,188 @@
 <ul>
 <li>Grants full access to all clients</li>
 <li>Same S3 bucket policy .</li>
+</ul>
+</li>
+<li>Cross Region Replication
+<ul>
+<li>Replicate objects in an EFS file system to another AWS region</li>
+<li>Setup for new or existing EFS file systems</li>
+<li>Doesn&rsquo;t affect the provisioned throughput of the EFS filesyste</li>
+<li>Use cases: meet your compliance and business continuity goals</li>
+</ul>
+</li>
+</ul>
+<h3 id="s3-1">S3</h3>
+<ul>
+<li>Anti patterns:
+<ul>
+<li>Lots of small files</li>
+<li>POISX file system (use EFS instead)</li>
+<li>Search features, queries, rapidly changing data</li>
+<li>Dynamic content</li>
+</ul>
+</li>
+<li>Storage classes comparison
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/s3_storage_classes_comparison.png"
+        data-srcset="/s3_storage_classes_comparison.png, /s3_storage_classes_comparison.png 1.5x, /s3_storage_classes_comparison.png 2x"
+        data-sizes="auto"
+        alt="/s3_storage_classes_comparison.png"
+        title="Storage classes comparison" /></li>
+<li>S3 Event Notifications
+<ul>
+<li>Some useful events: S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication</li>
+<li>Create as many s3 events as desired</li>
+<li>Deliver events in second but can sometimes take a minutes or longer</li>
+<li>Object name filtering possible</li>
+</ul>
+</li>
+<li>Baseline: 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD per second per prefix in a bucket</li>
+<li>S3 Performance:
+<ul>
+<li>Multi-part upload: recommended for files &gt; 100MB, must use for files &gt; 5GB. Can help parallelize uploads(speed up transfers)</li>
+<li>S3 Transfer Acceleration: Increase transfer by transfering file to an AWS edge location. Compatible with multipart-upload</li>
+<li>S3 Byte-Range Fetches: Can be used to speed up downloads and retrieve only partial data</li>
+</ul>
+</li>
+<li>Storage Class Analysis:
+<ul>
+<li>Help you decide when to transition objects to the right storage class</li>
+<li>Recommendations for Stand and Stand-IA</li>
+<li>Updated daily</li>
+<li>24-48h hours to start seeing data analysis</li>
+<li>Visualize data in QuickSight</li>
+</ul>
+</li>
+<li>Storage Lens
+<ul>
+<li>Default dashboard or create your own dashboard</li>
+<li>Aggregate data for Organization, specific accounts, regions, buckets or prefixs</li>
+<li>Can be configured to export metrics daily to an s3 bucket(CSV, Parquet)</li>
+<li>Free Metrics:
+<ul>
+<li>Available for all customers</li>
+<li>Contains around 28 usage metrics</li>
+<li>Data is available for queries for 14 days</li>
+</ul>
+</li>
+<li>Advanced metrics and recommendations
+<ul>
+<li>additional paid metrics and features</li>
+<li>Advanced metric: activity, advanced cost optimization, advanced data protection, status code</li>
+</ul>
+<ul>
+<li>Cloudwatch Publishing: Access metrics in CloudWatch without additional charges</li>
+<li>Prefix Aggregation: Collect metrics at the prefix level</li>
+<li>Data is available for queries for 15 months</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="amazon-fsx">Amazon Fsx</h3>
+<ul>
+<li>Fsx for Windows:
+<ul>
+<li>Supports SMB and NFTS, Active Directory</li>
+<li>Can be mounted on Linux EC2 instances</li>
+<li>Supports Distribute File System(DFS) Namespaces</li>
+<li>Scale up to 10s of GB/s, millions of IOPS, 100s PB of data</li>
+<li>Storage Options:
+<ul>
+<li>SSD</li>
+<li>HDD</li>
+</ul>
+</li>
+<li>Can be accessed from your on-premises(VPN and Direct Connect)</li>
+<li>Backed-up daily to S3</li>
+<li>Can be configured to be multi-AZ(HA)</li>
+</ul>
+</li>
+<li>Fsx for Lustre
+<ul>
+<li>ML, HPC, Video Processing, Financial Modeling</li>
+<li>Scales up to 100s GB/s, millions of IOPS, sub-ms latencies</li>
+<li>Seamless integration with s3</li>
+<li>Storage Options:
+<ul>
+<li>SSD</li>
+<li>HDD</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Deployment Options:
+<ul>
+<li>Scratch File System:
+<ul>
+<li>Temporary storage</li>
+<li>Data is not replicated</li>
+<li>Use case: short processing, optimize costs</li>
+</ul>
+</li>
+<li>Persistent
+<ul>
+<li>Long-term storage, sesitive data</li>
+<li>Replicated within same AZ</li>
+<li>Replace failed files within minutes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Fsx for ONTAP
+<ul>
+<li>NFS, SMB, iSCSI,</li>
+<li>Move workloads running on ONTAP or NAS to aws</li>
+<li>Storage shrink or grows automatically</li>
+</ul>
+</li>
+<li>FSX for OpenZFS
+<ul>
+<li>NFS, ZFS protocols</li>
+</ul>
+</li>
+<li>Using DataSync to move from One AZ to Multiple AZ or decrease volume size</li>
+</ul>
+<h3 id="datasync">DataSync</h3>
+<ul>
+<li>On premises: Need agent</li>
+<li>File permissions and metadata are preserved</li>
+<li>One agent task can use 10Gbps, setup a bandwidth limit</li>
+<li>Private VIF through Direct Connect
+<ul>
+<li>Agent -&gt; Direct Connect -&gt; Private Link -&gt; Interface VPC Endpoint -&gt; AWS DataSync</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-transfer">AWS Transfer</h3>
+<ul>
+<li>Transfers into and out of S3 or EFS</li>
+<li>FTP, FTPS, SFTP</li>
+<li>Integrate with existing authentication systems (AD, LDAP, Cognito, Custom)</li>
+<li>Types:
+<ul>
+<li>Public Endpoint:
+<ul>
+<li>Ips managed by aws</li>
+<li>Cant setup allow lists by source ip</li>
+</ul>
+</li>
+<li>VPC Endpoint with internal access
+<ul>
+<li>Static private ips</li>
+<li>Setup allow lists(SG and NACL)</li>
+</ul>
+</li>
+<li>VPC Endpoint with inter-facing
+<ul>
+<li>Static private ips</li>
+<li>Static publics ips</li>
+<li>Setup sg</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
