@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  3912 ,
+        },"genre": "posts","wordcount":  4015 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,7 +70,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3912 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4015 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -155,6 +155,11 @@
     <li><a href="#service-communication">Service Communication</a>
       <ul>
         <li><a href="#aws-step-functions">AWS Step Functions</a></li>
+      </ul>
+    </li>
+    <li><a href="#streaming">Streaming</a>
+      <ul>
+        <li><a href="#aws-kinesis">AWS Kinesis</a></li>
       </ul>
     </li>
   </ul>
@@ -1363,6 +1368,38 @@
 <li>Use cases: Workflow that don&rsquo;t require immediate response, messaging</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h2 id="streaming">Streaming</h2>
+<h3 id="aws-kinesis">AWS Kinesis</h3>
+<ul>
+<li>Kinesis Data Firehose
+<ul>
+<li>Destinations:
+<ul>
+<li>AWS: Redshift, S3, Elastic Search</li>
+<li>3rd partner: Splunk, Mongodb, Datadog, NewRelic</li>
+<li>Custom: HTTP endpoint</li>
+</ul>
+</li>
+<li>Near realtime
+<ul>
+<li>High throughput =&gt; buffer size(32MB) hit</li>
+<li>Low throughput =&gt; buffer time(1 minute) hit</li>
+<li>=&gt; If realtime flush from Kinesis to S3 is needed , use Lambda</li>
+</ul>
+</li>
+<li>Support custom data transformations using Lambda</li>
+<li>Send all failed or all data to a backup S3 bucket</li>
+<li>Doesn&rsquo;t support replay capability</li>
+</ul>
+</li>
+<li>Kinesis Data Analytics
+<ul>
+<li>Streaming ETL: select columns, make simple transformation, on streaming data</li>
+<li>Continuous metric generation : live leaderboard for a mobile game</li>
+<li>Reponse analytics: look for a certain criteria and build alerting</li>
 </ul>
 </li>
 </ul>
