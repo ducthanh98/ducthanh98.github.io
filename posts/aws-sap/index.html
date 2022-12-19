@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  2992 ,
+        },"genre": "posts","wordcount":  3912 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2992 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3912 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -138,6 +138,23 @@
         <li><a href="#amazon-fsx">Amazon Fsx</a></li>
         <li><a href="#datasync">DataSync</a></li>
         <li><a href="#aws-transfer">AWS Transfer</a></li>
+      </ul>
+    </li>
+    <li><a href="#caching">Caching</a>
+      <ul>
+        <li><a href="#cloudfront">Cloudfront</a></li>
+      </ul>
+    </li>
+    <li><a href="#databases">Databases</a>
+      <ul>
+        <li><a href="#dynamodb">DynamoDB</a></li>
+        <li><a href="#rds">RDS</a></li>
+        <li><a href="#aurora">Aurora</a></li>
+      </ul>
+    </li>
+    <li><a href="#service-communication">Service Communication</a>
+      <ul>
+        <li><a href="#aws-step-functions">AWS Step Functions</a></li>
       </ul>
     </li>
   </ul>
@@ -1073,6 +1090,277 @@
 <li>Static private ips</li>
 <li>Static publics ips</li>
 <li>Setup sg</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="caching">Caching</h2>
+<h3 id="cloudfront">Cloudfront</h3>
+<ul>
+<li>Improves read performance, content is cached at edge</li>
+<li>Integration with Shield, WAF, Route 53</li>
+<li>Expose external HTTPS</li>
+<li>Support Websocket</li>
+<li>Origins:
+<ul>
+<li>S3:
+<ul>
+<li>Enhanced security with Origin Access Control(OAC)</li>
+<li>Enable Static Web Hosting to configure</li>
+</ul>
+</li>
+<li>Media Store Container &amp;&amp; Media Package Endpoint
+<ul>
+<li>Deliver video on-demand or live streaming video using AWS Media Services</li>
+</ul>
+</li>
+<li>Custom Origin(HTTP):
+<ul>
+<li>EC2</li>
+<li>ALB or CLB</li>
+<li>API Gateway</li>
+<li>HTTP Backend</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cloudfront vs Cross Region:
+<ul>
+<li>CloudFront: Great for static content that must be available everywhere</li>
+<li>Cross region: Great for dynamic content that needs to be avaiable at low-latency in few regions</li>
+</ul>
+</li>
+<li>Restrict access to ALB and Custom Origins:
+<ul>
+<li>Configure CloudFront to add Custom HTTP Header</li>
+<li>Configure the ALB to only forward request that contain that custom header</li>
+</ul>
+</li>
+<li>Origin Groups: One primary and one secondary origin</li>
+<li>Geo Restriction:
+<ul>
+<li>You can limit who can access your distribution</li>
+<li>The country is determined using a 3rd geo-ip database</li>
+<li>geo header CloudFront-Viewer-Country is in Lambda@Edge</li>
+</ul>
+</li>
+<li>Cloudfront SignedURL:
+<ul>
+<li>Allow access to a path, no matter the origin</li>
+<li>Only root can manage it</li>
+<li>Filter by IP, path, date, expiration</li>
+<li>Leverage caching features</li>
+</ul>
+</li>
+<li>S3 Presigned URL:
+<ul>
+<li>Issue a request as the person who pre-signed URL</li>
+<li>Limited lifetime</li>
+</ul>
+</li>
+<li>Custom Error Pages: Use Error Caching Minium TTL</li>
+<li>Edge Function
+<ul>
+<li>Runs close to your uses to minimize latency</li>
+<li>Doesn&rsquo;t have any cache, only to change requests/response</li>
+<li>Two types: CloudFront Functions &amp;&amp; Lambda Edge</li>
+<li>Use cases:
+<ul>
+<li>Manipulate HTTP requests and responses</li>
+<li>Implement request filtering before reaching the application</li>
+<li>User authentication and authorization</li>
+<li>AB testing</li>
+</ul>
+</li>
+<li>CloudFront: Deploys at edge location</li>
+<li>Lambda Edge: Deploys at regional edge cache</li>
+<li>CloudFront Functions :
+<ul>
+<li>Cache key normalization: Transform request attributes</li>
+<li>Header manipulation</li>
+<li>URL rewrites</li>
+<li>Request authentication and authorization</li>
+</ul>
+</li>
+<li>Lambda Edge:
+<ul>
+<li>Longer execution(serveral ms)</li>
+<li>Adjustable CPU or mem</li>
+<li>Depends on 3rd lib</li>
+<li>Network access to external services for processing</li>
+<li>File system access or access to the body of HTTP request</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="databases">Databases</h2>
+<h3 id="dynamodb">DynamoDB</h3>
+<ul>
+<li>NoSQL database, massive scale(1 000 000 rps)</li>
+<li>Similar to Cassandra</li>
+<li>No disk space to provision, max object size 400kb</li>
+<li>Read: Eventually, strong consistency</li>
+<li>ACID support</li>
+<li>Backup available, point in time recovery</li>
+<li>Classes: Standard, IA</li>
+<li>Data Types: String, Number, Boolean, Binary, Null, List, Map, String Set, Number Set, Binary Set</li>
+<li>Primary Keys: Parition Key or Parition Key + Sort Key(timestamp is good choice)</li>
+<li>Indexs:
+<ul>
+<li>Local Second Index:
+<ul>
+<li>Keep the same primary key</li>
+<li>Select an alternative sort key</li>
+<li>Must be defined at table creation time</li>
+</ul>
+</li>
+<li>Global Second Index
+<ul>
+<li>Change the primary and optional sort key</li>
+<li>Can be defined after the table is created</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>You can only query by PK + sort key on the main table and indexes</li>
+<li>TTL:</li>
+<li>DynamoDB Streams:
+<ul>
+<li>Can be read by Lambda, Ec2</li>
+<li>24 hours retention of dagta</li>
+</ul>
+</li>
+<li>Global Tables:
+<ul>
+<li>Active Active Replication, many regions</li>
+<li>Must enable DynamoDB Streams</li>
+<li>Userful for low latency, DR purposes</li>
+</ul>
+</li>
+<li>DAX
+<ul>
+<li>Seamless cache for DynamoDB, no application re-write</li>
+<li>Write go through DAX To DynamoDB</li>
+<li>Micro-latency for cached reads and queries</li>
+<li>5 minutes TTL by default</li>
+<li>Up to 10 nodes</li>
+<li>Multi AZ(3 nodes minimum recommended for production)</li>
+<li>Secure(KMS, CloudTrail, )</li>
+</ul>
+</li>
+</ul>
+<h3 id="rds">RDS</h3>
+<ul>
+<li>Failover:
+<ul>
+<li>If you have an Amazon Aurora Replica in the same or a different Availability Zone, when failing over, Amazon Aurora flips the canonical name record (CNAME) for your DB Instance to point at the healthy replica, which in turn is promoted to become the new primary. Start-to-finish failover typically completes within 30 seconds.</li>
+<li>If you are running Aurora Serverless and the DB instance or AZ becomes unavailable, Aurora will automatically recreate the DB instance in a different AZ.</li>
+<li>If you do not have an Amazon Aurora Replica (i.e., single instance) and are not running Aurora Serverless, Aurora will attempt to create a new DB Instance in the same Availability Zone as the original instance</li>
+</ul>
+</li>
+<li>RDS Events: Get notified via SNS for events(operations, outages)</li>
+<li>Multi AZ &amp;&amp; Read Replicas:
+<ul>
+<li>Multi AZ: Standby instance for failover in case of outage</li>
+<li>Replicas: Increase read throughput. Can be cross-region</li>
+</ul>
+</li>
+<li>Security:
+<ul>
+<li>Transparent Data Encryption(TDE) for Oracle and SQL Server</li>
+<li>IAM authentication for MySQL and PostgreSQL</li>
+</ul>
+</li>
+<li>Oracle:
+<ul>
+<li>Use RDS backup for backup and restore</li>
+<li>Use Oracle RMAN(recovery mananger) for backups and restore to non rds</li>
+<li>Real Application Cluster(RAC)
+<ul>
+<li>RDS for Oracle doesn&rsquo;t support RAC</li>
+<li>RAC is working on EC2 instance because you have full control</li>
+<li>DMS works on Oracle RDS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RDS Proxy: you no longer need code that handles cleaning up idle connections and managing connection pools</li>
+</ul>
+<h3 id="aurora">Aurora</h3>
+<ul>
+<li>Automated failover for master in less than 30s</li>
+<li>Support cross region replication</li>
+<li>Troubleshooting RDS and Aurora Performance
+<ul>
+<li>CW Metrics: CPU, Memory, Swap Usage</li>
+<li>Enhanced Monitoring Metrics: host level, process view, per-second metric</li>
+<li>Slow query logs</li>
+</ul>
+</li>
+<li>Convert RDS to Aurora
+<ul>
+<li>Take a snap and restore</li>
+<li>Create new aurora replica from rds instance and promote it</li>
+</ul>
+</li>
+</ul>
+<h2 id="service-communication">Service Communication</h2>
+<h3 id="aws-step-functions">AWS Step Functions</h3>
+<ul>
+<li>Invoke a lambda function</li>
+<li>Run an AWS Batch, ECS task</li>
+<li>Insert an item to DynamoDB</li>
+<li>Publish message to SNS,SQS</li>
+<li>Launch an EMR, Glue, SageMaker jobs, another Step Function</li>
+<li>Invoke Step Function Workflow:
+<ul>
+<li>AWS Management Console</li>
+<li>AWS SDK(StartExecution)</li>
+<li>AWS cli(start-execution)</li>
+<li>AWS Lambda(StartExecution api call)</li>
+<li>API Gateway</li>
+<li>Event Bridge</li>
+<li>Code Pipeline</li>
+<li>Step Functions</li>
+</ul>
+</li>
+<li>Tasks
+<ul>
+<li>Lambda Task: Invoke a lambda function</li>
+<li>Activity Task:
+<ul>
+<li>Activity Worker, Ec2, Mobile, on-premise DC</li>
+<li>They poll the Step Functions Service</li>
+</ul>
+</li>
+<li>Service Task:
+<ul>
+<li>Connect to a supported AWS service</li>
+<li>Lambda function, ECS Task, Fargate, Dynamodb, Batch Job, SNS, SQS</li>
+</ul>
+</li>
+<li>WaitTask:
+<ul>
+<li>Wait for a duration or unitl a timestamp</li>
+</ul>
+</li>
+<li>Step Function doesn&rsquo;t integrate natively with AWS Medical Turk</li>
+</ul>
+</li>
+<li>Express Workflow
+<ul>
+<li>Synchronous:
+<ul>
+<li>Wait until the Workflow completes, then return the result</li>
+<li>Use cases: orchestrate microservices, handle errors, retries, parallel tasks,&hellip;</li>
+</ul>
+</li>
+<li>Asynchronous:
+<ul>
+<li>Doesn&rsquo;t for the Workflow to complete</li>
+<li>Use cases: Workflow that don&rsquo;t require immediate response, messaging</li>
 </ul>
 </li>
 </ul>
