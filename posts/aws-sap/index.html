@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Amazon Solution Architect Professional Note - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh"><meta property="og:title" content="Amazon Solution Architect Professional Note" />
-<meta property="og:description" content="Identify and Federation IAM: - Explicit DENY has precedence over ALOW - NotAction: explicit allow a FEW THING in there - Access Advisor: See permissions granted and when last accessed - Access analyzer: Analyze resources that are shared with external entity STS - When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa AWS Organization - Feature Mode: &#43; Consolidated billing feature: &#43; Consolidated billing across all acounts - single payment method &#43; Pricing benefits from aggregated usage &#43; Invited accounts must approve enabling allf eatures &#43; Ability to apply an SCP &#43; Reserved Instances: All accounts can receive the benefits that are purchased by any another account." />
+<meta property="og:description" content="OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Identify and Federation IAM: - Explicit DENY has precedence over ALOW - NotAction: explicit allow a FEW THING in there - Access Advisor: See permissions granted and when last accessed - Access analyzer: Analyze resources that are shared with external entity - Access Key: &#43; Can have two access keys &#43; Can be created, deleted, made inactivate or activate STS - When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa AWS Organization - Feature Mode: &#43; Consolidated billing feature: &#43; Consolidated billing across all acounts - single payment method &#43; Pricing benefits from aggregated usage &#43; Invited accounts must approve enabling all features &#43; Ability to apply an SCP &#43; Reserved Instances: All accounts can receive the benefits that are purchased by any another account." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/aws-sap/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-28T22:58:35+07:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Amazon Solution Architect Professional Note"/>
-<meta name="twitter:description" content="Identify and Federation IAM: - Explicit DENY has precedence over ALOW - NotAction: explicit allow a FEW THING in there - Access Advisor: See permissions granted and when last accessed - Access analyzer: Analyze resources that are shared with external entity STS - When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa AWS Organization - Feature Mode: &#43; Consolidated billing feature: &#43; Consolidated billing across all acounts - single payment method &#43; Pricing benefits from aggregated usage &#43; Invited accounts must approve enabling allf eatures &#43; Ability to apply an SCP &#43; Reserved Instances: All accounts can receive the benefits that are purchased by any another account."/>
+<meta name="twitter:description" content="OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Identify and Federation IAM: - Explicit DENY has precedence over ALOW - NotAction: explicit allow a FEW THING in there - Access Advisor: See permissions granted and when last accessed - Access analyzer: Analyze resources that are shared with external entity - Access Key: &#43; Can have two access keys &#43; Can be created, deleted, made inactivate or activate STS - When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa AWS Organization - Feature Mode: &#43; Consolidated billing feature: &#43; Consolidated billing across all acounts - single payment method &#43; Pricing benefits from aggregated usage &#43; Invited accounts must approve enabling all features &#43; Ability to apply an SCP &#43; Reserved Instances: All accounts can receive the benefits that are purchased by any another account."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  4015 ,
+        },"genre": "posts","wordcount":  4678 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4015 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4678 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -79,6 +79,11 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#osi-model">OSI Model</a>
+      <ul>
+        <li><a href="#layer-1">Layer 1</a></li>
+      </ul>
+    </li>
     <li><a href="#identify-and-federation">Identify and Federation</a>
       <ul>
         <li><a href="#iam">IAM:</a></li>
@@ -160,16 +165,43 @@
     <li><a href="#streaming">Streaming</a>
       <ul>
         <li><a href="#aws-kinesis">AWS Kinesis</a></li>
+        <li><a href="#aws-msk">AWS MSK</a></li>
+        <li><a href="#aws-batch">AWS Batch</a></li>
+        <li><a href="#aws-emr">AWS EMR</a></li>
+        <li><a href="#aws-glue">AWS Glue</a></li>
+        <li><a href="#redshift">Redshift</a></li>
+        <li><a href="#aws-timestream">AWS Timestream</a></li>
+        <li><a href="#aws-athena">AWS Athena</a></li>
+        <li><a href="#aws-quicksight">AWS Quicksight</a></li>
       </ul>
     </li>
+    <li><a href="#monitoring">Monitoring</a>
+      <ul>
+        <li><a href="#cloudwatch">Cloudwatch</a></li>
+        <li><a href="#aws-x-ray">AWS X-ray</a></li>
+        <li><a href="#aws-personal-health-dashboard">AWS Personal Health Dashboard</a></li>
+      </ul>
+    </li>
+    <li><a href="#deployment-and-management">Deployment and Management</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="identify-and-federation">Identify and Federation</h2>
+            </div><div class="content" id="content"><h2 id="osi-model">OSI Model</h2>
+<h3 id="layer-1">Layer 1</h3>
+<ul>
+<li>Physical shared medium</li>
+<li>Standards for transmiting and receiving from the medium</li>
+<li>No access control</li>
+<li>No device =&gt; no device communications</li>
+</ul>
+<h2 id="identify-and-federation">Identify and Federation</h2>
 <h3 id="iam">IAM:</h3>
 <pre><code>- Explicit DENY has precedence over ALOW
 - NotAction: explicit allow a FEW THING in there
 - Access Advisor: See permissions granted and when last accessed
 - Access analyzer: Analyze resources that are shared with external entity
+- Access Key: 
+    + Can have two access keys
+    + Can be created, deleted, made inactivate or activate
 </code></pre>
 <h3 id="sts">STS</h3>
 <pre><code>- When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa
@@ -179,7 +211,7 @@
     + Consolidated billing feature: 
         + Consolidated billing across all acounts - single payment method
         + Pricing benefits from aggregated usage
-    + Invited accounts must approve enabling allf eatures
+    + Invited accounts must approve enabling all features
     + Ability to apply an SCP
     + Reserved Instances: All accounts can receive the benefits that are purchased by any another account. The payer can turn off reserved instance discount and savings plans discount sharing fr any accounts, including the payer
 - Service Control Policies:
@@ -1402,6 +1434,206 @@
 <li>Reponse analytics: look for a certain criteria and build alerting</li>
 </ul>
 </li>
+</ul>
+<h3 id="aws-msk">AWS MSK</h3>
+<ul>
+<li>Consumers:
+<ul>
+<li>Kinesis Data Analytics for Apache Flink</li>
+<li>AWS Glue</li>
+<li>Lambda</li>
+<li>Application</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-batch">AWS Batch</h3>
+<ul>
+<li>Run as Docker images</li>
+<li>No time limit</li>
+<li>2 Options
+<ul>
+<li>AWS Fargate</li>
+<li>Dynamic provisioning</li>
+</ul>
+</li>
+<li>Example: batch process of images, thousands of concurrent jobs, &hellip;</li>
+<li>Schedule Batch Jobs using Amazon EventBridge</li>
+<li>Orchestrate Batch Jobs using AWS Step Functions</li>
+<li>Environments:
+<ul>
+<li>Managed Compute Environment: You can choose On-demand or spot(no need to worry about capacity)</li>
+<li>Unmanaged Compute Envrionment:</li>
+</ul>
+</li>
+<li>Modes:
+<ul>
+<li>One Mode</li>
+<li>Multi Node:
+<ul>
+<li>large scale, good for HPC.</li>
+<li>Doesn&rsquo;t work with spot</li>
+<li>Work better if your EC2 launch mode is a placement group</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-emr">AWS EMR</h3>
+<ul>
+<li>EMR stands for Elastic MapReduce</li>
+<li>Helps creating Hadoop cluster(big data)</li>
+<li>Nodes:
+<ul>
+<li>Master Node</li>
+<li>Core Node</li>
+<li>Task Node(Optional)</li>
+</ul>
+</li>
+<li>Purchasing options: on-demand, reserved, spot</li>
+<li>Instance Configuration
+<ul>
+<li>Uniform Intance Groups: Select a single instance type and purchasing option for each node(has auto scaling)</li>
+<li>Instance fleet: select target capacity, mix instance types and purchasing options (no auto scaling)</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-glue">AWS Glue</h3>
+<ul>
+<li>Manage extract, transform and load (ETL) service</li>
+<li>Fully serverless</li>
+<li>Example: S3, RDS -&gt; Extract -&gt; Glue(Transform) -&gt; Load -&gt; Redshift</li>
+</ul>
+<h3 id="redshift">Redshift</h3>
+<ul>
+<li>Based on postgresql</li>
+<li>OLAP - Online Analytical Processing</li>
+<li>10x better performances than other data warehouses, scale to PBS of data</li>
+<li>Columnar storage</li>
+<li>Massive Parallel Query</li>
+<li>Load from S3, Kinesis Firehose, DynamoDb, DMS</li>
+<li>Snapshots:
+<ul>
+<li>Automated: every 8 hours, every 5 GB, or on a schedule. Set retention</li>
+<li>Manual: snapshot is retained until you delete it</li>
+<li>Config it to automatically copy snapshots to another region</li>
+<li>Copy cross-region snapshots for an encrypted Redshift: Use snapshot copy grant</li>
+</ul>
+</li>
+<li>Redshift Spectrum:
+<ul>
+<li>Query S3 without loading it</li>
+<li>Must have a Redshift cluster available to start query</li>
+</ul>
+</li>
+<li>Workload Management: Enables you to flexibly manage queries priorties within workloads.</li>
+<li>Concurrency scaling:
+<ul>
+<li>Charged per second</li>
+<li>Provide consistently faster performance</li>
+<li>Automatically adds additional cluster capacity</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-timestream">AWS Timestream</h3>
+<ul>
+<li>Time series database</li>
+<li>AWS IOT</li>
+<li>Kinesis</li>
+<li>Prometheus</li>
+</ul>
+<h3 id="aws-athena">AWS Athena</h3>
+<ul>
+<li>Using SQL(built on Presto)</li>
+<li>Supports CSV, JSON, ORC, Parquet</li>
+<li>Commonly used with Amazon Quicksight for reporting/dashboard</li>
+<li>Use cases: Business intelligence/analytics/reporting/ query logs, CloudTrails</li>
+<li>Use columnar for cost savings
+<ul>
+<li>Apache Parquet or ORC is recommend</li>
+<li>Huge performance improvement</li>
+<li>Use Glue to convert you data</li>
+</ul>
+</li>
+<li>Compress data for smaller retrievals(bzip2, gzip, )</li>
+<li>Partition datasets in S3 for easy querying</li>
+</ul>
+<h3 id="aws-quicksight">AWS Quicksight</h3>
+<ul>
+<li>Serveless dashboard</li>
+</ul>
+<h2 id="monitoring">Monitoring</h2>
+<h3 id="cloudwatch">Cloudwatch</h3>
+<ul>
+<li>CW Metrics:
+<ul>
+<li>Provided by many AWS service</li>
+<li>EC2 Standard: 5min, detail monitoring: 1m</li>
+<li>Ram is not a built-in metric</li>
+<li>Create custom metrics: Standard resolution: 1m, high resolution: 1s</li>
+</ul>
+</li>
+<li>CW Alarms
+<ul>
+<li>Trigger actions</li>
+<li>Intercepted by AWS EventBridge</li>
+</ul>
+</li>
+<li>CW Dashboards:
+<ul>
+<li>show metrics of multiple regions</li>
+</ul>
+</li>
+<li>CW Synthetics Canary
+<ul>
+<li>Configurable script that monitor your  API, Websites, &hellip;</li>
+<li>Reproduce what your customers do programmatically to find issues</li>
+<li>Integration with CW</li>
+<li>Scripts written in Nodejs, Python</li>
+<li>Run once or regular SCHEDULE</li>
+<li>Blueprints:
+<ul>
+<li>Heart beat monitor: load url, storage screenshot and an HTTP archive file</li>
+<li>API Canary: test basic read and write functions</li>
+<li>Broken Link Checker: check all links inside the URL that you are testing</li>
+<li>Visual Monitoring : compare a screenshot taken during a canary run with a baseline screenshot</li>
+<li>Canary Recorder : record</li>
+<li>GUI Workflow Builder: verifies that actions can be taken on your webpage</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Can define expiration policies(never,30d,&hellip;)</li>
+<li>Send logs to : S3, Kinesis Stream, Firehose, Lambda, ElasticSearch</li>
+<li>CW Insight can be used to query logs and add queries to CW Dashboard</li>
+<li>EventBridge: Resource-based policy</li>
+</ul>
+<h3 id="aws-x-ray">AWS X-ray</h3>
+<ul>
+<li>Visual analysis of our application</li>
+<li>Integrate with:
+<ul>
+<li>EC2: X-ray client</li>
+<li>ECS: X-ray agent or docker</li>
+<li>Lambda</li>
+<li>Beanstalk</li>
+<li>Api Gateway</li>
+</ul>
+</li>
+<li>X-ray agent or services need IAM permissions</li>
+</ul>
+<h3 id="aws-personal-health-dashboard">AWS Personal Health Dashboard</h3>
+<ul>
+<li>Global service</li>
+<li>Show how AWS outages directly impact you</li>
+<li>Show maintenace events</li>
+<li>Accessible through AWS Health API</li>
+<li>Aggregation across multiple accounts of an AWS Organization</li>
+<li>Use EventBridge(CW) to react to changes for AWS Health events</li>
+</ul>
+<h2 id="deployment-and-management">Deployment and Management</h2>
+<ul>
+<li>We still have full controll over the underlying services</li>
+<li>Free but you pay for the underlying instances</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
