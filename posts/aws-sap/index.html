@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  4678 ,
+        },"genre": "posts","wordcount":  4912 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4678 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4912 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;24 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -182,7 +182,12 @@
         <li><a href="#aws-personal-health-dashboard">AWS Personal Health Dashboard</a></li>
       </ul>
     </li>
-    <li><a href="#deployment-and-management">Deployment and Management</a></li>
+    <li><a href="#deployment-and-management">Deployment and Management</a>
+      <ul>
+        <li><a href="#code-deploy">Code Deploy</a></li>
+        <li><a href="#cloudformation">Cloudformation</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="osi-model">OSI Model</h2>
@@ -1633,7 +1638,66 @@
 <h2 id="deployment-and-management">Deployment and Management</h2>
 <ul>
 <li>We still have full controll over the underlying services</li>
-<li>Free but you pay for the underlying instances</li>
+<li>Free but you pay for the underlying instances.</li>
+<li>Support many platforms. If not supported, you can write your own custom platform</li>
+<li>Deployment
+<ul>
+<li>Blue/Green:
+<ul>
+<li>Zero downtime</li>
+<li>The new environment can be validated independently and rollback if issues</li>
+<li>Route53 can be setup using weighted polies to redirect a little bit of traffic</li>
+<li>Using Beanstalk swap URLs(DNS swap) when done</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="code-deploy">Code Deploy</h3>
+<ul>
+<li>In place update: Update current existing EC2 instances</li>
+<li>Blue/Green deployment:
+<ul>
+<li>Must be using an ELB</li>
+<li>A new auto scaling group is created</li>
+</ul>
+</li>
+<li>Lambda
+<ul>
+<li>Traffic shifting feature</li>
+<li>Pre and post traffic hooks features to validate deployment</li>
+<li>SAM natively use CodeDeploy</li>
+</ul>
+</li>
+<li>ECS
+<ul>
+<li>Support Blue/Green</li>
+<li>A new task set is created, and traffic is re-routed to the new task test</li>
+<li>Support Canary Deployment(Canary10Percent5Minutes)</li>
+</ul>
+</li>
+</ul>
+<h3 id="cloudformation">Cloudformation</h3>
+<ul>
+<li>Backbone of Beanstalk, Service Catalog, SAM</li>
+<li>Use DeletionPolicy to control how Cloudformation delete or not a resource</li>
+<li>Custom Resources :  You can define a custom resource to address any of these cases:
+<ul>
+<li>A AWS Resource is not yet supported</li>
+<li>An On-premise resource</li>
+<li>Emptying an S3 before being deleted</li>
+</ul>
+</li>
+<li>Stacksets:
+<ul>
+<li>Create, update, delete stack across multiple accounts and regions with a single operation</li>
+<li>Admin can create stacksets and trusted account can create,update,delete stack instances from Stacksets</li>
+<li>When you update a stackset, all associated stack instances are updated throughout all accounts and regions</li>
+<li>Enable Automatic Deployment to automatically deploy to accounts in OG or OUs</li>
+</ul>
+</li>
+<li>Cloudformation Drift: Detect drift on an entire stack or an individual resources within a stack</li>
+<li>Integrate with secret manager:</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
