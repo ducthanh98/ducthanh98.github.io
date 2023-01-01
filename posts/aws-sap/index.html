@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  4912 ,
+        },"genre": "posts","wordcount":  5181 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4912 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;24 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5181 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;25 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -186,6 +186,10 @@
       <ul>
         <li><a href="#code-deploy">Code Deploy</a></li>
         <li><a href="#cloudformation">Cloudformation</a></li>
+        <li><a href="#service-catalog">Service Catalog</a></li>
+        <li><a href="#cloud-development-kit">Cloud Development Kit</a></li>
+        <li><a href="#aws-system-manager">AWS System Manager</a></li>
+        <li><a href="#cloudmap">CloudMap</a></li>
       </ul>
     </li>
   </ul>
@@ -1680,7 +1684,13 @@
 <h3 id="cloudformation">Cloudformation</h3>
 <ul>
 <li>Backbone of Beanstalk, Service Catalog, SAM</li>
-<li>Use DeletionPolicy to control how Cloudformation delete or not a resource</li>
+<li>Use DeletionPolicy to control how Cloudformation delete or not a resource
+<ul>
+<li>DeletionPolicy=Retain: Keep a resource</li>
+<li>DeletionPolicy=Snapshot: EBS, ElasticCache, DB</li>
+<li>DeletionPolicy=Delete(default) : For AWS::RDS::DB,  the default is snapshot. You need first empty S3 bucket before delete</li>
+</ul>
+</li>
 <li>Custom Resources :  You can define a custom resource to address any of these cases:
 <ul>
 <li>A AWS Resource is not yet supported</li>
@@ -1698,6 +1708,70 @@
 </li>
 <li>Cloudformation Drift: Detect drift on an entire stack or an individual resources within a stack</li>
 <li>Integrate with secret manager:</li>
+<li>Resource Import:
+<ul>
+<li>Each resource must have a deletionPolicy and identifier</li>
+<li>Can&rsquo;t import the same resource into multiple stacks</li>
+</ul>
+</li>
+</ul>
+<h3 id="service-catalog">Service Catalog</h3>
+<ul>
+<li>Admin can create a portfolio(collection of products) and then assign them to other user.</li>
+<li>Cloudformation is backbone and helps ensure consistency and standarization by admin</li>
+<li>Can give user access to launching products without requiring deep knowledge</li>
+<li>Help with governance, compliance and consistency</li>
+</ul>
+<h3 id="cloud-development-kit">Cloud Development Kit</h3>
+<ul>
+<li>A familiar language -&gt; CDK -&gt; Cloudformation template</li>
+</ul>
+<h3 id="aws-system-manager">AWS System Manager</h3>
+<ul>
+<li>Need to install SSM agent, installed by default Linux AMI and some ubuntu ami</li>
+<li>Make sure ec2 instances have a proper IAM role to allow System Manager action</li>
+<li>Run command
+<ul>
+<li>Execute a script or a command</li>
+<li>Integrate with IAM CloudTrail</li>
+<li>No need for ssh</li>
+</ul>
+</li>
+<li>Send command before an ASG instance is terminated
+<ul>
+<li>Create hook that puts the instance in Terminating:Wait</li>
+<li>Monitor that state using Event Bridge</li>
+<li>Trigger a SSM to perform actions</li>
+</ul>
+</li>
+<li>Patch Managers
+<ul>
+<li>Define a patch baseline</li>
+<li>Define a patch group: use tag Patch Group</li>
+<li>Define maintenance windows(schedule, patch groups, registered task)</li>
+<li>Add the AWS-RunPatchBaseLine Run command as part of the registerd tasks of the maintenance Windows</li>
+<li>Define rate control</li>
+<li>Monitor Patch Compliance using SSM Inventory</li>
+</ul>
+</li>
+<li>Session Manager
+<ul>
+<li>Allow to start a secure shell on your EC2 or on-prem</li>
+<li>Support linux, window, mac</li>
+<li>Log can be sent to S3 or CloudWatch</li>
+<li>CloudTrail con intercept StartSession events</li>
+</ul>
+</li>
+<li>OpsCenter
+<ul>
+<li>Resolve Operational Issues(OpsItems: issues, events and alerts)</li>
+</ul>
+</li>
+</ul>
+<h3 id="cloudmap">CloudMap</h3>
+<ul>
+<li>Works as a service discovery</li>
+<li>Use SDK, API, DNS to query AWS CloudMap</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -1726,7 +1800,7 @@
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.107.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
         </div>
     </footer></div>
 
