@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  5707 ,
+        },"genre": "posts","wordcount":  5919 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5707 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5919 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;28 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -205,6 +205,9 @@
       <ul>
         <li><a href="#6r">6R</a></li>
         <li><a href="#storage-gateway">Storage Gateway</a></li>
+        <li><a href="#snow-family">Snow Family</a></li>
+        <li><a href="#aws-cloud-adoption-readiness-toolcart">AWS Cloud Adoption Readiness Tool(CART)</a></li>
+        <li><a href="#disater-recovery">Disater Recovery</a></li>
       </ul>
     </li>
   </ul>
@@ -1953,8 +1956,61 @@
 <li>Works with File Gateway, Volume Gateway, Tape Gateway</li>
 </ul>
 </li>
-<li>Extensions:
-+</li>
+<li>Extensions:</li>
+</ul>
+<h3 id="snow-family">Snow Family</h3>
+<ul>
+<li>offline devices to perform data migrations</li>
+<li>Move TBs or PBs of data in or out</li>
+<li>Types:
+<ul>
+<li>Snowball Edge:
+<ul>
+<li>Pay per data transfer job</li>
+<li>Snowball Edge Storage Optimized: 80TB of HD capacity</li>
+<li>Snowball Ede Compute Optimized: 42TB of HDD capacity</li>
+</ul>
+</li>
+<li>Snow Cone:
+<ul>
+<li>8TBs of usable storage</li>
+<li>Must provide your own battery</li>
+<li>Can be sent back to AWS or use AWS DataSync to send data</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Snowmobile
+<ul>
+<li>Transfer extrabytes of data</li>
+<li>100PB of capacity</li>
+<li>Better than snowball if you transfer more than 100PB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Use AWS OpsHub to manage your Snow family device</li>
+<li>improve transfer performance
+<ul>
+<li>Perform multiple write opertions at one time: from multiple terminal</li>
+<li>Transfer small files in batches</li>
+<li>Don&rsquo;t perform other operations on files during transfer</li>
+<li>Reduce local network use</li>
+<li>Eliminate unnecessary hops</li>
+</ul>
+</li>
+<li>The data transfer rate is typically between 25MB and 40MB/s. If you need more , Use Amazone S3 Adpater for Snowball</li>
+</ul>
+<h3 id="aws-cloud-adoption-readiness-toolcart">AWS Cloud Adoption Readiness Tool(CART)</h3>
+<ul>
+<li>Develop efficient and effective plans for cloud adoption and migrations</li>
+</ul>
+<h3 id="disater-recovery">Disater Recovery</h3>
+<ul>
+<li>Backup and restore: High RTO and RPO</li>
+<li>Pilot Light: A small version of the app is always running in the cloud</li>
+<li>Warn Standby: Full system is up and running, but at minimum size</li>
+<li>Multi Size/Hot site approach: Very low RTO - very expensive. Full production scale is running AWS and On-premises</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
