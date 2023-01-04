@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  5181 ,
+        },"genre": "posts","wordcount":  5707 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5181 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;25 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5707 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -192,6 +192,21 @@
         <li><a href="#cloudmap">CloudMap</a></li>
       </ul>
     </li>
+    <li><a href="#aws-cost-allocation-tags">AWS Cost Allocation Tags</a>
+      <ul>
+        <li><a href="#trusted-advisor">Trusted Advisor</a></li>
+        <li><a href="#aws-service-quotas">AWS Service Quotas:</a></li>
+        <li><a href="#aws-savings-plan">AWS Savings Plan</a></li>
+        <li><a href="#aws-budget">AWS Budget</a></li>
+        <li><a href="#aws-compute-optimizer">AWS Compute Optimizer</a></li>
+      </ul>
+    </li>
+    <li><a href="#migration">Migration</a>
+      <ul>
+        <li><a href="#6r">6R</a></li>
+        <li><a href="#storage-gateway">Storage Gateway</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="osi-model">OSI Model</h2>
@@ -222,7 +237,7 @@
         + Pricing benefits from aggregated usage
     + Invited accounts must approve enabling all features
     + Ability to apply an SCP
-    + Reserved Instances: All accounts can receive the benefits that are purchased by any another account. The payer can turn off reserved instance discount and savings plans discount sharing fr any accounts, including the payer
+    + Reserved Instances: All accounts can receive the benefits that are purchased by any another account. The payer can turn off reserved instance discount and savings plans discount sharing for any accounts, including the payer
 - Service Control Policies:
     + SCP is applied to users and roles, service-linked role is not affected
     + Doesn't allow anything by default
@@ -318,7 +333,7 @@
 <li>React to events the fastest:
 <ul>
 <li>Overall, it may take up 15 min to deliver events</li>
-<li>Event Bridge: the fatest, most reactive way</li>
+<li>Event Bridge: the fastest, most reactive way</li>
 <li>CloudTrail Delivery in Cloudwatch Logs:  perform a metric filter to analyze</li>
 <li>CloudTrail Delivery in S3: Delivered every 5 minutes</li>
 </ul>
@@ -599,6 +614,15 @@
 <h3 id="ec2">Ec2</h3>
 <ul>
 <li>Ec2 Instance Refresh: Update launch template and then re-creating all Ec2 instances</li>
+<li>Instances type
+<ul>
+<li>Reserved Instaces:
+<ul>
+<li>To renew a RI, just queue an purchase RI whenever the previous one expires</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Health check:
 <ul>
 <li>EC2 Status</li>
@@ -1772,6 +1796,165 @@
 <ul>
 <li>Works as a service discovery</li>
 <li>Use SDK, API, DNS to query AWS CloudMap</li>
+</ul>
+<h2 id="aws-cost-allocation-tags">AWS Cost Allocation Tags</h2>
+<ul>
+<li>Just like Tags, but they show up as column in Reports</li>
+<li>Cost allocation tags just appear in the Billing Console</li>
+<li>AWS Generated Cost Allocation Tags
+<ul>
+<li>Starts with prefix aws: (eg: aws:CreatedBy)</li>
+<li>Automatically applied to the resource you creat</li>
+</ul>
+</li>
+<li>User Tag
+<ul>
+<li>Start with prefix user:</li>
+<li>Defined by the user</li>
+</ul>
+</li>
+<li>Cost allocation Tags just appear in the Billing Console</li>
+<li>Takes up 24h to show up in the report</li>
+</ul>
+<h3 id="trusted-advisor">Trusted Advisor</h3>
+<ul>
+<li>Can check if s3 is made public, but can&rsquo;t check for s3 object that are public inside of your bucket so use Event Bridge, S3 Events, AWS Config Rule instead</li>
+<li>Service Limits
+<ul>
+<li>Limit can only be monitored</li>
+<li>Cases must be created manually in AWS Support Centre to increase limits</li>
+<li>Use AWS Service Quotas</li>
+</ul>
+</li>
+<li>Enable weekly email notifications from the console</li>
+<li>Ability to set CW Alarms when reaching limits</li>
+<li>Programmatic Access using AWS suport API (Not support with free plan)</li>
+</ul>
+<h3 id="aws-service-quotas">AWS Service Quotas:</h3>
+<ul>
+<li>Notify you when you&rsquo;re close to a service quota value threshold</li>
+</ul>
+<h3 id="aws-savings-plan">AWS Savings Plan</h3>
+<ul>
+<li>New pricing model to get discount based on long-term usage</li>
+<li>EC2 Instance Savings plan (upto 72% - same discount as Standard RIs)
+<ul>
+<li>Select instance family(M5,C5&hellip;) and locked to a specific region</li>
+<li>Flexible across size, OS, tenacy(dedicated or default)</li>
+</ul>
+</li>
+<li>Compute Savings plan(upto 66% - same discount as Convertible RIs)
+<ul>
+<li>Ability to move between instance family, region, compute type,os , tenancy</li>
+</ul>
+</li>
+<li>SageMaker Savings Plan: upto 64% off for SageMaker</li>
+</ul>
+<h3 id="aws-budget">AWS Budget</h3>
+<ul>
+<li>Create budget and send alarms when costs exceeds the budget</li>
+<li>4 types: Usage, Cost, Reservation, Savings plan, &hellip;</li>
+<li>Upto 5 SNS per budget</li>
+<li>Can filter by many options</li>
+<li>Budget Actions:
+<ul>
+<li>Applying an IAM policy to a user, group, role</li>
+<li>Apply a SCP to an OU</li>
+<li>Stop EC2 or RDS</li>
+</ul>
+</li>
+<li>Cost Explorer: Forecast up to 12 months based on previous usage</li>
+</ul>
+<h3 id="aws-compute-optimizer">AWS Compute Optimizer</h3>
+<ul>
+<li>Help you choose optimal configurations and right size for your workloads</li>
+<li>Use ML to analyze your resources configurations and their CW metrics</li>
+<li>Need CW Agent to analyze RAM metrics</li>
+<li>Supported resources:
+<ul>
+<li>EC2</li>
+<li>Auto Scaling</li>
+<li>EBS</li>
+<li>Lambda</li>
+</ul>
+</li>
+<li>Lower your cost by up to 25%</li>
+</ul>
+<h2 id="migration">Migration</h2>
+<h3 id="6r">6R</h3>
+<ul>
+<li>Rehosting
+<ul>
+<li>lift and shift</li>
+<li>simple migrations by re-hosting on AWS</li>
+<li>Cost save as much as 30% on cost</li>
+<li>Example: Using AWS VM Import/Export, AWS Server Migration Service</li>
+</ul>
+</li>
+<li>Replatforming
+<ul>
+<li>Migrate your db to RDS</li>
+</ul>
+</li>
+<li>Repurchase
+<ul>
+<li>drop and shop</li>
+</ul>
+</li>
+<li>Refactoring/Re-architecting
+<ul>
+<li>Reimagining how the application is architected using Cloud Native</li>
+</ul>
+</li>
+<li>Retire
+<ul>
+<li>Turn off things you don&rsquo;t need</li>
+</ul>
+</li>
+<li>Retain</li>
+</ul>
+<h3 id="storage-gateway">Storage Gateway</h3>
+<ul>
+<li>Bridge between on-premises data and cloud data</li>
+<li>Types
+<ul>
+<li>S3 File Gateway:
+<ul>
+<li>Use NFS or SMB</li>
+<li>Cache most recently data</li>
+<li>Bucket access using IAM role for each file Gateway</li>
+<li>Transition to S3  Glacier using Lifecyle policy</li>
+</ul>
+</li>
+<li>Fsx File Gateway
+<ul>
+<li>Native access to AWS Fsx</li>
+<li>Useful for group file shares and home directories</li>
+</ul>
+</li>
+<li>Volume Gateway
+<ul>
+<li>Block storage using ISCSI protocol</li>
+<li>Backed by EBS snapshot</li>
+<li>Cached Volumes: low latency access to most recent data</li>
+<li>Stored Volumes: entire dataset is on premise, scheduled backups to s3</li>
+</ul>
+</li>
+<li>Tape Gateway
+<ul>
+<li>Tape, iSCSI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hardware  appliance
+<ul>
+<li>Helpful for daily backups in small data centers</li>
+<li>Works with File Gateway, Volume Gateway, Tape Gateway</li>
+</ul>
+</li>
+<li>Extensions:
++</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
