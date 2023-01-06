@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  5919 ,
+        },"genre": "posts","wordcount":  6172 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5919 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;28 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6172 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;29 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -208,6 +208,15 @@
         <li><a href="#snow-family">Snow Family</a></li>
         <li><a href="#aws-cloud-adoption-readiness-toolcart">AWS Cloud Adoption Readiness Tool(CART)</a></li>
         <li><a href="#disater-recovery">Disater Recovery</a></li>
+        <li><a href="#aws-fault-injection-simulator">AWS Fault Injection Simulator</a></li>
+        <li><a href="#aws-vm-migration">AWS VM Migration</a></li>
+        <li><a href="#aws-backup">AWS Backup</a></li>
+      </ul>
+    </li>
+    <li><a href="#vpc">VPC</a>
+      <ul>
+        <li><a href="#basics">Basics</a></li>
+        <li><a href="#vpc-peering">VPC Peering</a></li>
       </ul>
     </li>
   </ul>
@@ -1907,6 +1916,7 @@
 <li>Refactoring/Re-architecting
 <ul>
 <li>Reimagining how the application is architected using Cloud Native</li>
+<li>Example: MongoDB to DynamoDB</li>
 </ul>
 </li>
 <li>Retire
@@ -2011,6 +2021,93 @@
 <li>Pilot Light: A small version of the app is always running in the cloud</li>
 <li>Warn Standby: Full system is up and running, but at minimum size</li>
 <li>Multi Size/Hot site approach: Very low RTO - very expensive. Full production scale is running AWS and On-premises</li>
+</ul>
+<h3 id="aws-fault-injection-simulator">AWS Fault Injection Simulator</h3>
+<ul>
+<li>Based on Chaos Engineering - stressing an application by creating disruptive events(sudden increase CPU and Memory)</li>
+<li>Supports: EKS,EC2, ECS,RDS</li>
+</ul>
+<h3 id="aws-vm-migration">AWS VM Migration</h3>
+<ul>
+<li>Application Discovery Services
+<ul>
+<li>Gathering information about on-premise data centers</li>
+<li>Agentless discovery(Application Discovery Agentless Connector):
+<ul>
+<li>Open Virtual Application(OVA) package that can be deployed to a VM Host</li>
+<li>VM Inventory, Configuration, performance history such as CPU, memory, disk usage</li>
+<li>Any OS</li>
+</ul>
+</li>
+<li>Agent-based discovery
+<ul>
+<li>system configuration, system performance, running processes, network,</li>
+<li>Support: Microsoft Server, linux, &hellip;</li>
+</ul>
+</li>
+<li>Data can be exported as CSV or viewed within AWS Migration Hub</li>
+<li>Query with Athena</li>
+</ul>
+</li>
+<li>Application Migration Service
+<ul>
+<li>lift and shift</li>
+<li>Convert physical, virtual server to run natively on AWS</li>
+<li>Minimal downtime, reduced costs</li>
+</ul>
+</li>
+<li>Elastic Disater Recovery
+<ul>
+<li>Quickly and easily recover your physical, virtual into AWS</li>
+<li>Continuous block-level replication for your servers</li>
+<li>Example: protect your critical databases</li>
+</ul>
+</li>
+<li>AWS Migration Evaluator
+<ul>
+<li>Analyze current state, define target state, then develop migration plan</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-backup">AWS Backup</h3>
+<ul>
+<li>Supported service:
+<ul>
+<li>EC2</li>
+<li>RDS, DynamoDB, DocumentDB, Neptune</li>
+<li>EFS, FSx</li>
+<li>Storage Gateway(Volume Gateway)</li>
+</ul>
+</li>
+<li>Support cross-region and cross-account backups</li>
+</ul>
+<h2 id="vpc">VPC</h2>
+<h3 id="basics">Basics</h3>
+<ul>
+<li>Public subnets
+<ul>
+<li>Has a route table that sends 0.0.0.0/0 to an IGW</li>
+<li>Must have a public ipv4</li>
+</ul>
+</li>
+<li>Private subnets
+<ul>
+<li>Access internet with a nat instance or nat gateway</li>
+<li>0.0.0.0/0 -&gt; nat</li>
+</ul>
+</li>
+<li>VPC Flow logs
+<ul>
+<li>Can be defined at the VPC level, Subnet, ENI level</li>
+<li>can be sent to CW and S3</li>
+</ul>
+</li>
+</ul>
+<h3 id="vpc-peering">VPC Peering</h3>
+<ul>
+<li>Connect two VPC, privately using AWS network</li>
+<li>Must not have overlapping CIDR</li>
+<li>You must update route tables in each VPC&rsquo;s subnet to ensure instances can communicate</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
