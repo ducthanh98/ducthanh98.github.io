@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  6351 ,
+        },"genre": "posts","wordcount":  6681 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6351 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;30 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6681 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;32 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -220,8 +220,13 @@
         <li><a href="#transit-gateway">Transit Gateway</a></li>
         <li><a href="#vpc-endpoint">VPC Endpoint</a></li>
         <li><a href="#aws-privatelink">AWS PrivateLink</a></li>
+        <li><a href="#aws-site-to-site-vpn">AWS Site to Site VPN</a></li>
+        <li><a href="#direct-connection">Direct Connection</a></li>
+        <li><a href="#vpc-flow-logs">VPC Flow Logs</a></li>
+        <li><a href="#aws-network-firewall">AWS Network Firewall</a></li>
       </ul>
     </li>
+    <li><a href="#machine-learning">Machine Learning</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="osi-model">OSI Model</h2>
@@ -1020,10 +1025,10 @@
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/s3_storage_classes_comparison.png"
-        data-srcset="/s3_storage_classes_comparison.png, /s3_storage_classes_comparison.png 1.5x, /s3_storage_classes_comparison.png 2x"
+        data-src="/aws/s3_storage_classes_comparison.png"
+        data-srcset="/aws/s3_storage_classes_comparison.png, /aws/s3_storage_classes_comparison.png 1.5x, /aws/s3_storage_classes_comparison.png 2x"
         data-sizes="auto"
-        alt="/s3_storage_classes_comparison.png"
+        alt="/aws/s3_storage_classes_comparison.png"
         title="Storage classes comparison" /></li>
 <li>S3 Event Notifications
 <ul>
@@ -2153,8 +2158,137 @@
 <ul>
 <li>Requires a network load balancer(Service VPC) and ENI(Customer VPC)</li>
 <li>PrivateLink with DX: Corporate -&gt; DX -&gt; Private VIF -&gt; Private Link -&gt; Gateway Interface -&gt; S3</li>
-<li></li>
 </ul>
+<h3 id="aws-site-to-site-vpn">AWS Site to Site VPN</h3>
+<ul>
+<li>Establish
+<ul>
+<li>On-premise
+<ul>
+<li>Setup a software or hardware VPN appliance</li>
+<li>The on-premise VPN should be accessible using a public IP</li>
+</ul>
+</li>
+<li>AWS
+<ul>
+<li>Setup virtual private gateway(VGW) and attach to your VPC</li>
+<li>Setup a customer gateway to point the on-premise VPN appliance
+=&gt; Two VPN connections are created for redundancy, encrypted using IPSec</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Route Propagation
+<ul>
+<li>Static routing
+<ul>
+<li>Create static route in corperate for specific IP through CGW</li>
+<li>Create static route in AWS for specific IP through VGW</li>
+</ul>
+</li>
+<li>Dynamic routing(BGP)</li>
+</ul>
+</li>
+<li>VPN Cloudhub
+<ul>
+<li>Connect up to 10 CGW for each VGW</li>
+</ul>
+</li>
+<li>VPN to multiple VPC
+<ul>
+<li>Create a seperate VPN connection for each CGW</li>
+<li>Direct conneciton is recommended because it has a direct connection gateway</li>
+</ul>
+</li>
+<li>Shared service</li>
+</ul>
+<h3 id="direct-connection">Direct Connection</h3>
+<ul>
+<li>Provides a dedicated private connection from a remote network to your VPC</li>
+<li>Private access to AWS Services through VIF</li>
+<li>Must setup a failover DX or VIF</li>
+<li>Virtual Interfaces
+<ul>
+<li>Public VIF: connect to public AWS Endpoints</li>
+<li>Private VIF: connect to a resources in your VPC</li>
+<li>Transit Virtual Interface: connect to a resource in your VPC using Transit Gateway</li>
+</ul>
+</li>
+<li>VPC ENDPOINTS can&rsquo;t accessed through private VIF</li>
+<li>Encryption
+<ul>
+<li>Not encrypted by default</li>
+<li>DX + VPN provides an IPSec connections</li>
+<li>VPN over DX use public VIF</li>
+</ul>
+</li>
+<li>LAG
+<ul>
+<li>Increased speed and failover</li>
+<li>Aggregate up to 4 connections</li>
+<li>Conditions:
+<ul>
+<li>Dedicated connection</li>
+<li>Same bandwidth</li>
+<li>Terminate at the same AWS DX Endpoint</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DX Gateway: Setup a DX to one or more VPC in many different regions</li>
+</ul>
+<h3 id="vpc-flow-logs">VPC Flow Logs</h3>
+<ul>
+<li>Capture information about IP traffic going into your interfaces
+<ul>
+<li>VPC Flow Logs</li>
+<li>Subnet FLow Logs</li>
+<li>ENI FLow Logs</li>
+</ul>
+</li>
+<li>Save to CW, S3</li>
+<li>Query using Athena or CW Insight</li>
+</ul>
+<h3 id="aws-network-firewall">AWS Network Firewall</h3>
+<ul>
+<li>Protect your entire VPC from layer 3 to 7</li>
+<li>Internally,  Network Firewall use AWS Gateway Load Balancer</li>
+<li>Rule can centrally managed cross-account by AWS Firewall Manager to apply to many VPCs</li>
+<li>Traffic filtering: allow, drop, alert</li>
+<li>Send logs of rule matches to S3, CW, Firehose</li>
+</ul>
+<h2 id="machine-learning">Machine Learning</h2>
+<h1 id="kendra">Kendra</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/aws/kendra.png"
+        data-srcset="/aws/kendra.png, /aws/kendra.png 1.5x, /aws/kendra.png 2x"
+        data-sizes="auto"
+        alt="/aws/kendra.png"
+        title="Screenshot" /></p>
+<h1 id="personalize">Personalize</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/aws/personalize.png"
+        data-srcset="/aws/personalize.png, /aws/personalize.png 1.5x, /aws/personalize.png 2x"
+        data-sizes="auto"
+        alt="/aws/personalize.png"
+        title="Screenshot" /></p>
+<h1 id="textract">Textract</h1>
+<ul>
+<li>Automatically extracts text, handwriting, data from any scanned data</li>
+</ul>
+<h1 id="overview">Overview</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/aws/ml_overview.png"
+        data-srcset="/aws/ml_overview.png, /aws/ml_overview.png 1.5x, /aws/ml_overview.png 2x"
+        data-sizes="auto"
+        alt="/aws/ml_overview.png"
+        title="Screenshot" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
