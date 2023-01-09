@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  6172 ,
+        },"genre": "posts","wordcount":  6351 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6172 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;29 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6351 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;30 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -217,6 +217,9 @@
       <ul>
         <li><a href="#basics">Basics</a></li>
         <li><a href="#vpc-peering">VPC Peering</a></li>
+        <li><a href="#transit-gateway">Transit Gateway</a></li>
+        <li><a href="#vpc-endpoint">VPC Endpoint</a></li>
+        <li><a href="#aws-privatelink">AWS PrivateLink</a></li>
       </ul>
     </li>
   </ul>
@@ -2108,6 +2111,49 @@
 <li>Connect two VPC, privately using AWS network</li>
 <li>Must not have overlapping CIDR</li>
 <li>You must update route tables in each VPC&rsquo;s subnet to ensure instances can communicate</li>
+</ul>
+<h3 id="transit-gateway">Transit Gateway</h3>
+<ul>
+<li>Trasitive peering between thousands of VPC and on premises, hub connection</li>
+<li>Regional resource</li>
+<li>Share across-account using RAM</li>
+<li>RouteTables: Limit which VPC can talk with other VPC</li>
+<li>Work with Direct Connection Gateway, VPN</li>
+<li>Support IP Multicast</li>
+</ul>
+<h3 id="vpc-endpoint">VPC Endpoint</h3>
+<ul>
+<li>VPC Endpoint Gateway
+<ul>
+<li>Only works for S3, DynamoDB, must create one gateway per vpc</li>
+<li>Must update route table entries</li>
+<li>Gateway is defined at VPC level</li>
+<li>DNS resolution must be enabled</li>
+<li>Gateway endpoint cannot extended ou of VPC(VPN,DX, peering)</li>
+</ul>
+</li>
+<li>VPC Endpoint Interface
+<ul>
+<li>Provision an ENI that will have a private endpoint interface</li>
+<li>Leverage SG for security</li>
+<li>Private DNS</li>
+<li>DNS resolution must be enabled</li>
+<li>Interface can be accessed from DX,VPN</li>
+</ul>
+</li>
+<li>VPC Endpoint policy and S3 policy
+<ul>
+<li>S3 bucket may have: &ldquo;aws:sourceVpce&rdquo;:&ldquo;vpce-1a2b3c4d&rdquo; to deny any traffic that doesn&rsquo;t come from a specific VPC Endpoint</li>
+<li>S3 policies can restrict access only from public IP or EIP(private ip is not working)</li>
+<li>aws:SourceIp doesn&rsquo;t apply for VPC endpoints</li>
+</ul>
+</li>
+</ul>
+<h3 id="aws-privatelink">AWS PrivateLink</h3>
+<ul>
+<li>Requires a network load balancer(Service VPC) and ENI(Customer VPC)</li>
+<li>PrivateLink with DX: Corporate -&gt; DX -&gt; Private VIF -&gt; Private Link -&gt; Gateway Interface -&gt; S3</li>
+<li></li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
