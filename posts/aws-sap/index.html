@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Amazon Solution Architect Professional Note - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh"><meta property="og:title" content="Amazon Solution Architect Professional Note" />
-<meta property="og:description" content="OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Identify and Federation IAM: - Explicit DENY has precedence over ALOW - NotAction: explicit allow a FEW THING in there - Access Advisor: See permissions granted and when last accessed - Access analyzer: Analyze resources that are shared with external entity - Access Key: &#43; Can have two access keys &#43; Can be created, deleted, made inactivate or activate STS - When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa AWS Organization - Feature Mode: &#43; Consolidated billing feature: &#43; Consolidated billing across all acounts - single payment method &#43; Pricing benefits from aggregated usage &#43; Invited accounts must approve enabling all features &#43; Ability to apply an SCP &#43; Reserved Instances: All accounts can receive the benefits that are purchased by any another account." />
+<meta property="og:description" content="OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Layer 2: Data Link DDOS Type Application Layer: HTTP flood Protocol Attack: SYN Flood Volumetric: DNS Amplification Identify and Federation Policy Priorty Explicit DENY -&gt; SCP -&gt; Resource Policy -&gt; Permissions Boundaries -&gt; Session Policies -&gt; Identity Policies
+Directory Service AD Connector: Only redirects no local identity data in AWS Simple AD: AD compatible managed on AWS AWS Managed MS AD: Establish trust connection with your on-premise AD IAM: Explicit DENY has precedence over ALOW NotAction: explicit allow a FEW THING in there Access Advisor: See permissions granted and when last accessed Access analyzer: Analyze resources that are shared with external entity Access Key: Can have two access keys Can be created, deleted, made inactivate or activate STS When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa Temporary credentials can&rsquo;t be cancelled Changing the trust policy has no impact on existing credentials Revoking the leaked credentials: Denying access to credentials created by AssumeRole, AssumeRoleWithSAML, or AssumeRoleWithWebIdentity Delete role, change permisisons impact all assumers you must have the PutRolePolicy to attach the AWSRevokeOlderSessions inline policy Denying access to credentials created by GetFederationToken or GetSessionToken edit or delete the policies that are attached to the IAM user Note: You cannot change the permissions for an AWS account root user so we recommend that you do not call GetFederationToken or GetSessionToken as a root user." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/aws-sap/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-28T22:58:35+07:00" />
@@ -13,7 +14,8 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Amazon Solution Architect Professional Note"/>
-<meta name="twitter:description" content="OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Identify and Federation IAM: - Explicit DENY has precedence over ALOW - NotAction: explicit allow a FEW THING in there - Access Advisor: See permissions granted and when last accessed - Access analyzer: Analyze resources that are shared with external entity - Access Key: &#43; Can have two access keys &#43; Can be created, deleted, made inactivate or activate STS - When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa AWS Organization - Feature Mode: &#43; Consolidated billing feature: &#43; Consolidated billing across all acounts - single payment method &#43; Pricing benefits from aggregated usage &#43; Invited accounts must approve enabling all features &#43; Ability to apply an SCP &#43; Reserved Instances: All accounts can receive the benefits that are purchased by any another account."/>
+<meta name="twitter:description" content="OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Layer 2: Data Link DDOS Type Application Layer: HTTP flood Protocol Attack: SYN Flood Volumetric: DNS Amplification Identify and Federation Policy Priorty Explicit DENY -&gt; SCP -&gt; Resource Policy -&gt; Permissions Boundaries -&gt; Session Policies -&gt; Identity Policies
+Directory Service AD Connector: Only redirects no local identity data in AWS Simple AD: AD compatible managed on AWS AWS Managed MS AD: Establish trust connection with your on-premise AD IAM: Explicit DENY has precedence over ALOW NotAction: explicit allow a FEW THING in there Access Advisor: See permissions granted and when last accessed Access analyzer: Analyze resources that are shared with external entity Access Key: Can have two access keys Can be created, deleted, made inactivate or activate STS When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa Temporary credentials can&rsquo;t be cancelled Changing the trust policy has no impact on existing credentials Revoking the leaked credentials: Denying access to credentials created by AssumeRole, AssumeRoleWithSAML, or AssumeRoleWithWebIdentity Delete role, change permisisons impact all assumers you must have the PutRolePolicy to attach the AWSRevokeOlderSessions inline policy Denying access to credentials created by GetFederationToken or GetSessionToken edit or delete the policies that are attached to the IAM user Note: You cannot change the permissions for an AWS account root user so we recommend that you do not call GetFederationToken or GetSessionToken as a root user."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/"
-        },"genre": "posts","wordcount":  6681 ,
+        },"genre": "posts","wordcount":  6894 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-sap\/","datePublished": "2022-11-28T22:58:35+07:00","dateModified": "2022-11-28T22:58:35+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +72,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Amazon Solution Architect Professional Note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6681 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;32 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6894 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;33 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -82,14 +84,20 @@
     <li><a href="#osi-model">OSI Model</a>
       <ul>
         <li><a href="#layer-1">Layer 1</a></li>
+        <li><a href="#layer-2-data-link">Layer 2: Data Link</a></li>
+        <li><a href="#ddos">DDOS</a></li>
       </ul>
     </li>
     <li><a href="#identify-and-federation">Identify and Federation</a>
       <ul>
+        <li><a href="#policy-priorty">Policy Priorty</a></li>
+        <li><a href="#directory-service">Directory Service</a></li>
         <li><a href="#iam">IAM:</a></li>
         <li><a href="#sts">STS</a></li>
         <li><a href="#aws-organization">AWS Organization</a></li>
         <li><a href="#ram">RAM</a></li>
+        <li><a href="#aws-sso">AWS SSO</a></li>
+        <li><a href="#aws-cognito">AWS Cognito</a></li>
         <li><a href="#aws-control-tower">Aws Control Tower</a></li>
       </ul>
     </li>
@@ -226,6 +234,11 @@
         <li><a href="#aws-network-firewall">AWS Network Firewall</a></li>
       </ul>
     </li>
+    <li><a href="#other">Other</a>
+      <ul>
+        <li><a href="#aws-workspaces">AWS Workspaces</a></li>
+      </ul>
+    </li>
     <li><a href="#machine-learning">Machine Learning</a></li>
   </ul>
 </nav></div>
@@ -237,53 +250,122 @@
 <li>No access control</li>
 <li>No device =&gt; no device communications</li>
 </ul>
+<h3 id="layer-2-data-link">Layer 2: Data Link</h3>
+<h3 id="ddos">DDOS</h3>
+<ul>
+<li>Type
+<ul>
+<li>Application Layer: HTTP flood</li>
+<li>Protocol Attack: SYN Flood</li>
+<li>Volumetric: DNS Amplification</li>
+</ul>
+</li>
+</ul>
 <h2 id="identify-and-federation">Identify and Federation</h2>
+<h3 id="policy-priorty">Policy Priorty</h3>
+<p>Explicit DENY -&gt; SCP -&gt; Resource Policy -&gt; Permissions Boundaries -&gt; Session Policies -&gt; Identity Policies</p>
+<h3 id="directory-service">Directory Service</h3>
+<ul>
+<li>AD Connector: Only redirects no local identity data in AWS</li>
+<li>Simple AD: AD compatible managed on AWS</li>
+<li>AWS Managed MS AD: Establish trust connection with your on-premise AD</li>
+</ul>
 <h3 id="iam">IAM:</h3>
-<pre><code>- Explicit DENY has precedence over ALOW
-- NotAction: explicit allow a FEW THING in there
-- Access Advisor: See permissions granted and when last accessed
-- Access analyzer: Analyze resources that are shared with external entity
-- Access Key: 
-    + Can have two access keys
-    + Can be created, deleted, made inactivate or activate
-</code></pre>
+<ul>
+<li>Explicit DENY has precedence over ALOW</li>
+<li>NotAction: explicit allow a FEW THING in there</li>
+<li>Access Advisor: See permissions granted and when last accessed</li>
+<li>Access analyzer: Analyze resources that are shared with external entity</li>
+<li>Access Key:
+<ul>
+<li>Can have two access keys</li>
+<li>Can be created, deleted, made inactivate or activate</li>
+</ul>
+</li>
+</ul>
 <h3 id="sts">STS</h3>
-<pre><code>- When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa
-</code></pre>
+<ul>
+<li>When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa</li>
+<li>Temporary credentials can&rsquo;t be cancelled</li>
+<li>Changing the trust policy has no impact on existing credentials</li>
+<li>Revoking the leaked credentials:
+<ul>
+<li>Denying access to credentials created by AssumeRole, AssumeRoleWithSAML, or AssumeRoleWithWebIdentity
+<ul>
+<li>Delete role, change permisisons impact all assumers</li>
+<li>you must have the PutRolePolicy to attach the AWSRevokeOlderSessions inline policy</li>
+</ul>
+</li>
+<li>Denying access to credentials created by GetFederationToken or GetSessionToken
+<ul>
+<li>edit or delete the policies that are attached to the IAM user</li>
+<li><!-- raw HTML omitted -->Note<!-- raw HTML omitted -->: You cannot change the permissions for an AWS account root user so we recommend that you do not call GetFederationToken or GetSessionToken as a root user.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="aws-organization">AWS Organization</h3>
-<pre><code>- Feature Mode:
-    + Consolidated billing feature: 
-        + Consolidated billing across all acounts - single payment method
-        + Pricing benefits from aggregated usage
-    + Invited accounts must approve enabling all features
-    + Ability to apply an SCP
-    + Reserved Instances: All accounts can receive the benefits that are purchased by any another account. The payer can turn off reserved instance discount and savings plans discount sharing for any accounts, including the payer
-- Service Control Policies:
-    + SCP is applied to users and roles, service-linked role is not affected
-    + Doesn't allow anything by default
-    + Restrict access to certain service
-    + You can restrict specific tags on AWS resources with AWS:TagKeys(Use either ForAllValues or ForAnyValues)
-    + Use SCP to Deny A Region aws:RequestRegion
-    + Use SCP to restrict creating resources without appropriate tags: 
-        Null:{
-            aws:RequestTag/xxx: true
-        }
-- Tag Policies:
-    + Ensure consistent tags, audit tagged resources
-- Opt out
-    + AWS AI may use your content to continuous improvent
-    + Attached to OG, OU, individual member
-- Backup policies
-    + Enables you to create backup plan.
-    + Attached to OG, OU, individual member
-    + Immutable backup plans appear in Member accounts
-</code></pre>
+<ul>
+<li>Feature Mode:
+<ul>
+<li>Consolidated billing feature:</li>
+<li>Consolidated billing across all acounts - single payment method</li>
+<li>Pricing benefits from aggregated usage</li>
+<li>Invited accounts must approve enabling all features</li>
+<li>Ability to apply an SCP</li>
+<li>Reserved Instances: All accounts can receive the benefits that are purchased by any another account. The payer can turn off reserved instance discount and savings plans discount sharing for any accounts, including the payer</li>
+</ul>
+</li>
+<li>Service Control Policies:
+<ul>
+<li>SCP is applied to users and roles, service-linked role is not affected</li>
+<li>Doesn&rsquo;t allow anything by default</li>
+<li>Restrict access to certain service</li>
+<li>You can restrict specific tags on AWS resources with AWS:TagKeys(Use either ForAllValues or ForAnyValues)</li>
+<li>Use SCP to Deny A Region aws:RequestRegion</li>
+<li>Use SCP to restrict creating resources without appropriate tags:
+Null:{
+aws:RequestTag/xxx: true
+}</li>
+</ul>
+</li>
+<li>Tag Policies:
+<ul>
+<li>Ensure consistent tags, audit tagged resources</li>
+</ul>
+</li>
+<li>Opt out
+<ul>
+<li>AWS AI may use your content to continuous improvent</li>
+<li>Attached to OG, OU, individual member</li>
+</ul>
+</li>
+<li>Backup policies
+<ul>
+<li>Enables you to create backup plan.</li>
+<li>Attached to OG, OU, individual member</li>
+<li>Immutable backup plans appear in Member accounts</li>
+</ul>
+</li>
+</ul>
 <h3 id="ram">RAM</h3>
 <ul>
+<li>Products need to support RAM</li>
+<li>No charge for using RAM</li>
 <li>Share with other account or your OG</li>
 <li>Avoid resource duplication</li>
 <li>Share route53: <a href="https://aws.amazon.com/vi/premiumsupport/knowledge-center/route-53-share-resolver-rules-with-ram/" target="_blank" rel="noopener noreffer ">https://aws.amazon.com/vi/premiumsupport/knowledge-center/route-53-share-resolver-rules-with-ram/</a></li>
 <li>Sharing managed prefix list: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/sharing-managed-prefix-lists.html" target="_blank" rel="noopener noreffer ">https://docs.aws.amazon.com/vpc/latest/userguide/sharing-managed-prefix-lists.html</a></li>
+</ul>
+<h3 id="aws-sso">AWS SSO</h3>
+<ul>
+<li>Choose Identity Provider -&gt; Login -&gt; Select AWS Account to Assume</li>
+</ul>
+<h3 id="aws-cognito">AWS Cognito</h3>
+<ul>
+<li>User pool: user management,sign in, sign off and get jwt</li>
+<li>Identity Pool: return temporary credentials</li>
 </ul>
 <h3 id="aws-control-tower">Aws Control Tower</h3>
 <ul>
@@ -1072,12 +1154,10 @@
 <li>additional paid metrics and features</li>
 <li>Advanced metric: activity, advanced cost optimization, advanced data protection, status code</li>
 </ul>
-<ul>
+</li>
 <li>Cloudwatch Publishing: Access metrics in CloudWatch without additional charges</li>
 <li>Prefix Aggregation: Collect metrics at the prefix level</li>
 <li>Data is available for queries for 15 months</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -2256,6 +2336,17 @@
 <li>Rule can centrally managed cross-account by AWS Firewall Manager to apply to many VPCs</li>
 <li>Traffic filtering: allow, drop, alert</li>
 <li>Send logs of rule matches to S3, CW, Firehose</li>
+</ul>
+<h2 id="other">Other</h2>
+<h3 id="aws-workspaces">AWS Workspaces</h3>
+<ul>
+<li>Remote Desktop Service/Citrix</li>
+<li>Consistent desktop, from anywhere</li>
+<li>Monthly, hourly pricing</li>
+<li>Use Directory Service(Simple, AD, AD Connector) for authentication and user management</li>
+<li>Use ENI in VPC</li>
+<li>Connect on-premises over VPN or Direct Connect</li>
+<li>Workspaces are not HA, they occupy a single az</li>
 </ul>
 <h2 id="machine-learning">Machine Learning</h2>
 <h1 id="kendra">Kendra</h1>
