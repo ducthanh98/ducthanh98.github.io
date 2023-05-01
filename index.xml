@@ -3,10 +3,18 @@
         <title>ThanhLD Site</title>
         <link>https://ducthanh98.github.io/</link>
         <description>Hi, My name&#39;s Thanh</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 29 Nov 2022 11:17:12 &#43;0700</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 01 May 2023 22:43:50 &#43;0700</lastBuildDate>
             <atom:link href="https://ducthanh98.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Cka</title>
+    <title>Algorithms</title>
+    <link>https://ducthanh98.github.io/posts/algorithms/</link>
+    <pubDate>Mon, 01 May 2023 22:43:50 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/algorithms/</guid>
+    <description><![CDATA[Bitmanipulation Binary AND &amp; 0 &amp; 0 = 0 0 &amp; 1 = 0 1 &amp; 0 = 0 1 &amp; 1 = 1 Example: 5 &amp; 7 =&gt; 0000101 &amp; 0000111 = 0000101 =&gt; 5 Binary OR | 0 | 0 = 0 0 | 1 = 1 1 | 0 = 1 1 | 1 = 1 Binary XOR ^ 0 ^ 0 = 0 0 ^ 1 = 1 1 ^ 0 = 1 1 ^ 1 = 0 Binary NOT ~ ~ 0 = 1 ~ 1 = 0 Binary LEFT SHIFT &laquo; a &lt;&lt; b =&gt; a * power(2,b) Binary RIGHT SHIFT &raquo; a &gt;&gt; b =&gt; a / power(2,b) ]]></description>
+</item>
+<item>
+    <title>Certified kubernetes administrator note</title>
     <link>https://ducthanh98.github.io/posts/cka/</link>
     <pubDate>Tue, 29 Nov 2022 11:17:12 &#43;0700</pubDate>
     <author>Author</author>
@@ -19,8 +27,8 @@
     <pubDate>Mon, 28 Nov 2022 22:58:35 &#43;0700</pubDate>
     <author>Author</author>
     <guid>https://ducthanh98.github.io/posts/aws-sap/</guid>
-    <description><![CDATA[OSI Model Layer 1 Physical shared medium Standards for transmiting and receiving from the medium No access control No device =&gt; no device communications Layer 2: Data Link DDOS Type Application Layer: HTTP flood Protocol Attack: SYN Flood Volumetric: DNS Amplification Identify and Federation Policy Priorty Explicit DENY -&gt; SCP -&gt; Resource Policy -&gt; Permissions Boundaries -&gt; Session Policies -&gt; Identity Policies
-Directory Service AD Connector: Only redirects no local identity data in AWS Simple AD: AD compatible managed on AWS AWS Managed MS AD: Establish trust connection with your on-premise AD IAM: Explicit DENY has precedence over ALOW NotAction: explicit allow a FEW THING in there Access Advisor: See permissions granted and when last accessed Access analyzer: Analyze resources that are shared with external entity Access Key: Can have two access keys Can be created, deleted, made inactivate or activate STS When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa Temporary credentials can&rsquo;t be cancelled Changing the trust policy has no impact on existing credentials Revoking the leaked credentials: Denying access to credentials created by AssumeRole, AssumeRoleWithSAML, or AssumeRoleWithWebIdentity Delete role, change permisisons impact all assumers you must have the PutRolePolicy to attach the AWSRevokeOlderSessions inline policy Denying access to credentials created by GetFederationToken or GetSessionToken edit or delete the policies that are attached to the IAM user Note: You cannot change the permissions for an AWS account root user so we recommend that you do not call GetFederationToken or GetSessionToken as a root user.]]></description>
+    <description><![CDATA[DDOS Type Application Layer: HTTP flood Protocol Attack: SYN Flood Volumetric: DNS Amplification Identify and Federation Policy Priorty Explicit DENY -&gt; SCP -&gt; Resource Policy -&gt; Permissions Boundaries -&gt; Session Policies -&gt; Identity Policies
+Directory Service AD Connector: Only redirects no local identity data in AWS Simple AD: AD compatible managed on AWS AWS Managed MS AD: Establish trust connection with your on-premise AD Support AD Native schema extensions which required by some AD applications Large userS Integrates with radius/MFA IAM: Explicit DENY has precedence over ALOW NotAction: explicit allow a FEW THING in there Access Advisor: See permissions granted and when last accessed Access analyzer: Analyze resources that are shared with external entity Access Key: Can have two access keys Can be created, deleted, made inactivate or activate STS When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa Temporary credentials can&rsquo;t be cancelled Changing the trust policy has no impact on existing credentials Revoking the leaked credentials: Denying access to credentials created by AssumeRole, AssumeRoleWithSAML, or AssumeRoleWithWebIdentity Delete role, change permisisons impact all assumers you must have the PutRolePolicy to attach the AWSRevokeOlderSessions inline policy Denying access to credentials created by GetFederationToken or GetSessionToken edit or delete the policies that are attached to the IAM user Note: You cannot change the permissions for an AWS account root user so we recommend that you do not call GetFederationToken or GetSessionToken as a root user.]]></description>
 </item>
 </channel>
 </rss>
