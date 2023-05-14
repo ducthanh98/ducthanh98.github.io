@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Certified kubernetes administrator note - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh"><meta property="og:title" content="Certified kubernetes administrator note" />
-<meta property="og:description" content="Architecture Overview - Kube-api authenticates user - Kube-api Validates request - Kube-api Retrieves data - Kube-api Updates etcd - Scheduler - Kubelet Master Node: - Responsible for managing the K8s cluster, storing information about the nodes, containers, ... ETCD: - Database that stores informations in key-value format Scheduler - Identifies the right node to place a container based on the containers resource requirements, worker policies, constraints, ... - Controllers: - Types: - Node Controller: Responsible for onboarding new nodes to the cluster, handling situations where nodes are unavailable or get destroyed, - Replication Controller: ensures that the desired number of containers are running at all times in a replication group - Workflows: - Monitoring status from the nodes and taking some actions to keep applications running." />
+<meta property="og:description" content="Architecture Overview Master Node: - Responsible for managing the K8s cluster, storing information about the nodes, containers, ... ETCD: - Database that stores informations in key-value format Scheduler - Identifies the right node to place a container based on the containers resource requirements, worker policies, constraints, ... - Controllers: - Types: - Node Controller: Responsible for onboarding new nodes to the cluster, handling situations where nodes are unavailable or get destroyed, - Replication Controller: ensures that the desired number of containers are running at all times in a replication group &#43; - Workflows: - Monitoring status from the nodes and taking some actions to keep applications running." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/cka/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-29T11:17:12+07:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Certified kubernetes administrator note"/>
-<meta name="twitter:description" content="Architecture Overview - Kube-api authenticates user - Kube-api Validates request - Kube-api Retrieves data - Kube-api Updates etcd - Scheduler - Kubelet Master Node: - Responsible for managing the K8s cluster, storing information about the nodes, containers, ... ETCD: - Database that stores informations in key-value format Scheduler - Identifies the right node to place a container based on the containers resource requirements, worker policies, constraints, ... - Controllers: - Types: - Node Controller: Responsible for onboarding new nodes to the cluster, handling situations where nodes are unavailable or get destroyed, - Replication Controller: ensures that the desired number of containers are running at all times in a replication group - Workflows: - Monitoring status from the nodes and taking some actions to keep applications running."/>
+<meta name="twitter:description" content="Architecture Overview Master Node: - Responsible for managing the K8s cluster, storing information about the nodes, containers, ... ETCD: - Database that stores informations in key-value format Scheduler - Identifies the right node to place a container based on the containers resource requirements, worker policies, constraints, ... - Controllers: - Types: - Node Controller: Responsible for onboarding new nodes to the cluster, handling situations where nodes are unavailable or get destroyed, - Replication Controller: ensures that the desired number of containers are running at all times in a replication group &#43; - Workflows: - Monitoring status from the nodes and taking some actions to keep applications running."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/cka\/"
-        },"genre": "posts","wordcount":  290 ,
+        },"genre": "posts","wordcount":  418 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/cka\/","datePublished": "2022-11-29T11:17:12+07:00","dateModified": "2022-11-29T11:17:12+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,7 +70,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified kubernetes administrator note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;290 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;418 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -79,33 +79,26 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#master-node">Master Node:</a>
+    <li><a href="#overview">Overview</a>
       <ul>
+        <li><a href="#master-node">Master Node:</a></li>
         <li><a href="#etcd">ETCD:</a></li>
         <li><a href="#scheduler">Scheduler</a></li>
         <li><a href="#controllers">Controllers:</a></li>
         <li><a href="#kube-api">Kube API:</a></li>
-      </ul>
-    </li>
-    <li><a href="#worker-node">Worker Node:</a>
-      <ul>
+        <li><a href="#worker-node">Worker Node:</a></li>
         <li><a href="#kubelet">Kubelet</a></li>
         <li><a href="#kube-proxy">Kube-proxy</a></li>
       </ul>
     </li>
+    <li><a href="#pod">Pod</a></li>
+    <li><a href="#replica-set-vs-replica-controller">Replica Set vs Replica Controller</a></li>
+    <li><a href="#services">Services</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="architecture">Architecture</h1>
 <h2 id="overview">Overview</h2>
-<pre><code>- Kube-api authenticates user
-- Kube-api Validates request
-- Kube-api Retrieves data
-- Kube-api Updates etcd
-- Scheduler
-- Kubelet
-</code></pre>
-<h2 id="master-node">Master Node:</h2>
+<h3 id="master-node">Master Node:</h3>
 <pre><code>- Responsible for managing the K8s cluster, storing information about the nodes, containers, ...
 </code></pre>
 <h3 id="etcd">ETCD:</h3>
@@ -119,6 +112,7 @@
 <pre><code>- Types:
     - Node Controller: Responsible for onboarding new nodes to the cluster, handling situations where nodes are unavailable or get destroyed, 
     - Replication Controller: ensures that the desired number of containers are running at all times in a replication group
+        + 
 - Workflows:
     - Monitoring status from the nodes and taking some actions to keep applications running.
     - it does that through kube-apiserver
@@ -127,14 +121,37 @@
 </code></pre>
 <h3 id="kube-api">Kube API:</h3>
 <pre><code>- Responsible for orchestrating all operations within the cluster
+- Kube-api authenticates user
+- Kube-api Validates request
+- Kube-api Retrieves data
+- Kube-api Updates etcd
+- Scheduler
+- Kubelet
 </code></pre>
-<h2 id="worker-node">Worker Node:</h2>
+<h3 id="worker-node">Worker Node:</h3>
 <h3 id="kubelet">Kubelet</h3>
 <pre><code>- Agent that runs on each node in a cluster. It listens intructions from kube-api server, deploys and destroys
 </code></pre>
 <h3 id="kube-proxy">Kube-proxy</h3>
 <pre><code>- Ensures necessary rules in place on the worker nodes to allow all containers running on them to reach each other.
 - Kube-proxy is a process that runs on each node in the Kubernetes cluster. Its job is to look for new services, and every time a new service is created,it creates the appropriate rules on each node to forward traffic to those services to the backend pods.One way it does this is using iptables rules.In this case, it creates an iptables rule on each node in the cluster to forward traffic heading to the IP of the service
+</code></pre>
+<h2 id="pod">Pod</h2>
+<pre><code>- A single instance of application
+- Have one or multiple containers
+</code></pre>
+<pre tabindex="0"><code>kubectl run --image=nginx nginx
+</code></pre><h2 id="replica-set-vs-replica-controller">Replica Set vs Replica Controller</h2>
+<pre><code>- Replica
+</code></pre>
+<h2 id="services">Services</h2>
+<pre><code>- Map requests to the pod running the web containers
+- Node Port:
+    - Mapping a port on the node to a port on the pod
+- Cluster IP: Each service gets an IP and name assigned to it inside the cluster, and that is the name that should be used by other pods to access the service. This type of service is known as cluster IP.
+- Load Balancer
+    + Set the type of service to load balancer in an unsupported environment,like VirtualBox, or, you know,any other environments,then it would have the same effect as setting it to node port.
+    + 
 </code></pre>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
