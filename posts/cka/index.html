@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/cka\/"
-        },"genre": "posts","wordcount":  418 ,
+        },"genre": "posts","wordcount":  700 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/cka\/","datePublished": "2022-11-29T11:17:12+07:00","dateModified": "2022-11-29T11:17:12+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified kubernetes administrator note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;418 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;700 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -91,9 +91,29 @@
         <li><a href="#kube-proxy">Kube-proxy</a></li>
       </ul>
     </li>
-    <li><a href="#pod">Pod</a></li>
-    <li><a href="#replica-set-vs-replica-controller">Replica Set vs Replica Controller</a></li>
-    <li><a href="#services">Services</a></li>
+    <li><a href="#core-concept">Core Concept</a>
+      <ul>
+        <li><a href="#pod">Pod</a></li>
+        <li><a href="#replica-set-vs-replica-controller">Replica Set vs Replica Controller</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#namespaces">Namespaces:</a></li>
+        <li><a href="#static-pods">Static Pods</a></li>
+      </ul>
+    </li>
+    <li><a href="#lifecyle-and-management">Lifecyle and management</a>
+      <ul>
+        <li><a href="#commands">Commands</a></li>
+        <li><a href="#configmap">ConfigMap</a></li>
+        <li><a href="#secrets">Secrets</a></li>
+        <li><a href="#patterns">Patterns</a></li>
+      </ul>
+    </li>
+    <li><a href="#cluster-maintenance">Cluster maintenance</a>
+      <ul>
+        <li><a href="#os-upgraded">OS Upgraded</a></li>
+        <li><a href="#cluster-upgraded">Cluster upgraded</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="architecture">Architecture</h1>
@@ -136,23 +156,92 @@
 <pre><code>- Ensures necessary rules in place on the worker nodes to allow all containers running on them to reach each other.
 - Kube-proxy is a process that runs on each node in the Kubernetes cluster. Its job is to look for new services, and every time a new service is created,it creates the appropriate rules on each node to forward traffic to those services to the backend pods.One way it does this is using iptables rules.In this case, it creates an iptables rule on each node in the cluster to forward traffic heading to the IP of the service
 </code></pre>
-<h2 id="pod">Pod</h2>
+<h2 id="core-concept">Core Concept</h2>
+<h3 id="pod">Pod</h3>
 <pre><code>- A single instance of application
 - Have one or multiple containers
 </code></pre>
 <pre tabindex="0"><code>kubectl run --image=nginx nginx
-</code></pre><h2 id="replica-set-vs-replica-controller">Replica Set vs Replica Controller</h2>
+</code></pre><h3 id="replica-set-vs-replica-controller">Replica Set vs Replica Controller</h3>
 <pre><code>- Replica
 </code></pre>
-<h2 id="services">Services</h2>
+<h3 id="services">Services</h3>
 <pre><code>- Map requests to the pod running the web containers
 - Node Port:
     - Mapping a port on the node to a port on the pod
 - Cluster IP: Each service gets an IP and name assigned to it inside the cluster, and that is the name that should be used by other pods to access the service. This type of service is known as cluster IP.
 - Load Balancer
     + Set the type of service to load balancer in an unsupported environment,like VirtualBox, or, you know,any other environments,then it would have the same effect as setting it to node port.
-    + 
+    + Integrate natively with cloud LB
 </code></pre>
+<h3 id="namespaces">Namespaces:</h3>
+<pre><code>- Isolate envrionment
+- Kubernetes creates a set of pods and services for its internal purpose, such as those required by the networking solution, the DNS service, etcetera. To isolate these from the user and to prevent you from accidentally deleting or modifying these services, Kubernetes creates them under another name space created at cluster startup named kube-system.
+- A third name space created by Kubernetes automatically is called kube-public. This is where resources that should be made available to all users are created.
+</code></pre>
+<pre tabindex="0"><code>    Format: service-name.namespace.service.domain
+    Example: db-service.dev.svc.cluster.local
+</code></pre><h3 id="static-pods">Static Pods</h3>
+<pre><code>- You can configure the kubelet to read the pod definition files from a directory on the server designated to store information about pods.
+- default pod-manifest-path=/etc/kubernetes/manifest
+</code></pre>
+<h2 id="lifecyle-and-management">Lifecyle and management</h2>
+<h3 id="commands">Commands</h3>
+<pre><code>- Docker EntryPoint: append new variable
+- Docker Cmd: will be overwrite
+- ** Note **: K8s command overwrite entrypoint docker. args overwrite command docker
+</code></pre>
+<h3 id="configmap">ConfigMap</h3>
+<pre><code>- Config maps are used to pass configuration data in the form of key value pairs in Kubernetes.
+</code></pre>
+<h3 id="secrets">Secrets</h3>
+<pre><code>- Secrets are used to store sensitive information like passwords or keys.They're similar to ConfigMaps except that they're stored in an encoded format.
+</code></pre>
+<h3 id="patterns">Patterns</h3>
+<pre><code>- Sidecar pattern
+- adapter pattern
+- ambassador pattern
+</code></pre>
+<h2 id="cluster-maintenance">Cluster maintenance</h2>
+<h3 id="os-upgraded">OS Upgraded</h3>
+<ul>
+<li>drain: move exist pods to other nodes and new nodes are unscheduled on this node</li>
+</ul>
+<pre tabindex="0"><code>    kubectl drain &lt;node&gt;
+</code></pre><ul>
+<li>cordon: new pods are unscheduled on this node</li>
+</ul>
+<pre tabindex="0"><code>kubectl cordon &lt;node&gt;
+</code></pre><h3 id="cluster-upgraded">Cluster upgraded</h3>
+<ul>
+<li>Master:
+<ul>
+<li>Upgrade kubeadm</li>
+<li>Run</li>
+</ul>
+<pre tabindex="0"><code>kubectl upgrade apply &lt;version&gt;
+</code></pre><ul>
+<li>Upgrade kubelet by apt</li>
+</ul>
+</li>
+<li>Node:
+<ul>
+<li>Upgrade kubeadm</li>
+<li>upgrade node config</li>
+</ul>
+<pre tabindex="0"><code>kubeadm upgrade node config --kubelet-version &lt;version&gt;
+</code></pre><ul>
+<li>Restart kubelet</li>
+<li>Strategy:
+<ul>
+<li>All at once</li>
+<li>One node at time</li>
+<li>Replace old node with new node</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
