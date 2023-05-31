@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/cka\/"
-        },"genre": "posts","wordcount":  700 ,
+        },"genre": "posts","wordcount":  840 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/cka\/","datePublished": "2022-11-29T11:17:12+07:00","dateModified": "2022-11-29T11:17:12+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,7 +70,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified kubernetes administrator note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;700 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;840 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -112,6 +112,24 @@
       <ul>
         <li><a href="#os-upgraded">OS Upgraded</a></li>
         <li><a href="#cluster-upgraded">Cluster upgraded</a></li>
+        <li><a href="#backup">Backup</a></li>
+      </ul>
+    </li>
+    <li><a href="#resource-configurations">Resource Configurations</a>
+      <ul>
+        <li><a href="#certificate-api">Certificate API</a></li>
+        <li><a href="#kube-config">Kube Config</a></li>
+      </ul>
+    </li>
+    <li><a href="#storage">Storage</a>
+      <ul>
+        <li><a href="#persistent-volume">Persistent volume</a></li>
+        <li><a href="#storage-class">Storage class:</a></li>
+      </ul>
+    </li>
+    <li><a href="#networking">Networking</a>
+      <ul>
+        <li><a href="#switching">Switching</a></li>
       </ul>
     </li>
   </ul>
@@ -242,6 +260,90 @@
 </ul>
 </li>
 </ul>
+<h3 id="backup">Backup</h3>
+<ul>
+<li>
+<h2 id="resource-configurations">Resource Configurations</h2>
+</li>
+<li>ETCD Cluster
+<ul>
+<li>Restore</li>
+</ul>
+<pre tabindex="0"><code>ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/etcd/pki/ca.pem --cert=/etc/etcd/pki/etcd.pem --key=/etc/etcd/pki/etcd-key.pem snapshot restore /root/cluster2.db --data-dir &lt;dir&gt;
+</code></pre><ul>
+<li>Backup</li>
+</ul>
+<pre tabindex="0"><code>ETCDCTL_API=3 etcdctl --endpoints=https://192.13.40.18:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save /&lt;dir&gt;
+</code></pre></li>
+</ul>
+<h3 id="certificate-api">Certificate API</h3>
+<ul>
+<li>Create CertificateSigningRequest</li>
+</ul>
+<pre tabindex="0"><code>    openssl genrsa -out &lt;name.key&gt; 2048
+    openssl req -new-key &lt;name.key&gt; -subj &#34;/CN=jane&#34; -out jane.csr
+
+    cat &lt;name.csr&gt; | base64 |tr -d &#34;\n&#34;
+</code></pre><pre tabindex="0"><code>-- csr file yaml example
+---
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: &lt;user&gt;
+spec:
+  request: &lt;base64 here&gt;
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+</code></pre><ul>
+<li>Review requests</li>
+</ul>
+<pre tabindex="0"><code>kubectl get csr
+</code></pre><ul>
+<li>Approve requests</li>
+</ul>
+<pre tabindex="0"><code>kubectl certificate approve/deny &lt;name&gt;
+</code></pre><ul>
+<li>Shares certs to users</li>
+</ul>
+<h3 id="kube-config">Kube Config</h3>
+<h2 id="storage">Storage</h2>
+<h3 id="persistent-volume">Persistent volume</h3>
+<ul>
+<li>PV</li>
+</ul>
+<pre tabindex="0"><code>apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-log
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 100Mi
+  hostPath:
+    path: /pv/log
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain
+</code></pre><ul>
+<li>pvc</li>
+</ul>
+<pre tabindex="0"><code>apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claim-log-1
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Mi
+</code></pre><h3 id="storage-class">Storage class:</h3>
+<ul>
+<li>Support for dynamic provisioning</li>
+</ul>
+<h2 id="networking">Networking</h2>
+<h3 id="switching">Switching</h3>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
