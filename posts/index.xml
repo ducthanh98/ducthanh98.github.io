@@ -9,7 +9,7 @@
     <pubDate>Mon, 01 May 2023 22:43:50 &#43;0700</pubDate>
     <author>Author</author>
     <guid>https://ducthanh98.github.io/posts/algorithms/</guid>
-    <description><![CDATA[Bitmanipulation Binary AND &amp; 0 &amp; 0 = 0 0 &amp; 1 = 0 1 &amp; 0 = 0 1 &amp; 1 = 1 Example: 5 &amp; 7 =&gt; 0000101 &amp; 0000111 = 0000101 =&gt; 5 Binary OR | 0 | 0 = 0 0 | 1 = 1 1 | 0 = 1 1 | 1 = 1 Binary XOR ^ 0 ^ 0 = 0 0 ^ 1 = 1 1 ^ 0 = 1 1 ^ 1 = 0 Binary NOT ~ ~ 0 = 1 ~ 1 = 0 Binary LEFT SHIFT &laquo; a &lt;&lt; b =&gt; a * power(2,b) Binary RIGHT SHIFT &raquo; a &gt;&gt; b =&gt; a / power(2,b) ]]></description>
+    <description><![CDATA[Bitmanipulation Binary AND &amp; 0 &amp; 0 = 0 0 &amp; 1 = 0 1 &amp; 0 = 0 1 &amp; 1 = 1 Example: 5 &amp; 7 =&gt; 0000101 &amp; 0000111 = 0000101 =&gt; 5 Binary OR | 0 | 0 = 0 0 | 1 = 1 1 | 0 = 1 1 | 1 = 1 Binary XOR ^ 0 ^ 0 = 0 0 ^ 1 = 1 1 ^ 0 = 1 1 ^ 1 = 0 Binary NOT ~ ~ 0 = 1 ~ 1 = 0 Binary LEFT SHIFT &laquo; a &lt;&lt; b =&gt; a * power(2,b) Binary RIGHT SHIFT &raquo; a &gt;&gt; b =&gt; a / power(2,b) Design pattern Creational patterns Factory Pattern: Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created which solves the problem of creating product objects without specifying their concrete classes.]]></description>
 </item>
 <item>
     <title>Certified kubernetes administrator note</title>

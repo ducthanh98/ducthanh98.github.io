@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/cka\/"
-        },"genre": "posts","wordcount":  840 ,
+        },"genre": "posts","wordcount":  1420 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/cka\/","datePublished": "2022-11-29T11:17:12+07:00","dateModified": "2022-11-29T11:17:12+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified kubernetes administrator note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;840 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1420 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -112,6 +112,18 @@
       <ul>
         <li><a href="#os-upgraded">OS Upgraded</a></li>
         <li><a href="#cluster-upgraded">Cluster upgraded</a></li>
+      </ul>
+    </li>
+    <li><a href="#security">Security</a>
+      <ul>
+        <li><a href="#resources-and-verbs">Resources and Verbs</a></li>
+        <li><a href="#rbac">RBAC</a></li>
+        <li><a href="#cluster-role">Cluster Role</a></li>
+        <li><a href="#service-account">Service Account</a></li>
+        <li><a href="#image-security">Image security</a></li>
+        <li><a href="#docker-security">Docker Security</a></li>
+        <li><a href="#security-context">Security Context</a></li>
+        <li><a href="#traffic">Traffic</a></li>
         <li><a href="#backup">Backup</a></li>
       </ul>
     </li>
@@ -130,6 +142,12 @@
     <li><a href="#networking">Networking</a>
       <ul>
         <li><a href="#switching">Switching</a></li>
+        <li><a href="#dns">DNS</a></li>
+        <li><a href="#docker-networking">Docker networking</a></li>
+        <li><a href="#cni">CNI</a></li>
+        <li><a href="#ipam">IPAM</a></li>
+        <li><a href="#service-networking">Service Networking</a></li>
+        <li><a href="#dns-in-k8s">DNS in K8s</a></li>
       </ul>
     </li>
   </ul>
@@ -260,7 +278,145 @@
 </ul>
 </li>
 </ul>
-<h3 id="backup">Backup</h3>
+<h2 id="security">Security</h2>
+<h3 id="resources-and-verbs">Resources and Verbs</h3>
+<pre tabindex="0"><code>kubectl api-resources --sort-by name -o wide
+</code></pre><h3 id="rbac">RBAC</h3>
+<h3 id="cluster-role">Cluster Role</h3>
+<ul>
+<li>Assign role</li>
+</ul>
+<pre tabindex="0"><code>k create clusterrole &lt;name&gt; --resources=nodes --verb get,watch,list,get,create,delete
+k create clusterrolebinding &lt;name&gt; --user michelle --clusterrole node-admin 
+</code></pre><ul>
+<li>check permission</li>
+</ul>
+<pre tabindex="0"><code>kubectl auth can-i list storageclasses --as michelle
+</code></pre><pre tabindex="0"><code>---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: storage-admin
+rules:
+- apiGroups: [&#34;&#34;]
+  resources: [&#34;persistentvolumes&#34;]
+  verbs: [&#34;get&#34;, &#34;watch&#34;, &#34;list&#34;, &#34;create&#34;, &#34;delete&#34;]
+- apiGroups: [&#34;storage.k8s.io&#34;]
+  resources: [&#34;storageclasses&#34;]
+  verbs: [&#34;get&#34;, &#34;watch&#34;, &#34;list&#34;, &#34;create&#34;, &#34;delete&#34;]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: michelle-storage-admin
+subjects:
+- kind: User
+  name: michelle
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: storage-admin
+  apiGroup: rbac.authorization.k8s.io
+</code></pre><h3 id="service-account">Service Account</h3>
+<ul>
+<li></li>
+</ul>
+<pre tabindex="0"><code>kubectl create serviceaccount dashboard-sa
+k create token dashboard-sa
+</code></pre><ul>
+<li>Set service account by cmd</li>
+</ul>
+<pre tabindex="0"><code>kubectl set serviceaccount deploy/web-dashboard dashboard-sa
+</code></pre><h3 id="image-security">Image security</h3>
+<ul>
+<li>Command</li>
+</ul>
+<pre tabindex="0"><code>kubectl create secret docker-registry regcred --docker-server=&lt;your-registry-server&gt; --docker-username=&lt;your-name&gt; --docker-password=&lt;your-pword&gt; --docker-email=&lt;your-email&gt;
+
+kubectl get secret regcred --output=yaml
+</code></pre><ul>
+<li>Inspecting</li>
+</ul>
+<pre tabindex="0"><code>kubectl get secret regcred --output=yaml
+</code></pre><h3 id="docker-security">Docker Security</h3>
+<ul>
+<li>Unlike virtual machines, containers are not completely isolated from their host.Containers and the host share the same kernel.</li>
+<li>Containers are isolated using namespaces in Linux. The host has a namespace and the containers have their own namespace. All the processes run by the containers are in fact run on the host itself but in their own namespace. As far as the Docker container is concerned, it is in its own namespace</li>
+<li>By default, Docker runs a container with a limited set of capabilities. And so the processes running within the container do not have the privileges to say reboot the host or perform operations that can disrupt the host or other containers running on the same host.</li>
+<li>Docker capabilities</li>
+</ul>
+<pre tabindex="0"><code>docker run --cap-add MAC-ADMIN ubuntu
+docker run --cap-drop KILL ubuntu
+docker run --privilleged KILL ubuntu
+</code></pre><h3 id="security-context">Security Context</h3>
+<ul>
+<li>Put below data into containers details</li>
+</ul>
+<pre tabindex="0"><code>securityContext:
+  runAsUser: 1000
+  capabilities:
+    add: [&#34;MAC_ADMIN&#34;]
+</code></pre><h3 id="traffic">Traffic</h3>
+<ul>
+<li>Ingress: Ingoing</li>
+<li>Egress: Outgoing</li>
+<li>k8S allow any traffics from any pods in cluster</li>
+<li>Networking policy YAML</li>
+</ul>
+<pre tabindex="0"><code></code></pre><ul>
+<li>Solutions that support network policies
+<ul>
+<li>Kube-router</li>
+<li>Calico</li>
+<li>Romana</li>
+<li>Weave-net</li>
+</ul>
+</li>
+<li>Not Support:
+<ul>
+<li>Flannel</li>
+</ul>
+</li>
+<li>Example yaml file</li>
+</ul>
+<pre tabindex="0"><code>apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: internal-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: internal
+  policyTypes:
+  - Egress
+  - Ingress
+  ingress:
+    - {}
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          name: mysql
+    ports:
+    - protocol: TCP
+      port: 3306
+
+  - to:
+    - podSelector:
+        matchLabels:
+          name: payroll
+    ports:
+    - protocol: TCP
+      port: 8080
+
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+</code></pre><h3 id="backup">Backup</h3>
 <ul>
 <li>
 <h2 id="resource-configurations">Resource Configurations</h2>
@@ -344,6 +500,31 @@ spec:
 </ul>
 <h2 id="networking">Networking</h2>
 <h3 id="switching">Switching</h3>
+<h3 id="dns">DNS</h3>
+<ul>
+<li>Name resolution: Transalating hostname to IP address</li>
+<li>Append this option into /etc/resolv.conf so server can query from dns server</li>
+</ul>
+<pre tabindex="0"><code>nameserver 192.168.1.100
+</code></pre><h3 id="docker-networking">Docker networking</h3>
+<ul>
+<li>Network: none containers can&rsquo;t connect each other or outside the world</li>
+<li>Network: host</li>
+<li>Network: bridge
++</li>
+</ul>
+<h3 id="cni">CNI</h3>
+<h3 id="ipam">IPAM</h3>
+<ul>
+<li>Weave, by default, allocates the IP range 10.32.0.0/12 for the entire network.</li>
+<li>From this range, the peers decide to split the IP addresses equally between them and assigns one portion to each node.</li>
+</ul>
+<h3 id="service-networking">Service Networking</h3>
+<ul>
+<li>When a service is created, it is accessible from all pods on the cluster, irrespective of what nodes the pods are on.While a pod is hosted on a node, a service is hosted across the cluster. It is not bound to a specific node,but remember, the service is only accessible from within the cluster. This type of service is known as ClusterIP.</li>
+<li>Similarly, each node runs another component known as kube-proxy. kube-proxy watches the changes in the cluster through Kube API server,and every time a new service is to be created,kube-proxy gets into action.Unlike pods, services are not created on each node or assigned to each node. Services are a cluster-wide concept. They exist across all the nodes in the cluster.</li>
+</ul>
+<h3 id="dns-in-k8s">DNS in K8s</h3>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
