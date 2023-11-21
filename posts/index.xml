@@ -3,7 +3,24 @@
         <title>All Posts - ThanhLD Site</title>
         <link>https://ducthanh98.github.io/posts/</link>
         <description>All Posts | ThanhLD Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 01 May 2023 22:43:50 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Microservice</title>
+    <link>https://ducthanh98.github.io/posts/microservice/</link>
+    <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/microservice/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Linux</title>
+    <link>https://ducthanh98.github.io/posts/linux/</link>
+    <pubDate>Sun, 12 Nov 2023 22:53:02 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/linux/</guid>
+    <description><![CDATA[Processes Concept A running instance of a program is called a process and it runs in its own memory space. Each time you execute a command, a new process starts. An active processs also includes the resources the program needs to run. These resources are are managed by the operating system(heap, process registers, program counters)
+Each process has its own memory adress space and one process cannot corrupt the memory space of another process.]]></description>
+</item>
+<item>
     <title>Algorithms</title>
     <link>https://ducthanh98.github.io/posts/algorithms/</link>
     <pubDate>Mon, 01 May 2023 22:43:50 &#43;0700</pubDate>
