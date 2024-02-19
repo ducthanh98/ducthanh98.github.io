@@ -3,7 +3,23 @@
         <title>All Posts - ThanhLD Site</title>
         <link>https://ducthanh98.github.io/posts/</link>
         <description>All Posts | ThanhLD Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Az 104</title>
+    <link>https://ducthanh98.github.io/posts/az-104/</link>
+    <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/az-104/</guid>
+    <description><![CDATA[Entra ID Managed Identity System-assigned: some Azure services allow you to enable a managed identity directly on a service instance. When you enable a system-assigned managed identity, an identity is created in Microsoft Entra ID that is tied to the lifecycle of that service instance. So when the resource is deleted, Azure automatically deletes the identity for you. By design, only that Azure resource can use this identity to request tokens from Microsoft Entra ID.]]></description>
+</item>
+<item>
+    <title>Golang</title>
+    <link>https://ducthanh98.github.io/posts/golang/</link>
+    <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/golang/</guid>
+    <description><![CDATA[Garbage collection In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation. Here are some key points about the garbage collector in Go: 1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application.]]></description>
+</item>
+<item>
     <title>Microservice</title>
     <link>https://ducthanh98.github.io/posts/microservice/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>

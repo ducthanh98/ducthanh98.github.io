@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Golang - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
+ Skype: live:fushion48 
+ PhoneNumber: &#43;84918279888"><meta property="og:title" content="Golang" />
+<meta property="og:description" content="Garbage collection In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation. Here are some key points about the garbage collector in Go: 1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ducthanh98.github.io/posts/golang/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-23T09:40:49+07:00" />
+<meta property="article:modified_time" content="2023-12-23T09:40:49+07:00" /><meta property="og:site_name" content="ThanhLD site" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang"/>
+<meta name="twitter:description" content="Garbage collection In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation. Here are some key points about the garbage collector in Go: 1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application."/>
+<meta name="application-name" content="ThanhLD site">
+<meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ducthanh98.github.io/posts/golang/" /><link rel="prev" href="https://ducthanh98.github.io/posts/microservice/" /><link rel="next" href="https://ducthanh98.github.io/posts/az-104/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Golang",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ducthanh98.github.io\/posts\/golang\/"
+        },"genre": "posts","wordcount":  689 ,
+        "url": "https:\/\/ducthanh98.github.io\/posts\/golang\/","datePublished": "2023-12-23T09:40:49+07:00","dateModified": "2023-12-23T09:40:49+07:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ThanhLD Site">ThanhLD Site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ThanhLD Site">ThanhLD Site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;689 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#design-pattern">Design pattern</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="garbage-collection">Garbage collection</h1>
+<pre tabindex="0"><code>In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation.
+
+Here are some key points about the garbage collector in Go:
+
+1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application.
+
+2. Tracing Garbage Collector: Go uses a tracing garbage collector. It works by tracing through the memory from the root objects (global variables, stack frames, etc.) to identify and mark objects that are still reachable (live objects). The unreachable objects are then considered garbage and can be safely deallocated.
+
+3. Generational Garbage Collection: Go&#39;s garbage collector uses a generational garbage collection algorithm. It divides objects into multiple generations based on their age. Young objects are collected more frequently, while older objects are collected less frequently.
+
+4. Mark and Sweep: The garbage collector follows a mark-and-sweep algorithm. It first marks all live objects by traversing the object graph, starting from the roots. After marking, it sweeps through the memory, deallocating memory occupied by unmarked (garbage) objects.
+
+Memory Reclamation: The garbage collector reclaims memory by compacting the heap. It moves objects closer together, reducing fragmentation and improving memory utilization.
+
+Tuning: Go provides some tunable parameters to adjust the garbage collector&#39;s behavior based on the application&#39;s needs. For example, you can adjust the size of the heap or the garbage collection latency.
+
+GOMAXPROCS: The GOMAXPROCS environment variable or the runtime.GOMAXPROCS() function can be used to set the maximum number of CPUs that the Go runtime can use for garbage collection and other concurrent operations.
+</code></pre><h1 id="go-routine">Go routine</h1>
+<h2 id="design-pattern">Design pattern</h2>
+<ol>
+<li>Fan-Out, Fan-In:
+Fan-Out: Launch a fixed number of goroutines to perform a task concurrently.
+Fan-In: Combine the results from multiple goroutines into a single channel.</li>
+</ol>
+<pre tabindex="0"><code>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;sync&#34;
+)
+
+func worker(id int, jobs &lt;-chan int, results chan&lt;- int) {
+    for job := range jobs {
+        fmt.Printf(&#34;Worker %d processing job %d\n&#34;, id, job)
+        results &lt;- job * 2
+    }
+}
+
+func main() {
+    const numWorkers = 3
+    jobs := make(chan int, 5)
+    results := make(chan int, 5)
+
+    var wg sync.WaitGroup
+
+    // Fan-Out: Launch workers
+    for i := 1; i &lt;= numWorkers; i++ {
+        wg.Add(1)
+        go func(i int) {
+            defer wg.Done()
+            worker(i, jobs, results)
+        }(i)
+    }
+
+    // Fan-In: Combine results
+    go func() {
+        wg.Wait()
+        close(results)
+    }()
+
+    // Send jobs to workers
+    for i := 1; i &lt;= 5; i++ {
+        jobs &lt;- i
+    }
+    close(jobs)
+
+    // Collect results
+    for result := range results {
+        fmt.Println(&#34;Result:&#34;, result)
+    }
+}
+</code></pre><ol start="2">
+<li>Worker Pool:
+Create a pool of workers (goroutines) to handle incoming tasks.
+Use a channel to dispatch tasks to available workers.</li>
+</ol>
+<pre tabindex="0"><code>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;sync&#34;
+)
+
+func worker(id int, jobs &lt;-chan int, wg *sync.WaitGroup) {
+    defer wg.Done()
+    for job := range jobs {
+        fmt.Printf(&#34;Worker %d processing job %d\n&#34;, id, job)
+    }
+}
+
+func main() {
+    const numWorkers = 3
+    jobs := make(chan int, 5)
+
+    var wg sync.WaitGroup
+
+    // Create worker pool
+    for i := 1; i &lt;= numWorkers; i++ {
+        wg.Add(1)
+        go worker(i, jobs, &amp;wg)
+    }
+
+    // Send jobs to workers
+    for i := 1; i &lt;= 5; i++ {
+        jobs &lt;- i
+    }
+    close(jobs)
+
+    // Wait for all workers to finish
+    wg.Wait()
+}
+</code></pre><ol start="3">
+<li>Pipeline:
+Compose a series of processing stages, each implemented by a goroutine.
+Use channels to connect stages and pass data between them.</li>
+</ol>
+<pre tabindex="0"><code>package main
+
+import (
+    &#34;fmt&#34;
+)
+
+func generator(nums ...int) &lt;-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for _, n := range nums {
+            out &lt;- n
+        }
+    }()
+    return out
+}
+
+func square(in &lt;-chan int) &lt;-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for n := range in {
+            out &lt;- n * n
+        }
+    }()
+    return out
+}
+
+func printer(in &lt;-chan int) {
+    for n := range in {
+        fmt.Println(n)
+    }
+}
+
+func main() {
+    nums := []int{1, 2, 3, 4, 5}
+    gen := generator(nums...)
+    sqr := square(gen)
+
+    // Consuming the results
+    printer(sqr)
+}
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ducthanh98.github.io/posts/golang/" data-title="Golang"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ducthanh98.github.io/posts/golang/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://ducthanh98.github.io/posts/golang/" data-title="Golang"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ducthanh98.github.io/posts/golang/" data-title="Golang"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ducthanh98.github.io/posts/golang/" data-title="Golang"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/microservice/" class="prev" rel="prev" title="Microservice"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Microservice</a>
+            <a href="/posts/az-104/" class="next" rel="next" title="Az 104">Az 104<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.107.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
