@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/az-104\/"
-        },"genre": "posts","wordcount":  537 ,
+        },"genre": "posts","wordcount":  1216 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/az-104\/","datePublished": "2024-02-19T22:57:18+07:00","dateModified": "2024-02-19T22:57:18+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -72,8 +72,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Az 104</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;537 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1216 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -92,7 +92,23 @@
   </ul>
 
   <ul>
+    <li><a href="#migration">Migration</a></li>
+    <li><a href="#azure-file">Azure File</a></li>
+  </ul>
+
+  <ul>
     <li><a href="#azure-backup">Azure Backup</a></li>
+    <li><a href="#azure-recovery-service-vault">Azure Recovery Service Vault</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#connect-two-vnet">Connect two vnet</a></li>
+    <li><a href="#vpn">VPN</a>
+      <ul>
+        <li><a href="#point-to-site-vpn">Point to site VPN</a></li>
+        <li><a href="#site-to-site-vpn">Site to site VPN</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="entra-id">Entra ID</h1>
@@ -141,7 +157,44 @@
 <ul>
 <li>determine if traffic is being directed to the intended destination, or whether the traffic is being sent nowhere</li>
 </ul>
-<h1 id="backup">Backup</h1>
+<h1 id="azure-storage">Azure Storage</h1>
+<h2 id="migration">Migration</h2>
+<ul>
+<li>
+<p>To request a live migration to ZRS, GZRS, or RA-GZRS, you need to migrate your storage account from LRS to ZRS in the primary region with no application downtime. To migrate from LRS to GZRS or RA-GZRS, first switch to GRS or RA-GRS and then request a live migration. Similarly, you can request a live migration from GRS or RA-GRS to GZRS or RA-GZRS. To migrate from GRS or RA-GRS to ZRS, first switch to LRS, then request a live migration.</p>
+</li>
+<li>
+<p>Live migration is supported only for storage accounts that use LRS or GRS replication. If your account uses RA-GRS then you need to first change your account’s replication type to either LRS or GRS before proceeding. This intermediary step removes the secondary read-only endpoint provided by RA-GRS before migration.</p>
+</li>
+</ul>
+<h2 id="azure-file">Azure File</h2>
+<ul>
+<li>Step to create Azure file Sync</li>
+</ul>
+<pre tabindex="0"><code>1. Prepare Windows Server to use with Azure File Sync
+
+- You need to disable Internet Explorer Enhanced Security Configuration in your server. This is required only for initial server registration. You can re-enable it after the server has been registered.
+
+2. Deploy the Storage Sync Service
+
+- Allows you to create sync groups that contain Azure file shares across multiple storage accounts and multiple registered Windows Servers.
+
+3. Deploy the Azure File Sync agent to TDFileServer1
+
+- The Azure File Sync agent is a downloadable package that enables Windows Server to be synced with an Azure file share.
+
+4. Register TDFileServer1 with Storage Sync Service
+
+- This establishes a trust relationship between your server (or cluster) and the Storage Sync Service. A server can only be registered to one Storage Sync Service and can sync with other servers and Azure file shares associated with the same Storage Sync Service.
+
+- 5. Create a sync group and a cloud endpoint
+
+- A sync group defines the sync topology for a set of files. Endpoints within a sync group are kept in sync with each other.
+
+6. Create a server endpoint
+
+- A server endpoint represents a specific location on a registered server, such as a folder on a server volume.
+</code></pre><h1 id="backup">Backup</h1>
 <h2 id="azure-backup">Azure Backup</h2>
 <ul>
 <li>a cost-effective, secure, one-click backup solution that’s scalable based on your backup storage needs. The centralized management interface makes it easy to define backup policies and protect a wide range of enterprise workloads, including Azure Virtual Machines, SQL and SAP databases, and Azure file shares.</li>
@@ -152,6 +205,55 @@
 <li>Create a Recovery Services vault</li>
 <li>Define a backup policy</li>
 <li>Apply the backup policy to protect multiple virtual machines</li>
+</ul>
+<h2 id="azure-recovery-service-vault">Azure Recovery Service Vault</h2>
+<ul>
+<li>a storage entity in Azure that houses data</li>
+<li>Support:</li>
+</ul>
+<ul>
+<li>Azure FIle</li>
+<li>Azure VM</li>
+<li>SQL in Azure VM</li>
+<li>DPM</li>
+<li>Azure Backup server</li>
+<li>Azure Backup Agent</li>
+</ul>
+<h1 id="azure-vm">Azure VM</h1>
+<ul>
+<li>Azure Virtual Machine Scale Sets: grouping of platform-managed virtual machines. The two types of orchestration modes are:</li>
+</ul>
+<ul>
+<li>Uniform – uses a virtual machine profile or template to scale up to desired capacity. This orchestration mode is mainly used for large-scale stateless workloads that require identical VM instances. It also provides fault domain high availability (less than 100 VMs).</li>
+<li>Flexible – offers high availability with identical or multiple VM types (up to 1000 VMs) by spreading VMs across fault domains in a region or within an Availability Zone.</li>
+</ul>
+<h1 id="azure-network">Azure Network</h1>
+<h2 id="connect-two-vnet">Connect two vnet</h2>
+<ul>
+<li>There are two ways to connect two virtual networks, based on your specific scenario and needs, you might want to pick one over the other.</li>
+</ul>
+<ul>
+<li>
+<p>VNet Peering provides low latency, high bandwidth connection useful in scenarios such as cross-region data replication and database failover scenarios. Since traffic is completely private and remains on the Microsoft backbone, customers with strict data policies prefer to use VNet Peering as public Internet is not involved. Since there is no gateway in the path, there are no extra hops, ensuring low latency connections.</p>
+</li>
+<li>
+<p>VPN Gateways provide a limited bandwidth connection and is useful in scenarios where encryption is needed, but bandwidth restrictions are tolerable. In these scenarios, customers are also not latency-sensitive.</p>
+</li>
+</ul>
+<h2 id="vpn">VPN</h2>
+<h3 id="point-to-site-vpn">Point to site VPN</h3>
+<ul>
+<li>Take note that after creating the point-to-site connection between TD1 and TDVnet1, there is already a change in network topology when you created the virtual network peering with TDVnet1 and TDVnet2. Whenever there is a change in the topology of your network, you will always need to download and re-install the VPN configuration file.</li>
+</ul>
+<h3 id="site-to-site-vpn">Site to site VPN</h3>
+<ul>
+<li>Create a virtual network</li>
+<li>Create a gateway subnet</li>
+<li>Create a VPN Gateway</li>
+<li>Create a local network gateway</li>
+<li>Configure VPN device</li>
+<li>Create VPN connection</li>
+<li>Verify connection</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
