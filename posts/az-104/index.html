@@ -7,8 +7,7 @@
         <title>Az 104 - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="Az 104" />
-<meta property="og:description" content="Entra ID Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD. However, a Global Administrator in AD can elevate access to all subscriptions and will be User Access Administrator in Azure root scope.
-All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 has elevated access, so he is also User Access Admin (RBAC)." />
+<meta property="og:description" content="Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/az-104/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-19T22:57:18+07:00" />
@@ -16,8 +15,7 @@ All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 h
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Az 104"/>
-<meta name="twitter:description" content="Entra ID Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD. However, a Global Administrator in AD can elevate access to all subscriptions and will be User Access Administrator in Azure root scope.
-All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 has elevated access, so he is also User Access Admin (RBAC)."/>
+<meta name="twitter:description" content="Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -32,7 +30,7 @@ All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 h
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/az-104\/"
-        },"genre": "posts","wordcount":  1571 ,
+        },"genre": "posts","wordcount":  2352 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/az-104\/","datePublished": "2024-02-19T22:57:18+07:00","dateModified": "2024-02-19T22:57:18+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -74,8 +72,8 @@ All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 h
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Az 104</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1571 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2352 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -83,21 +81,31 @@ All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 h
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#licences">Licences</a></li>
     <li><a href="#users">Users</a></li>
     <li><a href="#managed-identity">Managed Identity</a></li>
     <li><a href="#self-service-reset-password">Self service reset password</a></li>
   </ul>
 
   <ul>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#alert">Alert</a></li>
+  </ul>
+
+  <ul>
     <li><a href="#azure-monitor">Azure Monitor</a></li>
-    <li><a href="#heading"></a></li>
     <li><a href="#network-security-group-nsg-flow-logs-are">Network security group (NSG) flow logs are:</a></li>
     <li><a href="#ip-flow">IP flow</a></li>
     <li><a href="#next-hop">Next hop</a></li>
   </ul>
 
   <ul>
+    <li><a href="#policies">Policies</a></li>
+    <li><a href="#encryption">Encryption</a></li>
+    <li><a href="#performance">Performance</a></li>
     <li><a href="#migration">Migration</a></li>
+    <li><a href="#azure-blob">Azure Blob</a></li>
+    <li><a href="#setup-importexport">Setup import/export</a></li>
     <li><a href="#azure-file">Azure File</a></li>
   </ul>
 
@@ -107,6 +115,14 @@ All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 h
   </ul>
 
   <ul>
+    <li><a href="#state-management">State management</a></li>
+    <li><a href="#scale-sets">Scale sets</a></li>
+    <li><a href="#encryption-1">Encryption</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#network-interface">Network interface</a></li>
+    <li><a href="#monitoring">Monitoring</a></li>
     <li><a href="#connect-two-vnet">Connect two vnet</a></li>
     <li><a href="#vpn">VPN</a>
       <ul>
@@ -117,6 +133,12 @@ All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC). Admin1 h
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="entra-id">Entra ID</h1>
+<h2 id="licences">Licences</h2>
+<ul>
+<li>The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE.</li>
+<li>Can delete all users whether a license is assigned directly or via inheritance from a group membership</li>
+<li>Groups with active license assignments cannot be deleted</li>
+</ul>
 <h2 id="users">Users</h2>
 <p>Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD. However, a Global Administrator in AD can elevate access to all subscriptions and will be User Access Administrator in Azure root scope.</p>
 <p>All 3 users are GA (AD) and Admin3 is owner of the subscription (RBAC).
@@ -156,13 +178,22 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 <li>For each resource group we can create its own iam, policy,buget</li>
 <li>Maximum 50 tags and it isn&rsquo;t inherited</li>
 </ul>
-<h1 id="roles">Roles</h1>
+<h2 id="roles">Roles</h2>
 <ul>
 <li>Owner: perform any action, change permissions on it for whatever scope it&rsquo;s set at</li>
 <li>Contributor: do all things except change permissions</li>
 <li>Reader: read everything</li>
 <li>Operator role only lets you read, enable, and disable apps.</li>
 <li>Network Contributor = &ldquo;Lets you manage networks, but not access to them.&rdquo;.</li>
+<li>Co-administrators have full access to all resources in a subscription, including the ability to create, read, update, and delete resources.</li>
+</ul>
+<h2 id="alert">Alert</h2>
+<ul>
+<li>The rate limit thresholds are:
+✑ SMS: No more than 1 SMS every 5 minutes.
+✑ Voice: No more than 1 Voice call every 5 minutes.
+✑ Email: No more than 100 emails in an hour.
+✑ Other actions are not rate limited.</li>
 </ul>
 <h1 id="azure-network-watcher">Azure Network Watcher</h1>
 <ul>
@@ -172,7 +203,6 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 <ul>
 <li>the tool used to collect and analyze performance metrics and logs in Azure. It provides insights into the performance of Azure resources, applications, and workloads, and helps identify and troubleshoot issues related to availability, performance, and security</li>
 </ul>
-<h2 id="heading"></h2>
 <h2 id="network-security-group-nsg-flow-logs-are">Network security group (NSG) flow logs are:</h2>
 <ul>
 <li>a feature of Azure Network Watcher that allows you to log the source and destination IP address, port, protocol, and whether traffic was allowed or denied by an NSG. Flow data is sent to Azure Storage accounts from where you can access it as well as export it to any visualization tool, SIEM, or IDS of your choice.</li>
@@ -186,8 +216,41 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 <li>determine if traffic is being directed to the intended destination, or whether the traffic is being sent nowhere</li>
 </ul>
 <h1 id="azure-storage">Azure Storage</h1>
+<h2 id="policies">Policies</h2>
+<ul>
+<li>Max stored access policies: 5</li>
+<li>Max immutable blob storage: 2 one Legal hold policy and one Time-based retention policy</li>
+</ul>
+<h2 id="encryption">Encryption</h2>
+<ul>
+<li>After creation, you can modify encryption type.</li>
+<li>You can choose between microsoft routing or internet routing</li>
+<li>Azure storage encryption supports RSA and RSA-HSM keys of sizes 2048, 3072 and 4096</li>
+<li>You can use encryption scope for container only</li>
+</ul>
+<h2 id="performance">Performance</h2>
+<ul>
+<li>
+<p>Tiering is allowed only on block blobs and not for append and page blobs.</p>
+</li>
+<li>
+<p>Select Standard performance for general-purpose v2 storage accounts (default). This type of account is recommended by Microsoft for most scenarios. For more information, see Types of storage accounts.</p>
+</li>
+<li>
+<p>Select Premium for scenarios requiring low latency. After selecting Premium, select the type of premium storage account to create. The following types of premium storage accounts are available:</p>
+</li>
+</ul>
+<p>Block blobs
+File shares
+Page blobs</p>
 <h2 id="migration">Migration</h2>
 <ul>
+<li>
+<p>To make a fail over, choose geo-replication(redundancy)</p>
+</li>
+<li>
+<p>To convert to ZRS must the Kind be: Standard general-purpose v2 (StorageV2), Premium block blobs (BlockBlobStorage) or Premium file shares (FileStorage) and the Replication is from LRS possible (…from GRS/RA-GRS convert to LRS first)</p>
+</li>
 <li>
 <p>To request a live migration to ZRS, GZRS, or RA-GZRS, you need to migrate your storage account from LRS to ZRS in the primary region with no application downtime. To migrate from LRS to GZRS or RA-GZRS, first switch to GRS or RA-GRS and then request a live migration. Similarly, you can request a live migration from GRS or RA-GRS to GZRS or RA-GZRS. To migrate from GRS or RA-GRS to ZRS, first switch to LRS, then request a live migration.</p>
 </li>
@@ -195,8 +258,21 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 <p>Live migration is supported only for storage accounts that use LRS or GRS replication. If your account uses RA-GRS then you need to first change your account’s replication type to either LRS or GRS before proceeding. This intermediary step removes the secondary read-only endpoint provided by RA-GRS before migration.</p>
 </li>
 </ul>
-<h2 id="azure-file">Azure File</h2>
+<h2 id="azure-blob">Azure Blob</h2>
 <ul>
+<li>Both Azure Active Directory (AD) and Shared Access Signature (SAS) token are supported for Blob storage.</li>
+<li>Only Shared Access Signature (SAS) token is supported for File storage.</li>
+<li>Object Replication supports General Purpose V2 and Premium Blob accounts.</li>
+<li>If you define more than one action on the same blob, lifecycle management applies the least expensive action to the blob. For example, action delete is cheaper than action tierToArchive. Action tierToArchive is cheaper than action tierToCool.</li>
+</ul>
+<h2 id="setup-importexport">Setup import/export</h2>
+<pre tabindex="0"><code>Step 1: Prepare the drives (Attach an external disk to Server1 and then run waimportexport.exe)
+Step 2: Create an import job (From the Azure portal, create an import job)
+Step 3: Ship the drives to the Azure datacenter (Detach the external disks from Server1 and ship the disks to an Azure data center)
+Step 4: Update the job with tracking information (From the Azure portal, update the import job)
+</code></pre><h2 id="azure-file">Azure File</h2>
+<ul>
+<li>The SMB (Server Message Broker) protocol does not support SAS. it still asks for username/password.</li>
 <li>Step to create Azure file Sync</li>
 </ul>
 <pre tabindex="0"><code>1. Prepare Windows Server to use with Azure File Sync
@@ -223,6 +299,9 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 
 - A server endpoint represents a specific location on a registered server, such as a folder on a server volume.
 </code></pre><h1 id="backup">Backup</h1>
+<ul>
+<li>App service works directly with azure storage and a _backup.filter file can be used to exclude specific folders.</li>
+</ul>
 <h2 id="azure-backup">Azure Backup</h2>
 <ul>
 <li>a cost-effective, secure, one-click backup solution that’s scalable based on your backup storage needs. The centralized management interface makes it easy to define backup policies and protect a wide range of enterprise workloads, including Azure Virtual Machines, SQL and SAP databases, and Azure file shares.</li>
@@ -249,13 +328,46 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 </ul>
 <h1 id="azure-vm">Azure VM</h1>
 <ul>
+<li>Hierarchical namespace: The hierarchical namespace is required for Azure Data Lake Storage, as it enables the storage account to support the data lake&rsquo;s file system structure.</li>
+</ul>
+<h2 id="state-management">State management</h2>
+<pre tabindex="0"><code>Step 1: Create and upload a configuration to Azure Automation
+Step 2: Compile a configuration into a node configuration
+Step 3: Register a VM to be managed by State Configuration
+Step 4: Specify configuration mode settings
+Step 5: Assign a node configuration to a managed node
+Step 6: Check the compliance status of a managed node
+</code></pre><h2 id="scale-sets">Scale sets</h2>
+<ul>
+<li>If you resize the Scale Set all the VMs get resized at once, thus 4 is the correct answer.</li>
 <li>Azure Virtual Machine Scale Sets: grouping of platform-managed virtual machines. The two types of orchestration modes are:</li>
 </ul>
 <ul>
 <li>Uniform – uses a virtual machine profile or template to scale up to desired capacity. This orchestration mode is mainly used for large-scale stateless workloads that require identical VM instances. It also provides fault domain high availability (less than 100 VMs).</li>
 <li>Flexible – offers high availability with identical or multiple VM types (up to 1000 VMs) by spreading VMs across fault domains in a region or within an Availability Zone.</li>
 </ul>
+<h2 id="encryption-1">Encryption</h2>
+<ul>
+<li>prepare Vault1 for Azure Disk Encryption with a key encryption key (KEK):
+<ul>
+<li>You need to have a key in the Key Vault.</li>
+<li>The key vault itself should be configured for Azure Disk Encryption.</li>
+</ul>
+</li>
+</ul>
 <h1 id="azure-network">Azure Network</h1>
+<h2 id="network-interface">Network interface</h2>
+<ul>
+<li>Each NIC attached to a VM must exist in the same location and subscription as the VM.</li>
+</ul>
+<h2 id="monitoring">Monitoring</h2>
+<ul>
+<li>When you create or update a virtual network in your subscription, Network Watcher will be enabled automatically in your Virtual Network&rsquo;s region. There is no impact to your resources or associated charge for automatically enabling Network Watcher.</li>
+<li>Create a VM with a network security group</li>
+<li>Enable Network Watcher (done by default with the vnet/subnet creation)</li>
+<li>Register the Microsoft.Insights provider. Enable a traffic flow log for an NSG, using Network Watcher&rsquo;s NSG flow log capability</li>
+<li>NSG flow log data is written to an Azure Storage account. Complete the following steps to create a storage account for the log data.</li>
+</ul>
 <h2 id="connect-two-vnet">Connect two vnet</h2>
 <ul>
 <li>There are two ways to connect two virtual networks, based on your specific scenario and needs, you might want to pick one over the other.</li>
@@ -296,6 +408,21 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 </li>
 <li>
 <p>modifying VM properties in the Azure Management Portal, does not provide a way to set static IP addresses for virtual machines.</p>
+</li>
+<li>
+<p>New-MgUser: creating new users in Azure AD</p>
+</li>
+<li>
+<p>New-AzureADMSInvitation: inviting external guest users</p>
+</li>
+<li>
+<p>New-AzResourceGroupDeployment. This cmdlet allows you to use a custom ARM template file to deploy resources to a resource group</p>
+</li>
+<li>
+<p>New-AzVm to create a VM, but it doesn’t use a template</p>
+</li>
+<li>
+<p>New-AzDeployment cmdlet adds a deployment at the current subscription scope. This includes the resources that the deployment requires.</p>
 </li>
 </ul>
 </div><div class="post-footer" id="post-footer">
