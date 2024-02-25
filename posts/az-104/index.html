@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/az-104\/"
-        },"genre": "posts","wordcount":  2352 ,
+        },"genre": "posts","wordcount":  2566 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/az-104\/","datePublished": "2024-02-19T22:57:18+07:00","dateModified": "2024-02-19T22:57:18+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -72,8 +72,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Az 104</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2352 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2566 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -100,6 +100,7 @@
   </ul>
 
   <ul>
+    <li><a href="#routing">Routing</a></li>
     <li><a href="#policies">Policies</a></li>
     <li><a href="#encryption">Encryption</a></li>
     <li><a href="#performance">Performance</a></li>
@@ -115,6 +116,7 @@
   </ul>
 
   <ul>
+    <li><a href="#bastion">Bastion</a></li>
     <li><a href="#state-management">State management</a></li>
     <li><a href="#scale-sets">Scale sets</a></li>
     <li><a href="#encryption-1">Encryption</a></li>
@@ -216,6 +218,11 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 <li>determine if traffic is being directed to the intended destination, or whether the traffic is being sent nowhere</li>
 </ul>
 <h1 id="azure-storage">Azure Storage</h1>
+<h2 id="routing">Routing</h2>
+<ul>
+<li>You can choose between microsoft routing or internet routing</li>
+<li>Configuring routing preference is not supported for Azure Queues or Azure Tables.</li>
+</ul>
 <h2 id="policies">Policies</h2>
 <ul>
 <li>Max stored access policies: 5</li>
@@ -224,7 +231,6 @@ Admin2 is just a GA in Azure AD scope. He doesn’t have permission in the Subsc
 <h2 id="encryption">Encryption</h2>
 <ul>
 <li>After creation, you can modify encryption type.</li>
-<li>You can choose between microsoft routing or internet routing</li>
 <li>Azure storage encryption supports RSA and RSA-HSM keys of sizes 2048, 3072 and 4096</li>
 <li>You can use encryption scope for container only</li>
 </ul>
@@ -315,6 +321,7 @@ Step 4: Update the job with tracking information (From the Azure portal, update 
 </ul>
 <h2 id="azure-recovery-service-vault">Azure Recovery Service Vault</h2>
 <ul>
+<li>Multi user authorization: MUA: resource guard</li>
 <li>a storage entity in Azure that houses data</li>
 <li>Support:</li>
 </ul>
@@ -328,9 +335,22 @@ Step 4: Update the job with tracking information (From the Azure portal, update 
 </ul>
 <h1 id="azure-vm">Azure VM</h1>
 <ul>
+<li>To protect your AWS-based resources, you can connect an AWS account with either Native of Classic
+Cloud Connector.Native cloud connector is the recommended way and provides an agentless connection to
+your AWS account that can extend with Defender for Cloud&rsquo;s Defender plans to secure the AWS
+resources</li>
 <li>Hierarchical namespace: The hierarchical namespace is required for Azure Data Lake Storage, as it enables the storage account to support the data lake&rsquo;s file system structure.</li>
 </ul>
-<h2 id="state-management">State management</h2>
+<h2 id="bastion">Bastion</h2>
+<ul>
+<li>When you configure Azure Bastion using the Basic SKU, two instances are created.</li>
+<li>Each instance can support 20 concurrent RDP connections and 40 concurrent SSH connections for medium workloads. Once the concurrent sessions are exceeded, an additional scale unit (instance) is required.</li>
+<li>Steps to establish connection</li>
+</ul>
+<pre tabindex="0"><code>+ we need to upgrade the SKU of our Azure Bastion instance.
++ we need to enable the native client support from the configuration settings of Bastion1 in the Azure Portal.
++ Run az network bastion rdp --name &#34;&lt;BastionName&gt;&#34; --resource-group &#34;&lt;ResourceGroupName&gt;&#34; --target-resource-id &#34;&lt;VMResourceId&gt;&#34;
+</code></pre><h2 id="state-management">State management</h2>
 <pre tabindex="0"><code>Step 1: Create and upload a configuration to Azure Automation
 Step 2: Compile a configuration into a node configuration
 Step 3: Register a VM to be managed by State Configuration
@@ -394,6 +414,15 @@ Step 6: Check the compliance status of a managed node
 <li>Configure VPN device</li>
 <li>Create VPN connection</li>
 <li>Verify connection</li>
+</ul>
+<h1 id="azure-app-service">Azure app service</h1>
+<ul>
+<li>Vnet isn&rsquo;t available for Isolated plan apps in an App Service Environment</li>
+<li>Virtual network integration is used only to make outbound calls from your app into your virtual network</li>
+</ul>
+<h1 id="azure-acr">Azure ACR</h1>
+<ul>
+<li>If activated, you can use the registry name as username and admin user access key as password to docker login to your container registry</li>
 </ul>
 <h1 id="command">Command</h1>
 <ul>
