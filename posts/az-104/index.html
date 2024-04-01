@@ -19,7 +19,7 @@
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ducthanh98.github.io/posts/az-104/" /><link rel="prev" href="https://ducthanh98.github.io/posts/golang/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ducthanh98.github.io/posts/az-104/" /><link rel="prev" href="https://ducthanh98.github.io/posts/cka/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/az-104\/"
-        },"genre": "posts","wordcount":  2698 ,
+        },"genre": "posts","wordcount":  2688 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/az-104\/","datePublished": "2024-02-19T22:57:18+07:00","dateModified": "2024-02-19T22:57:18+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -72,7 +72,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Az 104</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2698 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-19">2024-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2688 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -311,13 +311,22 @@ Step 4: Update the job with tracking information (From the Azure portal, update 
 6. Create a server endpoint
 
 - A server endpoint represents a specific location on a registered server, such as a folder on a server volume.
+</code></pre><ul>
+<li>Step to enable ad ds authentication</li>
+</ul>
+<pre tabindex="0"><code>1. Sync on-premises AD with Azure AD connect
+
+2. Enable AD DS authentication
+
+3. Assign share and directory permissions
+
+4. Mount file share with AD credentials
 </code></pre><h1 id="backup">Backup</h1>
 <ul>
 <li>App service works directly with azure storage and a _backup.filter file can be used to exclude specific folders.</li>
 </ul>
 <h2 id="azure-backup">Azure Backup</h2>
 <ul>
-<li>a cost-effective, secure, one-click backup solution that’s scalable based on your backup storage needs. The centralized management interface makes it easy to define backup policies and protect a wide range of enterprise workloads, including Azure Virtual Machines, SQL and SAP databases, and Azure file shares.</li>
 <li>When you back up data in Azure, you store that data in an Azure resource called a Recovery Services vault. The Recovery Services vault resource is available from the Settings menu of most Azure services. The benefit of having the Recovery Services vault integrated into the Settings menu of most Azure services is the ease of backing up data.</li>
 <li>Here are the steps when you backup an Azure virtual machine:</li>
 </ul>
@@ -344,16 +353,14 @@ Step 4: Update the job with tracking information (From the Azure portal, update 
 <ul>
 <li>Perform a reverse DNS lookup for 10.0.0.4 from VM2 =&gt; vm1.internal.cloudapp.net</li>
 <li>Azure DNS supports importing and exporting zone files by using the Azure command-line interface (CLI). Zone file import is not currently supported via Azure PowerShell or the Azure portal.</li>
-<li>To protect your AWS-based resources, you can connect an AWS account with either Native of Classic
-Cloud Connector.Native cloud connector is the recommended way and provides an agentless connection to
-your AWS account that can extend with Defender for Cloud&rsquo;s Defender plans to secure the AWS
-resources</li>
+<li>To protect your AWS-based resources, you can connect an AWS account with either Native of Classic Cloud Connector.Native cloud connector is the recommended way and provides an agentless connection to your AWS account that can extend with Defender for Cloud&rsquo;s Defender plans to secure the AWS resources</li>
 <li>Hierarchical namespace: The hierarchical namespace is required for Azure Data Lake Storage, as it enables the storage account to support the data lake&rsquo;s file system structure.</li>
 </ul>
 <h2 id="bastion">Bastion</h2>
 <ul>
 <li>When you configure Azure Bastion using the Basic SKU, two instances are created.</li>
 <li>Each instance can support 20 concurrent RDP connections and 40 concurrent SSH connections for medium workloads. Once the concurrent sessions are exceeded, an additional scale unit (instance) is required.</li>
+<li>Subnet: recommend /26</li>
 <li>Steps to establish connection</li>
 </ul>
 <pre tabindex="0"><code>+ we need to upgrade the SKU of our Azure Bastion instance.
@@ -493,7 +500,7 @@ Step 6: Check the compliance status of a managed node
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/golang/" class="prev" rel="prev" title="Golang"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Golang</a></div>
+    <div class="post-nav"><a href="/posts/cka/" class="prev" rel="prev" title="Certified kubernetes administrator note"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Certified kubernetes administrator note</a></div>
 </div>
 </article></div>
             </main><footer class="footer">
