@@ -16,6 +16,14 @@
     <description><![CDATA[Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD.]]></description>
 </item>
 <item>
+    <title>Microservice</title>
+    <link>https://ducthanh98.github.io/posts/microservice/</link>
+    <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/microservice/</guid>
+    <description><![CDATA[Queue What RabbitMQ employs a push model and prevents overwhelming users via the consumer configured prefetch limit. This model is an ideal approach for low-latency messaging. It also functions well with the RabbitMQ queue-based architecture. Think of RabbitMQ as a post office, which receives, stores, and delivers mail, whereas RabbitMQ accepts, stores, and transmits binary data messages. Kafka employs a “pull-based” approach, letting users request message batches from specific offsets. Users can leverage message batching for higher throughput and effective message delivery.]]></description>
+</item>
+<item>
     <title>Certified kubernetes administrator note</title>
     <link>https://ducthanh98.github.io/posts/cka/</link>
     <pubDate>Tue, 29 Nov 2022 11:17:12 &#43;0700</pubDate>
