@@ -16,6 +16,14 @@
     <description><![CDATA[Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD.]]></description>
 </item>
 <item>
+    <title>Golang</title>
+    <link>https://ducthanh98.github.io/posts/golang/</link>
+    <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/golang/</guid>
+    <description><![CDATA[Panic vs recover To handle panics and recover from them in Go, the built-in panic() and recover() functions can be used. When an error occurs, panic() is called and the program execution stops. You can use the defer statement to call recover(), which stops the panic and resumes execution from the point of the nearest enclosing function call, after all deferred functions have been run. Defer The defer statement in Golang is used to postpone the execution of a function until the surrounding function completes.]]></description>
+</item>
+<item>
     <title>Microservice</title>
     <link>https://ducthanh98.github.io/posts/microservice/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>

@@ -7,7 +7,7 @@
         <title>Golang - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="Golang" />
-<meta property="og:description" content="Garbage collection In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation. Here are some key points about the garbage collector in Go: 1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application." />
+<meta property="og:description" content="Panic vs recover To handle panics and recover from them in Go, the built-in panic() and recover() functions can be used. When an error occurs, panic() is called and the program execution stops. You can use the defer statement to call recover(), which stops the panic and resumes execution from the point of the nearest enclosing function call, after all deferred functions have been run. Defer The defer statement in Golang is used to postpone the execution of a function until the surrounding function completes." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/golang/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-23T09:40:49+07:00" />
@@ -15,7 +15,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang"/>
-<meta name="twitter:description" content="Garbage collection In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation. Here are some key points about the garbage collector in Go: 1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application."/>
+<meta name="twitter:description" content="Panic vs recover To handle panics and recover from them in Go, the built-in panic() and recover() functions can be used. When an error occurs, panic() is called and the program execution stops. You can use the defer statement to call recover(), which stops the panic and resumes execution from the point of the nearest enclosing function call, after all deferred functions have been run. Defer The defer statement in Golang is used to postpone the execution of a function until the surrounding function completes."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/golang\/"
-        },"genre": "posts","wordcount":  689 ,
+        },"genre": "posts","wordcount":  1245 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/golang\/","datePublished": "2023-12-23T09:40:49+07:00","dateModified": "2023-12-23T09:40:49+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -72,8 +72,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;689 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1245 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -81,28 +81,111 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#go-routine-vs-thread">Go routine vs Thread</a></li>
+    <li><a href="#differences">Differences</a></li>
+    <li><a href="#maximizing-parallelism-with-gomaxprocs">Maximizing Parallelism with GOMAXPROCS:</a></li>
     <li><a href="#design-pattern">Design pattern</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="garbage-collection">Garbage collection</h1>
-<pre tabindex="0"><code>In Go (Golang), automatic memory management is handled by a garbage collector. The garbage collector is responsible for reclaiming memory that is no longer in use, preventing memory leaks and allowing developers to focus on writing code without explicit memory deallocation.
+            </div><div class="content" id="content"><h1 id="panic-vs-recover">Panic vs recover</h1>
+<ul>
+<li>To handle panics and recover from them in Go, the built-in panic() and recover() functions can be used. When an error occurs, panic() is called and the program execution stops. You can use the defer statement to call recover(), which stops the panic and resumes execution from the point of the nearest enclosing function call, after all deferred functions have been run.</li>
+</ul>
+<h1 id="defer">Defer</h1>
+<ul>
+<li>The defer statement in Golang is used to postpone the execution of a function until the surrounding function completes. It is often used when you want to make sure some cleanup tasks are performed before exiting a function, regardless of errors or other conditions.</li>
+</ul>
+<h1 id="array-vs-slices">Array vs slices</h1>
+<p>In Go, arrays and slices are both used to store collections of elements, but they have some key differences. Here&rsquo;s a comparison between the two:</p>
+<ul>
+<li>Fixed Size vs. Dynamic Size:</li>
+</ul>
+<p>Arrays: Have a fixed size determined at compile time. Once declared, the size cannot be changed.
+Slices: Are dynamically sized and can grow or shrink. Slices are references to sections of arrays.</p>
+<ul>
+<li>Access:</li>
+</ul>
+<p>Arrays: Accessed using index notation. Indexes start from 0. For example:
+Slices: Also accessed using index notation. Slices can be sliced to get a subset of elements.</p>
+<ul>
+<li>Passing to Functions:
+Arrays: When passed to functions, the entire array is copied, which can be inefficient for large arrays.
+Slices: Passing slices to functions is more efficient because only a reference to the underlying array is copied, not the entire data. This allows for more efficient manipulation of data.</li>
+<li>Appending:
+Arrays: Cannot be appended to. Their size is fixed.
+Slices: Can be appended to using the append function. If the underlying array is not large enough to accommodate the new elements, a new larger array is allocated and the elements are copied over.</li>
+<li>Length and Capacity:</li>
+</ul>
+<p>Slices: Have both a length and a capacity. The length is the number of elements in the slice, and the capacity is the maximum number of elements the slice can hold without allocating more memory.</p>
+<ul>
+<li>Usage:</li>
+</ul>
+<p>Arrays: Used when the size of the collection is fixed and known at compile time.
+Slices: Used when the size of the collection may vary at runtime or when passing portions of arrays to functions.</p>
+<h1 id="garbage-collection">Garbage collection</h1>
+<pre tabindex="0"><code>The garbage collector, or GC, is a system designed specifically to identify and free dynamically allocated memory.
 
-Here are some key points about the garbage collector in Go:
+Go uses a garbage collection algorithm based on tracing and the Mark and Sweep algorithm. During the marking phase, the garbage collector marks data actively used by the application as live heap(It first marks all live objects by traversing the object graph, starting from the roots). Then, during the sweeping phase, the GC traverses all the memory not marked as live and reuses it. 
 
-1. Concurrency: Go&#39;s garbage collector is concurrent, meaning it runs concurrently with the application code. This concurrency helps in minimizing pauses and improving the overall performance of the application.
+The garbage collector’s work is not free, as it consumes two important system resources: CPU time and physical memory.
 
-2. Tracing Garbage Collector: Go uses a tracing garbage collector. It works by tracing through the memory from the root objects (global variables, stack frames, etc.) to identify and mark objects that are still reachable (live objects). The unreachable objects are then considered garbage and can be safely deallocated.
-
-3. Generational Garbage Collection: Go&#39;s garbage collector uses a generational garbage collection algorithm. It divides objects into multiple generations based on their age. Young objects are collected more frequently, while older objects are collected less frequently.
-
-4. Mark and Sweep: The garbage collector follows a mark-and-sweep algorithm. It first marks all live objects by traversing the object graph, starting from the roots. After marking, it sweeps through the memory, deallocating memory occupied by unmarked (garbage) objects.
-
-Memory Reclamation: The garbage collector reclaims memory by compacting the heap. It moves objects closer together, reducing fragmentation and improving memory utilization.
-
-Tuning: Go provides some tunable parameters to adjust the garbage collector&#39;s behavior based on the application&#39;s needs. For example, you can adjust the size of the heap or the garbage collection latency.
-
-GOMAXPROCS: The GOMAXPROCS environment variable or the runtime.GOMAXPROCS() function can be used to set the maximum number of CPUs that the Go runtime can use for garbage collection and other concurrent operations.
+The memory in the garbage collector consists of the following:
+- Live heap memory (memory marked as “live” in the previous garbage collection cycle)
+- New heap memory (heap memory not yet analyzed by the garbage collector)
+- Memory is used to store some metadata, which is usually insignificant compared to the first two entities.
+The CPU time consumption by the garbage collector is related to its working specifics. There are garbage collector implementations called “stop-the-world” that completely halt program execution during garbage collection. In the case of Go, the garbage collector is not fully “stop-the-world” and performs most of its work, such as heap marking, in parallel with the application execution.
 </code></pre><h1 id="go-routine">Go routine</h1>
+<h2 id="go-routine-vs-thread">Go routine vs Thread</h2>
+<ul>
+<li>
+<p>Go routines</p>
+<ul>
+<li>
+<p>Lightweight and concurrent units of execution in Go.</p>
+</li>
+<li>
+<p>Advantages of goroutines:
+a. Lightweight and efficient compared to OS threads.
+b. Faster startup and lower memory consumption.
+c. Easy to create and manage with the &ldquo;go&rdquo; keyword.
+d. Ideal for concurrent programming and handling I/O-bound tasks.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Thread</p>
+<ul>
+<li>Higher Memory Footprint: OS threads typically have a larger memory footprint compared to goroutines due to their underlying system structures and management overhead.</li>
+<li>Context Switching Overhead: Context switching between OS threads incurs additional overhead as it requires system calls. This can impact the overall performance and scalability of an application.</li>
+<li>Suitable for CPU-Intensive Tasks: OS threads are better suited for CPU-bound tasks that require intensive computation. They can fully utilize the available CPU cores, allowing parallel execution of computationally intensive workloads.</li>
+<li>Manual Thread Management: With OS threads, developers have to manually manage thread creation, synchronization, and load balancing, which can be more complex and error-prone compared to goroutines.</li>
+</ul>
+</li>
+</ul>
+<h2 id="differences">Differences</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://zalopay-oss.github.io/go-advanced/images/ch1.6-compare-thread-goroutine.png"
+        data-srcset="https://zalopay-oss.github.io/go-advanced/images/ch1.6-compare-thread-goroutine.png, https://zalopay-oss.github.io/go-advanced/images/ch1.6-compare-thread-goroutine.png 1.5x, https://zalopay-oss.github.io/go-advanced/images/ch1.6-compare-thread-goroutine.png 2x"
+        data-sizes="auto"
+        alt="https://zalopay-oss.github.io/go-advanced/images/ch1.6-compare-thread-goroutine.png"
+        title="alt text" /></p>
+<h2 id="maximizing-parallelism-with-gomaxprocs">Maximizing Parallelism with GOMAXPROCS:</h2>
+<ul>
+<li>
+<p>GOMAXPROCS Configuration: GOMAXPROCS is a configuration parameter in Go that specifies the maximum number of OS threads that can execute Go code simultaneously.</p>
+</li>
+<li>
+<p>Default Setting: By default, GOMAXPROCS is set to the number of logical CPUs available on the machine, allowing Go to automatically utilize the available cores for parallel execution.</p>
+</li>
+<li>
+<p>Performance Optimization: Developers can adjust the value of GOMAXPROCS based on the specific workload and hardware characteristics to optimize the performance of their applications.</p>
+</li>
+<li>
+<p>Balancing Act: Setting GOMAXPROCS too high may lead to increased contention and context switching overhead. Finding the right balance is crucial for achieving optimal parallelism.</p>
+</li>
+</ul>
 <h2 id="design-pattern">Design pattern</h2>
 <ol>
 <li>Fan-Out, Fan-In:
