@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/cka\/"
-        },"genre": "posts","wordcount":  1420 ,
+        },"genre": "posts","wordcount":  1808 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/cka\/","datePublished": "2022-11-29T11:17:12+07:00","dateModified": "2022-11-29T11:17:12+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -72,8 +72,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified kubernetes administrator note</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1420 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1808 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -527,6 +527,29 @@ spec:
 <li>Similarly, each node runs another component known as kube-proxy. kube-proxy watches the changes in the cluster through Kube API server,and every time a new service is to be created,kube-proxy gets into action.Unlike pods, services are not created on each node or assigned to each node. Services are a cluster-wide concept. They exist across all the nodes in the cluster.</li>
 </ul>
 <h3 id="dns-in-k8s">DNS in K8s</h3>
+<h1 id="compare-with-docker-swarm">Compare with docker swarm</h1>
+<p>While Docker Swarm offers a simpler networking model compared to Kubernetes, there are certain advanced networking features and use cases where Kubernetes outshines Docker Swarm. Here are some cases where Docker Swarm networking might fall short when compared to Kubernetes:</p>
+<ul>
+<li>Fine-grained Network Policies:</li>
+</ul>
+<p>Kubernetes supports network policies that allow you to define rules for how pods can communicate with each other and other network endpoints. These policies enable fine-grained control over network traffic based on labels, namespaces, and other attributes. Docker Swarm does not offer native support for such fine-grained network policies, making it more challenging to implement strict network segmentation and access controls.</p>
+<ul>
+<li>Advanced Load Balancing and Ingress Controllers:</li>
+</ul>
+<p>Kubernetes has a rich ecosystem of load balancers and ingress controllers that provide advanced traffic management features, including SSL termination, path-based routing, and header-based routing. While Docker Swarm provides built-in load balancing capabilities, it lacks the extensive features offered by Kubernetes&rsquo; ecosystem of Ingress controllers like Nginx Ingress Controller, Traefik, or HAProxy Ingress.</p>
+<ul>
+<li>Service Mesh Integration:</li>
+</ul>
+<p>Kubernetes has strong support for service mesh technologies like Istio and Linkerd, which enable advanced features such as traffic shaping, observability, and security at the service-to-service level. These features are essential for microservices architectures. While it&rsquo;s possible to integrate service mesh with Docker Swarm, Kubernetes has better support and integration due to its widespread adoption and larger community.</p>
+<ul>
+<li>Dynamic IP Assignment and DNS for Pods:</li>
+</ul>
+<p>Kubernetes assigns each pod a unique IP address and DNS name, allowing for seamless communication between pods within the cluster. Docker Swarm also provides DNS-based service discovery, but it does not assign individual IP addresses to pods by default. This might limit certain use cases where direct communication between pods with unique IPs is necessary.</p>
+<ul>
+<li>Third-party Networking Plugins and Integrations:</li>
+</ul>
+<p>Kubernetes has a broader ecosystem of third-party networking plugins and integrations, such as Calico, Flannel, and Cilium, which offer various networking features and performance optimizations. While Docker Swarm supports some networking plugins, Kubernetes&rsquo; ecosystem is more mature and diverse, providing users with more options and flexibility to tailor networking solutions to their specific needs.</p>
+<p>In summary, while Docker Swarm provides a straightforward networking model suitable for many use cases, Kubernetes offers more advanced networking features and integrations, making it better suited for complex microservices architectures and environments requiring fine-grained network control and observability.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
