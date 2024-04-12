@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/microservice\/"
-        },"genre": "posts","wordcount":  594 ,
+        },"genre": "posts","wordcount":  1190 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/microservice\/","datePublished": "2023-11-12T22:53:37+07:00","dateModified": "2023-11-12T22:53:37+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -72,8 +72,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Microservice</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;594 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1190 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -83,6 +83,8 @@
   <ul>
     <li><a href="#what">What</a></li>
     <li><a href="#use-cases">Use cases</a></li>
+    <li><a href="#rabbitmq-exchanges--binding">Rabbitmq exchanges &amp;&amp; binding</a></li>
+    <li><a href="#kafka--zero-copy">Kafka  zero copy</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="queue">Queue</h1>
@@ -95,6 +97,51 @@
 <ul>
 <li>Kafka is best used for streaming from A to B without resorting to complex routing, but with maximum throughput</li>
 <li>Use RabbitMQ with long-running tasks, reliably running background jobs, and communication/integration between and within applications.</li>
+</ul>
+<h2 id="rabbitmq-exchanges--binding">Rabbitmq exchanges &amp;&amp; binding</h2>
+<ul>
+<li>Direct Exchange:
+<ul>
+<li>Each message is routed to one or more queues whose binding key exactly matches the routing key of the message</li>
+</ul>
+</li>
+<li>Fanout Exchange:
+<ul>
+<li>Routes messages to all queues bound to the exchange, regardless of the routing key.</li>
+</ul>
+</li>
+<li>Topic Exchange
+<ul>
+<li>Routes messages to queues based on wildcard matches between the routing key of the message and the routing patterns specified when the queue was bound to the exchange.</li>
+</ul>
+</li>
+<li>Headers Exchange:
+<ul>
+<li>Routes messages based on message header attributes rather than routing keys.</li>
+</ul>
+</li>
+<li>Binding:
+Binding is the link between an exchange and a queue. It defines the relationship between the exchange and the queue, including the routing key or pattern used for routing messages from the exchange to the queue.</li>
+</ul>
+<h2 id="kafka--zero-copy">Kafka  zero copy</h2>
+<ul>
+<li>
+<p>Zero copy is a technique used in computer systems to transfer data between different memory locations or devices without the need for unnecessary copying of data. In essence, zero copy eliminates the intermediate step of copying data from one buffer to another, reducing CPU overhead, memory usage, and improving overall system performance.</p>
+</li>
+<li>
+<p>Traditional Copying: In traditional data transfer operations, when data needs to be moved from one memory location to another or from a storage device to memory, the data is typically copied from the source buffer to an intermediate buffer, and then to the destination buffer.
+This process involves multiple memory copy operations, which consume CPU cycles and memory bandwidth.</p>
+</li>
+<li>
+<p>Zero Copy:</p>
+<ul>
+<li>With zero copy, instead of copying data from the source buffer to an intermediate buffer and then to the destination buffer, the data is transferred directly from the source to the destination without intermediate copying.</li>
+<li>This is achieved by leveraging operating system features such as scatter-gather I/O, memory-mapped I/O, or direct memory access (DMA).</li>
+<li>The source and destination buffers are mapped to the same physical memory or are accessible by the same I/O controller, allowing data to be transferred directly between them without involving the CPU.</li>
+<li>Zero copy reduces CPU overhead, memory usage, and latency, resulting in improved performance and efficiency, especially in scenarios where large amounts of data need to be transferred quickly, such as network communication, file I/O, or inter-process communication.
+Zero copy is widely used in various systems and applications, including networking (e.g., TCP/IP stack), file systems (e.g., file read/write operations), database systems, and high-performance computing. It enables efficient data transfer and improves system scalability, particularly in high-throughput environments.</li>
+</ul>
+</li>
 </ul>
 <h1 id="shared-database">Shared database</h1>
 <ul>
@@ -170,6 +217,44 @@
 <h1 id="transactional-outbox-pattern">Transactional Outbox pattern</h1>
 <ul>
 <li>A service command typically needs to create/update/delete aggregates in the database and send messages/events to a message broker.</li>
+</ul>
+<h1 id="event-sourcing">Event Sourcing</h1>
+<ul>
+<li>Event sourcing persists the state of a business entity such an Order or a Customer as a sequence of state-changing events. Whenever the state of a business entity changes, a new event is appended to the list of events. Since saving an event is a single operation, it is inherently atomic. The application reconstructs an entity’s current state by replaying the events.</li>
+</ul>
+<h1 id="deployment-strategies">Deployment Strategies</h1>
+<ul>
+<li>Recreate Deployment Strategy
+<ul>
+<li>we stop and then recreate the application</li>
+</ul>
+</li>
+<li>Blue-Green Deployment
+<ul>
+<li>The original, old version is called blue environment, and the new updated version is called green environment.Now, both environments are running our application, but the users are still using the old version</li>
+</ul>
+</li>
+<li>Rolling Update
+<ul>
+<li>Firstly, we create a new instance that runs the updated version.</li>
+<li>After this, we remove one from the instances that run the old version</li>
+</ul>
+</li>
+<li>Canary Deployment
+<ul>
+<li>only a small part of the users receive the update</li>
+</ul>
+</li>
+<li>A/B Testing
+<ul>
+<li>This process deploys the update to a subset of users, just like canary deployments. However, A/B testing is mainly about getting feedback from the users about our changes</li>
+</ul>
+</li>
+<li>Shadow Deployment
+<ul>
+<li>Shadow deployment is similar to blue-green deployment in the sense that it uses two identical environments</li>
+</ul>
+</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
