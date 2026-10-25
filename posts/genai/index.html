@@ -4,17 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Generative AI: Chunking Strategies &amp; AWS Bedrock - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
+        <title>Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
- PhoneNumber: &#43;84918279888"><meta property="og:title" content="Generative AI: Chunking Strategies &amp; AWS Bedrock" />
-<meta property="og:description" content="Chunking strategy Standard chunking: Fixed size: Specify tokens per chunk and overlap percentage Default: 300tokens per chunk No chunk: very document is a chunk Hierarchical chunking Nested parent/child chunks Initial search hits the child chunk, and then we search back to parent chunk Semantic chunking Hits a foundation model to break up chunks based on semantic ontent and not just things like sentences or a fixed chunk Speifiy maximum tokens per chunk Buffer size: number of surrounding sentences per sentence to consider when embeddings Too large = too noise, too small = missing important context Breakpoint: How semantically chunk must be Too big: each chunk have a clearly context, number of chunk will be lower and size of each chunk will become bigger AWS Bedrock Guardrail contet filtẻing for prompts and responses works with text foundation models word filtering topic filtering profanities PII removal(masking) contextual grounding check: prevent halu, measure grounding configure blocked messsage erssponse Prompt Type of prompt Zero shot: No example given, relies only on large models Few shot: Provide some example, Chain of thought(COT) Bedrock Data Automation Extract structured data from pretty much anything SageMaker Data Wrangler imoprt daa visualize data transform data " />
+ PhoneNumber: &#43;84918279888"><meta property="og:title" content="Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock" />
+<meta property="og:description" content="Core concepts in Generative AI architectures, Retrieval-Augmented Generation (RAG) chunking strategies, Prompt Engineering techniques, and AWS Bedrock services.
+RAG Chunking Strategies Chunking divides long documents into smaller segments for embedding and vector similarity search.
+1. Fixed-Size Chunking (Standard) Concept: Chunks document into fixed token lengths (e.g. 300 - 512 tokens) with an overlap percentage (e.g. 10 - 20%). Pros: Fast, simple, predictable computation. Cons: Can cut sentences or paragraphs mid-thought, causing loss of semantic context." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/genai/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-01T10:00:00+07:00" />
 <meta property="article:modified_time" content="2024-02-01T10:00:00+07:00" /><meta property="og:site_name" content="ThanhLD site" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Generative AI: Chunking Strategies &amp; AWS Bedrock"/>
-<meta name="twitter:description" content="Chunking strategy Standard chunking: Fixed size: Specify tokens per chunk and overlap percentage Default: 300tokens per chunk No chunk: very document is a chunk Hierarchical chunking Nested parent/child chunks Initial search hits the child chunk, and then we search back to parent chunk Semantic chunking Hits a foundation model to break up chunks based on semantic ontent and not just things like sentences or a fixed chunk Speifiy maximum tokens per chunk Buffer size: number of surrounding sentences per sentence to consider when embeddings Too large = too noise, too small = missing important context Breakpoint: How semantically chunk must be Too big: each chunk have a clearly context, number of chunk will be lower and size of each chunk will become bigger AWS Bedrock Guardrail contet filtẻing for prompts and responses works with text foundation models word filtering topic filtering profanities PII removal(masking) contextual grounding check: prevent halu, measure grounding configure blocked messsage erssponse Prompt Type of prompt Zero shot: No example given, relies only on large models Few shot: Provide some example, Chain of thought(COT) Bedrock Data Automation Extract structured data from pretty much anything SageMaker Data Wrangler imoprt daa visualize data transform data "/>
+<meta name="twitter:title" content="Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock"/>
+<meta name="twitter:description" content="Core concepts in Generative AI architectures, Retrieval-Augmented Generation (RAG) chunking strategies, Prompt Engineering techniques, and AWS Bedrock services.
+RAG Chunking Strategies Chunking divides long documents into smaller segments for embedding and vector similarity search.
+1. Fixed-Size Chunking (Standard) Concept: Chunks document into fixed token lengths (e.g. 300 - 512 tokens) with an overlap percentage (e.g. 10 - 20%). Pros: Fast, simple, predictable computation. Cons: Can cut sentences or paragraphs mid-thought, causing loss of semantic context."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,12 +28,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Generative AI: Chunking Strategies \u0026 AWS Bedrock",
+        "headline": "Generative AI: Chunking Strategies, Prompt Engineering \u0026 AWS Bedrock",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/genai\/"
-        },"genre": "posts","keywords": "GenAI, LLM, RAG, AWS Bedrock, Prompt Engineering","wordcount":  196 ,
+        },"genre": "posts","keywords": "GenAI, LLM, RAG, AWS Bedrock, Prompt Engineering","wordcount":  352 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/genai\/","datePublished": "2024-02-01T10:00:00+07:00","dateModified": "2024-02-01T10:00:00+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -69,10 +73,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Generative AI: Chunking Strategies & AWS Bedrock</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Generative AI: Chunking Strategies, Prompt Engineering & AWS Bedrock</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/ai-data/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>AI & Data</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-01">2024-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;196 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-01">2024-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;352 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -80,66 +84,99 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#type-of-prompt">Type of prompt</a></li>
+    <li><a href="#1-fixed-size-chunking-standard">1. Fixed-Size Chunking (Standard)</a></li>
+    <li><a href="#2-hierarchical-chunking-parent-child">2. Hierarchical Chunking (Parent-Child)</a></li>
+    <li><a href="#3-semantic-chunking">3. Semantic Chunking</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#aws-bedrock-guardrails">AWS Bedrock Guardrails</a></li>
+    <li><a href="#bedrock-data-automation">Bedrock Data Automation</a></li>
+    <li><a href="#amazon-sagemaker-data-wrangler">Amazon SageMaker Data Wrangler</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="chunking-strategy">Chunking strategy</h1>
+            </div><div class="content" id="content"><p>Core concepts in Generative AI architectures, Retrieval-Augmented Generation (RAG) chunking strategies, Prompt Engineering techniques, and AWS Bedrock services.</p>
+<hr>
+<h1 id="rag-chunking-strategies">RAG Chunking Strategies</h1>
+<p>Chunking divides long documents into smaller segments for embedding and vector similarity search.</p>
+<h2 id="1-fixed-size-chunking-standard">1. Fixed-Size Chunking (Standard)</h2>
 <ul>
-<li>Standard chunking: Fixed size: Specify tokens per chunk and overlap percentage</li>
-<li>Default: 300tokens per chunk</li>
-<li>No chunk: very document is a chunk</li>
+<li><strong>Concept</strong>: Chunks document into fixed token lengths (e.g. 300 - 512 tokens) with an overlap percentage (e.g. 10 - 20%).</li>
+<li><strong>Pros</strong>: Fast, simple, predictable computation.</li>
+<li><strong>Cons</strong>: Can cut sentences or paragraphs mid-thought, causing loss of semantic context.</li>
 </ul>
-<h1 id="hierarchical-chunking">Hierarchical chunking</h1>
+<h2 id="2-hierarchical-chunking-parent-child">2. Hierarchical Chunking (Parent-Child)</h2>
 <ul>
-<li>Nested parent/child chunks</li>
-<li>Initial search hits the child chunk, and then we search back to parent chunk</li>
-</ul>
-<h1 id="semantic-chunking">Semantic chunking</h1>
-<ul>
-<li>Hits a foundation model to break up chunks based on semantic ontent and not just things like sentences or a fixed chunk</li>
-<li>Speifiy
-<ul>
-<li>maximum tokens per chunk</li>
-<li>Buffer size: number of surrounding sentences per sentence to consider when embeddings</li>
-<li>Too large = too noise, too small = missing important context</li>
-</ul>
-</li>
-<li>Breakpoint:
-<ul>
-<li>How semantically chunk must be</li>
-<li>Too big: each chunk have a clearly context, number of chunk will be lower and size of each chunk will become bigger</li>
-</ul>
+<li><strong>Concept</strong>: Multi-tiered chunks where large parent documents contain multiple smaller child chunks.</li>
+<li><strong>Workflow</strong>:
+<ol>
+<li>Vector similarity search matches against granular <strong>child chunks</strong> for high precision.</li>
+<li>The larger <strong>parent chunk</strong> is passed to the LLM context window to provide rich surrounding context.</li>
+</ol>
 </li>
 </ul>
-<h1 id="aws-bedrock-guardrail">AWS Bedrock Guardrail</h1>
+<h2 id="3-semantic-chunking">3. Semantic Chunking</h2>
 <ul>
-<li>contet filtẻing for prompts and responses</li>
-<li>works with text foundation models</li>
-<li>word filtering</li>
-<li>topic filtering</li>
-<li>profanities</li>
-<li>PII removal(masking)</li>
-<li>contextual grounding check: prevent halu, measure grounding</li>
-<li>configure blocked messsage erssponse</li>
+<li><strong>Concept</strong>: Uses an embedding model to evaluate semantic similarity between adjacent sentences and breaks chunks when a thematic shift occurs.</li>
+<li><strong>Key Parameters</strong>:
+<ul>
+<li><code>Maximum Tokens</code>: Hard ceiling per chunk.</li>
+<li><code>Buffer Size</code>: Number of surrounding sentences evaluated during embedding calculations.</li>
+<li><code>Breakpoint Threshold</code>: Percentile distance deciding when a new chunk begins.</li>
 </ul>
-<h1 id="prompt">Prompt</h1>
-<h2 id="type-of-prompt">Type of prompt</h2>
-<ul>
-<li>Zero shot: No example given, relies only on large models</li>
-<li>Few shot: Provide some example,</li>
-<li>Chain of thought(COT)</li>
+</li>
 </ul>
-<h1 id="bedrock-data-automation">Bedrock Data Automation</h1>
+<hr>
+<h1 id="prompt-engineering">Prompt Engineering</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Technique</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Zero-Shot Prompting</strong></td>
+<td style="text-align:left">Provide instruction with zero examples. Relies purely on the model&rsquo;s pre-trained knowledge.</td>
+<td style="text-align:left">Simple classification, basic summaries.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Few-Shot Prompting</strong></td>
+<td style="text-align:left">Provide a few input-output demonstrations before the final query.</td>
+<td style="text-align:left">Formatting enforcement, nuanced domain tasks.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Chain-of-Thought (CoT)</strong></td>
+<td style="text-align:left">Instruct model to think step-by-step (<em>&ldquo;Let&rsquo;s think step by step&rdquo;</em>).</td>
+<td style="text-align:left">Math, logic puzzles, multi-step reasoning.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="aws-bedrock--enterprise-ai-services">AWS Bedrock &amp; Enterprise AI Services</h1>
+<h2 id="aws-bedrock-guardrails">AWS Bedrock Guardrails</h2>
+<p>Provides safety and governance filters for foundation model inputs and responses:</p>
 <ul>
-<li>Extract structured data from pretty much anything</li>
-<li></li>
+<li><strong>Content Filtering</strong>: Filters out hate speech, insults, sexual content, and violence.</li>
+<li><strong>Topic Denylists</strong>: Restricts conversations to defined business topics.</li>
+<li><strong>Sensitive Information (PII)</strong>: Masks or blocks Social Security Numbers, emails, phone numbers, and credentials.</li>
+<li><strong>Contextual Grounding Check</strong>: Detects hallucinations by validating if the model response is factually grounded in retrieved RAG context.</li>
 </ul>
-<h1 id="sagemaker--data-wrangler">SageMaker  Data Wrangler</h1>
+<h2 id="bedrock-data-automation">Bedrock Data Automation</h2>
 <ul>
-<li>imoprt daa</li>
-<li>visualize data</li>
-<li>transform data</li>
-<li></li>
+<li>Automated ingestion and extraction of structured data from multi-modal sources (PDFs, images, tables, unstructured documents).</li>
+</ul>
+<h2 id="amazon-sagemaker-data-wrangler">Amazon SageMaker Data Wrangler</h2>
+<ul>
+<li>Feature engineering tool for AI/ML pipelines:
+<ul>
+<li>Import tabular and image datasets from S3, Redshift, Snowflake.</li>
+<li>Visualize distributions, correlations, and missing values.</li>
+<li>Transform and engineer ML features with 300+ built-in transformations without code.</li>
+</ul>
+</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -150,7 +187,7 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies &amp; AWS Bedrock" data-hashtags="GenAI,LLM,RAG,AWS Bedrock,Prompt Engineering"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ducthanh98.github.io/posts/genai/" data-hashtag="GenAI"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies &amp; AWS Bedrock"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies &amp; AWS Bedrock"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies &amp; AWS Bedrock"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock" data-hashtags="GenAI,LLM,RAG,AWS Bedrock,Prompt Engineering"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ducthanh98.github.io/posts/genai/" data-hashtag="GenAI"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ducthanh98.github.io/posts/genai/" data-title="Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

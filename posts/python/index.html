@@ -85,37 +85,37 @@
 <li>Đóng tài nguyên tự động, tránh lỗi quên close()</li>
 <li>Xử lý lỗi tự động, giảm code try-except-finally</li>
 </ul>
-<pre tabindex="0"><code>class FileManager:
-    def __init__(self, filename):
-        self.filename = filename
-
-    def __enter__(self):
-        self.file = open(self.filename, &#34;r&#34;)  # Mở file
-        return self.file  # Trả về file để sử dụng trong `with`
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.file.close()  # Đóng file khi thoát `with`
-        if exc_type:
-            print(&#34;Error:&#34;, exc_value)  # Xử lý lỗi (nếu có)
-        return True  # Ngăn lỗi không dừng chương trình
-
-with FileManager(&#34;test.txt&#34;) as f:
-    print(f.read())  # File tự động đóng sau khi `with` kết thúc
-
-
-import time
-from contextlib import contextmanager
-
-@contextmanager
-def timer():
-    start = time.time()
-    yield  # Chạy code trong `with`
-    end = time.time()
-    print(f&#34;Execution Time: {end - start:.2f}s&#34;)
-
-with timer():
-    time.sleep(2)  # Giả lập tác vụ mất 2s
-</code></pre><h1 id="yield">Yield</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileManager</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, filename):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>filename <span style="color:#f92672">=</span> filename
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __enter__(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>file <span style="color:#f92672">=</span> open(self<span style="color:#f92672">.</span>filename, <span style="color:#e6db74">&#34;r&#34;</span>)  <span style="color:#75715e"># Mở file</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>file  <span style="color:#75715e"># Trả về file để sử dụng trong `with`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_value, traceback):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>file<span style="color:#f92672">.</span>close()  <span style="color:#75715e"># Đóng file khi thoát `with`</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> exc_type:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Error:&#34;</span>, exc_value)  <span style="color:#75715e"># Xử lý lỗi (nếu có)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>  <span style="color:#75715e"># Ngăn lỗi không dừng chương trình</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> FileManager(<span style="color:#e6db74">&#34;test.txt&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    print(f<span style="color:#f92672">.</span>read())  <span style="color:#75715e"># File tự động đóng sau khi `with` kết thúc</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> contextmanager
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@contextmanager</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timer</span>():
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span>  <span style="color:#75715e"># Chạy code trong `with`</span>
+</span></span><span style="display:flex;"><span>    end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Execution Time: </span><span style="color:#e6db74">{</span>end <span style="color:#f92672">-</span> start<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">s&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> timer():
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># Giả lập tác vụ mất 2s</span>
+</span></span></code></pre></div><h1 id="yield">Yield</h1>
 <ul>
 <li>yield là một từ khóa đặc biệt trong Python, được dùng trong generator function để tạo ra một iterator.</li>
 <li>Khác với return, yield không kết thúc hàm mà tạm dừng (pause) và giữ lại trạng thái, cho phép tiếp tục từ chỗ dừng khi next() được gọi.</li>

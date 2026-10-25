@@ -9,8 +9,8 @@
     <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
     <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/golang/</guid>
-    <description><![CDATA[Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
-For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values.]]></description>
+    <description><![CDATA[In-depth technical notes on Go concurrency, memory management, garbage collection internals, performance profiling, hexagonal architecture, and design patterns.
+Concurrency &amp; Channels Channel Types 1. Unbuffered Channel Behavior: An unbuffered channel has zero capacity (make(chan int)). Synchronization: Requires both sender and receiver to be ready at the exact same moment. Send blocks until a receiver is ready, and receive blocks until a sender is ready. Use Case: Strict point-to-point synchronization between goroutines.]]></description>
 </item>
 <item>
     <title>Linux &amp; Operating System Internals</title>

@@ -9,8 +9,8 @@
     <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
     <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/microservice/</guid>
-    <description><![CDATA[Monolith vs Microservices Architecture Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
-Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system. Microservices Architecture Pros: - Independent scalability: Scale each service based on need.]]></description>
+    <description><![CDATA[Core architectural principles, decomposition strategies, distributed design patterns, resilience mechanisms, and deployment strategies for microservices systems.
+Monolith vs Microservices Architecture Criteria Monolithic Architecture Microservices Architecture Development Single codebase, straightforward local debugging Multiple repositories/services, polyglot tech stacks Deployment Single unit deployment (all-or-nothing) Independent, continuous deployments per service Scaling Vertical scaling or duplicate entire monolith Horizontal, granular scaling based on resource needs Fault Isolation Low (a memory leak or crash impacts whole app) High (failure in one service does not crash others) Complexity Low operational overhead; high codebase coupling High operational complexity (distributed network overhead) Microservice Decomposition Strategies How to break down a domain into microservices:]]></description>
 </item>
 </channel>
 </rss>

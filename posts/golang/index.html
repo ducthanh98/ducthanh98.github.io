@@ -7,16 +7,16 @@
         <title>Golang Deep Dive: Concurrency, Runtime &amp; Architecture - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="Golang Deep Dive: Concurrency, Runtime &amp; Architecture" />
-<meta property="og:description" content="Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
-For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values." />
+<meta property="og:description" content="In-depth technical notes on Go concurrency, memory management, garbage collection internals, performance profiling, hexagonal architecture, and design patterns.
+Concurrency &amp; Channels Channel Types 1. Unbuffered Channel Behavior: An unbuffered channel has zero capacity (make(chan int)). Synchronization: Requires both sender and receiver to be ready at the exact same moment. Send blocks until a receiver is ready, and receive blocks until a sender is ready. Use Case: Strict point-to-point synchronization between goroutines." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/golang/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-23T09:40:49+07:00" />
 <meta property="article:modified_time" content="2023-12-23T09:40:49+07:00" /><meta property="og:site_name" content="ThanhLD site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang Deep Dive: Concurrency, Runtime &amp; Architecture"/>
-<meta name="twitter:description" content="Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
-For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values."/>
+<meta name="twitter:description" content="In-depth technical notes on Go concurrency, memory management, garbage collection internals, performance profiling, hexagonal architecture, and design patterns.
+Concurrency &amp; Channels Channel Types 1. Unbuffered Channel Behavior: An unbuffered channel has zero capacity (make(chan int)). Synchronization: Requires both sender and receiver to be ready at the exact same moment. Send blocks until a receiver is ready, and receive blocks until a sender is ready. Use Case: Strict point-to-point synchronization between goroutines."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -31,7 +31,7 @@ For example, I have a long-running task on the database. Running multiple tasks 
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/golang\/"
-        },"genre": "posts","keywords": "Golang, Concurrency, Goroutines, Memory, Hexagonal Architecture, Interview","wordcount":  4843 ,
+        },"genre": "posts","keywords": "Golang, Concurrency, Goroutines, Memory, Hexagonal Architecture, Interview","wordcount":  1796 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/golang\/","datePublished": "2023-12-23T09:40:49+07:00","dateModified": "2023-12-23T09:40:49+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -73,8 +73,8 @@ For example, I have a long-running task on the database. Running multiple tasks 
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang Deep Dive: Concurrency, Runtime & Architecture</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4843 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;23 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1796 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -84,920 +84,555 @@ For example, I have a long-running task on the database. Running multiple tasks 
   <ul>
     <li><a href="#channel-types">Channel Types</a>
       <ul>
-        <li><a href="#unbuffered-channel">unbuffered channel</a></li>
-        <li><a href="#buffer-channel">buffer channel</a></li>
+        <li><a href="#1-unbuffered-channel">1. Unbuffered Channel</a></li>
+        <li><a href="#2-buffered-channel">2. Buffered Channel</a></li>
       </ul>
     </li>
   </ul>
 
   <ul>
-    <li><a href="#rest">REST</a></li>
-    <li><a href="#grapqh">Grapqh</a></li>
-    <li><a href="#grpc">GRPC</a></li>
+    <li><a href="#1-fan-out-fan-in">1. Fan-Out, Fan-In</a></li>
+    <li><a href="#2-worker-pool-pattern">2. Worker Pool Pattern</a></li>
+    <li><a href="#3-pipeline-pattern">3. Pipeline Pattern</a></li>
   </ul>
 
   <ul>
-    <li><a href="#go-wire">Go Wire</a></li>
-    <li><a href="#gc-stack-heap">gc-stack-heap</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#heap">Heap</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#hexagonal">Hexagonal</a>
+    <li><a href="#goroutines-vs-os-threads">Goroutines vs OS Threads</a></li>
+    <li><a href="#the-gmp-scheduler-model">The GMP Scheduler Model</a>
       <ul>
-        <li><a href="#benfits">Benfits</a></li>
-        <li><a href="#drawbacks">Drawbacks</a></li>
+        <li><a href="#key-scheduling-mechanisms">Key Scheduling Mechanisms:</a></li>
       </ul>
     </li>
   </ul>
 
   <ul>
-    <li><a href="#go-routine-vs-thread">Go routine vs Thread</a></li>
-    <li><a href="#differences">Differences</a></li>
-    <li><a href="#maximizing-parallelism-with-gomaxprocs">Maximizing Parallelism with GOMAXPROCS:</a></li>
-    <li><a href="#design-pattern">Design pattern</a></li>
+    <li><a href="#stack-vs-heap-in-go">Stack vs Heap in Go</a></li>
+    <li><a href="#escape-analysis">Escape Analysis</a></li>
   </ul>
 
   <ul>
-    <li><a href="#unit-test-">unit test =======</a></li>
+    <li><a href="#tri-color-mark-and-sweep-stages">Tri-Color Mark-and-Sweep Stages</a>
+      <ul>
+        <li><a href="#execution-phases">Execution Phases:</a></li>
+      </ul>
+    </li>
+    <li><a href="#tuning-garbage-collection">Tuning Garbage Collection:</a></li>
   </ul>
 
   <ul>
-    <li><a href="#content-security-policy">Content Security Policy</a></li>
-    <li><a href="#cross-site-scripting-xss-prevention">Cross-Site Scripting (XSS) Prevention:</a></li>
-    <li><a href="#clickjacking">Clickjacking</a></li>
-    <li><a href="#cross-site-request-forgery-csrf">Cross-Site Request Forgery (CSRF)</a></li>
-    <li><a href="#man-in-the-middle">Man-in-the-Middle</a></li>
+    <li><a href="#exposing-pprof-in-go-applications">Exposing <code>pprof</code> in Go Applications</a></li>
+    <li><a href="#analyzing-memory--cpu-profiles">Analyzing Memory &amp; CPU Profiles</a>
+      <ul>
+        <li><a href="#common-memory-leak-scenarios-in-go">Common Memory Leak Scenarios in Go:</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#arrays-vs-slices">Arrays vs Slices</a></li>
+    <li><a href="#defer-panic--recover">Defer, Panic &amp; Recover</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#table-driven-testing-pattern">Table-Driven Testing Pattern</a></li>
+    <li><a href="#mocking-tools-in-go-ecosystem">Mocking Tools in Go Ecosystem:</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#dependency-injection-with-google-wire">Dependency Injection with Google Wire</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#git-merge">Git Merge</a></li>
+    <li><a href="#git-rebase">Git Rebase</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="concurrency--channels">Concurrency &amp; Channels</h1>
+            </div><div class="content" id="content"><p>In-depth technical notes on Go concurrency, memory management, garbage collection internals, performance profiling, hexagonal architecture, and design patterns.</p>
+<hr>
+<h1 id="concurrency--channels">Concurrency &amp; Channels</h1>
 <h2 id="channel-types">Channel Types</h2>
-<h3 id="unbuffered-channel">unbuffered channel</h3>
-<pre><code>An unbuffered channel does not have any capacity to store values. 
-</code></pre>
-<p>It requires both a sender and a receiver to be ready at the same time to
-complete the communication. A send operation will block
-until another goroutine is ready to receive, and vice versa.</p>
+<h3 id="1-unbuffered-channel">1. Unbuffered Channel</h3>
 <ul>
-<li>For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time</li>
+<li><strong>Behavior</strong>: An unbuffered channel has zero capacity (<code>make(chan int)</code>).</li>
+<li><strong>Synchronization</strong>: Requires both sender and receiver to be ready at the exact same moment. Send blocks until a receiver is ready, and receive blocks until a sender is ready.</li>
+<li><strong>Use Case</strong>: Strict point-to-point synchronization between goroutines.</li>
 </ul>
-<h3 id="buffer-channel">buffer channel</h3>
-<pre><code>A buffered channel has a capacity that allows it to store a specified number of values. 
-The sender does not block until the buffer is full. 
-If the buffer is full, the sender will block until a value is received
-from the channel and space is freed up.
-</code></pre>
+<h3 id="2-buffered-channel">2. Buffered Channel</h3>
 <ul>
-<li>pull message from queue,  i publish them to channel then all worker can pull message from that to execute</li>
+<li><strong>Behavior</strong>: Has a fixed buffer capacity (<code>make(chan int, 10)</code>).</li>
+<li><strong>Synchronization</strong>: The sender does not block until the buffer is full. The receiver does not block until the buffer is empty.</li>
+<li><strong>Use Case</strong>: Rate limiting, work queuing, smoothing out bursts between producer and consumer.</li>
 </ul>
-<h1 id="context">Context</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Example: Concurrency throttle using buffered channel
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">processTasks</span>(<span style="color:#a6e22e">tasks</span> []<span style="color:#a6e22e">Task</span>, <span style="color:#a6e22e">concurrencyLimit</span> <span style="color:#66d9ef">int</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sem</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">struct</span>{}, <span style="color:#a6e22e">concurrencyLimit</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">task</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">tasks</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sem</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">struct</span>{}{} <span style="color:#75715e">// Acquire token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">t</span> <span style="color:#a6e22e">Task</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() { <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">sem</span> }() <span style="color:#75715e">// Release token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Execute</span>()
+</span></span><span style="display:flex;"><span>        }(<span style="color:#a6e22e">task</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h1 id="concurrency-patterns">Concurrency Patterns</h1>
+<h2 id="1-fan-out-fan-in">1. Fan-Out, Fan-In</h2>
 <ul>
-<li>The context package provides a way to propagate cancellation signals and deadlines across API boundaries and goroutines.</li>
-<li>It is primarily used to control the lifecycle of operations and to pass metadata (like values associated with requests) through the call stack.</li>
+<li><strong>Fan-Out</strong>: Multiple goroutines read from the same channel to parallelize work across CPU cores.</li>
+<li><strong>Fan-In</strong>: A multiplexer goroutine reads from multiple worker channels and consolidates output into a single channel.</li>
 </ul>
-<h1 id="rest-vs-graph">rest vs graph</h1>
-<h2 id="rest">REST</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sync&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">worker</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">results</span> <span style="color:#66d9ef">chan</span><span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">int</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">job</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">jobs</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">results</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">job</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">numWorkers</span> = <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">results</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Fan-Out: Spawn worker pool
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">numWorkers</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">int</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Done</span>()
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">worker</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">jobs</span>, <span style="color:#a6e22e">results</span>)
+</span></span><span style="display:flex;"><span>        }(<span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Fan-In: Close results once all workers complete
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span><span style="display:flex;"><span>        close(<span style="color:#a6e22e">results</span>)
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Send jobs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">5</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">i</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    close(<span style="color:#a6e22e">jobs</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Collect results
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">results</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Result:&#34;</span>, <span style="color:#a6e22e">result</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="2-worker-pool-pattern">2. Worker Pool Pattern</h2>
+<p>Distributes tasks across a bounded set of long-lived worker goroutines:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sync&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">worker</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">wg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Done</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">job</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">jobs</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Worker %d executed job %d\n&#34;</span>, <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">job</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">numWorkers</span> = <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">numWorkers</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">worker</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">jobs</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wg</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">5</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">j</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    close(<span style="color:#a6e22e">jobs</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="3-pipeline-pattern">3. Pipeline Pattern</h2>
+<p>Data flows through a chain of stages connected by channels:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">generator</span>(<span style="color:#a6e22e">nums</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">int</span>) <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">defer</span> close(<span style="color:#a6e22e">out</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">nums</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">square</span>(<span style="color:#a6e22e">in</span> <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">defer</span> close(<span style="color:#a6e22e">out</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">in</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pipeline</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">square</span>(<span style="color:#a6e22e">generator</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">pipeline</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">res</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h1 id="goroutines--the-go-runtime-scheduler">Goroutines &amp; The Go Runtime Scheduler</h1>
+<h2 id="goroutines-vs-os-threads">Goroutines vs OS Threads</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Metric</th>
+<th style="text-align:left">Goroutine</th>
+<th style="text-align:left">OS Thread</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Initial Memory</strong></td>
+<td style="text-align:left">~2 KB (dynamically resizes up to 1 GB)</td>
+<td style="text-align:left">~1 MB – 8 MB (fixed stack)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Creation Overhead</strong></td>
+<td style="text-align:left">Extremely fast (user-space allocation)</td>
+<td style="text-align:left">Slower (requires kernel system call)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Context Switch Cost</strong></td>
+<td style="text-align:left">Very fast (~few nanoseconds, no kernel trap)</td>
+<td style="text-align:left">Slower (~1-2 microseconds, TLB flushes)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Scheduling</strong></td>
+<td style="text-align:left">Cooperative M:N scheduler in Go runtime</td>
+<td style="text-align:left">Preemptive 1:1 scheduler in OS kernel</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-gmp-scheduler-model">The GMP Scheduler Model</h2>
+<p>Go uses an <strong>M:N Scheduler</strong> mapping $M$ goroutines onto $N$ OS threads:</p>
 <ul>
-<li>Overview:
-Pros:
+<li><strong>G (Goroutine)</strong>: Represents the goroutine, its stack, program counter, and state (<code>_Gwaiting</code>, <code>_Grunnable</code>, <code>_Grunning</code>).</li>
+<li><strong>M (Machine / OS Thread)</strong>: An actual operating system thread managed by the OS kernel.</li>
+<li><strong>P (Processor / Logical Context)</strong>: Represents the resources required to execute Go code (runqueue, memory cache). The count of P equals <code>GOMAXPROCS</code>.</li>
+</ul>
+<pre tabindex="0"><code>+---+        +---+
+| P | &lt;----&gt; | M | (executes G)
++---+        +---+
+  |
+  +-- Local Run Queue: [ G1, G2, G3 ]
+  |
+Global Run Queue: [ G4, G5, G6 ]
+</code></pre><h3 id="key-scheduling-mechanisms">Key Scheduling Mechanisms:</h3>
+<ol>
+<li><strong>Work Stealing</strong>: If a processor $P$ exhausts its local runqueue, it attempts to steal half the runqueue from another $P$. If all are empty, it checks the global runqueue.</li>
+<li><strong>Syscall Hand-off</strong>: When a goroutine performs a blocking OS system call, $M$ detaches from $P$. Another thread ($M$) takes over $P$ to keep executing other ready goroutines.</li>
+<li><strong>Preemption (Non-cooperative)</strong>: Since Go 1.14, the runtime uses OS signals (<code>SIGURG</code>) to preempt long-running loops without function calls.</li>
+</ol>
+<hr>
+<h1 id="memory-management--escape-analysis">Memory Management &amp; Escape Analysis</h1>
+<h2 id="stack-vs-heap-in-go">Stack vs Heap in Go</h2>
 <ul>
-<li>Simplicity: REST is straightforward to understand and implement, as it leverages existing HTTP methods and status codes.</li>
-<li>Caching: Supports built-in caching mechanisms using HTTP headers, which can improve performance for certain types of requests.</li>
-<li>Wide Adoption: REST is widely used and supported across many programming languages and frameworks, making it easy to find resources and documentation.</li>
-<li>Human-Readable: JSON responses are human-readable, aiding in debugging and manual testing.</li>
+<li><strong>Stack</strong>:
+<ul>
+<li>Allocated per goroutine. Starts at 2 KB and grows dynamically by doubling contiguous memory.</li>
+<li>Allocation is $O(1)$ (just moving stack pointer).</li>
+<li>Cleaned up automatically upon function return with zero GC overhead.</li>
+</ul>
+</li>
+<li><strong>Heap</strong>:
+<ul>
+<li>Global memory for values whose lifespan cannot be determined at compile time or exceeds function return.</li>
+<li>Requires GC tracking; subject to heap fragmentation and GC pauses.</li>
 </ul>
 </li>
 </ul>
-<p>Cons:</p>
+<h2 id="escape-analysis">Escape Analysis</h2>
+<p>The compiler determines whether a variable can safely remain on the stack or must &ldquo;escape&rdquo; to the heap:</p>
 <ul>
-<li>Over-fetching/Under-fetching: Clients may receive more data than needed (over-fetching) or require multiple requests to gather all necessary data (under-fetching).</li>
-<li>Versioning: Managing API versions can become complex, often requiring new endpoints or significant changes to existing ones.</li>
-<li>Limited Flexibility: Clients have limited control over the structure of the response data.</li>
-</ul>
-<h2 id="grapqh">Grapqh</h2>
+<li><strong>Causes of Heap Escape</strong>:
 <ul>
-<li>Pros
-<ul>
-<li>Flexible Data Retrieval: Clients can specify exactly what data they want in a single request, reducing over-fetching and under-fetching issues.</li>
-<li>Single Endpoint: Reduces the complexity of managing multiple endpoints for different resources.</li>
-<li>Strongly Typed Schema: The schema acts as a contract, providing clear documentation and enabling better tooling and validation.</li>
-<li>Real-time Capabilities: Supports real-time updates through subscriptions, allowing clients to receive updates when data changes.</li>
-</ul>
-</li>
-<li>Cons
-<ul>
-<li>Complexity: Can be more complex to implement and understand, particularly for developers new to GraphQL.</li>
-<li>Caching Challenges: More difficult to cache responses due to the dynamic nature of queries, though tools like Apollo Client provide solutions.
-<ul>
-<li>Client caching: appolo client,</li>
-<li>data loaders</li>
-</ul>
-</li>
-<li>Performance: May lead to performance issues if not designed properly, particularly with complex queries that request large amounts of data or require multiple resolvers.</li>
+<li>Returning a pointer to a local variable from a function.</li>
+<li>Storing values in <code>interface{}</code> / <code>any</code> (e.g. <code>fmt.Println(x)</code> causes <code>x</code> to escape).</li>
+<li>Slices or arrays whose size is dynamic or too large for stack limits.</li>
+<li>Variables captured by closures that outlive their declaring scope.</li>
 </ul>
 </li>
 </ul>
-<h2 id="grpc">GRPC</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check compiler escape analysis decisions:</span>
+</span></span><span style="display:flex;"><span>go build -gcflags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-m -m&#34;</span> main.go
+</span></span></code></pre></div><hr>
+<h1 id="garbage-collection-gc-internals">Garbage Collection (GC) Internals</h1>
+<p>Go uses a concurrent, tri-color mark-and-sweep garbage collector:</p>
+<h2 id="tri-color-mark-and-sweep-stages">Tri-Color Mark-and-Sweep Stages</h2>
+<ol>
+<li><strong>White</strong>: Unvisited objects (candidates for reclamation).</li>
+<li><strong>Grey</strong>: Discovered objects whose referenced children have not yet been evaluated.</li>
+<li><strong>Black</strong>: Visited objects whose references have all been evaluated (guaranteed live).</li>
+</ol>
+<pre tabindex="0"><code>Roots (Stack/Globals) ---&gt; [ Grey ] ---&gt; [ White ]
+                              |
+                     [ Evaluated: Turns Black ]
+</code></pre><h3 id="execution-phases">Execution Phases:</h3>
+<ol>
+<li><strong>Sweep Termination (STW - tiny)</strong>: Stop-The-World pause (~microseconds) to set up write barrier.</li>
+<li><strong>Marking (Concurrent)</strong>: Background workers mark live objects while the application continues executing. Uses <strong>Write Barrier</strong> to catch pointer mutations during concurrent marking.</li>
+<li><strong>Mark Termination (STW - tiny)</strong>: Brief pause to complete marking and flush remaining barriers.</li>
+<li><strong>Sweeping (Concurrent)</strong>: Reclaims white memory blocks and returns them to the memory allocator.</li>
+</ol>
+<h2 id="tuning-garbage-collection">Tuning Garbage Collection:</h2>
 <ul>
-<li>Protocol Buffers: A binary serialization format, which makes gRPC faster and more efficient than text-based formats like JSON.</li>
-<li>Multi-Language Support: gRPC supports multiple programming languages (e.g., Go, Java, Python, C++, etc.), enabling cross-platform communication.</li>
-<li>Streaming: Supports bi-directional streaming, allowing clients and servers to send multiple messages in a single connection.</li>
-<li>HTTP/2: gRPC uses HTTP/2 as its transport protocol, providing features like multiplexing, flow control, and header compression.</li>
+<li><code>GOGC</code> (Default 100): Triggers GC when heap grows by 100% since last GC. Increasing <code>GOGC=200</code> reduces GC frequency at the expense of higher RAM usage.</li>
+<li><code>GOMEMLIMIT</code> (Go 1.19+): Soft memory ceiling preventing OOM crashes in memory-constrained environments (e.g. Kubernetes containers).</li>
 </ul>
-<h1 id="analyze-code">Analyze Code</h1>
+<hr>
+<h1 id="profiling--diagnosing-memory-leaks">Profiling &amp; Diagnosing Memory Leaks</h1>
+<h2 id="exposing-pprof-in-go-applications">Exposing <code>pprof</code> in Go Applications</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;net/http/pprof&#34;</span> <span style="color:#75715e">// Registers pprof HTTP handlers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;localhost:6060&#34;</span>, <span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Application business logic
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h2 id="analyzing-memory--cpu-profiles">Analyzing Memory &amp; CPU Profiles</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Inspect live heap allocation:</span>
+</span></span><span style="display:flex;"><span>go tool pprof http://localhost:6060/debug/pprof/heap
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Inspect CPU consumption over a 30-second sampling window:</span>
+</span></span><span style="display:flex;"><span>go tool pprof http://localhost:6060/debug/pprof/profile?seconds<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Launch interactive web UI visualization:</span>
+</span></span><span style="display:flex;"><span>go tool pprof -http<span style="color:#f92672">=</span>:8080 heap.pprof
+</span></span></code></pre></div><h3 id="common-memory-leak-scenarios-in-go">Common Memory Leak Scenarios in Go:</h3>
 <ul>
-<li>
-<p>GolangCI:  is a fast Go linters aggregator that
-runs multiple linters in parallel, providing feedback on Go code quality.
-It focuses primarily on static code analysis</p>
-</li>
-<li>
-<p>SonarQube:  platform for continuous inspection of code quality and security  across various programming languages, including Go.
-It provides a broader range of features beyond just linting.</p>
+<li><strong>Abandoned Goroutines (Goroutine Leaks)</strong>: Goroutine blocked on receiving from an unbuffered channel that never receives data.</li>
+<li><strong>Slice Pinning</strong>: Slicing a tiny substring/slice from a massive array/file pins the whole underlying array in memory.</li>
+<li><strong>Unclosed Resources</strong>: Forgetting <code>resp.Body.Close()</code> or unreleased <code>time.Ticker</code> instances.</li>
+</ul>
+<hr>
+<h1 id="context-package">Context Package</h1>
+<p>The <code>context</code> package controls cancellation signals, deadlines, and request-scoped metadata across goroutines:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 1. Timeout propagation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">NewRequestWithContext</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#e6db74">&#34;https://api.example.com/data&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">resp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">DefaultClient</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#a6e22e">req</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. Cancellation listener in worker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Err</span>() <span style="color:#75715e">// context.Canceled or context.DeadlineExceeded
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">case</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ch</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">process</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h1 id="arrays-vs-slices-defer--recover">Arrays vs Slices, Defer &amp; Recover</h1>
+<h2 id="arrays-vs-slices">Arrays vs Slices</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Aspect</th>
+<th style="text-align:left">Array</th>
+<th style="text-align:left">Slice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Size</strong></td>
+<td style="text-align:left">Fixed at compile time (<code>[5]int</code>)</td>
+<td style="text-align:left">Dynamically sized (<code>[]int</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pass by Value</strong></td>
+<td style="text-align:left">Entire array is copied in function arguments</td>
+<td style="text-align:left">Slice header (Pointer, Len, Cap) is copied (24 bytes)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Growth</strong></td>
+<td style="text-align:left">Cannot grow</td>
+<td style="text-align:left">Appended via <code>append()</code>; doubles capacity under 256 elements</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defer-panic--recover">Defer, Panic &amp; Recover</h2>
 <ul>
-<li>Analyzes code for bugs, vulnerabilities, code smells, and duplications, providing an overall assessment of code quality.</li>
-<li>Historical Data: Tracks code quality over time, enabling teams to see trends and improvements or declines in quality.</li>
-<li>Security Vulnerability Detection: Identifies security vulnerabilities in code, providing guidance for remediation.</li>
-<li>Dashboard and Reporting: Offers a user-friendly interface for viewing metrics, issues, and project health at a glance.</li>
+<li><code>defer</code> pushes function calls onto a LIFO stack executed when surrounding function returns.</li>
+<li><code>recover()</code> intercepts panics inside deferred functions to prevent process termination:</li>
 </ul>
-</li>
-</ul>
-<h1 id="di">DI</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SafeExecute</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> recover(); <span style="color:#a6e22e">r</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Recovered from panic: %v\n&#34;</span>, <span style="color:#a6e22e">r</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Code that might panic (e.g. nil pointer dereference)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><hr>
+<h1 id="testing--mocking-in-go">Testing &amp; Mocking in Go</h1>
+<h2 id="table-driven-testing-pattern">Table-Driven Testing Pattern</h2>
+<p>Standard idiom in Go for readable and comprehensive unit testing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAdd</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">tests</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">name</span>     <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>     <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">expected</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>    }{
+</span></span><span style="display:flex;"><span>        {<span style="color:#e6db74">&#34;positive numbers&#34;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>},
+</span></span><span style="display:flex;"><span>        {<span style="color:#e6db74">&#34;negative numbers&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>},
+</span></span><span style="display:flex;"><span>        {<span style="color:#e6db74">&#34;zero case&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>},
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">tt</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">tests</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">name</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">got</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">got</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">expected</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;Add(%d, %d) = %d; want %d&#34;</span>, <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">got</span>, <span style="color:#a6e22e">tt</span>.<span style="color:#a6e22e">expected</span>)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="mocking-tools-in-go-ecosystem">Mocking Tools in Go Ecosystem:</h2>
 <ul>
-<li>Decoupling: DI promotes loose coupling between classes, making it easier to manage dependencies. This results in code that is easier to maintain and test.</li>
-<li>Testability: By allowing dependencies to be injected, it becomes easier to substitute mock objects for unit testing, leading to more robust and reliable tests.</li>
-<li>Flexibility and Scalability: Changes to dependencies can be made without modifying the classes that use them, making it easier to extend the application and introduce new features.</li>
-<li>Improved Maintainability: Code is generally easier to understand and maintain when dependencies are explicitly defined and injected.</li>
+<li><code>testify/mock</code>: Flexible mock objects and assertions.</li>
+<li><code>sqlmock</code>: Simulates database interactions without requiring a real SQL connection.</li>
+<li><code>httptest</code>: Mocks inbound HTTP requests and outbound HTTP servers.</li>
+<li><code>testcontainers-go</code>: Spins up real Docker containers (Postgres, Redis, Kafka) for integration tests.</li>
 </ul>
-<h2 id="go-wire">Go Wire</h2>
-<ul>
-<li>Google Wire is a code generation tool for dependency injection in Go
-<ul>
-<li>Dependency Injection: This is a design pattern used to manage dependencies in your code. Instead of creating dependencies directly, you pass them as parameters to functions or constructors.</li>
-</ul>
-</li>
-<li>Provider Functions: In Wire, you define provider functions that create instances of your components. These functions can accept dependencies as parameters.</li>
-<li>Injector Function: Wire generates an injector function that combines all your provider functions, allowing you to create your application with a single call.</li>
-</ul>
-<pre tabindex="0"><code>// models
-package main
-
-type User struct {
-	ID   int
-	Name string
-}
-// repository.go
-// Repository defines the interface for user data operations.
-type Repository interface {
-	FindUser(id int) (*User, error)
-}
-
-// UserRepository implements the Repository interface.
-type UserRepository struct{}
-
-// FindUser fetches a user by ID.
-func (r *UserRepository) FindUser(id int) (*User, error) {
-	// In a real application, this would interact with a database.
-	return &amp;User{ID: id, Name: &#34;John Doe&#34;}, nil
-}
-// service.go
-package main
-
-// UserService provides operations for managing users.
-type UserService struct {
-	repo Repository
-}
-
-// NewUserService creates a new UserService.
-func NewUserService(repo Repository) *UserService {
-	return &amp;UserService{repo: repo}
-}
-
-// GetUser retrieves a user by ID.
-func (s *UserService) GetUser(id int) (*User, error) {
-	return s.repo.FindUser(id)
-}
-</code></pre><pre tabindex="0"><code>
-import &#34;github.com/google/wire&#34;
-// InitializeUserService is the Wire injector function.
-func InitializeUserService() *UserService {
-	wire.Build(NewUserService, &amp;UserRepository{})
-	return nil
-}
-</code></pre><h2 id="gc-stack-heap">gc-stack-heap</h2>
-<ul>
-<li>Go has two main memory regions: the stack and the heap. The stack is a faster but fixed-size memory area used for local variables within functions. The heap is a more dynamic memory space that grows and shrinks as needed.</li>
-</ul>
-<h2 id="stack">Stack</h2>
-<ul>
-<li>Characteristics:
-<ul>
-<li>The stack is a fixed-size memory region managed in a Last In, First Out (LIFO) manner.</li>
-<li>Memory on the stack is automatically allocated when a function is called and released when the function exits.</li>
-<li>Access to the stack is very fast due to its linear nature and automatic management.</li>
-</ul>
-</li>
-<li>Stack in Go:
-<ul>
-<li>Every goroutine in Go has its own stack. The initial size of a goroutine&rsquo;s stack is small (around 2KB), but Go supports stack growth. When a stack is full, Go automatically allocates more memory to extend it.</li>
-</ul>
-</li>
-</ul>
-<h2 id="heap">Heap</h2>
-<ul>
-<li>
-<p>Characteristics:</p>
-<ul>
-<li>The heap is a larger and more flexible . used for long-lived objects.</li>
-<li>Unlike the stack, heap memory is not automatically managed. Memory allocated on the heap persists until it is cleaned up by the Garbage Collector (GC).</li>
-<li>Access to heap memory is slower than stack because of the overhead of memory management and dereferencing pointers.</li>
-</ul>
-</li>
-<li>
-<p>Heap in Go:</p>
-<ul>
-<li>Variables are allocated on the heap when Go cannot determine their lifespan, or when the variable is too large for the stack.</li>
-<li>Go&rsquo;s Garbage Collector automatically manages heap memory, cleaning up objects when they are no longer referenced.</li>
-</ul>
-</li>
-<li>
-<p>Example for heap:</p>
-<ul>
-<li>Dynamically allocated memory using new(), make(), or when creating large data structures.</li>
-<li>Data that needs to persist beyond the scope of a function, such as values referenced by closures or pointers returned from a function.</li>
-<li>Large objects or data structures that exceed the stack&rsquo;s size limit.</li>
-</ul>
-</li>
-<li>
-<p>Example for stack</p>
-<ul>
-<li>Local variables declared inside a function (or methods) that don&rsquo;t require heap allocation are stored on the stack.</li>
-<li>Small, fixed-size variables like integers, floats, and structs with small fields are stored on the stack.</li>
-<li>Variables that have a limited scope (i.e., they exist only for the duration of the function) are stored on the stack.</li>
-</ul>
-</li>
-</ul>
-<pre tabindex="0"><code>go build -gcflags -m main.go
-go tool compile -m main.go
-</code></pre><p>=============</p>
-<h1 id="garbage-collection">Garbage collection</h1>
-<pre tabindex="0"><code>The garbage collector, or GC, is a system designed specifically to identify and free dynamically allocated memory.
-
-Go uses a garbage collection algorithm based on tracing and the Mark and Sweep algorithm. During the marking phase, the garbage collector marks data actively used by the application as live heap(It first marks all live objects by traversing the object graph, starting from the roots). Then, during the sweeping phase, the GC traverses all the memory not marked as live and reuses it. 
-
-The garbage collector’s work is not free, as it consumes two important system resources: CPU time and physical memory.
-
-The memory in the garbage collector consists of the following:
-- Live heap memory (memory marked as “live” in the previous garbage collection cycle)
-- New heap memory (heap memory not yet analyzed by the garbage collector)
-- Memory is used to store some metadata, which is usually insignificant compared to the first two entities.
-The CPU time consumption by the garbage collector is related to its working specifics. There are garbage collector implementations called “stop-the-world” that completely halt program execution during garbage collection. In the case of Go, the garbage collector is not fully “stop-the-world” and performs most of its work, such as heap marking, in parallel with the application execution.
-</code></pre><h2 id="hexagonal">Hexagonal</h2>
-<ul>
-<li>Hexagonal architecture, also known as ports and adapters architecture, is an architectural approach that isolates the business logic of an application from technical details and data sources</li>
-</ul>
-<p>Ports: Interfaces that define how external systems can interact with the core.
-Adapters: Implementations of the ports that connect to external systems.</p>
-<h3 id="benfits">Benfits</h3>
-<ul>
-<li>
-<p>One of the main advantages of hexagonal architecture is its ability to reduce the risks when there is a technical changes. Unlike some other architectures where business logic can be tightly coupled with technical details, hexagonal architecture isolates business logic within the hexagon.</p>
-</li>
-<li>
-<p>Hexagonal architecture lends itself well to adding new features and modifying existing ones. bacause of  isolating business logic</p>
-</li>
-<li>
-<p>Easier to test business login: You can easily replace external systems (e.g., switching databases or changing the UI) without modifying the core business logic.</p>
-</li>
-</ul>
-<h3 id="drawbacks">Drawbacks</h3>
-<ul>
-<li>Increased Number of Packages and make the Project Structure more complex</li>
-<li>Developers unfamiliar with the pattern may find it harder to understand , especially in teams that haven&rsquo;t worked with this approach before.</li>
-</ul>
+<hr>
+<h1 id="hexagonal-architecture--dependency-injection">Hexagonal Architecture &amp; Dependency Injection</h1>
+<p>Hexagonal architecture (Ports &amp; Adapters) isolates core business logic from database, transport, and external framework details:</p>
 <pre tabindex="0"><code>myapp/
 ├── cmd/
-│   └── myapp/
-│       └── main.go                # Entry point for the application
+│   └── server/main.go              # Composition root / Dependency wiring
 ├── internal/
-│   ├── core/                       # Core domain logic
-│   │   ├── entities/               # Core business entities
-│   │   │   └── user.go             # Example entity
-│   │   ├── ports/                  # Ports folder for interfaces
-│   │   │   ├── repository.go        # Repository port interface
-│   │   │   └── service.go           # Service port interface (if applicable)
-│   │   └── usecases/                # Application business logic
-│   │       └── user_service.go      # Business logic for user operations
-│   ├── adapters/                    # Adapters for external systems
-│   │   ├── db/                      # Database implementations
-│   │   │   └── postgres.go          # PostgreSQL repository implementation
-│   │   ├── http/                    # HTTP API implementations
-│   │   │   ├── handler.go           # HTTP request handlers
-│   │   │   └── router.go            # HTTP router setup
-│   │   └── grpc/                    # gRPC implementations (if applicable)
-│   └── config/                      # Configuration handling
-│       └── config.go                # Configuration loading
-├── pkg/                             # Shared library code (optional)
-│   └── utils/                       # Utility functions
-├── test/                            # Integration and end-to-end tests
-│   ├── usecases/
-│   ├── adapters/
-│   └── core/
-└── README.md                        # Documentation for the project
-</code></pre><h1 id="go-routine">Go routine</h1>
-<h2 id="go-routine-vs-thread">Go routine vs Thread</h2>
+│   ├── core/
+│   │   ├── domain/user.go          # Pure domain models
+│   │   ├── ports/repositories.go   # Inbound &amp; Outbound interfaces
+│   │   └── services/user_svc.go    # Application business logic
+│   └── adapters/
+│       ├── postgres/repo.go        # Secondary adapter (Outbound DB)
+│       └── http/handler.go         # Primary adapter (Inbound REST)
+</code></pre><h2 id="dependency-injection-with-google-wire">Dependency Injection with Google Wire</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// models
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ID</span>   <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Repository</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">FindUser</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserRepository</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">UserRepository</span>) <span style="color:#a6e22e">FindUser</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">User</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;John Doe&#34;</span>}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserService</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">repo</span> <span style="color:#a6e22e">Repository</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUserService</span>(<span style="color:#a6e22e">repo</span> <span style="color:#a6e22e">Repository</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">UserService</span>{<span style="color:#a6e22e">repo</span>: <span style="color:#a6e22e">repo</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// wire.go (Code generation configuration)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// +build wireinject
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">InitializeUserService</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wire</span>.<span style="color:#a6e22e">Build</span>(<span style="color:#a6e22e">NewUserService</span>, <span style="color:#a6e22e">wire</span>.<span style="color:#a6e22e">Bind</span>(new(<span style="color:#a6e22e">Repository</span>), new(<span style="color:#f92672">*</span><span style="color:#a6e22e">UserRepository</span>)), <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">UserRepository</span>{})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h1 id="api-protocols-rest-vs-graphql-vs-grpc">API Protocols: REST vs GraphQL vs gRPC</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Feature</th>
+<th style="text-align:left">REST</th>
+<th style="text-align:left">GraphQL</th>
+<th style="text-align:left">gRPC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Data Format</strong></td>
+<td style="text-align:left">JSON (Text)</td>
+<td style="text-align:left">JSON (Text)</td>
+<td style="text-align:left">Protocol Buffers (Binary)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Transport</strong></td>
+<td style="text-align:left">HTTP/1.1 or HTTP/2</td>
+<td style="text-align:left">HTTP/1.1 or HTTP/2</td>
+<td style="text-align:left"><strong>HTTP/2 exclusively</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Typing</strong></td>
+<td style="text-align:left">Optional (OpenAPI)</td>
+<td style="text-align:left">Strongly Typed Schema</td>
+<td style="text-align:left">Strict Protobuf IDL contract</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Data Fetching</strong></td>
+<td style="text-align:left">Fixed endpoints (risk of over/under-fetching)</td>
+<td style="text-align:left">Client defines exact fields requested</td>
+<td style="text-align:left">Method-based RPC</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Streaming</strong></td>
+<td style="text-align:left">Server-Sent Events / WebSockets</td>
+<td style="text-align:left">Subscriptions</td>
+<td style="text-align:left">Native unary &amp; bidirectional streaming</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Best For</strong></td>
+<td style="text-align:left">Public APIs, Browser clients</td>
+<td style="text-align:left">Complex frontend dashboards</td>
+<td style="text-align:left"><strong>Internal Microservice communication</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="git-workflow-merge-vs-rebase">Git Workflow: Merge vs Rebase</h1>
+<h2 id="git-merge">Git Merge</h2>
 <ul>
-<li>
-<p>Go routines</p>
+<li>Creates a 3-way <strong>Merge Commit</strong> tying two branch histories together.</li>
+<li><strong>Pros</strong>: Non-destructive; completely preserves historical context and branch lifecycles.</li>
+<li><strong>Cons</strong>: Clutters commit history with frequent <code>Merge branch 'main' into feature</code> commits.</li>
+</ul>
+<h2 id="git-rebase">Git Rebase</h2>
 <ul>
-<li>
-<p>Lightweight and concurrent units of execution in Go.</p>
-</li>
-<li>
-<p>Advantages of goroutines:
-a. Lightweight and efficient compared to OS threads.
-b. Faster startup and lower memory consumption.
-c. Easy to create and manage with the &ldquo;go&rdquo; keyword.
-d. Ideal for concurrent programming and handling I/O-bound tasks.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Thread</p>
-<ul>
-<li>Higher Memory Footprint: OS threads typically have a larger memory footprint compared to goroutines due to their underlying system structures and management overhead.</li>
-<li>Context Switching Overhead: Context switching between OS threads incurs additional overhead as it requires system calls. This can impact the overall performance and scalability of an application.</li>
-<li>Suitable for CPU-Intensive Tasks: OS threads are better suited for CPU-bound tasks that require intensive computation. They can fully utilize the available CPU cores, allowing parallel execution of computationally intensive workloads.</li>
-<li>Manual Thread Management: With OS threads, developers have to manually manage thread creation, synchronization, and load balancing, which can be more complex and error-prone compared to goroutines.</li>
-</ul>
-</li>
-</ul>
-<h2 id="differences">Differences</h2>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="./image.png"
-        data-srcset="./image.png, ./image.png 1.5x, ./image.png 2x"
-        data-sizes="auto"
-        alt="./image.png"
-        title="alt text" /></p>
-<h2 id="maximizing-parallelism-with-gomaxprocs">Maximizing Parallelism with GOMAXPROCS:</h2>
-<ul>
-<li>
-<p>GOMAXPROCS Configuration: GOMAXPROCS is a configuration parameter in Go that specifies the maximum number of OS threads that can execute Go code simultaneously.</p>
-</li>
-<li>
-<p>Default Setting: By default, GOMAXPROCS is set to the number of logical CPUs available on the machine, allowing Go to automatically utilize the available cores for parallel execution.</p>
-</li>
-<li>
-<p>Performance Optimization: Developers can adjust the value of GOMAXPROCS based on the specific workload and hardware characteristics to optimize the performance of their applications.</p>
-</li>
-<li>
-<p>Balancing Act: Setting GOMAXPROCS too high may lead to increased contention and context switching overhead. Finding the right balance is crucial for achieving optimal parallelism.</p>
-</li>
-</ul>
-<h2 id="design-pattern">Design pattern</h2>
-<ol>
-<li>Fan-Out, Fan-In:
-Fan-Out: Launch a fixed number of goroutines to perform a task concurrently.
-Fan-In: Combine the results from multiple goroutines into a single channel.</li>
-</ol>
-<pre tabindex="0"><code>package main
-
-import (
-    &#34;fmt&#34;
-    &#34;sync&#34;
-)
-
-func worker(id int, jobs &lt;-chan int, results chan&lt;- int) {
-    for job := range jobs {
-        fmt.Printf(&#34;Worker %d processing job %d\n&#34;, id, job)
-        results &lt;- job * 2
-    }
-}
-
-func main() {
-    const numWorkers = 3
-    jobs := make(chan int, 5)
-    results := make(chan int, 5)
-
-    var wg sync.WaitGroup
-
-    // Fan-Out: Launch workers
-    for i := 1; i &lt;= numWorkers; i++ {
-        wg.Add(1)
-        go func(i int) {
-            defer wg.Done()
-            worker(i, jobs, results)
-        }(i)
-    }
-
-    // Fan-In: Combine results
-    go func() {
-        wg.Wait()
-        close(results)
-    }()
-
-    // Send jobs to workers
-    for i := 1; i &lt;= 5; i++ {
-        jobs &lt;- i
-    }
-    close(jobs)
-
-    // Collect results
-    for result := range results {
-        fmt.Println(&#34;Result:&#34;, result)
-    }
-}
-</code></pre><ol start="2">
-<li>Worker Pool:
-Create a pool of workers (goroutines) to handle incoming tasks.
-Use a channel to dispatch tasks to available workers.</li>
-</ol>
-<pre tabindex="0"><code>package main
-
-import (
-    &#34;fmt&#34;
-    &#34;sync&#34;
-)
-
-func worker(id int, jobs &lt;-chan int, wg *sync.WaitGroup) {
-    defer wg.Done()
-    for job := range jobs {
-        fmt.Printf(&#34;Worker %d processing job %d\n&#34;, id, job)
-    }
-}
-
-func main() {
-    const numWorkers = 3
-    jobs := make(chan int, 5)
-
-    var wg sync.WaitGroup
-
-    // Create worker pool
-    for i := 1; i &lt;= numWorkers; i++ {
-        wg.Add(1)
-        go worker(i, jobs, &amp;wg)
-    }
-
-    // Send jobs to workers
-    for i := 1; i &lt;= 5; i++ {
-        jobs &lt;- i
-    }
-    close(jobs)
-
-    // Wait for all workers to finish
-    wg.Wait()
-}
-</code></pre><ol start="3">
-<li>Pipeline:
-Compose a series of processing stages, each implemented by a goroutine.
-Use channels to connect stages and pass data between them.</li>
-</ol>
-<pre tabindex="0"><code>package main
-
-import (
-    &#34;fmt&#34;
-)
-
-func generator(nums ...int) &lt;-chan int {
-    out := make(chan int)
-    go func() {
-        defer close(out)
-        for _, n := range nums {
-            out &lt;- n
-        }
-    }()
-    return out
-}
-
-func square(in &lt;-chan int) &lt;-chan int {
-    out := make(chan int)
-    go func() {
-        defer close(out)
-        for n := range in {
-            out &lt;- n * n
-        }
-    }()
-    return out
-}
-
-func printer(in &lt;-chan int) {
-    for n := range in {
-        fmt.Println(n)
-    }
-}
-
-func main() {
-    nums := []int{1, 2, 3, 4, 5}
-    gen := generator(nums...)
-    sqr := square(gen)
-
-    // Consuming the results
-    printer(sqr)
-}
-</code></pre><h1 id="go-scheduler">Go scheduler</h1>
-<p>M:N Scheduler: The Go scheduler follows an M:N threading model,
-where M goroutines are multiplexed onto N operating system threads.
-This allows the Go runtime to manage concurrency efficiently,
-as it can adjust the number of operating system threads dynamically
-based on the workload.</p>
-<p>Work Stealing: The Go scheduler employsMA a work-stealing algorithm
-to distribute goroutines across multiple threads.
-When a thread runs out of work,
-it can steal tasks from other threads&rsquo; queues,
-helping to balance the workload across available threads.</p>
-<p>GOMAXPROCS: The GOMAXPROCS environment variable or runtime.
-GOMAXPROCS() function call determines the maximum number of operating system threads
-that the Go scheduler can use to execute goroutines concurrently.
-By default, this value is set to the number of CPU cores available on the system.</p>
-<h1 id="panic-vs-recover">Panic vs recover</h1>
-<ul>
-<li>To handle panics and recover from them in Go, the built-in panic() and recover() functions can be used. When an error occurs, panic() is called and the program execution stops. You can use the defer statement to call recover(), which stops the panic and resumes execution from the point of the nearest enclosing function call, after all deferred functions have been run.</li>
-</ul>
-<h1 id="defer">Defer</h1>
-<ul>
-<li>The defer statement in Golang is used to postpone the execution of a function until the surrounding function completes. It is often used when you want to make sure some cleanup tasks are performed before exiting a function, regardless of errors or other conditions.</li>
-</ul>
-<h1 id="array-vs-slices">Array vs slices</h1>
-<p>In Go, arrays and slices are both used to store collections of elements, but they have some key differences. Here&rsquo;s a comparison between the two:</p>
-<ul>
-<li>Fixed Size vs. Dynamic Size:</li>
-</ul>
-<p>Arrays: Have a fixed size determined at compile time. Once declared, the size cannot be changed.
-Slices: Are dynamically sized and can grow or shrink. Slices are references to sections of arrays.</p>
-<ul>
-<li>Access:</li>
-</ul>
-<p>Arrays: Accessed using index notation. Indexes start from 0. For example:
-Slices: Also accessed using index notation. Slices can be sliced to get a subset of elements.</p>
-<ul>
-<li>Passing to Functions:
-Arrays: When passed to functions, the entire array is copied, which can be inefficient for large arrays.
-Slices: Passing slices to functions is more efficient because only a reference to the underlying array is copied, not the entire data. This allows for more efficient manipulation of data.</li>
-<li>Appending:
-Arrays: Cannot be appended to. Their size is fixed.
-Slices: Can be appended to using the append function. If the underlying array is not large enough to accommodate the new elements, a new larger array is allocated and the elements are copied over.</li>
-<li>Length and Capacity:</li>
-</ul>
-<p>Slices: Have both a length and a capacity. The length is the number of elements in the slice, and the capacity is the maximum number of elements the slice can hold without allocating more memory.</p>
-<ul>
-<li>Usage:</li>
-</ul>
-<p>Arrays: Used when the size of the collection is fixed and known at compile time.
-Slices: Used when the size of the collection may vary at runtime or when passing portions of arrays to functions.</p>
-<h1 id="profiling-memory">profiling memory</h1>
-<ul>
-<li>Use Go’s Built-In Profiling Tool or using go-torch</li>
-</ul>
-<pre tabindex="0"><code>import (
-    &#34;net/http&#34;
-    _ &#34;net/http/pprof&#34; // Import for side effects only
-)
-
-func main() {
-    go func() {
-        log.Println(http.ListenAndServe(&#34;localhost:6060&#34;, nil)) // Start pprof server
-    }()
-    // Your application code here
-}
-</code></pre><ul>
-<li>Run command</li>
-</ul>
-<pre tabindex="0"><code>go tool pprof http://localhost:6060/debug/pprof/heap
-</code></pre><h1 id="test">Test</h1>
-<ul>
-<li>
-<p>Data-Driven Testing:</p>
-<ul>
-<li>
-<p>Pros:</p>
-<ul>
-<li>Reusable test scripts for various inputs.</li>
-<li>Comprehensive input/output coverage.</li>
-<li>Efficient and easy to maintain with data updates.</li>
-</ul>
-</li>
-<li>
-<p>Cons:</p>
-<ul>
-<li>Complex setup and external data handling.</li>
-<li>Harder to debug specific failures.</li>
-<li>May increase execution time with large data sets.</li>
-<li>Limited focus on overall behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Behavior Testing:
-Pros:</p>
-<ul>
-<li>
-<p>Aligns with business/user expectations.</p>
-</li>
-<li>
-<p>Readable and stakeholder-friendly.</p>
-</li>
-<li>
-<p>Validates user experience, not just functionality.
-Cons:</p>
-</li>
-<li>
-<p>Time-consuming to write.</p>
-</li>
-<li>
-<p>Learning curve for new tools (e.g., Ginkgo, Cucumber).</p>
-</li>
-<li>
-<p>Maintenance overhead with frequent updates.</p>
-</li>
-<li>
-<p>Not suitable for low-level code testing.
-Summary:</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>Use Data-Driven for validating code with multiple inputs.
-Use Behavior Testing for ensuring the system meets user scenarios and business requirements.
-Best results often come from combining both methods.</p>
-<h2 id="unit-test-">unit test =======</h2>
-<ul>
-<li>Unit test: Tests individual units or components of code in isolation, typically a single function, method, or class.
-<ul>
-<li>testify, sqlmock, httpmock</li>
-</ul>
-</li>
-<li>Integration Testing:  Tests the interaction between multiple units or modules to ensure they work together as expected. - consideration test
-<ul>
-<li>react: @testing-library/react @testing-library/jest-dom</li>
-<li>go: testconainer, httptest</li>
-</ul>
-</li>
-<li>Functional Testing: Tests specific functions of an application, validating output based on specific inputs.</li>
-<li>End-to-End (E2E) Testing: Simulates real user scenarios to verify that the application works end-to-end.</li>
-<li>Performance Testing: Tests the application’s speed, scalability, and stability under load. Simulates high usage to ensure reliability, identifies performance bottlenecks.</li>
-<li>Load Testing: Tests the application under expected load to ensure performance meets requirements. Detects behavior under normal conditions, helps set baselines.</li>
-</ul>
-<p>scartch is missing timezone cia</p>
-<h1 id="git">Git</h1>
-<ul>
-<li>Git Merge:
-If there are changes in both branches that do not conflict, Git will create a new commit (a merge commit) that combines the changes from both branches. This new commit will have two parent commits: the latest commit from A and the latest commit from B.</li>
-</ul>
-<pre tabindex="0"><code>A: 1-2-3-4-5
-B: 1-2-3-4-6-7
-
-After running `git merge B` on branch `A`:
-Result: 1-2-3-4-5-merge
-</code></pre><ul>
-<li>Git Rebase
-<ul>
-<li>When you are on branch A and you execute git rebase B, Git will identify the last commit that is shared between both branches</li>
-<li>Git will take each commit from branch A that comes after the last shared commit  and reapply them on top of branch B.</li>
-<li>Linear History: This creates a linear history since the changes from A will be added after the commits from B, which makes the commit history easier to read and understand.</li>
-</ul>
-</li>
-</ul>
-<pre tabindex="0"><code>A: 1-2-3-4-5
-B: 1-2-3-4-6-7
-
-After running `git rebase B` on branch `A`:
-Result: 1-2-3-4-6-7-5
-</code></pre><ul>
-<li>Conflict Handling:</li>
-</ul>
-<p>Merge: Conflicts are resolved once during the merge process.
-Rebase: Conflicts may occur multiple times if there are multiple commits in the branch being rebased.</p>
-<ul>
-<li>Use Cases:</li>
-</ul>
-<p>Merge: Ideal for integrating features or branches when you want to maintain the full history of both branches.
-Rebase: Best for keeping a clean and linear commit history, often used before merging a feature branch into a main branch.</p>
-<h1 id="generic">Generic</h1>
-<ul>
-<li>Go generics allows developers to write functions, types, and data structures that can operate on any data type while maintaining type safety. This enables code reuse and abstraction without reducing performance or readability.</li>
-<li>Without Constraints: Use generics without constraints when you need to work with types that do not require comparison or when you are performing operations that do not involve comparisons.</li>
-<li>With Constraints: Use the comparable constraint when you need to ensure that the type being passed supports equality comparisons, especially if you&rsquo;re performing operations like checking for unique values, filtering, or grouping.</li>
-</ul>
-<h1 id="mutex-sync">Mutex Sync</h1>
-<ul>
-<li></li>
-</ul>
-<h1 id="reader-writer">Reader Writer</h1>
-<ul>
-<li>
-<p>Why doesn’t the Reader return the data but fill the provided byte slice?</p>
-<ul>
-<li>You get to decide how big the slice is, where the data ends up. If the Reader returned a new slice each time, it would create a lot of unnecessary memory allocations, which would slow things down and waste resources.</li>
-</ul>
-</li>
-<li>
-<p>io.Copy is better than io.ReadAll. io.Copy reads the data in 32KB chunks and writes each chunk directly to the destination while</p>
-</li>
-<li>
-<p>io.Closer: there’s a chance Go’s garbage collector will step in and clean up</p>
-</li>
-</ul>
-<h1 id="common-security-considerations">Common security considerations</h1>
-<h2 id="content-security-policy">Content Security Policy</h2>
-<ul>
-<li>it specify which content sources are considered trusted and can be loaded by the web browser</li>
-<li>Use Browser Developer Tools: CSP-related errors will display any policy violations, by checking it, we can see that if it is config correct or not</li>
-<li>Test in Report-Only Mode: This lets you see what would be blocked by the policy without actually blocking anything, allowing you to adjust the policy based on observed violations.</li>
-<li>Monitor CSP Reports: Set up CSP reports by using the report-uri or report-to directives.</li>
-</ul>
-<pre tabindex="0"><code>Content-Security-Policy: default-src &#39;self&#39;; report-uri /csp-report-endpoint
-</code></pre><ul>
-<li>Use CSP Testing Tools: Google CSP Evaluator</li>
-</ul>
-<pre tabindex="0"><code>default-src &#39;self&#39;; 
-img-src &#39;self&#39; &lt;cdn&gt;; 
-script-src &#39;self&#39;; 
-font-src &#39;self&#39; &#39;unsafe-inline&#39; &lt;cdn&gt;; 
-frame-ancestors &#39;self&#39;;
-report-uri /csp-report-endpoint;
-</code></pre><h2 id="cross-site-scripting-xss-prevention">Cross-Site Scripting (XSS) Prevention:</h2>
-<ul>
-<li>
-<p>attackers can inject malicious scripts into web pages when your web application does not properly validate or escape user input before displaying it on the page. By that way, attackers can steal cookies, session tokens, or sensitive information,
-and performing actions on behalf of the victim.</p>
-</li>
-<li>
-<p>Types of XSS</p>
-<ul>
-<li>Stored XSS: The malicious script is stored on the server (e.g., in a database) and is served
-to users when they access the affected page</li>
-<li>Reflected XSS: The malicious script is reflected off a web server and
-is typically delivered to the victim via a URL or a link</li>
-<li>DOM-Based XSS: This type occurs when the client-side script modifies the DOM
-without proper validation or escaping of user input.</li>
-</ul>
-</li>
-<li>
-<p>Preventing:</p>
-<ul>
-<li>Escape User Input: encodeURIComponent or DOMPurify(lib) : DOMPurify.sanitize(dirty);</li>
-<li>Implement Content Security Policy (CSP): Set up a CSP header to restrict
-which scripts, styles, and other resources can be loaded.
-CSP helps limit the damage an attacker can do by only allowing content to load from trusted domains.</li>
-<li>Use HttpOnly and Secure Cookies</li>
-<li>Use Security Libraries and Tools: Use security libraries,
-such as Helmet in Node.js, which sets various HTTP headers to secure Express/Node applications,
-including XSS protection headers.</li>
-</ul>
-</li>
-</ul>
-<h2 id="clickjacking">Clickjacking</h2>
-<ul>
-<li>issue related to security where users are tricked into clicking a hidden  button on a website (often a misleading overlay) that redirects them to a potentially malicious URL.</li>
-<li>Preventing:
-<ul>
-<li>Content Security Policy (CSP): frame-ancestors</li>
-<li>X-Frame-Options: DENY or SAMEORIGIN prevents the page from being embedded by unauthorized domains.</li>
-</ul>
-</li>
-</ul>
-<h2 id="cross-site-request-forgery-csrf">Cross-Site Request Forgery (CSRF)</h2>
-<ul>
-<li>CSRF (Cross-Site Request Forgery) is a type of security attack that
-tricks a user to do an unintentional action like  submitting requests to a web application
-where they are authenticated.</li>
-<li>Prevent: setup csrf token</li>
-</ul>
-<h2 id="man-in-the-middle">Man-in-the-Middle</h2>
-<ul>
-<li>Description: Attackers intercept communications between two parties to steal data.</li>
-<li>Prevention: Use HTTPS for secure communication, employ SSL/TLS certificates, and validate server certificates.</li>
-</ul>
-<p>🔥 1) Idempotency (quan trọng nhất)</p>
-<p>Một hành động được gọi nhiều lần nhưng kết quả chỉ xảy ra 1 lần.</p>
-<p>Ví dụ dễ hiểu:</p>
-<p>API POST /payment mà retry nhiều lần không được trừ tiền nhiều lần.</p>
-<p>Kafka consumer đọc message 2–3 lần nhưng chỉ xử lý đúng 1 lần.</p>
-<p>Cách làm:</p>
-<p>Dùng idempotency key (ví dụ: order_id, message_id)</p>
-<p>Save trạng thái request vào DB</p>
-<p>Nếu request cùng key đến → return result cũ</p>
-<p>Ví dụ pseudo:</p>
-<p>INSERT INTO payments(id, amount) VALUES($id, $amount)
-ON CONFLICT(id) DO NOTHING;</p>
-<p>→ gọi 1 lần hay 100 lần vẫn chỉ create 1 record.</p>
-<p>Đây là nền tảng của at-least-once + retry trong distributed system.</p>
-<p>🔥 2) Circuit Breaker</p>
-<p>Giống cầu dao điện: khi downstream lỗi liên tục → ngắt kết nối.</p>
-<p>Có 3 trạng thái:</p>
-<p>Closed</p>
-<p>Mọi request đi qua</p>
-<p>Nếu lỗi tăng cao → chuyển sang Open</p>
-<p>Open</p>
-<p>Ngắt ngay, trả lỗi nhanh (fast fail)</p>
-<p>Không gọi downstream nữa để tự bảo vệ</p>
-<p>Half-Open</p>
-<p>Cho 1 vài request test</p>
-<p>Nếu ok → quay lại Closed</p>
-<p>Nếu fail → Open tiếp</p>
-<p>Tại sao cần?</p>
-<p>Tránh cascade failure (A gọi B, B chết → A treo → C treo → cả hệ thống sập)</p>
-<p>Bảo vệ database, Kafka, external API</p>
-<p>Tool dùng:</p>
-<p>Envoy, Istio, Netflix Hystrix, Go-resilience</p>
-<p>🔥 3) Bulkhead</p>
-<p>Ngăn 1 lỗi kéo chết cả service.</p>
-<p>Giống như chia ngăn tàu thủy — 1 ngăn thủng không làm chìm cả tàu.</p>
-<p>Trong microservice:</p>
-<p>Tách thread pool hoặc goroutine pool theo từng downstream</p>
-<p>Nếu API X chết → chỉ pool X bị nghẽn</p>
-<p>Pool Y vẫn chạy bình thường</p>
-<p>Ví dụ Golang:</p>
-<p>workerPoolA := make(chan Job, 50)
-workerPoolB := make(chan Job, 50)</p>
-<p>→ Downstream A nghẽn không ảnh hưởng downstream B.</p>
-<p>🔥 4) Backpressure</p>
-<p>Khi downstream không xử lý kịp → upstream phải giảm tốc.</p>
-<p>Đây là nền tảng của:</p>
-<p>Kafka consumer lag</p>
-<p>Worker queue</p>
-<p>Rate limiting</p>
-<p>Bounded channel</p>
-<p>Ví dụ Golang (bounded):</p>
-<p>jobs := make(chan Job, 100)</p>
-<p>Nếu queue đầy → upstream reject / wait → đó là backpressure.</p>
-<p>🔥 5) Load Shedding</p>
-<p>Khi hệ thống quá tải → từ chối bớt request để cứu server.</p>
-<p>Trả error:
-429 Too Many Requests</p>
-<p>Lý do:
-Thà từ chối 20% sớm còn hơn server xử lý 0% và sập toàn bộ.</p>
-<p>Gateway hỗ trợ:</p>
-<p>Envoy</p>
-<p>Nginx</p>
-<p>Traefik</p>
-<p>Istio</p>
-<p>🔥 6) Retry Policy</p>
-<p>Retry đúng → tăng reliability
-Retry sai → sập luôn hệ thống.</p>
-<p>Nguyên tắc vàng:</p>
-<p>Retry phải có exponential backoff</p>
-<p>Retry phải idempotent</p>
-<p>Retry không dùng cho POST không có idempotency key</p>
-<p>Ví dụ:</p>
-<p>retry after 100ms
-then 200ms
-then 400ms</p>
-<p>🔥 7) Timeout</p>
-<p>Nếu không có timeout → request treo → bật circuit breaker → cascade failure.</p>
-<p>Phải cấu hình:</p>
-<p>connection timeout</p>
-<p>read timeout</p>
-<p>write timeout</p>
-<p>Timeout luôn &lt; retry timeout để tránh treo vô hạn.</p>
-<p>🔥 8) Rate Limiting</p>
-<p>Ngăn client spam hoặc traffic spike hạ hệ thống.</p>
-<p>Thuật toán phổ biến:</p>
-<p>Token Bucket</p>
-<p>Leaky Bucket</p>
-<p>Fixed window</p>
-<p>Sliding window</p>
-<p>Triển khai:</p>
-<p>Redis (cluster)</p>
-<p>Envoy / Kong / Traefik</p>
-<p>🔥 9) Outbox Pattern</p>
-<p>Đã nói rồi nhưng recap ngắn gọn:</p>
-<p>DB transaction và event publish phải 100% đi cùng nhau.
-Nếu DB commit mà publish fail → outbox cứu.</p>
-<p>Dùng: outbox table + worker hoặc Debezium.</p>
-<p>🔥 10) Saga Pattern</p>
-<p>Dùng cho distributed transaction nhiều service.</p>
-<p>2 dạng:</p>
-<p>Orchestration Saga (có coordinator)</p>
-<p>Choreography Saga (event-driven)</p>
-<p>Ví dụ:</p>
-<p>tạo order → reserve inventory → charge payment</p>
-<p>nếu payment fail → emit &ldquo;cancel inventory&rdquo; event</p>
-<p>Saga = transaction với compensation event.</p>
-<p>🔥 11) Eventual Consistency</p>
-<p>Microservice không bao giờ mạnh như monolith về transaction.</p>
-<p>Nên chấp nhận:</p>
-<p>Data ở từng service không khớp tức thì</p>
-<p>Nhưng sẽ đồng bộ theo thời gian qua event</p>
-<p>Ví dụ:</p>
-<p>User created → 300ms sau mới xuất hiện ở search service</p>
-<p>🔥 12) Message Deduplication</p>
-<p>Kafka at-least-once sẽ gửi trùng.
-Consumer phải idempotent bằng:</p>
-<p>PRIMARY KEY</p>
-<p>message_id</p>
-<p>business id</p>
-<p>compare last processed offset</p>
-<p>Producer thì dùng:</p>
-<p>idempotence + retry + sequence number</p>
-<ul>
-<li>tính năng: upload file để embed vector,</li>
-<li>api gateway: verify authen rate limit,</li>
-<li></li>
+<li>Re-applies your local feature branch commits sequentially on top of the target base branch.</li>
+<li><strong>Pros</strong>: Produces a clean, strictly linear project commit history.</li>
+<li><strong>Cons</strong>: Rewrites commit SHA hashes; <strong>never rebase public shared branches</strong>.</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">

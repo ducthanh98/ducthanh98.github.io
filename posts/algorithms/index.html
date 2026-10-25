@@ -108,176 +108,176 @@
 <ul>
 <li>Encapsulation: Grouping data and methods that operate on the data together, and restricting access to some components. Là quá trình ẩn đi các chi tiết bên trong của một đối tượng và chỉ cung cấp một giao diện rõ ràng cho người dùng (hay các đối tượng khác) để tương tác</li>
 </ul>
-<pre tabindex="0"><code>type Car struct {
-    brand string
-    speed int
-}
-
-func (c *Car) setSpeed(s int) { c.speed = s }
-func (c *Car) getSpeed() int { return c.speed }
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Car</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">brand</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">speed</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Car</span>) <span style="color:#a6e22e">setSpeed</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">int</span>) { <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">speed</span> = <span style="color:#a6e22e">s</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Car</span>) <span style="color:#a6e22e">getSpeed</span>() <span style="color:#66d9ef">int</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">speed</span> }
+</span></span></code></pre></div><ul>
 <li>Abstraction: Hiding complex details and exposing only necessary features via interfaces. Là quá trình chỉ cung cấp thông tin quan trọng cho người dùng và ẩn đi các chi tiết phức tạp. Mục đích của abstraction là giảm sự phức tạp cho người dùng và làm cho chương trình dễ dàng sử dụng hơn.</li>
 </ul>
-<pre tabindex="0"><code>type Vehicle interface { drive() }
-type Car struct{}
-func (c Car) drive() { fmt.Println(&#34;Driving&#34;) }
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Vehicle</span> <span style="color:#66d9ef">interface</span> { <span style="color:#a6e22e">drive</span>() }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Car</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">Car</span>) <span style="color:#a6e22e">drive</span>() { <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Driving&#34;</span>) }
+</span></span></code></pre></div><ul>
 <li>Inheritance: Reusing functionality by embedding structs in Go.</li>
 </ul>
-<pre tabindex="0"><code>type Animal struct { name string }
-func (a Animal) speak() { fmt.Println(a.name, &#34;speaks&#34;) }
-
-type Dog struct { Animal }
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Animal</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">Animal</span>) <span style="color:#a6e22e">speak</span>() { <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34;speaks&#34;</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">Animal</span> }
+</span></span></code></pre></div><ul>
 <li>Polymorphism: Treating different types as the same via interfaces.</li>
 </ul>
-<pre tabindex="0"><code>type Shape interface { area() float64 }
-type Rectangle struct { width, height float64 }
-func (r Rectangle) area() float64 { return r.width * r.height }
-</code></pre><h1 id="solid">SOLID</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Shape</span> <span style="color:#66d9ef">interface</span> { <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">height</span> <span style="color:#66d9ef">float64</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Rectangle</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span> }
+</span></span></code></pre></div><h1 id="solid">SOLID</h1>
 <ul>
 <li>Single Responsibility Principle (SRP):  A class should have only one reason to change, meaning it should only have one job.</li>
 </ul>
-<pre tabindex="0"><code>// Bad example: One struct handling multiple responsibilities
-type User struct {
-    name  string
-    email string
-}
-func (u *User) saveToDatabase() {
-    // saving user to DB
-}
-func (u *User) sendEmail() {
-    // sending email
-}
-
-// Good example: Separate concerns
-type User struct {
-    name  string
-    email string
-}
-
-type UserRepository struct{}
-func (r *UserRepository) save(u User) {
-    // saving user to DB
-}
-
-type EmailService struct{}
-func (e *EmailService) send(u User) {
-    // sending email
-}
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Bad example: One struct handling multiple responsibilities
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span>  <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">email</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) <span style="color:#a6e22e">saveToDatabase</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// saving user to DB
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) <span style="color:#a6e22e">sendEmail</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// sending email
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Good example: Separate concerns
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span>  <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">email</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserRepository</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">UserRepository</span>) <span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">u</span> <span style="color:#a6e22e">User</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// saving user to DB
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">EmailService</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">EmailService</span>) <span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">u</span> <span style="color:#a6e22e">User</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// sending email
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
 <li>Open/Closed Principle (OCP): Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification .</li>
 </ul>
-<pre tabindex="0"><code>// Before: Modifying the original class for new functionality
-type Rectangle struct {
-    width, height float64
-}
-
-func (r *Rectangle) area() float64 {
-    return r.width * r.height
-}
-
-// After: Extending functionality with interfaces
-type Shape interface {
-    area() float64
-}
-
-type Rectangle struct {
-    width, height float64
-}
-
-func (r Rectangle) area() float64 {
-    return r.width * r.height
-}
-
-type Circle struct {
-    radius float64
-}
-
-func (c Circle) area() float64 {
-    return 3.14 * c.radius * c.radius
-}
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Before: Modifying the original class for new functionality
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">height</span> <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Rectangle</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// After: Extending functionality with interfaces
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Shape</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">height</span> <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Rectangle</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">height</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">radius</span> <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">Circle</span>) <span style="color:#a6e22e">area</span>() <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">3.14</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">radius</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>Liskov Substitution Principle (LSP): Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.</li>
 </ul>
-<pre tabindex="0"><code>// Correct example: Derived classes can replace base class without issues
-type Bird interface {
-    fly()
-}
-
-type Sparrow struct{}
-func (s Sparrow) fly() {
-    fmt.Println(&#34;Sparrow flying&#34;)
-}
-
-type Penguin struct{}
-func (p Penguin) fly() {
-    fmt.Println(&#34;Penguin cannot fly&#34;)
-}
-
-// In this example, Penguin violates LSP if it is expected to fly
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Correct example: Derived classes can replace base class without issues
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Bird</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fly</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Sparrow</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">Sparrow</span>) <span style="color:#a6e22e">fly</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Sparrow flying&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Penguin</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">Penguin</span>) <span style="color:#a6e22e">fly</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Penguin cannot fly&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// In this example, Penguin violates LSP if it is expected to fly
+</span></span></span></code></pre></div><ul>
 <li>Interface Segregation Principle (ISP):  This principle encourages the creation of fine-grained, client-specific interfaces rather than large, general-purpose interfaces.</li>
 </ul>
-<pre tabindex="0"><code>// Bad example: A single interface with too many methods
-type Worker interface {
-    work()
-    eat()
-}
-
-type Robot struct{}
-func (r Robot) work() {}
-func (r Robot) eat() {}
-
-// Good example: Split into smaller, more specific interfaces
-type Workable interface {
-    work()
-}
-type Eatable interface {
-    eat()
-}
-
-type Robot struct{}
-func (r Robot) work() {}
-func (r Robot) eat() {}
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Bad example: A single interface with too many methods
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Worker</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">work</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">eat</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Robot</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Robot</span>) <span style="color:#a6e22e">work</span>() {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Robot</span>) <span style="color:#a6e22e">eat</span>() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Good example: Split into smaller, more specific interfaces
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Workable</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">work</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Eatable</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">eat</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Robot</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Robot</span>) <span style="color:#a6e22e">work</span>() {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">Robot</span>) <span style="color:#a6e22e">eat</span>() {}
+</span></span></code></pre></div><ul>
 <li>Dependency Inversion Principle (DIP): High-level modules should not depend on low-level modules. This principle encourages decoupling between modules by relying on abstractions (such as interfaces or abstract classes) rather than concrete implementations.</li>
 </ul>
-<pre tabindex="0"><code>// Bad example: High-level class depends on low-level implementation
-type Database struct {}
-func (d *Database) connect() {}
-
-type App struct {
-    db *Database
-}
-
-// Good example: Both high-level and low-level depend on interfaces
-type DatabaseConnection interface {
-    connect()
-}
-
-type Database struct {}
-func (d *Database) connect() {}
-
-type App struct {
-    db DatabaseConnection
-}
-</code></pre><h1 id="di">DI</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Bad example: High-level class depends on low-level implementation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Database</span> <span style="color:#66d9ef">struct</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Database</span>) <span style="color:#a6e22e">connect</span>() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Database</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Good example: Both high-level and low-level depend on interfaces
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DatabaseConnection</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">connect</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Database</span> <span style="color:#66d9ef">struct</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Database</span>) <span style="color:#a6e22e">connect</span>() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">db</span> <span style="color:#a6e22e">DatabaseConnection</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="di">DI</h1>
 <ul>
 <li>Easier Testing: You can easily replace dependencies with mocks or stubs when writing test cases.</li>
 <li>Reduced Coupling: Objects don’t need to create their own dependencies, making it easier to change or extend the application without affecting other parts.</li>
 <li>Improved Flexibility: With DI, you can replace or modify dependencies without changing the code of the objects using them.</li>
 <li>While Go doesn’t have built-in complex DI frameworks like some other languages (e.g., Spring Framework in Java), you can implement DI manually by passing dependencies into objects via constructors or struct methods.</li>
 </ul>
-<pre tabindex="0"><code>// Constructor for UserService, where the dependency is injected
-func NewUserService(repo UserRepository) *UserService {
-    return &amp;UserService{repo: repo}
-}
-
-func (s *UserService) SetLogger(logger Logger) {
-    s.logger = logger
-}
-</code></pre><h1 id="design-pattern">Design pattern</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Constructor for UserService, where the dependency is injected
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUserService</span>(<span style="color:#a6e22e">repo</span> <span style="color:#a6e22e">UserRepository</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">UserService</span>{<span style="color:#a6e22e">repo</span>: <span style="color:#a6e22e">repo</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">UserService</span>) <span style="color:#a6e22e">SetLogger</span>(<span style="color:#a6e22e">logger</span> <span style="color:#a6e22e">Logger</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">logger</span> = <span style="color:#a6e22e">logger</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="design-pattern">Design pattern</h1>
 <h2 id="creational-patterns">Creational patterns</h2>
 <h3 id="factory-pattern">Factory Pattern:</h3>
 <ul>
@@ -295,33 +295,33 @@ func (s *UserService) SetLogger(logger Logger) {
 </ul>
 </li>
 </ul>
-<pre tabindex="0"><code>type IGun interface {
-    setName(name string)
-    setPower(power int)
-    getName() string
-    getPower() int
-}
-
-type Ak47 struct {
-    Gun
-}
-
-func newAk47() IGun {
-    return &amp;Ak47{
-        Gun: Gun{
-            name:  &#34;AK47 gun&#34;,
-            power: 4,
-        },
-    }
-}
-
-func getGun(gunType string) (IGun, error) {
-    if gunType == &#34;ak47&#34; {
-        return newAk47(), nil
-    }
-    return nil, fmt.Errorf(&#34;Wrong gun type passed&#34;)
-}   
-</code></pre><h3 id="abstract-factory">Abstract Factory</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IGun</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setName</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setPower</span>(<span style="color:#a6e22e">power</span> <span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getName</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getPower</span>() <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Ak47</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Gun</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newAk47</span>() <span style="color:#a6e22e">IGun</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Ak47</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Gun</span>: <span style="color:#a6e22e">Gun</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">name</span>:  <span style="color:#e6db74">&#34;AK47 gun&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">power</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getGun</span>(<span style="color:#a6e22e">gunType</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">IGun</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">gunType</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;ak47&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">newAk47</span>(), <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;Wrong gun type passed&#34;</span>)
+</span></span><span style="display:flex;"><span>}   
+</span></span></code></pre></div><h3 id="abstract-factory">Abstract Factory</h3>
 <ul>
 <li>Abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories.</li>
 </ul>
@@ -329,135 +329,135 @@ func getGun(gunType string) (IGun, error) {
 <ul>
 <li>Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.</li>
 </ul>
-<pre tabindex="0"><code>type IBuilder interface {
-    setWindowType()
-    setDoorType()
-    setNumFloor()
-    getHouse() House
-}
-
-func getBuilder(builderType string) IBuilder {
-    if builderType == &#34;normal&#34; {
-        return newNormalBuilder()
-    }
-
-    if builderType == &#34;igloo&#34; {
-        return newIglooBuilder()
-    }
-    return nil
-}
-
-type NormalBuilder struct {
-    windowType string
-    doorType   string
-    floor      int
-}
-
-func newNormalBuilder() *NormalBuilder {
-    return &amp;NormalBuilder{}
-}
-
-func (b *NormalBuilder) setWindowType() {
-    b.windowType = &#34;Wooden Window&#34;
-}
-
-func (b *NormalBuilder) setDoorType() {
-    b.doorType = &#34;Wooden Door&#34;
-}
-
-func (b *NormalBuilder) setNumFloor() {
-    b.floor = 2
-}
-
-func (b *NormalBuilder) getHouse() House {
-    return House{
-        doorType:   b.doorType,
-        windowType: b.windowType,
-        floor:      b.floor,
-    }
-}
-
-
-type IglooBuilder struct {
-    windowType string
-    doorType   string
-    floor      int
-}
-
-func newIglooBuilder() *IglooBuilder {
-    return &amp;IglooBuilder{}
-}
-
-func (b *IglooBuilder) setWindowType() {
-    b.windowType = &#34;Snow Window&#34;
-}
-
-func (b *IglooBuilder) setDoorType() {
-    b.doorType = &#34;Snow Door&#34;
-}
-
-func (b *IglooBuilder) setNumFloor() {
-    b.floor = 1
-}
-
-func (b *IglooBuilder) getHouse() House {
-    return House{
-        doorType:   b.doorType,
-        windowType: b.windowType,
-        floor:      b.floor,
-    }
-}
-
-
-type House struct {
-    windowType string
-    doorType   string
-    floor      int
-}
-
-type Director struct {
-    builder IBuilder
-}
-
-func newDirector(b IBuilder) *Director {
-    return &amp;Director{
-        builder: b,
-    }
-}
-
-func (d *Director) setBuilder(b IBuilder) {
-    d.builder = b
-}
-
-func (d *Director) buildHouse() House {
-    d.builder.setDoorType()
-    d.builder.setWindowType()
-    d.builder.setNumFloor()
-    return d.builder.getHouse()
-}
-
-import &#34;fmt&#34;
-
-func main() {
-    normalBuilder := getBuilder(&#34;normal&#34;)
-    iglooBuilder := getBuilder(&#34;igloo&#34;)
-
-    director := newDirector(normalBuilder)
-    normalHouse := director.buildHouse()
-
-    fmt.Printf(&#34;Normal House Door Type: %s\n&#34;, normalHouse.doorType)
-    fmt.Printf(&#34;Normal House Window Type: %s\n&#34;, normalHouse.windowType)
-    fmt.Printf(&#34;Normal House Num Floor: %d\n&#34;, normalHouse.floor)
-
-    director.setBuilder(iglooBuilder)
-    iglooHouse := director.buildHouse()
-
-    fmt.Printf(&#34;\nIgloo House Door Type: %s\n&#34;, iglooHouse.doorType)
-    fmt.Printf(&#34;Igloo House Window Type: %s\n&#34;, iglooHouse.windowType)
-    fmt.Printf(&#34;Igloo House Num Floor: %d\n&#34;, iglooHouse.floor)
-
-}
-</code></pre><h3 id="singleton">Singleton</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IBuilder</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setWindowType</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setDoorType</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setNumFloor</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getHouse</span>() <span style="color:#a6e22e">House</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getBuilder</span>(<span style="color:#a6e22e">builderType</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">IBuilder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">builderType</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;normal&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">newNormalBuilder</span>()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">builderType</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;igloo&#34;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">newIglooBuilder</span>()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">NormalBuilder</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">windowType</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">doorType</span>   <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">floor</span>      <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newNormalBuilder</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">NormalBuilder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">NormalBuilder</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NormalBuilder</span>) <span style="color:#a6e22e">setWindowType</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">windowType</span> = <span style="color:#e6db74">&#34;Wooden Window&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NormalBuilder</span>) <span style="color:#a6e22e">setDoorType</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doorType</span> = <span style="color:#e6db74">&#34;Wooden Door&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NormalBuilder</span>) <span style="color:#a6e22e">setNumFloor</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">floor</span> = <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">NormalBuilder</span>) <span style="color:#a6e22e">getHouse</span>() <span style="color:#a6e22e">House</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">House</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">doorType</span>:   <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doorType</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">windowType</span>: <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">windowType</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">floor</span>:      <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">floor</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IglooBuilder</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">windowType</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">doorType</span>   <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">floor</span>      <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newIglooBuilder</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">IglooBuilder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">IglooBuilder</span>{}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">IglooBuilder</span>) <span style="color:#a6e22e">setWindowType</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">windowType</span> = <span style="color:#e6db74">&#34;Snow Window&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">IglooBuilder</span>) <span style="color:#a6e22e">setDoorType</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doorType</span> = <span style="color:#e6db74">&#34;Snow Door&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">IglooBuilder</span>) <span style="color:#a6e22e">setNumFloor</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">floor</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">IglooBuilder</span>) <span style="color:#a6e22e">getHouse</span>() <span style="color:#a6e22e">House</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">House</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">doorType</span>:   <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doorType</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">windowType</span>: <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">windowType</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">floor</span>:      <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">floor</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">House</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">windowType</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">doorType</span>   <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">floor</span>      <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Director</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">builder</span> <span style="color:#a6e22e">IBuilder</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newDirector</span>(<span style="color:#a6e22e">b</span> <span style="color:#a6e22e">IBuilder</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Director</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Director</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">builder</span>: <span style="color:#a6e22e">b</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Director</span>) <span style="color:#a6e22e">setBuilder</span>(<span style="color:#a6e22e">b</span> <span style="color:#a6e22e">IBuilder</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">builder</span> = <span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Director</span>) <span style="color:#a6e22e">buildHouse</span>() <span style="color:#a6e22e">House</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">builder</span>.<span style="color:#a6e22e">setDoorType</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">builder</span>.<span style="color:#a6e22e">setWindowType</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">builder</span>.<span style="color:#a6e22e">setNumFloor</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">builder</span>.<span style="color:#a6e22e">getHouse</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">normalBuilder</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getBuilder</span>(<span style="color:#e6db74">&#34;normal&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">iglooBuilder</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getBuilder</span>(<span style="color:#e6db74">&#34;igloo&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">director</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">newDirector</span>(<span style="color:#a6e22e">normalBuilder</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">normalHouse</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">director</span>.<span style="color:#a6e22e">buildHouse</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Normal House Door Type: %s\n&#34;</span>, <span style="color:#a6e22e">normalHouse</span>.<span style="color:#a6e22e">doorType</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Normal House Window Type: %s\n&#34;</span>, <span style="color:#a6e22e">normalHouse</span>.<span style="color:#a6e22e">windowType</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Normal House Num Floor: %d\n&#34;</span>, <span style="color:#a6e22e">normalHouse</span>.<span style="color:#a6e22e">floor</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">director</span>.<span style="color:#a6e22e">setBuilder</span>(<span style="color:#a6e22e">iglooBuilder</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">iglooHouse</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">director</span>.<span style="color:#a6e22e">buildHouse</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\nIgloo House Door Type: %s\n&#34;</span>, <span style="color:#a6e22e">iglooHouse</span>.<span style="color:#a6e22e">doorType</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Igloo House Window Type: %s\n&#34;</span>, <span style="color:#a6e22e">iglooHouse</span>.<span style="color:#a6e22e">windowType</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Igloo House Num Floor: %d\n&#34;</span>, <span style="color:#a6e22e">iglooHouse</span>.<span style="color:#a6e22e">floor</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="singleton">Singleton</h3>
 <ul>
 <li>is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.</li>
 <li>Pros
@@ -472,101 +472,101 @@ func main() {
 </ul>
 </li>
 </ul>
-<pre tabindex="0"><code>var lock = &amp;sync.Mutex{}
-
-type single struct {
-}
-
-var singleInstance *single
-
-func getInstance() *single {
-    if singleInstance == nil {
-        lock.Lock()
-        defer lock.Unlock()
-        if singleInstance == nil {
-            fmt.Println(&#34;Creating single instance now.&#34;)
-            singleInstance = &amp;single{}
-        } else {
-            fmt.Println(&#34;Single instance already created.&#34;)
-        }
-    } else {
-        fmt.Println(&#34;Single instance already created.&#34;)
-    }
-
-    return singleInstance
-}
-</code></pre><h3 id="prototype">Prototype</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lock</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">single</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">singleInstance</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">single</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getInstance</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">single</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">singleInstance</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">lock</span>.<span style="color:#a6e22e">Lock</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">lock</span>.<span style="color:#a6e22e">Unlock</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">singleInstance</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Creating single instance now.&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">singleInstance</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">single</span>{}
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Single instance already created.&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Single instance already created.&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">singleInstance</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="prototype">Prototype</h3>
 <ul>
 <li>Prototype is a creational design pattern that lets you copy existing objects without making your code dependent on their classes</li>
 </ul>
-<pre tabindex="0"><code>type Inode interface {
-    print(string)
-    clone() Inode
-}
-
-type File struct {
-    name string
-}
-
-func (f *File) print(indentation string) {
-    fmt.Println(indentation + f.name)
-}
-
-func (f *File) clone() Inode {
-    return &amp;File{name: f.name + &#34;_clone&#34;}
-}
-</code></pre><h2 id="structural-patterns">Structural patterns</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Inode</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    print(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">clone</span>() <span style="color:#a6e22e">Inode</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">File</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">File</span>) print(<span style="color:#a6e22e">indentation</span> <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">indentation</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">File</span>) <span style="color:#a6e22e">clone</span>() <span style="color:#a6e22e">Inode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">File</span>{<span style="color:#a6e22e">name</span>: <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_clone&#34;</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="structural-patterns">Structural patterns</h2>
 <h3 id="decorator-pattern">Decorator pattern</h3>
 <ul>
 <li>structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.</li>
 </ul>
-<pre tabindex="0"><code>type TomatoTopping struct {
-    pizza IPizza
-}
-
-func (c *TomatoTopping) getPrice() int {
-    pizzaPrice := c.pizza.getPrice()
-    return pizzaPrice + 7
-}
-
-type CheeseTopping struct {
-    pizza IPizza
-}
-
-func (c *CheeseTopping) getPrice() int {
-    pizzaPrice := c.pizza.getPrice()
-    return pizzaPrice + 10
-}
-</code></pre><h3 id="adapter-pattern">Adapter pattern</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TomatoTopping</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pizza</span> <span style="color:#a6e22e">IPizza</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TomatoTopping</span>) <span style="color:#a6e22e">getPrice</span>() <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pizzaPrice</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">pizza</span>.<span style="color:#a6e22e">getPrice</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pizzaPrice</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CheeseTopping</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pizza</span> <span style="color:#a6e22e">IPizza</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">CheeseTopping</span>) <span style="color:#a6e22e">getPrice</span>() <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pizzaPrice</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">pizza</span>.<span style="color:#a6e22e">getPrice</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pizzaPrice</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="adapter-pattern">Adapter pattern</h3>
 <ul>
 <li>Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.</li>
 </ul>
-<pre tabindex="0"><code>type Computer interface {
-    InsertIntoLightningPort()
-}
-
-type Mac struct {
-}
-
-func (m *Mac) InsertIntoLightningPort() {
-    fmt.Println(&#34;Lightning connector is plugged into mac machine.&#34;)
-}
-
-type Windows struct{}
-
-func (w *Windows) insertIntoUSBPort() {
-    fmt.Println(&#34;USB connector is plugged into windows machine.&#34;)
-}
-
-type WindowsAdapter struct {
-    windowMachine *Windows
-}
-
-func (w *WindowsAdapter) InsertIntoLightningPort() {
-    fmt.Println(&#34;Adapter converts Lightning signal to USB.&#34;)
-    w.windowMachine.insertIntoUSBPort()
-}
-</code></pre><h2 id="behavioral-design-pattern">Behavioral Design pattern</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Computer</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">InsertIntoLightningPort</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Mac</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Mac</span>) <span style="color:#a6e22e">InsertIntoLightningPort</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Lightning connector is plugged into mac machine.&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Windows</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Windows</span>) <span style="color:#a6e22e">insertIntoUSBPort</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;USB connector is plugged into windows machine.&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WindowsAdapter</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">windowMachine</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Windows</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WindowsAdapter</span>) <span style="color:#a6e22e">InsertIntoLightningPort</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Adapter converts Lightning signal to USB.&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">windowMachine</span>.<span style="color:#a6e22e">insertIntoUSBPort</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="behavioral-design-pattern">Behavioral Design pattern</h2>
 <h3 id="command-pattern">Command pattern</h3>
 <ul>
 <li>a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.</li>
@@ -575,28 +575,28 @@ func (w *WindowsAdapter) InsertIntoLightningPort() {
 <ul>
 <li>Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.</li>
 </ul>
-<pre tabindex="0"><code>package main
-
-type EvictionAlgo interface {
-    evict(c *Cache)
-}
-
-type Fifo struct {
-}
-
-func (l *Fifo) evict(c *Cache) {
-    fmt.Println(&#34;Evicting by fifo strtegy&#34;)
-}
-</code></pre><h2 id="observer-pattern">Observer pattern</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">EvictionAlgo</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">evict</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Cache</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Fifo</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">l</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Fifo</span>) <span style="color:#a6e22e">evict</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Cache</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Evicting by fifo strtegy&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="observer-pattern">Observer pattern</h2>
 <ul>
 <li>Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.</li>
 </ul>
-<pre tabindex="0"><code>type Subject interface {
-    register(observer Observer)
-    deregister(observer Observer)
-    notifyAll()
-}
-</code></pre></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Subject</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">register</span>(<span style="color:#a6e22e">observer</span> <span style="color:#a6e22e">Observer</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">deregister</span>(<span style="color:#a6e22e">observer</span> <span style="color:#a6e22e">Observer</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">notifyAll</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

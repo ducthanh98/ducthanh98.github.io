@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/networking\/"
-        },"genre": "posts","keywords": "Networking, TCP\/IP, HTTP, DNS, TLS, gRPC, WebSockets","wordcount":  1429 ,
+        },"genre": "posts","keywords": "Networking, TCP\/IP, HTTP, DNS, TLS, gRPC, WebSockets","wordcount":  1748 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/networking\/","datePublished": "2024-01-10T10:00:00+07:00","dateModified": "2024-01-10T10:00:00+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -71,8 +71,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Computer Networking Fundamentals for Interviews</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/computer-science/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer Science</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-10">2024-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1429 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-10">2024-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1748 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -101,6 +101,31 @@
       </ul>
     </li>
     <li><a href="#access-token-vs-refresh-token">Access Token vs Refresh Token</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-cross-site-scripting-xss">1. Cross-Site Scripting (XSS)</a>
+      <ul>
+        <li><a href="#types-of-xss">Types of XSS:</a></li>
+        <li><a href="#mitigations">Mitigations:</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-cross-site-request-forgery-csrf">2. Cross-Site Request Forgery (CSRF)</a>
+      <ul>
+        <li><a href="#mitigations-1">Mitigations:</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-clickjacking-ui-redressing">3. Clickjacking (UI Redressing)</a>
+      <ul>
+        <li><a href="#mitigations-2">Mitigations:</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-man-in-the-middle-mitm">4. Man-in-the-Middle (MitM)</a>
+      <ul>
+        <li><a href="#mitigations-3">Mitigations:</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-content-security-policy-csp">5. Content Security Policy (CSP)</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="computer-networking-fundamentals">Computer Networking Fundamentals</h1>
@@ -451,6 +476,50 @@
 <li>Refresh Token Rotation: Each time a refresh token is used, a new refresh token is issued, invalidating the old one to prevent replay attacks if compromised.</li>
 </ul>
 </li>
+</ul>
+<hr>
+<h1 id="common-web-security-vulnerabilities--mitigations">Common Web Security Vulnerabilities &amp; Mitigations</h1>
+<h2 id="1-cross-site-scripting-xss">1. Cross-Site Scripting (XSS)</h2>
+<p>Occurs when an application includes untrusted data in a web page without proper validation or escaping, allowing attackers to execute malicious JavaScript in the victim&rsquo;s browser (stealing cookies, session tokens, or performing unauthorized actions).</p>
+<h3 id="types-of-xss">Types of XSS:</h3>
+<ul>
+<li><strong>Stored XSS</strong>: Malicious script is permanently stored on the server (e.g. database comment, user bio) and served to all users viewing the page.</li>
+<li><strong>Reflected XSS</strong>: Script is reflected off a web server via query parameters or form inputs (e.g. search query in URL).</li>
+<li><strong>DOM-based XSS</strong>: Vulnerability exists purely in client-side JavaScript modifying the DOM without validation (e.g. <code>element.innerHTML = location.hash</code>).</li>
+</ul>
+<h3 id="mitigations">Mitigations:</h3>
+<ul>
+<li><strong>Context-aware Output Encoding</strong>: Escape HTML, attributes, and JavaScript (e.g. DOMPurify for user HTML).</li>
+<li><strong>Content Security Policy (CSP)</strong>: Restrict trusted script origins.</li>
+<li><strong>HttpOnly Cookies</strong>: Prevent JavaScript from accessing session tokens via <code>document.cookie</code>.</li>
+</ul>
+<h2 id="2-cross-site-request-forgery-csrf">2. Cross-Site Request Forgery (CSRF)</h2>
+<p>Tricks an authenticated user into executing unwanted actions on a web application in which they are currently logged in.</p>
+<h3 id="mitigations-1">Mitigations:</h3>
+<ul>
+<li><strong>Anti-CSRF Tokens</strong>: Cryptographic, non-guessable tokens checked on state-changing requests (<code>POST</code>, <code>PUT</code>, <code>DELETE</code>).</li>
+<li><strong>SameSite Cookie Attribute</strong>: Set <code>SameSite=Strict</code> or <code>SameSite=Lax</code> to prevent cookies from being sent in cross-site requests.</li>
+<li><strong>Re-authentication</strong>: Require password or MFA re-entry for sensitive actions (e.g. changing password or email).</li>
+</ul>
+<h2 id="3-clickjacking-ui-redressing">3. Clickjacking (UI Redressing)</h2>
+<p>Attackers trick users into clicking hidden buttons or iframes overlaid transparently on top of benign UI elements.</p>
+<h3 id="mitigations-2">Mitigations:</h3>
+<ul>
+<li><strong>Content Security Policy</strong>: <code>frame-ancestors 'none'</code> or <code>frame-ancestors 'self'</code>.</li>
+<li><strong>HTTP Header</strong>: <code>X-Frame-Options: DENY</code> or <code>X-Frame-Options: SAMEORIGIN</code>.</li>
+</ul>
+<h2 id="4-man-in-the-middle-mitm">4. Man-in-the-Middle (MitM)</h2>
+<p>Attackers intercept network communication between client and server to eavesdrop or tamper with data.</p>
+<h3 id="mitigations-3">Mitigations:</h3>
+<ul>
+<li><strong>HTTPS &amp; TLS 1.3</strong>: Encrypt all traffic end-to-end.</li>
+<li><strong>HSTS (HTTP Strict Transport Security)</strong>: <code>Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code> forces browsers to only connect over HTTPS.</li>
+</ul>
+<h2 id="5-content-security-policy-csp">5. Content Security Policy (CSP)</h2>
+<p>HTTP response header specifying allowed content sources:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39; https://trustedscripts.com; img-src &#39;self&#39; data:; report-uri /csp-report-endpoint;
+</span></span></span></code></pre></div><ul>
+<li><strong>Report-Only Mode</strong>: <code>Content-Security-Policy-Report-Only</code> allows testing policies without breaking live application features.</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">

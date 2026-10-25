@@ -7,16 +7,16 @@
         <title>Microservices Architecture &amp; Distributed System Design Patterns - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="Microservices Architecture &amp; Distributed System Design Patterns" />
-<meta property="og:description" content="Monolith vs Microservices Architecture Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
-Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system. Microservices Architecture Pros: - Independent scalability: Scale each service based on need." />
+<meta property="og:description" content="Core architectural principles, decomposition strategies, distributed design patterns, resilience mechanisms, and deployment strategies for microservices systems.
+Monolith vs Microservices Architecture Criteria Monolithic Architecture Microservices Architecture Development Single codebase, straightforward local debugging Multiple repositories/services, polyglot tech stacks Deployment Single unit deployment (all-or-nothing) Independent, continuous deployments per service Scaling Vertical scaling or duplicate entire monolith Horizontal, granular scaling based on resource needs Fault Isolation Low (a memory leak or crash impacts whole app) High (failure in one service does not crash others) Complexity Low operational overhead; high codebase coupling High operational complexity (distributed network overhead) Microservice Decomposition Strategies How to break down a domain into microservices:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/microservice/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-12T22:53:37+07:00" />
 <meta property="article:modified_time" content="2023-11-12T22:53:37+07:00" /><meta property="og:site_name" content="ThanhLD site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Microservices Architecture &amp; Distributed System Design Patterns"/>
-<meta name="twitter:description" content="Monolith vs Microservices Architecture Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
-Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system. Microservices Architecture Pros: - Independent scalability: Scale each service based on need."/>
+<meta name="twitter:description" content="Core architectural principles, decomposition strategies, distributed design patterns, resilience mechanisms, and deployment strategies for microservices systems.
+Monolith vs Microservices Architecture Criteria Monolithic Architecture Microservices Architecture Development Single codebase, straightforward local debugging Multiple repositories/services, polyglot tech stacks Deployment Single unit deployment (all-or-nothing) Independent, continuous deployments per service Scaling Vertical scaling or duplicate entire monolith Horizontal, granular scaling based on resource needs Fault Isolation Low (a memory leak or crash impacts whole app) High (failure in one service does not crash others) Complexity Low operational overhead; high codebase coupling High operational complexity (distributed network overhead) Microservice Decomposition Strategies How to break down a domain into microservices:"/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -31,7 +31,7 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/microservice\/"
-        },"genre": "posts","keywords": "Microservices, System Design, CQRS, Saga, Architecture, Distributed Systems","wordcount":  2767 ,
+        },"genre": "posts","keywords": "Microservices, System Design, CQRS, Saga, Architecture, Distributed Systems","wordcount":  1635 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/microservice\/","datePublished": "2023-11-12T22:53:37+07:00","dateModified": "2023-11-12T22:53:37+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -73,8 +73,8 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Microservices Architecture & Distributed System Design Patterns</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/system-design/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>System Design</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2767 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1635 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -82,31 +82,39 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#monolithic-architecture">Monolithic Architecture</a></li>
-    <li><a href="#microservices-architecture">Microservices Architecture</a></li>
+    <li><a href="#1-database-per-service">1. Database per Service</a></li>
+    <li><a href="#2-shared-database-anti-pattern--migration-phase">2. Shared Database (Anti-Pattern / Migration Phase)</a></li>
+    <li><a href="#3-command-query-responsibility-segregation-cqrs">3. Command Query Responsibility Segregation (CQRS)</a>
+      <ul>
+        <li><a href="#combining-cqrs-with-saga">Combining CQRS with Saga:</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-saga-pattern-distributed-transactions">4. Saga Pattern (Distributed Transactions)</a>
+      <ul>
+        <li><a href="#saga-coordination-approaches">Saga Coordination Approaches:</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-transactional-outbox-pattern">5. Transactional Outbox Pattern</a></li>
+    <li><a href="#6-event-sourcing">6. Event Sourcing</a></li>
+    <li><a href="#7-api-composition--api-gateway">7. API Composition &amp; API Gateway</a></li>
   </ul>
 
   <ul>
-    <li><a href="#what">What</a></li>
-    <li><a href="#use-cases">Use cases</a></li>
-    <li><a href="#rabbitmq-exchanges--binding">Rabbitmq exchanges &amp;&amp; binding</a></li>
-    <li><a href="#kafka--zero-copy">Kafka  zero copy</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#shared-database">Shared database</a></li>
-    <li><a href="#database-per-services">Database per services</a></li>
-    <li><a href="#command-query-responsibility-segregation-cqrs">Command Query Responsibility Segregation (CQRS)</a></li>
-    <li><a href="#saga">Saga</a></li>
-    <li><a href="#transactional-outbox-pattern">Transactional Outbox pattern</a></li>
-    <li><a href="#api-composition">Api Composition</a></li>
-    <li><a href="#event-sourcing">Event Sourcing</a></li>
+    <li><a href="#1-idempotency-most-critical">1. Idempotency (Most Critical)</a></li>
+    <li><a href="#2-circuit-breaker">2. Circuit Breaker</a></li>
+    <li><a href="#3-bulkhead-pattern">3. Bulkhead Pattern</a></li>
+    <li><a href="#4-backpressure">4. Backpressure</a></li>
+    <li><a href="#5-load-shedding">5. Load Shedding</a></li>
+    <li><a href="#6-retry-policy-with-exponential-backoff--jitter">6. Retry Policy with Exponential Backoff &amp; Jitter</a></li>
+    <li><a href="#7-timeouts">7. Timeouts</a></li>
+    <li><a href="#8-rate-limiting">8. Rate Limiting</a></li>
+    <li><a href="#9-eventual-consistency">9. Eventual Consistency</a></li>
+    <li><a href="#10-message-deduplication">10. Message Deduplication</a></li>
   </ul>
 
   <ul>
     <li><a href="#traditional-synchronous-architecture">Traditional Synchronous Architecture</a></li>
     <li><a href="#event-driven-architecture-eda">Event-Driven Architecture (EDA)</a></li>
-    <li><a href="#practical-example-e-commerce-order-flow">Practical Example: E-Commerce Order Flow</a></li>
   </ul>
 
   <ul>
@@ -116,277 +124,248 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
     <li><a href="#step-4-deep-dive--bottlenecks-15-20-mins">Step 4: Deep Dive &amp; Bottlenecks (15-20 mins)</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="monolith-vs-microservices-architecture">Monolith vs Microservices Architecture</h1>
-<h2 id="monolithic-architecture">Monolithic Architecture</h2>
-<p>Pros:
-- Simpler to develop and deploy: Single codebase, fewer moving parts.
-- Easier testing: End-to-end tests are straightforward.
-- Lower operational overhead: One unit to manage and deploy.
-Cons:</p>
-<ul>
-<li>Limited scalability: Scaling requires scaling the entire app.
-- Harder to maintain: As the app grows, managing the codebase becomes difficult.
-- Tight coupling: Changes in one part can affect the entire system.</li>
-</ul>
-<h2 id="microservices-architecture">Microservices Architecture</h2>
-<p>Pros:
-- Independent scalability: Scale each service based on need.
-- Technology flexibility: Use different tech stacks for different services.
-- Fault isolation: Failures in one service don&rsquo;t affect others.
-Cons:
-- Increased complexity: More services to manage and coordinate.
-- Higher resource overhead: More resources due to running multiple services.
-- Complex testing: Requires integration testing for multiple services.</p>
-<h1 id="queue">Queue</h1>
-<h2 id="what">What</h2>
-<ul>
-<li>RabbitMQ employs a push model. This model is an ideal approach for low-latency messaging. It also functions well with the RabbitMQ queue-based architecture. Think of RabbitMQ as a post office, which receives, stores, and delivers mail, whereas RabbitMQ accepts, stores, and transmits binary data messages.</li>
-<li>Kafka employs a “pull-based” approach, letting users request message batches from specific offsets. Users can leverage message batching for higher throughput and effective message delivery.</li>
-</ul>
-<h2 id="use-cases">Use cases</h2>
-<ul>
-<li>Kafka is best used for streaming from A to B without resorting to complex routing, but with maximum throughput</li>
-<li>Use RabbitMQ with long-running tasks, reliably running background jobs, and communication/integration between and within applications.</li>
-</ul>
-<h2 id="rabbitmq-exchanges--binding">Rabbitmq exchanges &amp;&amp; binding</h2>
-<ul>
-<li>Direct Exchange:
-<ul>
-<li>Each message is routed to one or more queues whose binding key exactly matches the routing key of the message</li>
-</ul>
-</li>
-<li>Fanout Exchange:
-<ul>
-<li>Routes messages to all queues bound to the exchange, regardless of the routing key.</li>
-</ul>
-</li>
-<li>Topic Exchange
-<ul>
-<li>Routes messages to queues based on wildcard matches between the routing key of the message and the routing patterns specified when the queue was bound to the exchange.</li>
-</ul>
-</li>
-<li>Headers Exchange:
-<ul>
-<li>Routes messages based on message header attributes rather than routing keys.</li>
-</ul>
-</li>
-<li>Binding:
-Binding is the link between an exchange and a queue. It defines the relationship between the exchange and the queue, including the routing key or pattern used for routing messages from the exchange to the queue.</li>
-</ul>
-<h2 id="kafka--zero-copy">Kafka  zero copy</h2>
-<ul>
-<li>
-<p>Zero copy is a technique used in computer systems to transfer data between different memory locations or devices without the need for unnecessary copying of data. In essence, zero copy eliminates the intermediate step of copying data from one buffer to another, reducing CPU overhead, memory usage, and improving overall system performance.</p>
-</li>
-<li>
-<p>Traditional Copying: In traditional data transfer operations, when data needs to be moved from one memory location to another or from a storage device to memory, the data is typically copied from the source buffer to an intermediate buffer, and then to the destination buffer.
-This process involves multiple memory copy operations, which consume CPU cycles and memory bandwidth.</p>
-</li>
-<li>
-<p>Zero Copy:</p>
-<ul>
-<li>With zero copy, instead of copying data from the source buffer to an intermediate buffer and then to the destination buffer, the data is transferred directly from the source to the destination without intermediate copying.</li>
-<li>This is achieved by leveraging operating system features such as scatter-gather I/O, memory-mapped I/O, or direct memory access (DMA).</li>
-<li>The source and destination buffers are mapped to the same physical memory or are accessible by the same I/O controller, allowing data to be transferred directly between them without involving the CPU.</li>
-<li>Zero copy reduces CPU overhead, memory usage, and latency, resulting in improved performance and efficiency, especially in scenarios where large amounts of data need to be transferred quickly, such as network communication, file I/O, or inter-process communication.
-Zero copy is widely used in various systems and applications, including networking (e.g., TCP/IP stack), file systems (e.g., file read/write operations), database systems, and high-performance computing. It enables efficient data transfer and improves system scalability, particularly in high-throughput environments.</li>
-</ul>
-</li>
-</ul>
-<h1 id="microservice-design-pattern">Microservice Design Pattern</h1>
-<h2 id="shared-database">Shared database</h2>
-<ul>
-<li>Use a (single) database that is shared by multiple services</li>
-<li>Benefits
-<ul>
-<li>A developer uses familiar and straightforward ACID transactions to enforce data consistency</li>
-<li>A single database is simpler to operate</li>
-</ul>
-</li>
-<li>Drawbacks
-<ul>
-<li>Development time coupling - a developer working on, for example, the OrderService will need to coordinate schema changes with the developers of other services that access the same tables. This coupling and additional coordination will slow down development.</li>
-<li>Runtime coupling - because all services access the same database they can potentially interfere with one another. For example, if long running CustomerService transaction holds a lock on the ORDER table then the OrderService will be blocked.</li>
-<li>Single database might not satisfy the data storage and access requirements of all services.</li>
-</ul>
-</li>
-</ul>
-<h2 id="database-per-services">Database per services</h2>
-<ul>
-<li>Different services have different data storage requirements. For some services, a relational database is the best choice. Other services might need a NoSQL database such as MongoDB, which is good at storing complex, unstructured data, or Neo4J, which is designed to efficiently store and query graph data.</li>
-<li>Benefits
-<ul>
-<li>ensure that the services are loosely coupled. Changes to one service’s database does not impact any other services.</li>
-<li>Each service can use the type of database that is best suited to its needs. For example, a service that does text searches could use ElasticSearch. A service that manipulates a social graph could use Neo4j.</li>
-</ul>
-</li>
-<li>Drawback
-<ul>
-<li>Implementing business transactions that span multiple services is not straightforward. Distributed transactions are best avoided because of the CAP theorem. Moreover, many modern (NoSQL) databases don’t support them.</li>
-<li>Implementing queries that join data that is now in multiple databases is challenging.</li>
-<li>Complexity of managing multiple SQL and NoSQL databases</li>
-</ul>
-</li>
-</ul>
-<h2 id="command-query-responsibility-segregation-cqrs">Command Query Responsibility Segregation (CQRS)</h2>
-<ul>
-<li>Command Query Responsibility Segregation (CQRS) is a design pattern that separates the read and write operations of an application into two distinct models. It is particularly useful in systems with complex domain logic or high scalability requirements</li>
-<li>Benefits
-<ul>
-<li>Simplifies code by splitting read and write logic, making maintenance easier.</li>
-<li>Scalability: Enables independent scaling of read and write operations.</li>
-<li>Performance: Optimizes reads with denormalized data structures and caching.</li>
-<li>Flexibility: Allows different databases and querying mechanisms for reads and writes.</li>
-<li>Event Sourcing: Supports event replay and auditability.</li>
-<li>Security: Enables fine-grained access control.</li>
-</ul>
-</li>
-<li>Drawbacks
-<ul>
-<li>Complexity: Adds overhead with two models and synchronization challenges.</li>
-<li>Cost: Requires more development effort and infrastructure.</li>
-<li>Eventual Consistency: Reads may lag behind writes.</li>
-<li>Overkill: Not suitable for simple systems or where strict consistency is essential.</li>
-</ul>
-</li>
-</ul>
-<h2 id="saga">Saga</h2>
-<ul>
-<li>A saga is a sequence of local transactions. Each local transaction updates the database and publishes a message or event to trigger the next local transaction in the saga. If a local transaction fails because it violates a business rule then the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.</li>
-<li>There are two ways of coordination sagas:
-<ul>
-<li>Choreography - each local transaction publishes domain events that trigger local transactions in other services</li>
-<li>Orchestration - an orchestrator (object) tells the participants what local transactions to execute</li>
-</ul>
-</li>
-<li>Benefits
-<ul>
-<li>It enables an application to maintain data consistency across multiple services without using distributed transactions</li>
-</ul>
-</li>
-<li>Drawbacks
-<ul>
-<li>The programming model is more complex. For example, a developer must design compensating transactions that explicitly undo changes made earlier in a saga.</li>
-</ul>
-</li>
-</ul>
-<h2 id="transactional-outbox-pattern">Transactional Outbox pattern</h2>
-<ul>
-<li>A service command typically needs to create/update/delete aggregates in the database and send messages/events to a message broker.</li>
-</ul>
-<h2 id="api-composition">Api Composition</h2>
-<ul>
-<li>API Composition is a pattern used in microservices architectures to handle the complexity of combining data from multiple services into a single response for the client</li>
-</ul>
-<h2 id="event-sourcing">Event Sourcing</h2>
-<ul>
-<li>Event sourcing persists the state of a business entity such an Order or a Customer as a sequence of state-changing events. Whenever the state of a business entity changes, a new event is appended to the list of events. Since saving an event is a single operation, it is inherently atomic. The application reconstructs an entity’s current state by replaying the events.</li>
-</ul>
-<h1 id="deployment-strategies">Deployment Strategies</h1>
-<ul>
-<li>Recreate Deployment Strategy
-<ul>
-<li>we stop and then recreate the application</li>
-</ul>
-</li>
-<li>Blue-Green Deployment
-<ul>
-<li>The original, old version is called blue environment, and the new updated version is called green environment.Now, both environments are running our application, but the users are still using the old version</li>
-</ul>
-</li>
-<li>Rolling Update
-<ul>
-<li>Firstly, we create a new instance that runs the updated version.</li>
-<li>After this, we remove one from the instances that run the old version</li>
-</ul>
-</li>
-<li>Canary Deployment
-<ul>
-<li>only a small part of the users receive the update</li>
-</ul>
-</li>
-<li>A/B Testing
-<ul>
-<li>This process deploys the update to a subset of users, just like canary deployments. However, A/B testing is mainly about getting feedback from the users about our changes</li>
-</ul>
-</li>
-<li>Shadow Deployment
-<ul>
-<li>Shadow deployment is similar to blue-green deployment in the sense that it uses two identical environments</li>
-</ul>
-</li>
-</ul>
-<p>====</p>
+            </div><div class="content" id="content"><p>Core architectural principles, decomposition strategies, distributed design patterns, resilience mechanisms, and deployment strategies for microservices systems.</p>
+<hr>
+<h1 id="monolith-vs-microservices-architecture">Monolith vs Microservices Architecture</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Criteria</th>
+<th style="text-align:left">Monolithic Architecture</th>
+<th style="text-align:left">Microservices Architecture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Development</strong></td>
+<td style="text-align:left">Single codebase, straightforward local debugging</td>
+<td style="text-align:left">Multiple repositories/services, polyglot tech stacks</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Deployment</strong></td>
+<td style="text-align:left">Single unit deployment (all-or-nothing)</td>
+<td style="text-align:left">Independent, continuous deployments per service</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Scaling</strong></td>
+<td style="text-align:left">Vertical scaling or duplicate entire monolith</td>
+<td style="text-align:left">Horizontal, granular scaling based on resource needs</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Fault Isolation</strong></td>
+<td style="text-align:left">Low (a memory leak or crash impacts whole app)</td>
+<td style="text-align:left">High (failure in one service does not crash others)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Complexity</strong></td>
+<td style="text-align:left">Low operational overhead; high codebase coupling</td>
+<td style="text-align:left">High operational complexity (distributed network overhead)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="microservice-decomposition-strategies">Microservice Decomposition Strategies</h1>
+<p>How to break down a domain into microservices:</p>
 <ol>
-<li>CQRS (Command Query Responsibility Segregation)
-CQRS là một mẫu thiết kế phân tách rõ ràng giữa hai loại hành động:</li>
-</ol>
-<p>Command: Là các hành động thay đổi trạng thái của hệ thống. (Thực hiện ghi dữ liệu, cập nhật trạng thái, v.v.)
-Query: Là các hành động chỉ đọc dữ liệu mà không thay đổi nó.
-Mặc dù phân tách giữa Command và Query rất rõ ràng, trong thực tế, đôi khi trong một step (bước của một quy trình), bạn có thể sẽ cần thực hiện cả Command và Query. Ví dụ, trong quá trình tạo đơn hàng, bạn có thể truy vấn số lượng kho (Query) rồi thực hiện cập nhật số lượng kho và tạo đơn hàng (Command).</p>
-<p>Command và Query là khái niệm dùng để phân tách logic. Không có một quy định nào bắt buộc mỗi bước phải chỉ có Command hoặc chỉ có Query, một số bước có thể bao gồm cả hai, tùy vào yêu cầu xử lý.
-2. Saga Pattern
-Saga Pattern giúp xử lý các giao dịch dài hoặc phức tạp, đặc biệt là trong các hệ thống phân tán, nơi một giao dịch không thể xử lý trong một bước duy nhất hoặc một giao dịch đơn lẻ.</p>
-<p>Saga chia một giao dịch phức tạp thành nhiều bước nhỏ, mỗi bước tương ứng với một hành động cụ thể (có thể là command hoặc query).
-Mỗi bước trong saga là một microtransaction, có thể hoàn thành và xử lý độc lập.
-Nếu một bước thất bại, hệ thống sẽ có các bước bù đắp (compensating actions) để hủy bỏ hoặc khôi phục trạng thái ban đầu.
-Sự Kết Hợp Giữa CQRS và Saga
-Trong một Saga, các bước có thể là Command hoặc Query tùy vào mục đích của mỗi bước.
-Ví dụ, kiểm tra kho là query vì bạn chỉ đọc dữ liệu để kiểm tra điều kiện.
-Tạo đơn hàng là command vì bạn đang thay đổi trạng thái hệ thống (tạo một bản ghi đơn hàng mới).
-Cập nhật kho và tài khoản khách hàng là command, vì bạn thay đổi số lượng sản phẩm và số dư tài khoản.
-Trong CQRS với Saga:
-Command được sử dụng trong các bước mà bạn cần thay đổi dữ liệu hoặc tạo mới.
-Query được sử dụng trong các bước mà bạn cần đọc dữ liệu mà không thay đổi bất kỳ trạng thái nào.
-Ví Dụ Về Quy Trình Tạo Đơn Hàng
-Bước 1: Kiểm tra số lượng kho (CheckStockQuery).</p>
-<p>Query: Kiểm tra xem sản phẩm có đủ số lượng không.
-Nếu không đủ, có thể hủy toàn bộ quá trình.
-Bước 2: Kiểm tra số dư tài khoản khách hàng (CheckCustomerBalanceQuery).</p>
-<p>Query: Kiểm tra xem khách hàng có đủ tiền không.
-Bước 3: Tạo đơn hàng (CreateOrderCommand).</p>
-<p>Command: Tạo một đơn hàng mới, thay đổi trạng thái hệ thống.
-Bước 4: Cập nhật kho (UpdateStockCommand).</p>
-<p>Command: Cập nhật số lượng sản phẩm trong kho.
-Bước 5: Cập nhật số dư tài khoản khách hàng (UpdateBalanceCommand).</p>
-<p>Command: Trừ tiền từ tài khoản khách hàng.
-Tóm Tắt Chính
-CQRS giúp phân tách các hành động đọc và ghi dữ liệu, nhưng trong một bước quy trình, có thể sẽ có cả query và command (tùy vào mục đích của bước đó).
-Saga Pattern giúp chia nhỏ một giao dịch dài thành các bước nhỏ hơn (microtransactions), mỗi bước có thể là query hoặc command. Nếu một bước thất bại, Saga sẽ sử dụng các hành động bù đắp để xử lý.
-Điều Quan Trọng
-Command là những hành động thay đổi dữ liệu.
-Query là hành động chỉ đọc dữ liệu.
-Saga sẽ giúp bạn chia nhỏ các giao dịch phức tạp, và mỗi bước trong Saga có thể là command hoặc query.</p>
-<h1 id="devide-micro">devide-micro</h1>
+<li><strong>Domain-Driven Design (DDD) Bounded Contexts (Most Recommended)</strong>:
 <ul>
-<li>
-<p>Dựa trên Domain / Business Capability (phổ biến nhất – chuẩn DDD)</p>
+<li>Each Bounded Context corresponds to one microservice.</li>
+<li>Each service has its own ubiquitous language and private data model.</li>
+</ul>
 </li>
-<li>
-<p>Dựa theo Team Ownership
-Một team có thể tự triển khai, tự vận hành 1 service mà không phụ thuộc team khác.
-Mỗi team sở hữu trọn vẹn một service.</p>
+<li><strong>Business Capability</strong>:
+<ul>
+<li>Align services with organizational capabilities (e.g. <code>OrderService</code>, <code>PaymentService</code>, <code>InventoryService</code>, <code>NotificationService</code>).</li>
+</ul>
 </li>
-<li>
-<p>Dựa theo tần suất thay đổi
-Các module thay đổi nhiều thì nên tách riêng để:
-Deploy nhanh hơn
-Không ảnh hưởng các phần còn lại
-Ví dụ: UI service, Notification service tách riêng vì hay thay đổi.</p>
+<li><strong>Team Ownership &amp; Autonomous Delivery</strong>:
+<ul>
+<li>A single two-pizza team owns, deploys, and operates a service independently without cross-team dependencies.</li>
+</ul>
 </li>
-<li>
-<p>Dựa theo scalability
-Những phần cần scale độc lập nên tách riêng:
-Search service → cần CPU
-Image processing → cần GPU
-Notification → cần throughput cao</p>
+<li><strong>Change Velocity / Frequency of Deployment</strong>:
+<ul>
+<li>Fast-changing modules (e.g. Promotion/Marketing engine, UI BFF) are decoupled from stable, low-churn cores (e.g. General Ledger).</li>
+</ul>
 </li>
-<li>
-<p>Dựa trên Bounded Context (DDD)</p>
+<li><strong>Resource &amp; Scalability Profiles</strong>:
+<ul>
+<li>Isolate CPU-bound tasks (Search service), GPU-bound tasks (Image/AI processing), and high-throughput I/O tasks (Notification dispatchers).</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="microservice-design-patterns">Microservice Design Patterns</h1>
+<h2 id="1-database-per-service">1. Database per Service</h2>
+<ul>
+<li>Each service has its own private database. No other service can access it directly; all access is via public APIs or events.</li>
+<li><strong>Benefits</strong>:
+<ul>
+<li>Loose coupling: Schema migrations in one service never break another.</li>
+<li>Polyglot persistence: Use PostgreSQL for orders, MongoDB for catalogs, Redis for sessions, Neo4j for graphs.</li>
+</ul>
+</li>
+<li><strong>Drawbacks</strong>:
+<ul>
+<li>Distributed queries across services require API Composition or CQRS.</li>
+<li>Distributed transactions require Saga patterns (no cross-DB 2PC).</li>
+</ul>
 </li>
 </ul>
-<p>Một bounded context = 1 microservice.
-Mỗi service có model dữ liệu riêng, không chia sẻ DB.</p>
+<h2 id="2-shared-database-anti-pattern--migration-phase">2. Shared Database (Anti-Pattern / Migration Phase)</h2>
+<ul>
+<li>Multiple services share a single database instance and schema.</li>
+<li><strong>Benefits</strong>: Simple ACID transactions during initial migration from monolith.</li>
+<li><strong>Drawbacks</strong>: Tight coupling at the schema layer; runtime lock contention on shared tables.</li>
+</ul>
+<h2 id="3-command-query-responsibility-segregation-cqrs">3. Command Query Responsibility Segregation (CQRS)</h2>
+<p>CQRS separates read and write operations into distinct models and data stores:</p>
+<ul>
+<li><strong>Command Model (Write)</strong>:
+<ul>
+<li>Handles business validation, transactions, state mutations (<code>CreateOrderCommand</code>, <code>CancelOrderCommand</code>).</li>
+<li>Optimized for write consistency and normalized data.</li>
+</ul>
+</li>
+<li><strong>Query Model (Read)</strong>:
+<ul>
+<li>Handles high-speed reads and aggregations (<code>GetOrderDetailsQuery</code>, <code>ListUserOrdersQuery</code>).</li>
+<li>Uses denormalized views or search indexes (Elasticsearch / Redis / Read Replicas).</li>
+</ul>
+</li>
+</ul>
+<h3 id="combining-cqrs-with-saga">Combining CQRS with Saga:</h3>
+<p>In real-world distributed transactions, individual steps in a Saga can be Commands or Queries:</p>
+<ol>
+<li><code>CheckStockQuery</code>: Read inventory to verify availability.</li>
+<li><code>CheckCustomerBalanceQuery</code>: Read customer account balance.</li>
+<li><code>CreateOrderCommand</code>: Write new order record with <code>PENDING</code> state.</li>
+<li><code>ReserveStockCommand</code>: Mutate inventory balance.</li>
+<li><code>ChargePaymentCommand</code>: Mutate customer account balance.</li>
+</ol>
+<blockquote>
+<p><strong>Key Takeaway</strong>: Commands change system state; Queries read without side-effects. CQRS allows independent scaling of reads vs writes (e.g. 100:1 read-to-write ratio).</p>
+</blockquote>
+<h2 id="4-saga-pattern-distributed-transactions">4. Saga Pattern (Distributed Transactions)</h2>
+<p>A Saga coordinates a series of local transactions across multiple services without distributed locks (CAP theorem):</p>
+<ul>
+<li>Each local transaction updates the service&rsquo;s database and publishes an event.</li>
+<li>If any step fails, the Saga executes <strong>Compensating Transactions</strong> that undo changes in reverse order.</li>
+</ul>
+<pre tabindex="0"><code>Service A (Create Order) ---&gt; Service B (Reserve Stock) ---&gt; Service C (Process Payment: FAIL!)
+                                      |                                  |
+                                      v                                  v
+Service A (Set Order Cancelled) &lt;-- Compensating Action &lt;-----------------
+</code></pre><h3 id="saga-coordination-approaches">Saga Coordination Approaches:</h3>
+<ul>
+<li><strong>Choreography (Event-Driven)</strong>:
+<ul>
+<li>Services emit events; other services listen and act autonomously.</li>
+<li><em>Best for</em>: Simple workflows (2-4 steps) without central bottlenecks.</li>
+</ul>
+</li>
+<li><strong>Orchestration (Coordinator-Driven)</strong>:
+<ul>
+<li>A dedicated Orchestrator service tells participants what local transactions to execute.</li>
+<li><em>Best for</em>: Complex workflows with branching, retries, and explicit state machines.</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-transactional-outbox-pattern">5. Transactional Outbox Pattern</h2>
+<ul>
+<li><strong>Problem</strong>: Dual-write failure. Updating a database and publishing a message to Kafka/RabbitMQ in two separate network calls cannot be atomically guaranteed. If the broker is unreachable, data is out of sync.</li>
+<li><strong>Solution</strong>:
+<ol>
+<li>Save business data and an Outbox message in the <strong>same local database transaction</strong>.</li>
+<li>A separate background poller or CDC worker (<strong>Debezium</strong> reading DB WAL/binlog) reads the Outbox table and publishes to Kafka reliably.</li>
+</ol>
+</li>
+</ul>
+<h2 id="6-event-sourcing">6. Event Sourcing</h2>
+<ul>
+<li>Instead of storing just the current state of an entity, store the full chronological sequence of append-only events (<code>OrderCreated</code>, <code>PaymentAdded</code>, <code>OrderShipped</code>).</li>
+<li>State is reconstructed at any point in time by replaying events.</li>
+<li>Provides 100% complete audit trails and temporal state queries.</li>
+</ul>
+<h2 id="7-api-composition--api-gateway">7. API Composition &amp; API Gateway</h2>
+<ul>
+<li><strong>API Gateway</strong>: Single entry point for clients. Handles authentication, rate limiting, SSL termination, and request routing.</li>
+<li><strong>API Composition</strong>: Combines data from multiple downstream microservices into a unified response for clients.</li>
+</ul>
+<hr>
+<h1 id="distributed-system-resilience-patterns">Distributed System Resilience Patterns</h1>
+<p>When building distributed systems, failures are inevitable. These patterns guarantee fault tolerance and system stability:</p>
+<h2 id="1-idempotency-most-critical">1. Idempotency (Most Critical)</h2>
+<ul>
+<li>Calling an operation multiple times produces the exact same side-effect as calling it once.</li>
+<li><strong>Implementation</strong>:
+<ul>
+<li>Require an <strong>Idempotency Key</strong> (<code>order_id</code>, <code>client_request_token</code>).</li>
+<li>Store request state in Redis or DB:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> payments(id, amount, status) <span style="color:#66d9ef">VALUES</span>(<span style="color:#960050;background-color:#1e0010">$</span>id, <span style="color:#960050;background-color:#1e0010">$</span>amount, <span style="color:#e6db74">&#39;COMPLETED&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ON</span> CONFLICT(id) <span style="color:#66d9ef">DO</span> <span style="color:#66d9ef">NOTHING</span>;
+</span></span></code></pre></div></li>
+<li>Essential for safe network retries and Kafka at-least-once message processing.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-circuit-breaker">2. Circuit Breaker</h2>
+<p>Protects the caller and downstream dependencies from cascading failures:</p>
+<ul>
+<li><strong>Closed</strong>: Requests flow normally. If failure rate exceeds threshold (e.g. 50% errors over 10s), trip to <strong>Open</strong>.</li>
+<li><strong>Open</strong>: Fail immediately (Fast Fail). Do not call downstream; return cached data or fallback error.</li>
+<li><strong>Half-Open</strong>: After a cooldown period, allow a small percentage of test requests through. If successful, reset to <strong>Closed</strong>; if failing, return to <strong>Open</strong>.</li>
+<li><em>Tools</em>: Envoy, Istio, Resilience4j, Sony gobreaker.</li>
+</ul>
+<h2 id="3-bulkhead-pattern">3. Bulkhead Pattern</h2>
+<ul>
+<li>Isolates resources (thread pools, goroutines, connection pools) across downstream dependencies so that one slow external dependency cannot exhaust all resources of the service.</li>
+<li><em>Analogy</em>: Compartments in a ship hull — if one compartment floods, the ship still floats.</li>
+</ul>
+<h2 id="4-backpressure">4. Backpressure</h2>
+<ul>
+<li>When a consumer cannot keep up with the producer&rsquo;s data volume, backpressure signals the producer to slow down or wait.</li>
+<li><em>Examples</em>: Bounded Go channels (<code>make(chan Job, 100)</code>), TCP sliding window, reactive streams.</li>
+</ul>
+<h2 id="5-load-shedding">5. Load Shedding</h2>
+<ul>
+<li>When server CPU or memory approaches saturation, deliberately drop lower-priority traffic (HTTP <code>429 Too Many Requests</code> or <code>503 Service Unavailable</code>).</li>
+<li><em>Principle</em>: Better to successfully serve 80% of users with low latency than crash and serve 0% to all.</li>
+</ul>
+<h2 id="6-retry-policy-with-exponential-backoff--jitter">6. Retry Policy with Exponential Backoff &amp; Jitter</h2>
+<ul>
+<li><strong>Exponential Backoff</strong>: Gradually increase wait intervals between retries: $100\text{ms} \rightarrow 200\text{ms} \rightarrow 400\text{ms} \rightarrow 800\text{ms}$.</li>
+<li><strong>Full Jitter</strong>: Add random variance to prevent the <strong>Thundering Herd</strong> problem where thousands of clients retry at the exact same millisecond.</li>
+<li><strong>Rule</strong>: Only retry idempotent operations and transient network errors (<code>502</code>, <code>503</code>, <code>504</code>), never <code>4xx</code> client errors.</li>
+</ul>
+<h2 id="7-timeouts">7. Timeouts</h2>
+<ul>
+<li>Every remote network call MUST have explicit timeouts:
+<ul>
+<li>Connection Timeout (e.g. 1-2s).</li>
+<li>Read/Write Timeout (e.g. 3-5s).</li>
+</ul>
+</li>
+<li><em>Rule</em>: Upstream timeout must be strictly greater than downstream timeout to avoid orphaned calls.</li>
+</ul>
+<h2 id="8-rate-limiting">8. Rate Limiting</h2>
+<ul>
+<li>Enforce usage quotas per client/IP to protect against DDoS, bugs, and API abuse.</li>
+<li><em>Algorithms</em>: Token Bucket, Leaky Bucket, Sliding Window Counter (backed by Redis Cluster).</li>
+</ul>
+<h2 id="9-eventual-consistency">9. Eventual Consistency</h2>
+<ul>
+<li>In microservices, distributed transactions are asynchronous. Data across services will not be immediately identical, but will converge and become consistent over time via events.</li>
+</ul>
+<h2 id="10-message-deduplication">10. Message Deduplication</h2>
+<ul>
+<li>Because distributed message brokers (Kafka, RabbitMQ) provide <strong>at-least-once delivery</strong>, duplicates will occur during network hiccups.</li>
+<li>Consumers must deduplicate messages using:
+<ul>
+<li>Unique message ID / transaction ID stored in a distributed deduplication store (Redis with TTL or DB unique constraint).</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h1 id="event-driven-architecture-vs-synchronous-microservices">Event-Driven Architecture vs Synchronous Microservices</h1>
 <h2 id="traditional-synchronous-architecture">Traditional Synchronous Architecture</h2>
@@ -394,16 +373,15 @@ Mỗi service có model dữ liệu riêng, không chia sẻ DB.</p>
 <ul>
 <li><strong>Pros</strong>:
 <ul>
-<li>Easier to understand and debug: Linear execution flow and clear stack traces.</li>
-<li>Straightforward error handling: Errors are immediately returned to the caller.</li>
-<li>Strong data consistency: Synchronous calls make ACID and two-phase commits simpler.</li>
+<li>Linear execution flow and clear stack traces.</li>
+<li>Straightforward error handling.</li>
+<li>Strong data consistency.</li>
 </ul>
 </li>
 <li><strong>Cons</strong>:
 <ul>
-<li>Cascading failures: If downstream Service C fails, Service A and B may block and crash (Single Point of Failure).</li>
+<li>Cascading failures: If downstream Service C fails, Service A and B may block and crash.</li>
 <li>Scalability bottleneck: High latency under peak load as threads wait on I/O.</li>
-<li>Tight temporal coupling: All services must be available simultaneously.</li>
 </ul>
 </li>
 </ul>
@@ -412,7 +390,7 @@ Mỗi service có model dữ liệu riêng, không chia sẻ DB.</p>
 <ul>
 <li><strong>Pros</strong>:
 <ul>
-<li><strong>High Scalability &amp; Throughput</strong>: Asynchronous processing allows services to process messages at their own pace without blocking.</li>
+<li><strong>High Scalability &amp; Throughput</strong>: Asynchronous processing allows services to process messages without blocking.</li>
 <li><strong>Loose Coupling</strong>: Publishers have zero knowledge of consumers; new services can subscribe to events without modifying existing publishers.</li>
 <li><strong>Fault Tolerance</strong>: If a consumer service goes down, messages persist in the broker and are processed once the service recovers.</li>
 </ul>
@@ -420,34 +398,79 @@ Mỗi service có model dữ liệu riêng, không chia sẻ DB.</p>
 <li><strong>Cons</strong>:
 <ul>
 <li>Complex debugging &amp; tracing: Requires distributed tracing (OpenTelemetry, Jaeger).</li>
-<li>Eventual consistency: Data takes time to sync across services; distributed rollback requires compensating transactions (Saga).</li>
-<li>Message broker management overhead: Clustering, partition sizing, and monitoring dead-letter queues (DLQ).</li>
+<li>Eventual consistency: Distributed rollback requires compensating transactions (Saga).</li>
 </ul>
 </li>
 </ul>
-<h2 id="practical-example-e-commerce-order-flow">Practical Example: E-Commerce Order Flow</h2>
-<ul>
-<li><strong>Synchronous Path</strong>: When placing an order, synchronously call Inventory Service to reserve stock and Payment Service to charge credit card. Gives immediate feedback to the buyer.</li>
-<li><strong>Asynchronous Event Path</strong>: Once payment succeeds, publish an <code>OrderPlaced</code> event. Downstream services independently consume this event:
-<ul>
-<li><code>Notification Service</code> sends confirmation email/SMS.</li>
-<li><code>Loyalty Points Service</code> credits points to customer account.</li>
-<li><code>Warehouse/Shipping Service</code> generates shipping label and begins packaging.</li>
-</ul>
-</li>
-</ul>
+<hr>
+<h1 id="deployment-strategies">Deployment Strategies</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Strategy</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:center">Downtime</th>
+<th style="text-align:center">Risk</th>
+<th style="text-align:center">Rollback Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Recreate</strong></td>
+<td style="text-align:left">Terminate old version completely, then boot new version</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">High</td>
+<td style="text-align:center">Slow</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Rolling Update</strong></td>
+<td style="text-align:left">Gradually replace old instances with new instances one by one</td>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">Low</td>
+<td style="text-align:center">Moderate</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Blue-Green</strong></td>
+<td style="text-align:left">Spin up complete new environment (Green); switch load balancer traffic</td>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">Very Low</td>
+<td style="text-align:center">Instant (switch LB)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Canary</strong></td>
+<td style="text-align:left">Route a tiny fraction (e.g. 5%) of traffic to new version; monitor metrics</td>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">Minimal</td>
+<td style="text-align:center">Fast (adjust weights)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>A/B Testing</strong></td>
+<td style="text-align:left">Route users based on business rules to test feature conversion</td>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">Minimal</td>
+<td style="text-align:center">Instant</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Shadow</strong></td>
+<td style="text-align:left">Fork live production traffic to new version without returning responses to users</td>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">Zero</td>
+<td style="text-align:center">N/A</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h1 id="system-design-interview-framework--checklist">System Design Interview Framework &amp; Checklist</h1>
 <p>When tackling a System Design interview, follow this 4-step framework:</p>
 <h2 id="step-1-clarify-requirements-5-8-mins">Step 1: Clarify Requirements (5-8 mins)</h2>
 <ul>
-<li><strong>Functional Requirements</strong>: What are the top 2-3 essential features the user must be able to perform? What is out of scope?</li>
+<li><strong>Functional Requirements</strong>: Core 2-3 essential features. Clarify out-of-scope items.</li>
 <li><strong>Non-Functional Requirements</strong>:
 <ul>
 <li>Scalability: Daily Active Users (DAU), peak vs average traffic.</li>
-<li>Availability vs Consistency (CAP Theorem trade-off): High availability (99.99%) or strict financial consistency?</li>
-<li>Latency: p95 / p99 SLA (e.g. read latency &lt; 50ms, write latency &lt; 200ms).</li>
-<li>Read/Write Ratio: Is the system read-heavy (e.g. Twitter 100:1) or write-heavy (e.g. IoT telemetry)?</li>
+<li>Availability vs Consistency (CAP Theorem): 99.99% availability vs strict consistency.</li>
+<li>Latency: p95/p99 SLAs (e.g. read &lt; 50ms, write &lt; 200ms).</li>
+<li>Read/Write Ratio: Read-heavy (100:1) vs write-heavy.</li>
 </ul>
 </li>
 </ul>
@@ -458,29 +481,22 @@ $$\text{Average QPS} = \frac{\text{DAU} \times \text{Requests per user}}{86400 \
 $$\text{Peak QPS} = \text{Average QPS} \times 2 \text{ (or } 3\text{)}$$</li>
 <li><strong>Storage Estimation</strong>:
 $$\text{Daily Storage} = \text{New records/day} \times \text{Size per record}$$
-Multiply by 365 days $\times$ 5 years retention, plus replication factor ($\times 3$).</li>
+Multiply by 365 days $\times$ 5 years retention $\times 3$ (replication).</li>
 <li><strong>Network Bandwidth</strong>:
 $$\text{Bandwidth} = \text{QPS} \times \text{Average payload size}$$</li>
 </ul>
 <h2 id="step-3-high-level-architecture-10-15-mins">Step 3: High-Level Architecture (10-15 mins)</h2>
 <ul>
-<li>Draw client (Mobile, Web) $\rightarrow$ DNS $\rightarrow$ CDN (static assets) $\rightarrow$ Load Balancer (ALB/Nginx).</li>
-<li>API Gateway: Handles authentication, SSL termination, rate limiting, and request routing.</li>
+<li>Client $\rightarrow$ DNS $\rightarrow$ CDN $\rightarrow$ Load Balancer (ALB/Nginx).</li>
+<li>API Gateway: Authentication, rate limiting, routing.</li>
 <li>Microservices tier: Stateless application services.</li>
-<li>Data tier:
-<ul>
-<li>Primary Database (PostgreSQL / MySQL) with Read Replicas.</li>
-<li>In-Memory Cache (Redis) in front of read replicas.</li>
-<li>Message Queue / Event Bus (Kafka / RabbitMQ) for async tasks.</li>
-<li>Object Storage (AWS S3) for images, videos, and documents.</li>
-</ul>
-</li>
+<li>Data tier: Primary DB + Read Replicas + Redis Cache + Message Broker (Kafka) + S3 Object Storage.</li>
 </ul>
 <h2 id="step-4-deep-dive--bottlenecks-15-20-mins">Step 4: Deep Dive &amp; Bottlenecks (15-20 mins)</h2>
 <ul>
-<li><strong>Database Scalability</strong>: Index optimization (B-tree, covering indexes), partitioning, horizontal sharding by shard key.</li>
-<li><strong>Cache Strategy</strong>: Cache-Aside, Write-Through, Cache Invalidation, handling Cache Penetration / Cache Stampede.</li>
-<li><strong>Resilience &amp; Fault Tolerance</strong>: Circuit breaker pattern, rate limiting, retry with exponential backoff and jitter, dead-letter queues.</li>
+<li><strong>Database Scalability</strong>: Indexing, partitioning, horizontal sharding.</li>
+<li><strong>Cache Strategy</strong>: Cache-Aside, handling Cache Penetration / Cache Stampede.</li>
+<li><strong>Resilience</strong>: Circuit breakers, rate limiters, retries with exponential backoff and jitter, dead-letter queues.</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">

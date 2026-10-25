@@ -20,12 +20,14 @@
     <description><![CDATA[Introduce about yourself Firstly, Thank you for taking the time to review my CV. Regarding myself, I graduated with a degree in Software Engineering. I have been working for about six years in software development, focusing primarily on backend technologies and cloud services. Throughout my career, I have focused not just on coding but also on mentoring junior developers and promoting best practices in code quality and version control. Most recently, I worked at VPBank, where I contributed to the development of their loyalty system.]]></description>
 </item>
 <item>
-    <title>Generative AI: Chunking Strategies &amp; AWS Bedrock</title>
+    <title>Generative AI: Chunking Strategies, Prompt Engineering &amp; AWS Bedrock</title>
     <link>https://ducthanh98.github.io/posts/genai/</link>
     <pubDate>Thu, 01 Feb 2024 10:00:00 &#43;0700</pubDate>
     <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/genai/</guid>
-    <description><![CDATA[Chunking strategy Standard chunking: Fixed size: Specify tokens per chunk and overlap percentage Default: 300tokens per chunk No chunk: very document is a chunk Hierarchical chunking Nested parent/child chunks Initial search hits the child chunk, and then we search back to parent chunk Semantic chunking Hits a foundation model to break up chunks based on semantic ontent and not just things like sentences or a fixed chunk Speifiy maximum tokens per chunk Buffer size: number of surrounding sentences per sentence to consider when embeddings Too large = too noise, too small = missing important context Breakpoint: How semantically chunk must be Too big: each chunk have a clearly context, number of chunk will be lower and size of each chunk will become bigger AWS Bedrock Guardrail contet filtẻing for prompts and responses works with text foundation models word filtering topic filtering profanities PII removal(masking) contextual grounding check: prevent halu, measure grounding configure blocked messsage erssponse Prompt Type of prompt Zero shot: No example given, relies only on large models Few shot: Provide some example, Chain of thought(COT) Bedrock Data Automation Extract structured data from pretty much anything SageMaker Data Wrangler imoprt daa visualize data transform data ]]></description>
+    <description><![CDATA[Core concepts in Generative AI architectures, Retrieval-Augmented Generation (RAG) chunking strategies, Prompt Engineering techniques, and AWS Bedrock services.
+RAG Chunking Strategies Chunking divides long documents into smaller segments for embedding and vector similarity search.
+1. Fixed-Size Chunking (Standard) Concept: Chunks document into fixed token lengths (e.g. 300 - 512 tokens) with an overlap percentage (e.g. 10 - 20%). Pros: Fast, simple, predictable computation. Cons: Can cut sentences or paragraphs mid-thought, causing loss of semantic context.]]></description>
 </item>
 <item>
     <title>JavaScript, TypeScript &amp; React Core Concepts</title>
@@ -57,8 +59,8 @@
     <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
     <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/golang/</guid>
-    <description><![CDATA[Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
-For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values.]]></description>
+    <description><![CDATA[In-depth technical notes on Go concurrency, memory management, garbage collection internals, performance profiling, hexagonal architecture, and design patterns.
+Concurrency &amp; Channels Channel Types 1. Unbuffered Channel Behavior: An unbuffered channel has zero capacity (make(chan int)). Synchronization: Requires both sender and receiver to be ready at the exact same moment. Send blocks until a receiver is ready, and receive blocks until a sender is ready. Use Case: Strict point-to-point synchronization between goroutines.]]></description>
 </item>
 <item>
     <title>Microservices Architecture &amp; Distributed System Design Patterns</title>
@@ -66,8 +68,8 @@ For example, I have a long-running task on the database. Running multiple tasks 
     <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
     <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/microservice/</guid>
-    <description><![CDATA[Monolith vs Microservices Architecture Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
-Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system. Microservices Architecture Pros: - Independent scalability: Scale each service based on need.]]></description>
+    <description><![CDATA[Core architectural principles, decomposition strategies, distributed design patterns, resilience mechanisms, and deployment strategies for microservices systems.
+Monolith vs Microservices Architecture Criteria Monolithic Architecture Microservices Architecture Development Single codebase, straightforward local debugging Multiple repositories/services, polyglot tech stacks Deployment Single unit deployment (all-or-nothing) Independent, continuous deployments per service Scaling Vertical scaling or duplicate entire monolith Horizontal, granular scaling based on resource needs Fault Isolation Low (a memory leak or crash impacts whole app) High (failure in one service does not crash others) Complexity Low operational overhead; high codebase coupling High operational complexity (distributed network overhead) Microservice Decomposition Strategies How to break down a domain into microservices:]]></description>
 </item>
 <item>
     <title>Database &amp; Message Brokers: SQL, NoSQL &amp; Queues</title>
