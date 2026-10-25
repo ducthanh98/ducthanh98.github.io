@@ -1,0 +1,31 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Programming Languages - Category - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/categories/programming-languages/</link>
+        <description>Programming Languages - Category - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 20 Jan 2024 10:00:00 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/categories/programming-languages/" rel="self" type="application/rss+xml" /><item>
+    <title>JavaScript, TypeScript &amp; React Core Concepts</title>
+    <link>https://ducthanh98.github.io/posts/javascript/</link>
+    <pubDate>Sat, 20 Jan 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/javascript/</guid>
+    <description><![CDATA[Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed.]]></description>
+</item>
+<item>
+    <title>Python Core: Context Managers, Generators &amp; GIL</title>
+    <link>https://ducthanh98.github.io/posts/python/</link>
+    <pubDate>Mon, 15 Jan 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/python/</guid>
+    <description><![CDATA[Python Context Manager Yield keyword Context Context Manager giúp quản lý tài nguyên tự động, đảm bảo tài nguyên (file, database connection, network socket,&hellip;) được mở và đóng đúng cách. Đóng tài nguyên tự động, tránh lỗi quên close() Xử lý lỗi tự động, giảm code try-except-finally class FileManager: def __init__(self, filename): self.filename = filename def __enter__(self): self.file = open(self.filename, &#34;r&#34;) # Mở file return self.file # Trả về file để sử dụng trong `with` def __exit__(self, exc_type, exc_value, traceback): self.]]></description>
+</item>
+<item>
+    <title>Golang Deep Dive: Concurrency, Runtime &amp; Architecture</title>
+    <link>https://ducthanh98.github.io/posts/golang/</link>
+    <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/golang/</guid>
+    <description><![CDATA[Channel Document Context document IO Reader Writer Mutex Lock, Sync package GC, Stack &amp; Heap Document Go routines document Go scheduler document Memory leak Generic document Test document Hexagonal document rest vs grapqh Git document Analyze code document Dependency injection Security consideration Channel unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication.]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,31 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Interview - Tag - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/tags/interview/</link>
+        <description>Interview - Tag - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 15 Feb 2024 10:00:00 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/interview/" rel="self" type="application/rss+xml" /><item>
+    <title>VPBank Project Case Study &amp; Technical Interview Cheatsheet</title>
+    <link>https://ducthanh98.github.io/posts/bank/</link>
+    <pubDate>Thu, 15 Feb 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/bank/</guid>
+    <description><![CDATA[Contributed to projects Middle task recommend tech Event architecture vs microservice Dependency Injection Kind of Test Token I18n React Hooks Redux Agile scrum System design Contributed Help team to design a scalable architecture, choose suitable technique. Reviews code to ensure high-quality code . Mentored junior developers, helping them improve their skills through code reviews, and knowledge sharing. Collaborated with the product owner to prioritize and plan the next sprints, ensuring alignment between development and business requirements.]]></description>
+</item>
+<item>
+    <title>Behavioral &amp; HR Interview Questions &amp; Answers</title>
+    <link>https://ducthanh98.github.io/posts/introduce/</link>
+    <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/introduce/</guid>
+    <description><![CDATA[Introduce about yourself Firstly, Thank you for taking the time to review my CV. Regarding myself, I graduated with a degree in Software Engineering. I have been working for about six years in software development, focusing primarily on backend technologies and cloud services. Throughout my career, I have focused not just on coding but also on mentoring junior developers and promoting best practices in code quality and version control. Most recently, I worked at VPBank, where I contributed to the development of their loyalty system.]]></description>
+</item>
+<item>
+    <title>Golang Deep Dive: Concurrency, Runtime &amp; Architecture</title>
+    <link>https://ducthanh98.github.io/posts/golang/</link>
+    <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/golang/</guid>
+    <description><![CDATA[Channel Document Context document IO Reader Writer Mutex Lock, Sync package GC, Stack &amp; Heap Document Go routines document Go scheduler document Memory leak Generic document Test document Hexagonal document rest vs grapqh Git document Analyze code document Dependency injection Security consideration Channel unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication.]]></description>
+</item>
+</channel>
+</rss>

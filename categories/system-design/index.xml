@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>System Design - Category - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/categories/system-design/</link>
+        <description>System Design - Category - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/categories/system-design/" rel="self" type="application/rss+xml" /><item>
+    <title>Microservices Architecture &amp; Distributed System Design Patterns</title>
+    <link>https://ducthanh98.github.io/posts/microservice/</link>
+    <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/microservice/</guid>
+    <description><![CDATA[Monolith vs microservice Queue document Microservice design pattern document Deployment strategy Cách chia micro Compare mono micro Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
+Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system.]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Computer Networking Fundamentals for Interviews - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
+ Skype: live:fushion48 
+ PhoneNumber: &#43;84918279888"><meta property="og:title" content="Computer Networking Fundamentals for Interviews" />
+<meta property="og:description" content="Computer Networking Fundamentals Table of Contents OSI 7 Layers vs TCP/IP Model TCP vs UDP TCP 3-Way Handshake &amp; 4-Way Teardown 3-Way Handshake (Connection Establishment) 4-Way Teardown (Connection Termination) The TIME_WAIT State HTTP Evolution: HTTP/1.1 vs HTTP/2 vs HTTP/3 HTTPS &amp; SSL/TLS Handshake What Happens When You Type a URL in Your Browser? API Protocols: REST vs gRPC vs WebSockets Load Balancing: Layer 4 vs Layer 7 OSI 7 Layers vs TCP/IP Model OSI Layer TCP/IP Layer Common Protocols / Devices Data Unit 7." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ducthanh98.github.io/posts/networking/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-10T10:00:00+07:00" />
+<meta property="article:modified_time" content="2024-01-10T10:00:00+07:00" /><meta property="og:site_name" content="ThanhLD site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Computer Networking Fundamentals for Interviews"/>
+<meta name="twitter:description" content="Computer Networking Fundamentals Table of Contents OSI 7 Layers vs TCP/IP Model TCP vs UDP TCP 3-Way Handshake &amp; 4-Way Teardown 3-Way Handshake (Connection Establishment) 4-Way Teardown (Connection Termination) The TIME_WAIT State HTTP Evolution: HTTP/1.1 vs HTTP/2 vs HTTP/3 HTTPS &amp; SSL/TLS Handshake What Happens When You Type a URL in Your Browser? API Protocols: REST vs gRPC vs WebSockets Load Balancing: Layer 4 vs Layer 7 OSI 7 Layers vs TCP/IP Model OSI Layer TCP/IP Layer Common Protocols / Devices Data Unit 7."/>
+<meta name="application-name" content="ThanhLD site">
+<meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ducthanh98.github.io/posts/networking/" /><link rel="prev" href="https://ducthanh98.github.io/posts/golang/" /><link rel="next" href="https://ducthanh98.github.io/posts/python/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Computer Networking Fundamentals for Interviews",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ducthanh98.github.io\/posts\/networking\/"
+        },"genre": "posts","keywords": "Networking, TCP\/IP, HTTP, DNS, TLS, gRPC, WebSockets","wordcount":  1123 ,
+        "url": "https:\/\/ducthanh98.github.io\/posts\/networking\/","datePublished": "2024-01-10T10:00:00+07:00","dateModified": "2024-01-10T10:00:00+07:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ThanhLD Site">ThanhLD Site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> All Posts </a><a class="menu-item" href="/categories/database/"> Database </a><a class="menu-item" href="/categories/computer-science/"> OS &amp; Network </a><a class="menu-item" href="/categories/system-design/"> System Design </a><a class="menu-item" href="/categories/programming-languages/"> Languages </a><a class="menu-item" href="/categories/cloud-devops/"> Cloud &amp; DevOps </a><a class="menu-item" href="/categories/interview-prep/"> Interview </a><a class="menu-item" href="/categories/"> All Topics </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ThanhLD Site">ThanhLD Site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">All Posts</a><a class="menu-item" href="/categories/database/" title="">Database</a><a class="menu-item" href="/categories/computer-science/" title="">OS &amp; Network</a><a class="menu-item" href="/categories/system-design/" title="">System Design</a><a class="menu-item" href="/categories/programming-languages/" title="">Languages</a><a class="menu-item" href="/categories/cloud-devops/" title="">Cloud &amp; DevOps</a><a class="menu-item" href="/categories/interview-prep/" title="">Interview</a><a class="menu-item" href="/categories/" title="">All Topics</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Computer Networking Fundamentals for Interviews</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/computer-science/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer Science</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-10">2024-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1123 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#table-of-contents">Table of Contents</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#3-way-handshake">3-Way Handshake</a></li>
+    <li><a href="#4-way-teardown">4-Way Teardown</a></li>
+    <li><a href="#the-time_wait-state">The TIME_WAIT State</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#layer-4-load-balancing-transport-layer">Layer 4 Load Balancing (Transport Layer)</a></li>
+    <li><a href="#layer-7-load-balancing-application-layer">Layer 7 Load Balancing (Application Layer)</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="computer-networking-fundamentals">Computer Networking Fundamentals</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#osi-7-layers-vs-tcpip-model" rel="">OSI 7 Layers vs TCP/IP Model</a></li>
+<li><a href="#tcp-vs-udp" rel="">TCP vs UDP</a></li>
+<li><a href="#tcp-3-way-handshake--4-way-teardown" rel="">TCP 3-Way Handshake &amp; 4-Way Teardown</a>
+<ul>
+<li><a href="#3-way-handshake" rel="">3-Way Handshake (Connection Establishment)</a></li>
+<li><a href="#4-way-teardown" rel="">4-Way Teardown (Connection Termination)</a></li>
+<li><a href="#the-time_wait-state" rel="">The TIME_WAIT State</a></li>
+</ul>
+</li>
+<li><a href="#http-evolution" rel="">HTTP Evolution: HTTP/1.1 vs HTTP/2 vs HTTP/3</a></li>
+<li><a href="#https--ssltls-handshake" rel="">HTTPS &amp; SSL/TLS Handshake</a></li>
+<li><a href="#what-happens-when-you-type-a-url" rel="">What Happens When You Type a URL in Your Browser?</a></li>
+<li><a href="#api-protocols-rest-vs-grpc-vs-websockets" rel="">API Protocols: REST vs gRPC vs WebSockets</a></li>
+<li><a href="#load-balancing-layer-4-vs-layer-7" rel="">Load Balancing: Layer 4 vs Layer 7</a></li>
+</ul>
+<hr>
+<h1 id="osi-7-layers-vs-tcpip-model">OSI 7 Layers vs TCP/IP Model</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">OSI Layer</th>
+<th style="text-align:left">TCP/IP Layer</th>
+<th style="text-align:left">Common Protocols / Devices</th>
+<th style="text-align:left">Data Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>7. Application</strong></td>
+<td style="text-align:left"><strong>Application</strong></td>
+<td style="text-align:left">HTTP, HTTPS, DNS, SSH, SMTP, gRPC</td>
+<td style="text-align:left">Messages / Data</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>6. Presentation</strong></td>
+<td style="text-align:left">Application</td>
+<td style="text-align:left">TLS/SSL, JSON, XML, JPEG, Protobuf</td>
+<td style="text-align:left">Data</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>5. Session</strong></td>
+<td style="text-align:left">Application</td>
+<td style="text-align:left">RPC, Sockets, NetBIOS</td>
+<td style="text-align:left">Data</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>4. Transport</strong></td>
+<td style="text-align:left"><strong>Transport</strong></td>
+<td style="text-align:left">TCP, UDP, QUIC</td>
+<td style="text-align:left"><strong>Segment</strong> (TCP) / <strong>Datagram</strong> (UDP)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3. Network</strong></td>
+<td style="text-align:left"><strong>Internet</strong></td>
+<td style="text-align:left">IP (IPv4, IPv6), ICMP, Routers</td>
+<td style="text-align:left"><strong>Packet</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2. Data Link</strong></td>
+<td style="text-align:left"><strong>Network Access</strong></td>
+<td style="text-align:left">Ethernet, MAC addressing, Switches</td>
+<td style="text-align:left"><strong>Frame</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>1. Physical</strong></td>
+<td style="text-align:left">Network Access</td>
+<td style="text-align:left">Cables, Fiber, NIC, Radio waves</td>
+<td style="text-align:left"><strong>Bits</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="tcp-vs-udp">TCP vs UDP</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Feature</th>
+<th style="text-align:left">TCP (Transmission Control Protocol)</th>
+<th style="text-align:left">UDP (User Datagram Protocol)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Connection</strong></td>
+<td style="text-align:left">Connection-oriented (Handshake required)</td>
+<td style="text-align:left">Connectionless</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Reliability</strong></td>
+<td style="text-align:left">Guaranteed delivery (retransmission of lost packets)</td>
+<td style="text-align:left">Best-effort (packets may be lost or disordered)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ordering</strong></td>
+<td style="text-align:left">In-order delivery guaranteed (sequence numbers)</td>
+<td style="text-align:left">No order guaranteed</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Flow &amp; Congestion Control</strong></td>
+<td style="text-align:left">Built-in (Sliding window, Slow start, Congestion avoidance)</td>
+<td style="text-align:left">None</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Header Overhead</strong></td>
+<td style="text-align:left">20 - 60 bytes</td>
+<td style="text-align:left">8 bytes</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Speed</strong></td>
+<td style="text-align:left">Slower (due to acknowledgments &amp; handshakes)</td>
+<td style="text-align:left">Fast and low latency</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Use Cases</strong></td>
+<td style="text-align:left">Web (HTTP/HTTPS), File transfer (FTP/SFTP), Emails, Database connections</td>
+<td style="text-align:left">Real-time gaming, Video streaming, VoIP, DNS queries</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="tcp-3-way-handshake--4-way-teardown">TCP 3-Way Handshake &amp; 4-Way Teardown</h1>
+<h2 id="3-way-handshake">3-Way Handshake</h2>
+<p>Establishes a reliable TCP connection between Client and Server:</p>
+<pre tabindex="0"><code>Client                                  Server
+  |                                       |
+  | -------- 1. SYN (seq=x) ------------&gt; |  (Client sends SYN, state -&gt; SYN_SENT)
+  |                                       |  (Server receives SYN, state -&gt; SYN_RCVD)
+  | &lt;------- 2. SYN-ACK (seq=y, ack=x+1) -|  (Server replies with SYN + ACK)
+  |                                       |  (Client receives SYN-ACK, state -&gt; ESTABLISHED)
+  | -------- 3. ACK (ack=y+1) ----------&gt; |  (Client confirms ACK)
+  |                                       |  (Server receives ACK, state -&gt; ESTABLISHED)
+</code></pre><ul>
+<li><strong>SYN Flood Attack</strong>: Attacker sends massive SYN requests without replying to SYN-ACK, exhausting the server&rsquo;s backlog queue.
+<ul>
+<li><em>Mitigation</em>: Enable <strong>SYN Cookies</strong> (<code>net.ipv4.tcp_syncookies = 1</code>), rate limiting, firewalls.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-way-teardown">4-Way Teardown</h2>
+<p>Gracefully closes a TCP connection:</p>
+<pre tabindex="0"><code>Client                                  Server
+  |                                       |
+  | -------- 1. FIN (seq=u) ------------&gt; |  (Client initiates close, state -&gt; FIN_WAIT_1)
+  | &lt;------- 2. ACK (ack=u+1) ----------- |  (Server acknowledges FIN, state -&gt; CLOSE_WAIT)
+  |                                       |  (Client receives ACK, state -&gt; FIN_WAIT_2)
+  |                                       |  [Server finishes pending data transmission]
+  | &lt;------- 3. FIN (seq=w) ------------- |  (Server sends FIN, state -&gt; LAST_ACK)
+  | -------- 4. ACK (ack=w+1) ----------&gt; |  (Client sends ACK, state -&gt; TIME_WAIT)
+  |                                       |  (Server closes immediately)
+  |  [Waits 2 * MSL (typically 60s)]      |
+  v  State -&gt; CLOSED                      |
+</code></pre><h2 id="the-time_wait-state">The TIME_WAIT State</h2>
+<ul>
+<li><strong>Why is TIME_WAIT necessary?</strong>
+<ol>
+<li>To ensure the final ACK reached the other end. If the ACK was lost, the server retransmits its FIN, and the client in TIME_WAIT can resend the ACK.</li>
+<li>To allow lingering duplicate packets from this connection to expire in the network before a new connection reuses the same port/IP tuple.</li>
+</ol>
+</li>
+<li><strong>Problem</strong>: In high-throughput microservices, thousands of short-lived connections can exhaust ephemeral ports due to sockets lingering in TIME_WAIT.</li>
+<li><strong>Solution</strong>: Use HTTP Connection Keep-Alive / connection pooling; reuse sockets (<code>net.ipv4.tcp_tw_reuse = 1</code>).</li>
+</ul>
+<hr>
+<h1 id="http-evolution">HTTP Evolution</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Version</th>
+<th style="text-align:left">Transport Protocol</th>
+<th style="text-align:left">Key Features &amp; Advantages</th>
+<th style="text-align:left">Key Drawbacks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>HTTP/1.1</strong> (1997)</td>
+<td style="text-align:left">TCP</td>
+<td style="text-align:left">Persistent connections (Keep-Alive), chunked transfer.</td>
+<td style="text-align:left"><strong>Head-of-Line (HoL) Blocking</strong> at application layer. Only 1 request/response per connection at a time.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>HTTP/2</strong> (2015)</td>
+<td style="text-align:left">TCP</td>
+<td style="text-align:left"><strong>Multiplexing</strong> (multiple requests in single TCP connection via streams), Binary protocol, Header Compression (HPACK), Server Push.</td>
+<td style="text-align:left"><strong>TCP Head-of-Line Blocking</strong>: If 1 packet is lost, the entire TCP connection stalls until retransmitted.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>HTTP/3</strong> (2022)</td>
+<td style="text-align:left"><strong>QUIC</strong> (over <strong>UDP</strong>)</td>
+<td style="text-align:left">Eliminates TCP HoL blocking (streams are independent in QUIC), 0-RTT connection resumption, Built-in encryption (TLS 1.3), Connection Migration across Wi-Fi/4G.</td>
+<td style="text-align:left">High CPU usage on legacy middleboxes; UDP packets blocked on some restrictive firewalls.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="https--ssltls-handshake">HTTPS &amp; SSL/TLS Handshake</h1>
+<p>HTTPS encrypts HTTP traffic by wrapping it inside <strong>TLS (Transport Layer Security)</strong>:</p>
+<pre tabindex="0"><code>Client                                                Server
+  |                                                     |
+  | --- 1. ClientHello (TLS version, Ciphers, Nonce) -&gt; |
+  |                                                     |
+  | &lt;-- 2. ServerHello (Selected Cipher, Server Nonce)- |
+  | &lt;-- 3. Certificate (Signed by CA with Public Key) - |
+  | &lt;-- 4. ServerKeyExchange (Diffie-Hellman params) -- |
+  | &lt;-- 5. ServerHelloDone ---------------------------- |
+  |                                                     |
+  |  [Client validates Certificate chain against Root CAs]
+  | --- 6. ClientKeyExchange (DH params or Pre-Master) -&gt;|
+  | --- 7. ChangeCipherSpec &amp; Finished (Encrypted) ----&gt; |
+  |                                                     |
+  | &lt;-- 8. ChangeCipherSpec &amp; Finished (Encrypted) ---- |
+  |                                                     |
+  | &lt;======== Application Data Encrypted with =========&gt;|
+  | &lt;======== Symmetric Session Key (AES-GCM) ========&gt; |
+</code></pre><ul>
+<li><strong>Asymmetric Encryption</strong>: Used during handshake to authenticate server identity and securely negotiate symmetric session keys.</li>
+<li><strong>Symmetric Encryption</strong>: Used for subsequent data transfer because it is significantly faster than asymmetric encryption.</li>
+</ul>
+<hr>
+<h1 id="what-happens-when-you-type-a-url-in-your-browser">What Happens When You Type a URL in Your Browser?</h1>
+<ol>
+<li><strong>DNS Lookup</strong>:
+<ul>
+<li>Check Browser Cache -&gt; OS Cache (<code>/etc/hosts</code>) -&gt; Local Router Cache -&gt; ISP Resolver (Recursive DNS).</li>
+<li>If not found: Root Server (<code>.</code>) -&gt; TLD Server (<code>.com</code>) -&gt; Authoritative Name Server (<code>example.com</code>).</li>
+</ul>
+</li>
+<li><strong>TCP Handshake</strong>: Client initiates 3-way handshake with target IP address on port 443 (HTTPS) or port 80.</li>
+<li><strong>TLS Handshake</strong>: Negotiates encryption keys, validates SSL certificate.</li>
+<li><strong>HTTP Request</strong>: Browser sends <code>GET / HTTP/2</code> request with headers (Host, User-Agent, Accept).</li>
+<li><strong>Server Processing</strong>: Reverse proxy (Nginx) terminates TLS, forwards request to application microservice, queries database/cache, returns HTML payload.</li>
+<li><strong>Browser Rendering</strong>: Browser receives HTTP response, parses HTML to build DOM Tree, parses CSS to build CSSOM Tree, combines into Render Tree, computes Layout, Paints pixels to screen, and executes JavaScript.</li>
+</ol>
+<hr>
+<h1 id="api-protocols-rest-vs-grpc-vs-websockets">API Protocols: REST vs gRPC vs WebSockets</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Aspect</th>
+<th style="text-align:left">REST (HTTP/1.1 or HTTP/2)</th>
+<th style="text-align:left">gRPC (HTTP/2)</th>
+<th style="text-align:left">WebSockets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Data Format</strong></td>
+<td style="text-align:left">JSON (Text-based, larger payload)</td>
+<td style="text-align:left">Protocol Buffers (Binary, compact)</td>
+<td style="text-align:left">Text (JSON) or Binary</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Communication</strong></td>
+<td style="text-align:left">Request / Response (Stateless)</td>
+<td style="text-align:left">Unary, Server Streaming, Client Streaming, Bidirectional Streaming</td>
+<td style="text-align:left">Full-Duplex, Persistent, Stateful connection</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Performance</strong></td>
+<td style="text-align:left">Moderate (JSON serialization overhead)</td>
+<td style="text-align:left">Very High (Low CPU, minimal network overhead)</td>
+<td style="text-align:left">High (Minimal header overhead after handshake)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Typing &amp; Contract</strong></td>
+<td style="text-align:left">OpenAPI / Swagger (optional)</td>
+<td style="text-align:left">Strict schema (<code>.proto</code> file with auto-generated client stubs)</td>
+<td style="text-align:left">Custom protocol required</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Best Used For</strong></td>
+<td style="text-align:left">Public APIs, Browser-to-Backend</td>
+<td style="text-align:left"><strong>Internal Microservices communication</strong>, High-throughput RPC</td>
+<td style="text-align:left">Real-time chat, Live financial tickers, Gaming</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="load-balancing-layer-4-vs-layer-7">Load Balancing: Layer 4 vs Layer 7</h1>
+<h2 id="layer-4-load-balancing-transport-layer">Layer 4 Load Balancing (Transport Layer)</h2>
+<ul>
+<li>Operates at TCP/UDP level.</li>
+<li>Routes traffic based on IP address and port without inspecting message content or headers.</li>
+<li><strong>Pros</strong>: Blazing fast, minimal CPU overhead.</li>
+<li><strong>Cons</strong>: Cannot inspect HTTP headers, cookies, or URL paths.</li>
+<li><strong>Examples</strong>: AWS NLB (Network Load Balancer), Linux IPVS, HAProxy (mode tcp).</li>
+</ul>
+<h2 id="layer-7-load-balancing-application-layer">Layer 7 Load Balancing (Application Layer)</h2>
+<ul>
+<li>Operates at HTTP/HTTPS level.</li>
+<li>Inspects path (<code>/api/v1/orders</code>), headers (Authorization, Host), cookies, query strings.</li>
+<li><strong>Pros</strong>: Intelligent routing, SSL/TLS termination, rate limiting, path-based routing.</li>
+<li><strong>Cons</strong>: Higher CPU and latency overhead due to decrypting and buffering payloads.</li>
+<li><strong>Examples</strong>: AWS ALB (Application Load Balancer), Nginx, Traefik, Envoy Proxy.</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-01-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ducthanh98.github.io/posts/networking/" data-title="Computer Networking Fundamentals for Interviews" data-hashtags="Networking,TCP/IP,HTTP,DNS,TLS,gRPC,WebSockets"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ducthanh98.github.io/posts/networking/" data-hashtag="Networking"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://ducthanh98.github.io/posts/networking/" data-title="Computer Networking Fundamentals for Interviews"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ducthanh98.github.io/posts/networking/" data-title="Computer Networking Fundamentals for Interviews"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ducthanh98.github.io/posts/networking/" data-title="Computer Networking Fundamentals for Interviews"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/networking/">Networking</a>,&nbsp;<a href="/tags/tcp/ip/">TCP/IP</a>,&nbsp;<a href="/tags/http/">HTTP</a>,&nbsp;<a href="/tags/dns/">DNS</a>,&nbsp;<a href="/tags/tls/">TLS</a>,&nbsp;<a href="/tags/grpc/">gRPC</a>,&nbsp;<a href="/tags/websockets/">WebSockets</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/golang/" class="prev" rel="prev" title="Golang Deep Dive: Concurrency, Runtime &amp; Architecture"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Golang Deep Dive: Concurrency, Runtime & Architecture</a>
+            <a href="/posts/python/" class="next" rel="next" title="Python Core: Context Managers, Generators &amp; GIL">Python Core: Context Managers, Generators & GIL<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

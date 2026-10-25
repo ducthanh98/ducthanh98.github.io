@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>HTTP - Tag - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/tags/http/</link>
+        <description>HTTP - Tag - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 10 Jan 2024 10:00:00 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/http/" rel="self" type="application/rss+xml" /><item>
+    <title>Computer Networking Fundamentals for Interviews</title>
+    <link>https://ducthanh98.github.io/posts/networking/</link>
+    <pubDate>Wed, 10 Jan 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/networking/</guid>
+    <description><![CDATA[Computer Networking Fundamentals Table of Contents OSI 7 Layers vs TCP/IP Model TCP vs UDP TCP 3-Way Handshake &amp; 4-Way Teardown 3-Way Handshake (Connection Establishment) 4-Way Teardown (Connection Termination) The TIME_WAIT State HTTP Evolution: HTTP/1.1 vs HTTP/2 vs HTTP/3 HTTPS &amp; SSL/TLS Handshake What Happens When You Type a URL in Your Browser? API Protocols: REST vs gRPC vs WebSockets Load Balancing: Layer 4 vs Layer 7 OSI 7 Layers vs TCP/IP Model OSI Layer TCP/IP Layer Common Protocols / Devices Data Unit 7.]]></description>
+</item>
+</channel>
+</rss>

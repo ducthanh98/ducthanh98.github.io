@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Behavioral - Tag - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/tags/behavioral/</link>
+        <description>Behavioral - Tag - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/behavioral/" rel="self" type="application/rss+xml" /><item>
+    <title>Behavioral &amp; HR Interview Questions &amp; Answers</title>
+    <link>https://ducthanh98.github.io/posts/introduce/</link>
+    <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/introduce/</guid>
+    <description><![CDATA[Introduce about yourself Firstly, Thank you for taking the time to review my CV. Regarding myself, I graduated with a degree in Software Engineering. I have been working for about six years in software development, focusing primarily on backend technologies and cloud services. Throughout my career, I have focused not just on coding but also on mentoring junior developers and promoting best practices in code quality and version control. Most recently, I worked at VPBank, where I contributed to the development of their loyalty system.]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>React - Tag - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/tags/react/</link>
+        <description>React - Tag - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 20 Jan 2024 10:00:00 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/react/" rel="self" type="application/rss+xml" /><item>
+    <title>JavaScript, TypeScript &amp; React Core Concepts</title>
+    <link>https://ducthanh98.github.io/posts/javascript/</link>
+    <pubDate>Sat, 20 Jan 2024 10:00:00 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/javascript/</guid>
+    <description><![CDATA[Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed.]]></description>
+</item>
+</channel>
+</rss>

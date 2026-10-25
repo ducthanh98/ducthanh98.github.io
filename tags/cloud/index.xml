@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Cloud - Tag - ThanhLD Site</title>
+        <link>https://ducthanh98.github.io/tags/cloud/</link>
+        <description>Cloud - Tag - ThanhLD Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/cloud/" rel="self" type="application/rss+xml" /><item>
+    <title>Azure Administrator (AZ-104) Notes</title>
+    <link>https://ducthanh98.github.io/posts/az-104/</link>
+    <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/az-104/</guid>
+    <description><![CDATA[Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD.]]></description>
+</item>
+<item>
+    <title>Certified Kubernetes Administrator (CKA) Notes</title>
+    <link>https://ducthanh98.github.io/posts/cka/</link>
+    <pubDate>Tue, 29 Nov 2022 11:17:12 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/cka/</guid>
+    <description><![CDATA[Architecture Overview Master Node: - Responsible for managing the K8s cluster, storing information about the nodes, containers, ... ETCD: - Database that stores informations in key-value format Scheduler - Identifies the right node to place a container based on the containers resource requirements, worker policies, constraints, ... - Controllers: - Types: - Node Controller: Responsible for onboarding new nodes to the cluster, handling situations where nodes are unavailable or get destroyed, - Replication Controller: ensures that the desired number of containers are running at all times in a replication group - Workflows: - Monitoring status from the nodes and taking some actions to keep applications running.]]></description>
+</item>
+<item>
+    <title>AWS Certified Solutions Architect Professional Notes</title>
+    <link>https://ducthanh98.github.io/posts/aws-sap/</link>
+    <pubDate>Mon, 28 Nov 2022 22:58:35 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/aws-sap/</guid>
+    <description><![CDATA[DDOS Type Application Layer: HTTP flood Protocol Attack: SYN Flood Volumetric: DNS Amplification Identify and Federation Policy Priorty Explicit DENY -&gt; SCP -&gt; Resource Policy -&gt; Permissions Boundaries -&gt; Session Policies -&gt; Identity Policies
+Directory Service AD Connector: Only redirects no local identity data in AWS Simple AD: AD compatible managed on AWS AWS Managed MS AD: Establish trust connection with your on-premise AD Support AD Native schema extensions which required by some AD applications Large userS Integrates with radius/MFA IAM: Explicit DENY has precedence over ALOW NotAction: explicit allow a FEW THING in there Access Advisor: See permissions granted and when last accessed Access analyzer: Analyze resources that are shared with external entity Access Key: Can have two access keys Can be created, deleted, made inactivate or activate STS When you assume a role, you give up your permissions and take the permissions assigned to the role and vice versa Temporary credentials can&rsquo;t be cancelled Changing the trust policy has no impact on existing credentials Revoking the leaked credentials: Denying access to credentials created by AssumeRole, AssumeRoleWithSAML, or AssumeRoleWithWebIdentity Delete role, change permisisons impact all assumers you must have the PutRolePolicy to attach the AWSRevokeOlderSessions inline policy Denying access to credentials created by GetFederationToken or GetSessionToken edit or delete the policies that are attached to the IAM user Note: You cannot change the permissions for an AWS account root user so we recommend that you do not call GetFederationToken or GetSessionToken as a root user.]]></description>
+</item>
+</channel>
+</rss>

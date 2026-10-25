@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>JavaScript, TypeScript &amp; React Core Concepts - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
+ Skype: live:fushion48 
+ PhoneNumber: &#43;84918279888"><meta property="og:title" content="JavaScript, TypeScript &amp; React Core Concepts" />
+<meta property="og:description" content="Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ducthanh98.github.io/posts/javascript/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-20T10:00:00+07:00" />
+<meta property="article:modified_time" content="2024-01-20T10:00:00+07:00" /><meta property="og:site_name" content="ThanhLD site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JavaScript, TypeScript &amp; React Core Concepts"/>
+<meta name="twitter:description" content="Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed."/>
+<meta name="application-name" content="ThanhLD site">
+<meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ducthanh98.github.io/posts/javascript/" /><link rel="prev" href="https://ducthanh98.github.io/posts/python/" /><link rel="next" href="https://ducthanh98.github.io/posts/genai/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript, TypeScript \u0026 React Core Concepts",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ducthanh98.github.io\/posts\/javascript\/"
+        },"genre": "posts","keywords": "JavaScript, TypeScript, React, Frontend, Event Loop","wordcount":  1385 ,
+        "url": "https:\/\/ducthanh98.github.io\/posts\/javascript\/","datePublished": "2024-01-20T10:00:00+07:00","dateModified": "2024-01-20T10:00:00+07:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ThanhLD Site">ThanhLD Site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> All Posts </a><a class="menu-item" href="/categories/database/"> Database </a><a class="menu-item" href="/categories/computer-science/"> OS &amp; Network </a><a class="menu-item" href="/categories/system-design/"> System Design </a><a class="menu-item" href="/categories/programming-languages/"> Languages </a><a class="menu-item" href="/categories/cloud-devops/"> Cloud &amp; DevOps </a><a class="menu-item" href="/categories/interview-prep/"> Interview </a><a class="menu-item" href="/categories/"> All Topics </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ThanhLD Site">ThanhLD Site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">All Posts</a><a class="menu-item" href="/categories/database/" title="">Database</a><a class="menu-item" href="/categories/computer-science/" title="">OS &amp; Network</a><a class="menu-item" href="/categories/system-design/" title="">System Design</a><a class="menu-item" href="/categories/programming-languages/" title="">Languages</a><a class="menu-item" href="/categories/cloud-devops/" title="">Cloud &amp; DevOps</a><a class="menu-item" href="/categories/interview-prep/" title="">Interview</a><a class="menu-item" href="/categories/" title="">All Topics</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JavaScript, TypeScript & React Core Concepts</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-20">2024-01-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1385 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#closure-function-documentclosure-function"><a href="#closure-function">Closure function document</a></a></li>
+    <li><a href="#hoisting-documenthoisting"><a href="#hoisting">Hoisting document</a></a></li>
+    <li><a href="#event-loop-stack-documenteventloop-stack"><a href="#eventloop-stack">Event loop stack document</a></a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#operator-type-union-intersection-pick--omit-documentoperator-type"><a href="#operator-type">Operator Type (union, intersection, pick , omit) document</a></a></li>
+        <li><a href="#interface-type-documentinterface-type"><a href="#interface-type">Interface, type document</a></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#hooks-documenthooks"><a href="#hooks">Hooks document</a></a></li>
+    <li><a href="#life-cycles-documentlife-cycles"><a href="#life-cycles">Life cycles document</a></a></li>
+    <li><a href="#detect-changes-documentdetect-changes"><a href="#detect-changes">Detect changes document</a></a></li>
+    <li><a href="#memoization-documentmemoization"><a href="#memoization">Memoization document</a></a></li>
+    <li><a href="#lazy-load-documentlazy-load"><a href="#lazy-load">Lazy load document</a></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#usestate">useState</a></li>
+    <li><a href="#useeffect">useEffect</a></li>
+    <li><a href="#usecontext">useContext:</a></li>
+    <li><a href="#usereducer">useReducer</a></li>
+    <li><a href="#usecallback">UseCallback</a></li>
+    <li><a href="#usememo">UseMemo</a></li>
+    <li><a href="#useref">useRef</a></li>
+    <li><a href="#reactmemo">React.memo</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="javascript">Javascript</h1>
+<h2 id="closure-function-documentclosure-function"><a href="#closure-function" rel="">Closure function document</a></h2>
+<h2 id="hoisting-documenthoisting"><a href="#hoisting" rel="">Hoisting document</a></h2>
+<h2 id="event-loop-stack-documenteventloop-stack"><a href="#eventloop-stack" rel="">Event loop stack document</a></h2>
+<h1 id="typescript">Typescript</h1>
+<h3 id="operator-type-union-intersection-pick--omit-documentoperator-type"><a href="#operator-type" rel="">Operator Type (union, intersection, pick , omit) document</a></h3>
+<h3 id="interface-type-documentinterface-type"><a href="#interface-type" rel="">Interface, type document</a></h3>
+<h1 id="react">React</h1>
+<h2 id="hooks-documenthooks"><a href="#hooks" rel="">Hooks document</a></h2>
+<h2 id="life-cycles-documentlife-cycles"><a href="#life-cycles" rel="">Life cycles document</a></h2>
+<h2 id="detect-changes-documentdetect-changes"><a href="#detect-changes" rel="">Detect changes document</a></h2>
+<h2 id="memoization-documentmemoization"><a href="#memoization" rel="">Memoization document</a></h2>
+<h2 id="lazy-load-documentlazy-load"><a href="#lazy-load" rel="">Lazy load document</a></h2>
+<h1 id="closure-function">Closure function</h1>
+<ul>
+<li>A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention.</li>
+</ul>
+<h1 id="hoisting">Hoisting</h1>
+<ul>
+<li>Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed. This means that you can use variables and functions before they are declared in the code.</li>
+<li>Variables declared with var are hoisted to the top of their function or global scope and initialized with undefined, but not initialized with <strong>let, const</strong></li>
+</ul>
+<h1 id="eventloop-stack">Eventloop stack</h1>
+<ul>
+<li>When a function is invoked, it gets added to the call stack. The JavaScript engine executes the function, and when it completes, it&rsquo;s removed from the stack.</li>
+<li>When asynchronous operations (like a setTimeout or an API call) are initiated, the JavaScript engine handles them and places the corresponding callback in the message queue once the operation is complete.</li>
+<li>The main thread continues executing other code without blocking for these operations.</li>
+<li>Once the call stack is empty (all synchronous code has executed), the event loop picks the next callback from the message queue and pushes it onto the call stack for execution.</li>
+<li>This continues until all messages in the queue have been processed and the stack is empty.</li>
+</ul>
+<h1 id="operator-type">Operator Type</h1>
+<ul>
+<li>Union Types (|)</li>
+</ul>
+<pre tabindex="0"><code>let value: number | string;
+value = 42;         // Valid
+value = &#34;hello&#34;;    // Valid
+</code></pre><ul>
+<li>Intersection Types (&amp;)</li>
+</ul>
+<pre tabindex="0"><code>type A = { name: string };
+type B = { age: number };
+
+let person: A &amp; B = {
+  name: &#34;John&#34;,
+  age: 30,
+};
+</code></pre><ul>
+<li>Pick creates a type by selecting specific properties from an existing type, while Omit creates a type by excluding specific properties.</li>
+</ul>
+<pre tabindex="0"><code>type User = { name: string; age: number; email: string };
+type UserWithoutEmail = Omit&lt;User, &#34;email&#34;&gt;; // { name: string; age: number; }
+</code></pre><h1 id="interface-type">Interface, type</h1>
+<ul>
+<li>Both interface and type can be used to define an object , but interface can be extended and merged, while type cannot. Use interface for object-oriented designs and type for more complex types, like unions and intersections.</li>
+</ul>
+<h1 id="decorator">Decorator</h1>
+<ul>
+<li>Decorators are special functions that modify classes, methods, or properties. They can be used to add metadata or modify behavior. They differ from regular functions because they are prefixed with @</li>
+</ul>
+<h1 id="redux-vs-context">Redux vs context</h1>
+<ul>
+<li>React Context and React Hooks are two powerful features of React that can help manage state and side effects in your application.</li>
+</ul>
+<h1 id="hooks">Hooks</h1>
+<h2 id="usestate">useState</h2>
+<ul>
+<li>Allows you to add state to functional components.</li>
+</ul>
+<h2 id="useeffect">useEffect</h2>
+<ul>
+<li>Manages side effects in your component (e.g., data fetching, subscriptions).</li>
+<li>You can specify dependencies to control when the effect runs.</li>
+<li>Can use Cleanup to close connection, &hellip;</li>
+</ul>
+<pre tabindex="0"><code>useEffect(() =&gt; {
+  // Code to run on mount and when dependencies change
+  return () =&gt; {
+    // Cleanup code
+  };
+}, [dependencies]);
+</code></pre><h2 id="usecontext">useContext:</h2>
+<ul>
+<li>Allows you to access the value of a React context directly in a functional component.</li>
+</ul>
+<pre tabindex="0"><code>const value = useContext(MyContext);
+</code></pre><h2 id="usereducer">useReducer</h2>
+<ul>
+<li>An alternative to useState for managing complex state logic. It resembles Redux but works within a single component.</li>
+</ul>
+<pre tabindex="0"><code>const [state, dispatch] = useReducer(reducer, initialState);
+</code></pre><h2 id="usecallback">UseCallback</h2>
+<ul>
+<li>Returns a memoized version of a callback function, preventing unnecessary re-creations on re-renders.</li>
+</ul>
+<pre tabindex="0"><code>const memoizedCallback = useCallback(() =&gt; {
+  // Your callback logic
+}, [dependencies]);
+</code></pre><h2 id="usememo">UseMemo</h2>
+<ul>
+<li>useMemo allows you to memoize expensive calculations and only re-compute them when specific dependencies change. This can prevent unnecessary re-renders of child components.</li>
+</ul>
+<pre tabindex="0"><code>const computedValue = useMemo(() =&gt; {
+  return expensiveCalculation(inputValue);
+}, [inputValue]);
+</code></pre><h2 id="useref">useRef</h2>
+<ul>
+<li>Returns a mutable ref object whose .current property can hold a value, commonly used to access DOM elements directly.</li>
+</ul>
+<h2 id="reactmemo">React.memo</h2>
+<ul>
+<li>a higher-order component that memoizes the result of a functional component. It will only re-render the component if its props change.</li>
+</ul>
+<h1 id="detect-changes">Detect changes</h1>
+<ul>
+<li>each component can have its own state, managed through the useState hook (for functional components) or through this.setState (for class components). When you update the state using these methods, React know that a change has occurred.</li>
+<li>When you call the state update function (like setState or this.setState), React groups these updates together for performance reasons. It then schedules a re-render of the affected components.</li>
+<li>A reconciliation process that create a new virtual DOM and use a diffing algorithm to compare the new virtual DOM tree with the previous version.</li>
+<li>React performs a shallow comparison of the previous and current state (and props) to determine if an update is necessary
+<ul>
+<li>For primitive types (strings, numbers, booleans), React checks if the value has changed.</li>
+<li>Reference Types: For objects and arrays, React checks if the reference has changed. If the reference to an object or array is the same, React assumes the contents have not changed and does not trigger a re-render.</li>
+</ul>
+</li>
+</ul>
+<h1 id="memoization">Memoization</h1>
+<ul>
+<li>Memoization is an optimization technique that involves caching the results of expensive function calls and returning the cached result
+when the same inputs occur again. In React, memoization helps avoid unnecessary calculations and re-renders.</li>
+<li>React.memo is a higher-order component that wraps a functional component to memoize it. If the props of the component do not change, React skips rendering the component and uses the memoized version instead</li>
+<li>When to use
+<ul>
+<li>If you have components that are expensive to render</li>
+<li>Use React.memo when the component receives props that don’t change often</li>
+<li>For functional components that simply render UI based on props
+and don’t have internal state that affects rendering, React.memo is particularly useful.</li>
+</ul>
+</li>
+<li>When Not to Use
+<ul>
+<li>If a component is very simple and renders quickly</li>
+<li>If a component’s props change frequently</li>
+<li>Internal State Changes:</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>import React from &#39;react&#39;;
+
+const MyComponent = React.memo(({ data }) =&gt; {
+  // Expensive calculations or rendering logic
+  return &lt;div&gt;{data}&lt;/div&gt;;
+});
+</code></pre><h1 id="lazy-load">Lazy load</h1>
+<ul>
+<li>You can use React.lazy to dynamically import components when they are needed.
+Combine this with Suspense to provide a fallback UI while the component is loading.</li>
+</ul>
+<pre tabindex="0"><code>import React, { Suspense, lazy } from &#39;react&#39;;
+import { BrowserRouter as Router, Route, Switch } from &#39;react-router-dom&#39;;
+
+const Home = lazy(() =&gt; import(&#39;./Home&#39;));
+const About = lazy(() =&gt; import(&#39;./About&#39;));
+
+const App = () =&gt; (
+  &lt;Router&gt;
+    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+      &lt;Switch&gt;
+        &lt;Route path=&#34;/&#34; exact component={Home} /&gt;
+        &lt;Route path=&#34;/about&#34; component={About} /&gt;
+      &lt;/Switch&gt;
+    &lt;/Suspense&gt;
+  &lt;/Router&gt;
+);
+</code></pre><h1 id="react-lifecyclelife-cycle">React Lifecycle(#life-cycle)</h1>
+<p>In React, the component lifecycle can be divided into three main phases: Mounting, Updating, and Unmounting.
+Here’s a breakdown of each phase:</p>
+<ol>
+<li>Mounting
+When a component is being created and inserted into the DOM:</li>
+</ol>
+<ul>
+<li>constructor: Initializes state and binds methods.
+static getDerivedStateFromProps: Syncs state with props before rendering.</li>
+<li>render: Renders the component to the DOM.
+-componentDidMount: Invoked immediately after the component is mounted; ideal for API calls and subscriptions.</li>
+</ul>
+<ol start="2">
+<li>Updating
+When a component is being re-rendered due to changes in props or state:</li>
+</ol>
+<ul>
+<li>shouldComponentUpdate: Allows control over whether a component should re-render.</li>
+<li>render: (same as above) Re-renders the component.
+getSnapshotBeforeUpdate: Captures some information from the DOM (e.g., scroll position) before the updates are applied.</li>
+<li>componentDidUpdate: Invoked immediately after updating occurs; great for responding to prop or state changes.</li>
+</ul>
+<ol start="3">
+<li>Unmounting
+When a component is being removed from the DOM:</li>
+</ol>
+<p>componentWillUnmount: Cleanup tasks like cancelling network requests, removing subscriptions, etc.</p>
+<p>Both React and Angular have lifecycle methods that allow developers to hook into the various stages of a component&rsquo;s existence, from creation to destruction. Here’s an overview of the lifecycle phases for both frameworks.</p>
+<h1 id="angular-lifecycle">Angular Lifecycle</h1>
+<p>In Angular, components also have a lifecycle that consists of several phases. These phases are handled by lifecycle hooks, which are methods that you can implement in your components.</p>
+<p>ngOnInit: Called once, after the first ngOnChanges. It is commonly used for initialization tasks, such as fetching data.</p>
+<p>ngOnChanges: Called before ngOnInit and whenever one or more data-bound input properties change. This hook receives a SimpleChanges object containing the previous and current values.</p>
+<p>ngDoCheck: Called during every change detection run. It allows for custom change detection.</p>
+<p>ngAfterContentInit: Called after Angular has projected external content into the component.</p>
+<p>ngAfterContentChecked: Called after the projected content has been checked.</p>
+<p>ngAfterViewInit: Called after the component’s view (and child views) has been initialized.</p>
+<p>ngAfterViewChecked: Called after the component’s view (and child views) has been checked.</p>
+<p>ngOnDestroy: Called just before Angular destroys the component. This is where you can perform cleanup, like unsubscribing from observables or detaching event handlers.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-01-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ducthanh98.github.io/posts/javascript/" data-title="JavaScript, TypeScript &amp; React Core Concepts" data-hashtags="JavaScript,TypeScript,React,Frontend,Event Loop"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ducthanh98.github.io/posts/javascript/" data-hashtag="JavaScript"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://ducthanh98.github.io/posts/javascript/" data-title="JavaScript, TypeScript &amp; React Core Concepts"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ducthanh98.github.io/posts/javascript/" data-title="JavaScript, TypeScript &amp; React Core Concepts"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ducthanh98.github.io/posts/javascript/" data-title="JavaScript, TypeScript &amp; React Core Concepts"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/javascript/">JavaScript</a>,&nbsp;<a href="/tags/typescript/">TypeScript</a>,&nbsp;<a href="/tags/react/">React</a>,&nbsp;<a href="/tags/frontend/">Frontend</a>,&nbsp;<a href="/tags/event-loop/">Event Loop</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/python/" class="prev" rel="prev" title="Python Core: Context Managers, Generators &amp; GIL"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Python Core: Context Managers, Generators & GIL</a>
+            <a href="/posts/genai/" class="next" rel="next" title="Generative AI: Chunking Strategies &amp; AWS Bedrock">Generative AI: Chunking Strategies & AWS Bedrock<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
