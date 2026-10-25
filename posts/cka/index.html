@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/cka\/"
-        },"genre": "posts","keywords": "Kubernetes, CKA, DevOps, Containers, Cloud","wordcount":  2171 ,
+        },"genre": "posts","keywords": "Kubernetes, CKA, DevOps, Containers, Cloud","wordcount":  2402 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/cka\/","datePublished": "2022-11-29T11:17:12+07:00","dateModified": "2022-11-29T11:17:12+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -71,8 +71,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified Kubernetes Administrator (CKA) Notes</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cloud-devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Cloud & DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2171 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-29">2022-11-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2402 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -152,6 +152,12 @@
         <li><a href="#dns-in-k8s">DNS in K8s</a></li>
       </ul>
     </li>
+  </ul>
+
+  <ul>
+    <li><a href="#core-concepts">Core Concepts</a></li>
+    <li><a href="#advantages-pros">Advantages (Pros)</a></li>
+    <li><a href="#trade-offs-cons">Trade-offs (Cons)</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="architecture">Architecture</h1>
@@ -575,7 +581,31 @@ Container Runtime:</p>
 <p>The container runtime is the software responsible for running containers. Kubernetes supports several container runtimes, including Docker, containerd, and CRI-O.
 Node Components:</p>
 <p>These include various components that ensure the node operates smoothly and that Pods run as expected. In addition to kubelet and kube-proxy, this includes the node’s operating system and networking components.</p>
-<h1 id="heading"></h1>
+<hr>
+<h1 id="gitops-with-argocd">GitOps with ArgoCD</h1>
+<p>ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes.</p>
+<h2 id="core-concepts">Core Concepts</h2>
+<ul>
+<li><strong>Git as Single Source of Truth</strong>: Application manifests (Helm, Kustomize, plain YAML) are stored in Git.</li>
+<li><strong>Automated Synchronization</strong>: ArgoCD continuously compares the desired state in Git with the live state in the K8s cluster and triggers auto-sync or flags drift.</li>
+<li><strong>Self-Healing</strong>: If someone manually modifies resources via <code>kubectl</code>, ArgoCD can automatically reconcile the cluster back to the state committed in Git.</li>
+</ul>
+<h2 id="advantages-pros">Advantages (Pros)</h2>
+<ul>
+<li><strong>GitOps Model</strong>: Full version control, audit trail, pull request reviews, and 1-click rollback via <code>git revert</code>.</li>
+<li><strong>Declarative Configuration</strong>: All deployment specifications are transparently stored in YAML.</li>
+<li><strong>Automated Syncing</strong>: Reconciles cluster state without requiring CI servers to hold direct cluster credentials (pull-based deployment model).</li>
+<li><strong>Multi-Cluster Support</strong>: A single ArgoCD control plane can manage deployments across multiple cloud and on-premise Kubernetes clusters.</li>
+<li><strong>Developer UI</strong>: Web dashboard provides real-time visual health, sync status, and pod tree visualization.</li>
+<li><strong>Ecosystem Integration</strong>: Seamlessly works with Helm charts, Kustomize overlays, and sealed secrets.</li>
+</ul>
+<h2 id="trade-offs-cons">Trade-offs (Cons)</h2>
+<ul>
+<li><strong>Initial Complexity</strong>: Learning curve around Git repository structures (monorepo vs repo-per-team) and RBAC configurations.</li>
+<li><strong>Secret Management</strong>: Cannot commit raw secrets to Git; requires integration with HashiCorp Vault, AWS Secrets Manager, or Sealed Secrets.</li>
+<li><strong>Resource Consumption</strong>: Running ArgoCD controllers and Redis inside the cluster adds overhead.</li>
+<li><strong>Workflow Limitations</strong>: ArgoCD focuses strictly on deployment delivery; complex pipelines still require CI tools (GitHub Actions, GitLab CI, Argo Workflows).</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/networking\/"
-        },"genre": "posts","keywords": "Networking, TCP\/IP, HTTP, DNS, TLS, gRPC, WebSockets","wordcount":  1123 ,
+        },"genre": "posts","keywords": "Networking, TCP\/IP, HTTP, DNS, TLS, gRPC, WebSockets","wordcount":  1429 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/networking\/","datePublished": "2024-01-10T10:00:00+07:00","dateModified": "2024-01-10T10:00:00+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -71,8 +71,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Computer Networking Fundamentals for Interviews</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/computer-science/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer Science</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-10">2024-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1123 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-10">2024-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1429 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -92,6 +92,15 @@
   <ul>
     <li><a href="#layer-4-load-balancing-transport-layer">Layer 4 Load Balancing (Transport Layer)</a></li>
     <li><a href="#layer-7-load-balancing-application-layer">Layer 7 Load Balancing (Application Layer)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#oauth-20-authorization-code-grant-flow">OAuth 2.0 Authorization Code Grant Flow</a>
+      <ul>
+        <li><a href="#steps-in-the-authorization-code-flow">Steps in the Authorization Code Flow:</a></li>
+      </ul>
+    </li>
+    <li><a href="#access-token-vs-refresh-token">Access Token vs Refresh Token</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="computer-networking-fundamentals">Computer Networking Fundamentals</h1>
@@ -391,6 +400,57 @@
 <li><strong>Pros</strong>: Intelligent routing, SSL/TLS termination, rate limiting, path-based routing.</li>
 <li><strong>Cons</strong>: Higher CPU and latency overhead due to decrypting and buffering payloads.</li>
 <li><strong>Examples</strong>: AWS ALB (Application Load Balancer), Nginx, Traefik, Envoy Proxy.</li>
+</ul>
+<hr>
+<h1 id="web-security--authentication-oauth-20--tokens">Web Security &amp; Authentication: OAuth 2.0 &amp; Tokens</h1>
+<h2 id="oauth-20-authorization-code-grant-flow">OAuth 2.0 Authorization Code Grant Flow</h2>
+<p>OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to an HTTP service on behalf of a resource owner.</p>
+<pre tabindex="0"><code>+----------+
+| Resource |
+|   Owner  |
+|  (User)  |
++----------+
+     ^
+     |
+    (1) User logs in and approves consent
+     |
+     v
++----------+          (2) Authorization Code          +---------------+
+|  Client  | ---------------------------------------&gt; | Authorization |
+| App (SPA |                                          |    Server     |
+|  / BE)   | &lt;--------------------------------------- | (Auth0/Google)|
++----------+          (3) Access Token + Refresh      +---------------+
+     |
+    (4) API Request with Bearer Token
+     v
++---------------+
+|   Resource    |
+|  Server (API) |
++---------------+
+</code></pre><h3 id="steps-in-the-authorization-code-flow">Steps in the Authorization Code Flow:</h3>
+<ol>
+<li><strong>User Authorization</strong>: User clicks &ldquo;Login with Google/GitHub&rdquo;, is redirected to the Auth Server, enters credentials, and consents to permissions.</li>
+<li><strong>Authorization Code</strong>: The Auth Server redirects the user back to the application&rsquo;s redirect URI with a temporary <strong>Authorization Code</strong> (single-use, short TTL).</li>
+<li><strong>Token Exchange</strong>: The application backend securely exchanges the authorization code + client secret for an <strong>Access Token</strong> and an optional <strong>Refresh Token</strong>.</li>
+<li><strong>Resource Access</strong>: The application queries protected APIs by including <code>Authorization: Bearer &lt;access_token&gt;</code> in HTTP headers.</li>
+</ol>
+<h2 id="access-token-vs-refresh-token">Access Token vs Refresh Token</h2>
+<ul>
+<li><strong>Access Token</strong>:
+<ul>
+<li>Short-lived credential (e.g. 15 to 60 minutes).</li>
+<li>Used to authorize API calls against resource servers.</li>
+<li>Commonly structured as a <strong>JWT (JSON Web Token)</strong>: <code>Header.Payload.Signature</code>.</li>
+<li>Stateless verification: API gateways verify the token&rsquo;s cryptographic signature without querying the Auth database on every request.</li>
+</ul>
+</li>
+<li><strong>Refresh Token</strong>:
+<ul>
+<li>Long-lived credential (e.g. 7 days to months) stored securely (e.g. HTTP-only secure cookie).</li>
+<li>Used strictly against the Auth Server to obtain a fresh access token without forcing the user to re-authenticate when the access token expires.</li>
+<li>Refresh Token Rotation: Each time a refresh token is used, a new refresh token is issued, invalidating the old one to prevent replay attacks if compromised.</li>
+</ul>
+</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">

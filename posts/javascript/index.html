@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/javascript\/"
-        },"genre": "posts","keywords": "JavaScript, TypeScript, React, Frontend, Event Loop","wordcount":  1385 ,
+        },"genre": "posts","keywords": "JavaScript, TypeScript, React, Frontend, Event Loop","wordcount":  1740 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/javascript\/","datePublished": "2024-01-20T10:00:00+07:00","dateModified": "2024-01-20T10:00:00+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -71,8 +71,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JavaScript, TypeScript & React Core Concepts</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-20">2024-01-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1385 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-20">2024-01-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1740 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -111,6 +111,20 @@
     <li><a href="#usememo">UseMemo</a></li>
     <li><a href="#useref">useRef</a></li>
     <li><a href="#reactmemo">React.memo</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#redux-middleware-thunk-vs-saga">Redux Middleware: Thunk vs Saga</a></li>
+    <li><a href="#redux-data-flow">Redux Data Flow:</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#implementation-with-react-i18next">Implementation with <code>react-i18next</code></a>
+      <ul>
+        <li><a href="#1-configuration-srci18njs">1. Configuration (<code>src/i18n.js</code>):</a></li>
+        <li><a href="#2-usage-in-components-srcappjs">2. Usage in Components (<code>src/App.js</code>):</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="javascript">Javascript</h1>
@@ -325,7 +339,93 @@ When a component is being removed from the DOM:</li>
 <p>ngAfterViewInit: Called after the component’s view (and child views) has been initialized.</p>
 <p>ngAfterViewChecked: Called after the component’s view (and child views) has been checked.</p>
 <p>ngOnDestroy: Called just before Angular destroys the component. This is where you can perform cleanup, like unsubscribing from observables or detaching event handlers.</p>
-</div><div class="post-footer" id="post-footer">
+<hr>
+<h1 id="state-management-redux-vs-context-api">State Management: Redux vs Context API</h1>
+<ul>
+<li><strong>Context API</strong>: Built into React. Best for low-frequency, global state (e.g. current user theme, authenticated user profile, locale).
+<ul>
+<li><em>Trade-off</em>: When a Context Provider&rsquo;s value updates, <strong>all</strong> consumer components re-render unless wrapped in granular providers or memoization.</li>
+</ul>
+</li>
+<li><strong>Redux</strong>: Dedicated state management library with a centralized store, strict unidirectional data flow, and immutable state updates.
+<ul>
+<li><em>Advantage</em>: Components subscribe to specific slices of state using <code>useSelector</code>. Components only re-render when their selected slice changes, optimizing performance for large-scale applications.</li>
+</ul>
+</li>
+</ul>
+<h2 id="redux-middleware-thunk-vs-saga">Redux Middleware: Thunk vs Saga</h2>
+<p>Middleware intercepts dispatched actions before they reach the reducer:</p>
+<ul>
+<li><strong>Redux Thunk</strong>: Allows action creators to return a function <code>(dispatch, getState)</code> instead of a plain action object. Ideal for standard async calls (REST API requests).</li>
+<li><strong>Redux Saga</strong>: Leverages ES6 Generator functions (<code>yield</code>, <code>takeEvery</code>, <code>call</code>, <code>put</code>) to manage complex async side effects, race conditions, debouncing, and retries.</li>
+</ul>
+<h2 id="redux-data-flow">Redux Data Flow:</h2>
+<ol>
+<li><strong>Action Creation</strong>: UI components dispatch an action describing the event: <code>{ type: 'cart/addItem', payload: item }</code>.</li>
+<li><strong>Action Dispatching</strong>: Action is dispatched to the centralized Redux store.</li>
+<li><strong>Middleware</strong>: Thunk/Saga handles async operations or logging if applicable.</li>
+<li><strong>Reducer Processing</strong>: Pure reducer functions take <code>(previousState, action)</code> and return a new state snapshot.</li>
+<li><strong>Component Update</strong>: Subscribed UI components re-render with the updated state slice.</li>
+</ol>
+<hr>
+<h1 id="internationalization-i18n-in-react">Internationalization (i18n) in React</h1>
+<p>Internationalization allows frontend applications to support multiple languages dynamically.</p>
+<h2 id="implementation-with-react-i18next">Implementation with <code>react-i18next</code></h2>
+<h3 id="1-configuration-srci18njs">1. Configuration (<code>src/i18n.js</code>):</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">i18n</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;i18next&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">initReactI18next</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-i18next&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resources</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">en</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">translation</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">greeting</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">welcome</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Welcome to our application!&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">button</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">submit</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Submit&#34;</span> }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vi</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">translation</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">greeting</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Xin chào!&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">welcome</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Chào mừng bạn đến với ứng dụng!&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">button</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">submit</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Xác nhận&#34;</span> }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">i18n</span>
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">initReactI18next</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">init</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resources</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">lng</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;vi&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fallbackLng</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;en&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">interpolation</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">escapeValue</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> }
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">i18n</span>;
+</span></span></code></pre></div><h3 id="2-usage-in-components-srcappjs">2. Usage in Components (<code>src/App.js</code>):</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTranslation</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-i18next&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">App</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">i18n</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTranslation</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">changeLanguage</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">lng</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">i18n</span>.<span style="color:#a6e22e">changeLanguage</span>(<span style="color:#a6e22e">lng</span>);
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">t</span>(<span style="color:#e6db74">&#39;greeting&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/h1&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">p</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">t</span>(<span style="color:#e6db74">&#39;welcome&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/p&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">changeLanguage</span>(<span style="color:#e6db74">&#39;vi&#39;</span>)}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Tiếng</span> <span style="color:#a6e22e">Việt</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">changeLanguage</span>(<span style="color:#e6db74">&#39;en&#39;</span>)}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">English</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">t</span>(<span style="color:#e6db74">&#39;button.submit&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

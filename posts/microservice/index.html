@@ -31,7 +31,7 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/microservice\/"
-        },"genre": "posts","keywords": "Microservices, System Design, CQRS, Saga, Architecture, Distributed Systems","wordcount":  2210 ,
+        },"genre": "posts","keywords": "Microservices, System Design, CQRS, Saga, Architecture, Distributed Systems","wordcount":  2780 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/microservice\/","datePublished": "2023-11-12T22:53:37+07:00","dateModified": "2023-11-12T22:53:37+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -73,8 +73,8 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Microservices Architecture & Distributed System Design Patterns</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/system-design/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>System Design</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2210 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2780 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -101,6 +101,19 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
     <li><a href="#transactional-outbox-pattern">Transactional Outbox pattern</a></li>
     <li><a href="#api-composition">Api Composition</a></li>
     <li><a href="#event-sourcing">Event Sourcing</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#traditional-synchronous-architecture">Traditional Synchronous Architecture</a></li>
+    <li><a href="#event-driven-architecture-eda">Event-Driven Architecture (EDA)</a></li>
+    <li><a href="#practical-example-e-commerce-order-flow">Practical Example: E-Commerce Order Flow</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#step-1-clarify-requirements-5-8-mins">Step 1: Clarify Requirements (5-8 mins)</a></li>
+    <li><a href="#step-2-back-of-the-envelope-capacity-estimation-5-mins">Step 2: Back-of-the-envelope Capacity Estimation (5 mins)</a></li>
+    <li><a href="#step-3-high-level-architecture-10-15-mins">Step 3: High-Level Architecture (10-15 mins)</a></li>
+    <li><a href="#step-4-deep-dive--bottlenecks-15-20-mins">Step 4: Deep Dive &amp; Bottlenecks (15-20 mins)</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="monolith-vs-microservicecompare-mono-micro"><a href="#compare-mono-micro" rel="">Monolith vs microservice</a></h1>
@@ -379,6 +392,101 @@ Notification → cần throughput cao</p>
 </ul>
 <p>Một bounded context = 1 microservice.
 Mỗi service có model dữ liệu riêng, không chia sẻ DB.</p>
+<hr>
+<h1 id="event-driven-architecture-vs-synchronous-microservices">Event-Driven Architecture vs Synchronous Microservices</h1>
+<h2 id="traditional-synchronous-architecture">Traditional Synchronous Architecture</h2>
+<p>Relies on direct, blocking RPC or HTTP/REST calls between services (Service A calls Service B and waits for response before proceeding).</p>
+<ul>
+<li><strong>Pros</strong>:
+<ul>
+<li>Easier to understand and debug: Linear execution flow and clear stack traces.</li>
+<li>Straightforward error handling: Errors are immediately returned to the caller.</li>
+<li>Strong data consistency: Synchronous calls make ACID and two-phase commits simpler.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:
+<ul>
+<li>Cascading failures: If downstream Service C fails, Service A and B may block and crash (Single Point of Failure).</li>
+<li>Scalability bottleneck: High latency under peak load as threads wait on I/O.</li>
+<li>Tight temporal coupling: All services must be available simultaneously.</li>
+</ul>
+</li>
+</ul>
+<h2 id="event-driven-architecture-eda">Event-Driven Architecture (EDA)</h2>
+<p>Components communicate asynchronously by publishing events to a message broker (Kafka, RabbitMQ, EventBridge). Consumers subscribe and react to events independently.</p>
+<ul>
+<li><strong>Pros</strong>:
+<ul>
+<li><strong>High Scalability &amp; Throughput</strong>: Asynchronous processing allows services to process messages at their own pace without blocking.</li>
+<li><strong>Loose Coupling</strong>: Publishers have zero knowledge of consumers; new services can subscribe to events without modifying existing publishers.</li>
+<li><strong>Fault Tolerance</strong>: If a consumer service goes down, messages persist in the broker and are processed once the service recovers.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:
+<ul>
+<li>Complex debugging &amp; tracing: Requires distributed tracing (OpenTelemetry, Jaeger).</li>
+<li>Eventual consistency: Data takes time to sync across services; distributed rollback requires compensating transactions (Saga).</li>
+<li>Message broker management overhead: Clustering, partition sizing, and monitoring dead-letter queues (DLQ).</li>
+</ul>
+</li>
+</ul>
+<h2 id="practical-example-e-commerce-order-flow">Practical Example: E-Commerce Order Flow</h2>
+<ul>
+<li><strong>Synchronous Path</strong>: When placing an order, synchronously call Inventory Service to reserve stock and Payment Service to charge credit card. Gives immediate feedback to the buyer.</li>
+<li><strong>Asynchronous Event Path</strong>: Once payment succeeds, publish an <code>OrderPlaced</code> event. Downstream services independently consume this event:
+<ul>
+<li><code>Notification Service</code> sends confirmation email/SMS.</li>
+<li><code>Loyalty Points Service</code> credits points to customer account.</li>
+<li><code>Warehouse/Shipping Service</code> generates shipping label and begins packaging.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="system-design-interview-framework--checklist">System Design Interview Framework &amp; Checklist</h1>
+<p>When tackling a System Design interview, follow this 4-step framework:</p>
+<h2 id="step-1-clarify-requirements-5-8-mins">Step 1: Clarify Requirements (5-8 mins)</h2>
+<ul>
+<li><strong>Functional Requirements</strong>: What are the top 2-3 essential features the user must be able to perform? What is out of scope?</li>
+<li><strong>Non-Functional Requirements</strong>:
+<ul>
+<li>Scalability: Daily Active Users (DAU), peak vs average traffic.</li>
+<li>Availability vs Consistency (CAP Theorem trade-off): High availability (99.99%) or strict financial consistency?</li>
+<li>Latency: p95 / p99 SLA (e.g. read latency &lt; 50ms, write latency &lt; 200ms).</li>
+<li>Read/Write Ratio: Is the system read-heavy (e.g. Twitter 100:1) or write-heavy (e.g. IoT telemetry)?</li>
+</ul>
+</li>
+</ul>
+<h2 id="step-2-back-of-the-envelope-capacity-estimation-5-mins">Step 2: Back-of-the-envelope Capacity Estimation (5 mins)</h2>
+<ul>
+<li><strong>QPS Estimation</strong>:
+$$\text{Average QPS} = \frac{\text{DAU} \times \text{Requests per user}}{86400 \text{ seconds}}$$
+$$\text{Peak QPS} = \text{Average QPS} \times 2 \text{ (or } 3\text{)}$$</li>
+<li><strong>Storage Estimation</strong>:
+$$\text{Daily Storage} = \text{New records/day} \times \text{Size per record}$$
+Multiply by 365 days $\times$ 5 years retention, plus replication factor ($\times 3$).</li>
+<li><strong>Network Bandwidth</strong>:
+$$\text{Bandwidth} = \text{QPS} \times \text{Average payload size}$$</li>
+</ul>
+<h2 id="step-3-high-level-architecture-10-15-mins">Step 3: High-Level Architecture (10-15 mins)</h2>
+<ul>
+<li>Draw client (Mobile, Web) $\rightarrow$ DNS $\rightarrow$ CDN (static assets) $\rightarrow$ Load Balancer (ALB/Nginx).</li>
+<li>API Gateway: Handles authentication, SSL termination, rate limiting, and request routing.</li>
+<li>Microservices tier: Stateless application services.</li>
+<li>Data tier:
+<ul>
+<li>Primary Database (PostgreSQL / MySQL) with Read Replicas.</li>
+<li>In-Memory Cache (Redis) in front of read replicas.</li>
+<li>Message Queue / Event Bus (Kafka / RabbitMQ) for async tasks.</li>
+<li>Object Storage (AWS S3) for images, videos, and documents.</li>
+</ul>
+</li>
+</ul>
+<h2 id="step-4-deep-dive--bottlenecks-15-20-mins">Step 4: Deep Dive &amp; Bottlenecks (15-20 mins)</h2>
+<ul>
+<li><strong>Database Scalability</strong>: Index optimization (B-tree, covering indexes), partitioning, horizontal sharding by shard key.</li>
+<li><strong>Cache Strategy</strong>: Cache-Aside, Write-Through, Cache Invalidation, handling Cache Penetration / Cache Stampede.</li>
+<li><strong>Resilience &amp; Fault Tolerance</strong>: Circuit breaker pattern, rate limiting, retry with exponential backoff and jitter, dead-letter queues.</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

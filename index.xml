@@ -16,14 +16,6 @@
     <description><![CDATA[Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD.]]></description>
 </item>
 <item>
-    <title>VPBank Project Case Study &amp; Technical Interview Cheatsheet</title>
-    <link>https://ducthanh98.github.io/posts/bank/</link>
-    <pubDate>Thu, 15 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
-    <guid>https://ducthanh98.github.io/posts/bank/</guid>
-    <description><![CDATA[Contributed to projects Middle task recommend tech Event architecture vs microservice Dependency Injection Kind of Test Token I18n React Hooks Redux Agile scrum System design Contributed Help team to design a scalable architecture, choose suitable technique. Reviews code to ensure high-quality code . Mentored junior developers, helping them improve their skills through code reviews, and knowledge sharing. Collaborated with the product owner to prioritize and plan the next sprints, ensuring alignment between development and business requirements.]]></description>
-</item>
-<item>
     <title>Behavioral &amp; HR Interview Questions &amp; Answers</title>
     <link>https://ducthanh98.github.io/posts/introduce/</link>
     <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
@@ -88,6 +80,14 @@ Limited scalability: Scaling requires scaling the entire app. - Harder to mainta
     <guid>https://ducthanh98.github.io/posts/database/</guid>
     <description><![CDATA[SQL Delete AND Truncate Isolation level mysql vs postgres Execution order document Index document Partition document Sharding document NOSQL Redis document Redis backup document Message brokers kafka vs rabbitmq SQL vs Nosql ACID is a set of properties of relational database transactions.
 Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a chuyển đến b thì bắt buộc phải hoàn tất hoặc phải rollback) Consistency - Any transaction will bring the database from one valid state to another (ví dụ: nếu bản quản lí số lượng hàng, và số lượng hàng không bao giờ là âm, thì một giao dịch không được vi phạm quy tắc này) Isolation - Executing transactions concurrently has the same results as if the transactions were executed serially Durability - Once a transaction has been committed, it will remain so]]></description>
+</item>
+<item>
+    <title>Linux &amp; Operating System Internals</title>
+    <link>https://ducthanh98.github.io/posts/linux/</link>
+    <pubDate>Sun, 12 Nov 2023 22:53:02 &#43;0700</pubDate>
+    <author>Author</author>
+    <guid>https://ducthanh98.github.io/posts/linux/</guid>
+    <description><![CDATA[Operating System Internals &amp; Linux Table of Contents Processes Process Concept Process States &amp; Types Threads Process vs Thread Context Switching Memory Management (Stack vs Heap, Virtual Memory) Cron &amp; Scheduling Storage &amp; Mount Disk Essential Linux Troubleshooting Commands Processes Process Concept A running instance of a program is called a process and it runs in its own memory space. Each time you execute a command, a new process starts. An active process also includes the resources the program needs to run.]]></description>
 </item>
 </channel>
 </rss>
