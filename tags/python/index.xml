@@ -7,9 +7,9 @@
     <title>Python Core: Context Managers, Generators &amp; GIL</title>
     <link>https://ducthanh98.github.io/posts/python/</link>
     <pubDate>Mon, 15 Jan 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/python/</guid>
-    <description><![CDATA[Python Context Manager Yield keyword Context Context Manager giúp quản lý tài nguyên tự động, đảm bảo tài nguyên (file, database connection, network socket,&hellip;) được mở và đóng đúng cách. Đóng tài nguyên tự động, tránh lỗi quên close() Xử lý lỗi tự động, giảm code try-except-finally class FileManager: def __init__(self, filename): self.filename = filename def __enter__(self): self.file = open(self.filename, &#34;r&#34;) # Mở file return self.file # Trả về file để sử dụng trong `with` def __exit__(self, exc_type, exc_value, traceback): self.]]></description>
+    <description><![CDATA[Context Managers Context Manager giúp quản lý tài nguyên tự động, đảm bảo tài nguyên (file, database connection, network socket,&hellip;) được mở và đóng đúng cách. Đóng tài nguyên tự động, tránh lỗi quên close() Xử lý lỗi tự động, giảm code try-except-finally class FileManager: def __init__(self, filename): self.filename = filename def __enter__(self): self.file = open(self.filename, &#34;r&#34;) # Mở file return self.file # Trả về file để sử dụng trong `with` def __exit__(self, exc_type, exc_value, traceback): self.]]></description>
 </item>
 </channel>
 </rss>

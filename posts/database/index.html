@@ -7,16 +7,16 @@
         <title>Database &amp; Message Brokers: SQL, NoSQL &amp; Queues - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="Database &amp; Message Brokers: SQL, NoSQL &amp; Queues" />
-<meta property="og:description" content="SQL Delete AND Truncate Isolation level mysql vs postgres Execution order document Index document Partition document Sharding document NOSQL Redis document Redis backup document Message brokers kafka vs rabbitmq SQL vs Nosql ACID is a set of properties of relational database transactions.
-Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a chuyển đến b thì bắt buộc phải hoàn tất hoặc phải rollback) Consistency - Any transaction will bring the database from one valid state to another (ví dụ: nếu bản quản lí số lượng hàng, và số lượng hàng không bao giờ là âm, thì một giao dịch không được vi phạm quy tắc này) Isolation - Executing transactions concurrently has the same results as if the transactions were executed serially Durability - Once a transaction has been committed, it will remain so" />
+<meta property="og:description" content="Comprehensive notes on Relational Databases (SQL), In-Memory Caching (Redis), and Distributed Message Brokers (Kafka &amp; RabbitMQ) for technical interviews and system architecture design.
+Relational Databases (SQL) SQL vs NoSQL ACID Properties in Relational Databases Atomicity: All operations in a transaction succeed or fail together. If any operation fails, the entire transaction is rolled back. (e.g. transfer money from Account A to Account B). Consistency: Any transaction brings the database from one valid state to another, strictly obeying all schema rules, constraints, triggers, and cascades." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/database/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-12T22:53:02+07:00" />
 <meta property="article:modified_time" content="2023-11-12T22:53:02+07:00" /><meta property="og:site_name" content="ThanhLD site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Database &amp; Message Brokers: SQL, NoSQL &amp; Queues"/>
-<meta name="twitter:description" content="SQL Delete AND Truncate Isolation level mysql vs postgres Execution order document Index document Partition document Sharding document NOSQL Redis document Redis backup document Message brokers kafka vs rabbitmq SQL vs Nosql ACID is a set of properties of relational database transactions.
-Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a chuyển đến b thì bắt buộc phải hoàn tất hoặc phải rollback) Consistency - Any transaction will bring the database from one valid state to another (ví dụ: nếu bản quản lí số lượng hàng, và số lượng hàng không bao giờ là âm, thì một giao dịch không được vi phạm quy tắc này) Isolation - Executing transactions concurrently has the same results as if the transactions were executed serially Durability - Once a transaction has been committed, it will remain so"/>
+<meta name="twitter:description" content="Comprehensive notes on Relational Databases (SQL), In-Memory Caching (Redis), and Distributed Message Brokers (Kafka &amp; RabbitMQ) for technical interviews and system architecture design.
+Relational Databases (SQL) SQL vs NoSQL ACID Properties in Relational Databases Atomicity: All operations in a transaction succeed or fail together. If any operation fails, the entire transaction is rolled back. (e.g. transfer money from Account A to Account B). Consistency: Any transaction brings the database from one valid state to another, strictly obeying all schema rules, constraints, triggers, and cascades."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -31,12 +31,12 @@ Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/database\/"
-        },"genre": "posts","keywords": "SQL, MySQL, PostgreSQL, Redis, Kafka, RabbitMQ, Database","wordcount":  3479 ,
+        },"genre": "posts","keywords": "SQL, MySQL, PostgreSQL, Redis, Kafka, RabbitMQ, Database","wordcount":  1812 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/database\/","datePublished": "2023-11-12T22:53:02+07:00","dateModified": "2023-11-12T22:53:02+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "Author"
+                "name": "ThanhLD"
             },"description": ""
     }
     </script></head>
@@ -72,9 +72,9 @@ Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Database & Message Brokers: SQL, NoSQL & Queues</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3479 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1812 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -82,537 +82,547 @@ Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#delete-and-truncatedelete-vs-truncate"><a href="#delete-vs-truncate">Delete AND Truncate</a></a></li>
-    <li><a href="#isolation-levelisolation"><a href="#isolation">Isolation level</a></a></li>
-    <li><a href="#mysql-vs-postgresmysql-postgresql"><a href="#mysql-postgresql">mysql vs postgres</a></a></li>
-    <li><a href="#execution-order-documentexecution-order"><a href="#execution-order">Execution order document</a></a></li>
-    <li><a href="#index-documentindex"><a href="#index">Index document</a></a></li>
-    <li><a href="#partition-documentpartition"><a href="#partition">Partition document</a></a></li>
-    <li><a href="#sharding-documentsharding"><a href="#sharding">Sharding document</a></a></li>
+    <li><a href="#sql-vs-nosql">SQL vs NoSQL</a>
+      <ul>
+        <li><a href="#acid-properties-in-relational-databases">ACID Properties in Relational Databases</a></li>
+        <li><a href="#decision-matrix-when-to-choose-what">Decision Matrix: When to Choose What?</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql-vs-postgresql">MySQL vs PostgreSQL</a>
+      <ul>
+        <li><a href="#architecture--mvcc-multi-version-concurrency-control">Architecture &amp; MVCC (Multi-Version Concurrency Control)</a></li>
+      </ul>
+    </li>
+    <li><a href="#delete-vs-truncate">DELETE vs TRUNCATE</a></li>
+    <li><a href="#transaction-isolation-levels">Transaction Isolation Levels</a>
+      <ul>
+        <li><a href="#concurrency-anomalies-explained">Concurrency Anomalies Explained:</a></li>
+      </ul>
+    </li>
+    <li><a href="#database-locks-shared-exclusive--update-locks">Database Locks: Shared, Exclusive &amp; Update Locks</a>
+      <ul>
+        <li><a href="#1-read-lock-shared-lock---s">1. Read Lock (Shared Lock - S)</a></li>
+        <li><a href="#2-write-lock-exclusive-lock---x">2. Write Lock (Exclusive Lock - X)</a></li>
+        <li><a href="#3-update-lock-u">3. Update Lock (U)</a></li>
+      </ul>
+    </li>
+    <li><a href="#optimistic-vs-pessimistic-locking--deadlocks">Optimistic vs Pessimistic Locking &amp; Deadlocks</a>
+      <ul>
+        <li><a href="#optimistic-locking">Optimistic Locking</a></li>
+        <li><a href="#pessimistic-locking">Pessimistic Locking</a></li>
+        <li><a href="#deadlock-handling-strategies">Deadlock Handling Strategies</a></li>
+      </ul>
+    </li>
+    <li><a href="#sql-query-execution-order">SQL Query Execution Order</a></li>
+    <li><a href="#indexing-strategies">Indexing Strategies</a>
+      <ul>
+        <li><a href="#1-b-tree-index-default-in-innodb--postgres">1. B-Tree Index (Default in InnoDB &amp; Postgres)</a></li>
+        <li><a href="#2-composite-multi-column-index">2. Composite (Multi-Column) Index</a></li>
+        <li><a href="#3-partial-index-postgresql">3. Partial Index (PostgreSQL)</a></li>
+        <li><a href="#4-hash-index">4. Hash Index</a></li>
+      </ul>
+    </li>
+    <li><a href="#partitioning">Partitioning</a></li>
+    <li><a href="#sharding">Sharding</a></li>
   </ul>
 
   <ul>
-    <li><a href="#redis-documentredis"><a href="#redis">Redis document</a></a>
+    <li><a href="#overview--core-data-structures">Overview &amp; Core Data Structures</a>
       <ul>
-        <li><a href="#redis-backup-documentredis-backup"><a href="#redis-backup">Redis backup document</a></a></li>
+        <li><a href="#rate-limiting-algorithms-in-redis">Rate Limiting Algorithms in Redis:</a></li>
+      </ul>
+    </li>
+    <li><a href="#high-availability-sentinel-vs-cluster">High Availability: Sentinel vs Cluster</a></li>
+    <li><a href="#consistent-hashing--16384-hash-slots">Consistent Hashing &amp; 16,384 Hash Slots</a></li>
+    <li><a href="#persistence-aof-vs-rdb">Persistence: AOF vs RDB</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#architectural-comparison">Architectural Comparison</a>
+      <ul>
+        <li><a href="#real-world-decision-guide">Real-world Decision Guide:</a></li>
+      </ul>
+    </li>
+    <li><a href="#messaging-models-push-vs-pull">Messaging Models: Push vs Pull</a>
+      <ul>
+        <li><a href="#push-model-eg-rabbitmq">Push Model (e.g. RabbitMQ)</a></li>
+        <li><a href="#pull-model-eg-kafka">Pull Model (e.g. Kafka)</a></li>
       </ul>
     </li>
   </ul>
-
-  <ul>
-    <li><a href="#kafka-vs-rabbitmqkafka-rabbitmq"><a href="#kafka-rabbitmq">kafka vs rabbitmq</a></a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#delete">DELETE</a></li>
-    <li><a href="#truncate">TRUNCATE</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#read-lock-shared-lock">Read Lock (Shared Lock)</a></li>
-    <li><a href="#write-lock-exclusive-lock">Write Lock (Exclusive Lock)</a></li>
-    <li><a href="#update-lock">Update Lock</a></li>
-    <li><a href="#execution-order">Execution order</a></li>
-    <li><a href="#index">Index</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#sentinel-vs-cluster">Sentinel vs Cluster</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#redis-hashing">Redis Hashing</a></li>
-    <li><a href="#redis-backup">Redis Backup</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#concept">Concept</a></li>
-    <li><a href="#thread">Thread</a></li>
-    <li><a href="#how-cpu-run-a-thread-or-process-on-a-cpu">How CPU run a thread or process on a CPU</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#anacron">Anacron:</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#apache-kafka">Apache Kafka</a></li>
-    <li><a href="#rabbitmq">RabbitMQ</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#push-model">Push Model</a></li>
-    <li><a href="#pull-model">Pull Model</a></li>
-  </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="sql">SQL</h1>
-<h2 id="delete-and-truncatedelete-vs-truncate"><a href="#delete-vs-truncate" rel="">Delete AND Truncate</a></h2>
-<h2 id="isolation-levelisolation"><a href="#isolation" rel="">Isolation level</a></h2>
-<h2 id="mysql-vs-postgresmysql-postgresql"><a href="#mysql-postgresql" rel="">mysql vs postgres</a></h2>
-<h2 id="execution-order-documentexecution-order"><a href="#execution-order" rel="">Execution order document</a></h2>
-<h2 id="index-documentindex"><a href="#index" rel="">Index document</a></h2>
-<h2 id="partition-documentpartition"><a href="#partition" rel="">Partition document</a></h2>
-<h2 id="sharding-documentsharding"><a href="#sharding" rel="">Sharding document</a></h2>
-<h1 id="nosql">NOSQL</h1>
-<h2 id="redis-documentredis"><a href="#redis" rel="">Redis document</a></h2>
-<h3 id="redis-backup-documentredis-backup"><a href="#redis-backup" rel="">Redis backup document</a></h3>
-<h1 id="message-brokers">Message brokers</h1>
-<h2 id="kafka-vs-rabbitmqkafka-rabbitmq"><a href="#kafka-rabbitmq" rel="">kafka vs rabbitmq</a></h2>
-<h1 id="sql-vs-nosql">SQL vs Nosql</h1>
+            </div><div class="content" id="content"><p>Comprehensive notes on Relational Databases (SQL), In-Memory Caching (Redis), and Distributed Message Brokers (Kafka &amp; RabbitMQ) for technical interviews and system architecture design.</p>
+<hr>
+<h1 id="relational-databases-sql">Relational Databases (SQL)</h1>
+<h2 id="sql-vs-nosql">SQL vs NoSQL</h2>
+<h3 id="acid-properties-in-relational-databases">ACID Properties in Relational Databases</h3>
 <ul>
-<li>
-<p>ACID is a set of properties of relational database transactions.</p>
-<p>Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a chuyển đến b thì bắt buộc phải hoàn tất hoặc phải rollback)
-Consistency - Any transaction will bring the database from one valid state to another (ví dụ: nếu bản quản lí số lượng hàng, và số lượng hàng không bao giờ là âm, thì một giao dịch không được vi phạm quy tắc này)
-Isolation - Executing transactions concurrently has the same results as if the transactions were executed serially
-Durability - Once a transaction has been committed, it will remain so</p>
-</li>
-<li>
-<p>When to Choose SQL:</p>
+<li><strong>Atomicity</strong>: All operations in a transaction succeed or fail together. If any operation fails, the entire transaction is rolled back. (e.g. transfer money from Account A to Account B).</li>
+<li><strong>Consistency</strong>: Any transaction brings the database from one valid state to another, strictly obeying all schema rules, constraints, triggers, and cascades.</li>
+<li><strong>Isolation</strong>: Concurrent execution of transactions yields the same state that would have been obtained if transactions were executed sequentially.</li>
+<li><strong>Durability</strong>: Once a transaction commits, its changes survive power outages, crashes, or server restarts (written to disk/WAL).</li>
+</ul>
+<h3 id="decision-matrix-when-to-choose-what">Decision Matrix: When to Choose What?</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Criteria</th>
+<th style="text-align:left">SQL (Relational)</th>
+<th style="text-align:left">NoSQL (Document/KV/Column)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Data Schema</strong></td>
+<td style="text-align:left">Structured, fixed schema, typed</td>
+<td style="text-align:left">Dynamic, flexible, unstructured or semi-structured</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Queries</strong></td>
+<td style="text-align:left">Complex joins, aggregations, subqueries</td>
+<td style="text-align:left">Key lookups, document retrieval, range scans</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Consistency</strong></td>
+<td style="text-align:left">Strong consistency (ACID)</td>
+<td style="text-align:left">Eventual consistency (BASE theorem)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Scaling</strong></td>
+<td style="text-align:left">Vertical scaling (Scale-up), Read replicas, Sharding</td>
+<td style="text-align:left">Horizontal scaling (Scale-out) built into architecture</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ideal For</strong></td>
+<td style="text-align:left">Financial systems, order management, ERP</td>
+<td style="text-align:left">Real-time big data, user feeds, telemetry, caching</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="mysql-vs-postgresql">MySQL vs PostgreSQL</h2>
+<h3 id="architecture--mvcc-multi-version-concurrency-control">Architecture &amp; MVCC (Multi-Version Concurrency Control)</h3>
 <ul>
-<li>Structured Data</li>
-<li>Complex Queries</li>
-<li>ACID Compliance:  If your application needs strong consistency and reliability (e.g., banking systems), an SQL database is a good choice.</li>
+<li><strong>MySQL (InnoDB)</strong>:
+<ul>
+<li>Performs exceptionally well in write-heavy, high-concurrency environments.</li>
+<li>InnoDB uses <strong>Undo Logs</strong> to store older row versions. Updates are made in-place on data pages, keeping main tables lean and preventing table bloat.</li>
+<li>Undo logs are purged in the background by a dedicated purge thread once no active transaction needs them.</li>
 </ul>
 </li>
-<li>
-<p>When to Choose NoSQL</p>
+<li><strong>PostgreSQL</strong>:
 <ul>
-<li>Unstructured or Semi-Structured Data</li>
-<li>Scalability: NoSQL databases are designed for horizontal scaling, which means you can easily add more servers to handle increased load</li>
-</ul>
-</li>
-</ul>
-<h1 id="mysql-postgresql">mysql postgresql</h1>
-<ul>
-<li>
-<p>Mysql write better than postgress</p>
-</li>
-<li>
-<p>MVCC</p>
-<ul>
-<li>MySQL: InnoDB’s MVCC tends to perform better in write-heavy applications
-due to its separation of old row versions into undo logs,
-reducing main table size and avoiding extensive bloat.
-MySQL is therefore better suited to workloads with
-high concurrency and frequent updates,
-as undo logs can be cleaned efficiently.</li>
-<li>PostgreSQL: MVCC can lead to table bloat in PostgreSQL
-as each update creates a new row version in the main table.
-Although autovacuum helps manage this,
-write-heavy workloads may suffer due to the additional overhead
-and delays from cleaning up dead tuples. PostgreSQL’s approach can
-also increase I/O for high-throughput writes.</li>
-</ul>
-</li>
-<li>
-<p>postgres can analyze a complex query better than mysql.
-mysql is suitable with a simple query</p>
-</li>
-</ul>
-<h1 id="delete-vs-truncate">Delete Vs Truncate</h1>
-<h2 id="delete">DELETE</h2>
-<pre><code>- For every row deleted, the database records the DELETE operation, 
-which can significantly increase I/O operations and slow down performance, 
-especially for large tables.
-- Maintains undo logs to support rollback, adding additional overhead.
-- Can leave the table fragmented, especially if many rows are deleted, as it does not reclaim space at the page level. May require additional maintenance (e.g., rebuilding indexes or defragmentation) to optimize table performance afterward.
-</code></pre>
-<h2 id="truncate">TRUNCATE</h2>
-<pre><code>- Minimally logs the operation by deallocating entire data pages at once, not individual rows.
-- Much faster for large datasets as it avoids row-by-row logging.
-- Reclaims all space allocated to the table and its indexes by resetting the table's structure. Leaves the table in a clean and defragmented state, ready for new data.
-</code></pre>
-<h1 id="isolation">Isolation</h1>
-<ul>
-<li>Read Uncommitted:</li>
-</ul>
-<p>Allows dirty reads. A transaction can read data that has been modified but not yet committed by other transactions.
-Pros: Highest performance and concurrency.
-Cons: Least consistency; data may be invalid.</p>
-<ul>
-<li>Read Committed (Postgresql):</li>
-</ul>
-<p>A transaction can only read data that has been committed by other transactions.
-Pros: Prevents dirty reads.
-Cons: Non-repeatable reads can occur (data may change between reads within the same transaction).</p>
-<ul>
-<li>Repeatable Read: (Mysql) tưởng tượng giống như m đọc 1 transaction trong mysql và query lại bao lần thì nó cũng v</li>
-</ul>
-<p>Ensures that if a transaction reads a row, it can read that row again and get the same values,
-even if other transactions are modifying the data.
-Pros: Prevents dirty reads and non-repeatable reads.
-Cons: Phantom reads can occur (new rows added by other transactions can be seen in subsequent queries).</p>
-<ul>
-<li>Serializable:</li>
-</ul>
-<h1 id="cons-lowest-performance-and-concurrency-can-lead-to-increased-blocking-and-deadlocks">It ensures complete isolation from other transactions by making them appear as if they are executed sequentially.
-Pros: Prevents dirty reads, non-repeatable reads, and phantom reads.
-Cons: Lowest performance and concurrency; can lead to increased blocking and deadlocks.</h1>
-<h2 id="read-lock-shared-lock">Read Lock (Shared Lock)</h2>
-<ul>
-<li>
-<p>Purpose: Allows multiple transactions to read (or select) data simultaneously.</p>
-</li>
-<li>
-<p>Behavior:</p>
-<ul>
-<li>Multiple transactions can acquire a read lock on the same data.</li>
-<li>No transaction can modify (write) the data while there are active read locks.</li>
-</ul>
-</li>
-<li>
-<p>Example: If Transaction A reads a row with a read lock, Transaction B can also read that row but cannot modify it until Transaction A releases the lock.</p>
-</li>
-</ul>
-<h2 id="write-lock-exclusive-lock">Write Lock (Exclusive Lock)</h2>
-<ul>
-<li>Purpose: Allows a transaction to modify (write) data.</li>
-<li>Behavior:
-<ul>
-<li>Only one transaction can hold a write lock on a specific piece of data at a time.</li>
-<li>While a write lock is held, no other transaction can read or write that data.</li>
-</ul>
-</li>
-<li>Example: If Transaction A acquires a write lock on a row, no other transaction can read or modify that row until Transaction A completes its operation and releases the lock.</li>
-</ul>
-<h2 id="update-lock">Update Lock</h2>
-<ul>
-<li>
-<p>Purpose: Used to prevent deadlocks while allowing transactions to read data.</p>
-</li>
-<li>
-<p>Behavior:</p>
-<ul>
-<li>Allows a transaction to read a row and indicates that it intends to modify it.</li>
-<li>Other transactions can still acquire read locks but cannot acquire exclusive locks on the same row.
-Example: A transaction places an update lock on a row when it intends to update it after reading.
-===========</li>
-</ul>
-</li>
-<li>
-<p>Optimistic locking doesn’t lock rows when reading. It uses a version field and checks it during updates. If the version changed, the update fails and the app retries. It doesn’t create deadlocks because no row-level locks are held.</p>
-</li>
-<li>
-<p>Pessimistic locking locks the row immediately when it’s read (e.g., SELECT FOR UPDATE). It prevents concurrent writes but can cause deadlocks if transactions lock resources in different orders.</p>
-</li>
-<li>
-<p>Deadlock handling:
-Use a consistent lock order, keep transactions short, or switch to optimistic locking and retry on conflicts.
-===========</p>
-</li>
-</ul>
-<h2 id="execution-order">Execution order</h2>
-<p>Basic SQL Execution Order:
-SQL queries are executed in the following order:</p>
-<pre><code>FROM: Determine the source of the data.
-WHERE: Filter the rows that match the condition.
-GROUP BY: Group rows into summary rows.
-HAVING: Filter the grouped rows.
-SELECT: Specify the columns to retrieve.
-DISTINCT: Remove duplicate rows from the result.
-ORDER BY: Sort the result set.
-LIMIT / OFFSET: Specify the number of rows to return or the starting point.
-</code></pre>
-<h2 id="index">Index</h2>
-<ul>
-<li>Partial Index(Postgresql)
-An index built only on a subset of the table, based on a condition. This can save space and improve performance for queries that commonly filter on that condition.</li>
-</ul>
-<p>Example:</p>
-<pre tabindex="0"><code>CREATE INDEX idx_active_employees ON employees (name) WHERE status = &#39;active&#39;;
-</code></pre><ul>
-<li>
-<p>Hash Index: Although not supported by InnoDB, certain storage engines in MySQL, such as MEMORY and NDB (NDBCluster), support hash indexes. Hash indexes are efficient for exact match lookups but not suitable for range queries or sorting.</p>
-</li>
-<li>
-<p>Composite Index (Multi-Column Index): Composite indexes are indexes created on multiple columns. They can improve query performance for queries that involve conditions on multiple columns by allowing the database to perform index range scans or index merges.</p>
-</li>
-<li>
-<p>Full-Text Index: Full-text indexes are special indexes used for full-text search operations. They are designed to efficiently search for words or phrases within large blocks of text data stored in TEXT or VARCHAR columns.</p>
-</li>
-<li>
-<p>B-tree Index:</p>
-<ul>
-<li>B-trees are balanced, meaning that the depth of the tree remains relatively constant even as the number of entries increases. This ensures that search operations have a consistent time complexity, typically O(log n) where n is the number of entries.</li>
-<li>Support for Range Queries: B-tree indexes are particularly efficient for range queries, where you need to retrieve data within a specified range of values.</li>
-<li>Sorted Order: Within each node of the B-tree, keys are stored in sorted order, allowing for efficient range scans and range-based queries.</li>
-<li>Support for Range Queries: B-tree indexes are particular.</li>
+<li>Handles complex analytical queries, window functions, and rich data types (JSONB, GIS, arrays) better than MySQL.</li>
+<li>Updates create a <strong>new tuple</strong> in the main table data block while leaving the old tuple marked as dead.</li>
+<li>Requires <strong>VACUUM / Autovacuum</strong> to clean dead tuples. Under heavy write workloads, this can cause table bloat and higher disk I/O.</li>
 </ul>
 </li>
 </ul>
-<h1 id="partition">Partition</h1>
-<p>MySQL supports several types of partitioning methods, each with its own characteristics and use cases. Here are the main types of partitioning supported by MySQL:</p>
+<hr>
+<h2 id="delete-vs-truncate">DELETE vs TRUNCATE</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Feature</th>
+<th style="text-align:left">DELETE</th>
+<th style="text-align:left">TRUNCATE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Operation Type</strong></td>
+<td style="text-align:left">DML (Data Manipulation Language)</td>
+<td style="text-align:left">DDL (Data Definition Language)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Logging</strong></td>
+<td style="text-align:left">Row-by-row logging in Undo/Redo logs</td>
+<td style="text-align:left">Minimal logging (deallocates data pages)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Speed</strong></td>
+<td style="text-align:left">Slow for large datasets</td>
+<td style="text-align:left">Extremely fast</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>WHERE Clause</strong></td>
+<td style="text-align:left">Supported (can delete specific rows)</td>
+<td style="text-align:left">Not supported (removes all table data)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Space Reclamation</strong></td>
+<td style="text-align:left">Leaves space allocated; may cause fragmentation</td>
+<td style="text-align:left">Reclaims all allocated storage and index pages</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Triggers</strong></td>
+<td style="text-align:left">Fires row-level <code>DELETE</code> triggers</td>
+<td style="text-align:left">Does not fire delete triggers</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Rollback</strong></td>
+<td style="text-align:left">Can be rolled back inside a transaction</td>
+<td style="text-align:left">Can be rolled back in PostgreSQL; cannot in MySQL</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="transaction-isolation-levels">Transaction Isolation Levels</h2>
+<p>When multiple transactions run concurrently, isolation levels dictate which anomalies are prevented:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Isolation Level</th>
+<th style="text-align:center">Dirty Read</th>
+<th style="text-align:center">Non-Repeatable Read</th>
+<th style="text-align:center">Phantom Read</th>
+<th style="text-align:left">Default In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Read Uncommitted</strong></td>
+<td style="text-align:center">Permitted</td>
+<td style="text-align:center">Permitted</td>
+<td style="text-align:center">Permitted</td>
+<td style="text-align:left">None</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Read Committed</strong></td>
+<td style="text-align:center">Prevented</td>
+<td style="text-align:center">Permitted</td>
+<td style="text-align:center">Permitted</td>
+<td style="text-align:left"><strong>PostgreSQL</strong>, Oracle, SQL Server</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Repeatable Read</strong></td>
+<td style="text-align:center">Prevented</td>
+<td style="text-align:center">Prevented</td>
+<td style="text-align:center">Prevented (InnoDB via Next-Key Lock)</td>
+<td style="text-align:left"><strong>MySQL (InnoDB)</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Serializable</strong></td>
+<td style="text-align:center">Prevented</td>
+<td style="text-align:center">Prevented</td>
+<td style="text-align:center">Prevented</td>
+<td style="text-align:left">None (Highest overhead)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="concurrency-anomalies-explained">Concurrency Anomalies Explained:</h3>
 <ul>
-<li>Range Partitioning: With range partitioning, rows are distributed across partitions based on the range of values in a specified partitioning key column. For example, you could partition a table of sales data based on the sales date, with each partition representing a specific time period (e.g., monthly or yearly partitions).</li>
+<li><strong>Dirty Read</strong>: Transaction A reads data modified by Transaction B before Transaction B commits. If B rolls back, A&rsquo;s data was invalid.</li>
+<li><strong>Non-Repeatable Read</strong>: Transaction A reads a row. Transaction B updates that row and commits. Transaction A re-reads the row and gets different values.</li>
+<li><strong>Phantom Read</strong>: Transaction A queries rows matching a condition (<code>WHERE age &gt; 20</code>). Transaction B inserts new rows matching that condition and commits. Transaction A re-runs the query and sees new &ldquo;phantom&rdquo; rows.</li>
 </ul>
-<pre tabindex="0"><code>CREATE TABLE table_name (
-    column1 datatype,
-    column2 datatype,
-    ...
-) PARTITION BY RANGE (column_name) (
-    PARTITION partition_name1 VALUES LESS THAN (value1),
-    PARTITION partition_name2 VALUES LESS THAN (value2),
-    ...
-    PARTITION partition_nameN VALUES LESS THAN MAXVALUE
-);
-</code></pre><ul>
-<li>List Partitioning: List partitioning allows you to explicitly define which rows belong to each partition based on discrete values in a partitioning key column. For instance, you could partition a table of customer data based on the country or region of each customer.</li>
-</ul>
-<pre tabindex="0"><code>CREATE TABLE products (
-    id INT NOT NULL,
-    product_name VARCHAR(100),
-    category_id INT NOT NULL
-) PARTITION BY LIST (category_id) (
-    PARTITION p_electronics VALUES IN (1, 2, 3),   -- Điện tử
-    PARTITION p_clothing VALUES IN (4, 5, 6),      -- Quần áo
-    PARTITION p_food VALUES IN (7, 8, 9),          -- Thực phẩm
-    PARTITION p_other VALUES IN (DEFAULT)          -- Các loại khác
-);
-</code></pre><ul>
-<li>Hash Partitioning: Hash partitioning distributes rows across partitions based on a hash function applied to one or more columns. This method can help evenly distribute data across partitions, which can be useful for load balancing and preventing hotspots.</li>
-</ul>
-<pre tabindex="0"><code>CREATE TABLE users (
-    id INT NOT NULL,
-    name VARCHAR(50),
-    email VARCHAR(100)
-) PARTITION BY HASH (id) (1 cột duy nhất)
-PARTITIONS 4;
-</code></pre><ul>
-<li>Key Partitioning: Key partitioning is similar to hash partitioning but uses a hash function applied to the columns used in the table&rsquo;s primary key or unique key. This method is suitable for tables with unique keys that are not sequential.</li>
-</ul>
-<pre tabindex="0"><code>CREATE TABLE orders (
-    order_id INT NOT NULL,
-    customer_id INT NOT NULL,
-    order_date DATE NOT NULL,
-    total_amount DECIMAL(10, 2)
-) PARTITION BY KEY (customer_id, YEAR(order_date))
-PARTITIONS 6;
-</code></pre><ul>
-<li>Composite Partitioning: Composite partitioning allows you to use a combination of partitioning methods, such as range-hash or range-list partitioning.
-This can provide more flexibility in partitioning large tables.</li>
-</ul>
-<h1 id="sharding">Sharding</h1>
+<hr>
+<h2 id="database-locks-shared-exclusive--update-locks">Database Locks: Shared, Exclusive &amp; Update Locks</h2>
+<h3 id="1-read-lock-shared-lock---s">1. Read Lock (Shared Lock - S)</h3>
 <ul>
-<li>Range-Based Sharding</li>
-<li>Hash-Based Sharding</li>
-<li>Directory-Based Sharding</li>
-<li>Geo sharding</li>
+<li><strong>Purpose</strong>: Allows multiple transactions to read a resource simultaneously.</li>
+<li><strong>Behavior</strong>: Multiple transactions can hold shared locks on the same row/table. No transaction can acquire an exclusive write lock until all shared locks are released.</li>
 </ul>
-<h1 id="redis">Redis</h1>
+<h3 id="2-write-lock-exclusive-lock---x">2. Write Lock (Exclusive Lock - X)</h3>
 <ul>
-<li>Redis is an in-memory key-value store that’s used as a database, cache, and message broker. It provide high speed and flexibility, making it ideal for applications that need quick data retrieval and high performance.</li>
-<li>Rich Data Structures: Redis supports multiple data types such as:
+<li><strong>Purpose</strong>: Modifies or deletes data (<code>UPDATE</code>, <code>DELETE</code>, <code>INSERT</code>).</li>
+<li><strong>Behavior</strong>: Only one transaction can hold an exclusive lock. No other transaction can read (with lock) or modify the data until the write lock is released.</li>
+</ul>
+<h3 id="3-update-lock-u">3. Update Lock (U)</h3>
 <ul>
-<li>Strings: Simple text or binary data.</li>
-<li>Lists: Ordered collections (like queues).</li>
-<li>Sets: Unordered unique items.</li>
-<li>Hashes: Maps of key-value pairs (useful for objects).</li>
-<li>Sorted Sets: Similar to sets but with scores for ordering (useful for leaderboards).</li>
-<li>Bitmaps, HyperLogLogs, Streams: Specialized structures for advanced use cases.</li>
+<li><strong>Purpose</strong>: Used during hybrid read-then-write operations to prevent deadlocks.</li>
+<li><strong>Behavior</strong>: Multiple readers can read, but only one transaction can hold an update lock. When ready to update, it upgrades to an exclusive lock.</li>
+</ul>
+<hr>
+<h2 id="optimistic-vs-pessimistic-locking--deadlocks">Optimistic vs Pessimistic Locking &amp; Deadlocks</h2>
+<h3 id="optimistic-locking">Optimistic Locking</h3>
+<ul>
+<li>Does not lock rows on read. Instead, tracks a <code>version</code> number or <code>updated_at</code> timestamp.</li>
+<li>When saving:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> accounts 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> balance <span style="color:#f92672">=</span> balance <span style="color:#f92672">-</span> <span style="color:#ae81ff">100</span>, <span style="color:#66d9ef">version</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">version</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">version</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div></li>
+<li>If rows affected is <code>0</code>, another transaction updated the record concurrently. The application retries the operation.</li>
+<li><strong>Best for</strong>: Low-conflict, high-throughput read workloads.</li>
+</ul>
+<h3 id="pessimistic-locking">Pessimistic Locking</h3>
+<ul>
+<li>Explicitly locks the row at read time using <code>SELECT ... FOR UPDATE</code>.</li>
+<li>Prevents other transactions from acquiring locks until the transaction completes.</li>
+<li><strong>Best for</strong>: High-conflict transactions (e.g. inventory reservation during flash sales).</li>
+</ul>
+<h3 id="deadlock-handling-strategies">Deadlock Handling Strategies</h3>
+<ul>
+<li><strong>Lock Ordering</strong>: Ensure all transactions access tables and rows in the exact same deterministic order.</li>
+<li><strong>Keep Transactions Short</strong>: Minimize long-running business logic while locks are active.</li>
+<li><strong>Timeout &amp; Retry</strong>: Configure deadlock detection (<code>innodb_lock_wait_timeout</code>) and retry failed transactions with exponential backoff.</li>
+</ul>
+<hr>
+<h2 id="sql-query-execution-order">SQL Query Execution Order</h2>
+<p>Understanding the logical query processing order helps optimize indexes and query structure:</p>
+<pre tabindex="0"><code>1. FROM        (Evaluate table joins, subqueries, CROSS/LEFT/INNER JOIN)
+2. ON          (Apply join conditions)
+3. WHERE       (Filter rows based on predicates)
+4. GROUP BY    (Aggregate rows into groups)
+5. HAVING      (Filter aggregated groups)
+6. SELECT      (Evaluate expressions, projections, aliases)
+7. DISTINCT    (Eliminate duplicate rows)
+8. ORDER BY    (Sort result set by specified columns)
+9. LIMIT/OFFSET(Paginate and constrain output row count)
+</code></pre><blockquote>
+<p><strong>Tip</strong>: You cannot reference a <code>SELECT</code> column alias inside a <code>WHERE</code> clause because <code>WHERE</code> executes before <code>SELECT</code>.</p>
+</blockquote>
+<hr>
+<h2 id="indexing-strategies">Indexing Strategies</h2>
+<h3 id="1-b-tree-index-default-in-innodb--postgres">1. B-Tree Index (Default in InnoDB &amp; Postgres)</h3>
+<ul>
+<li>Self-balancing tree keeping data sorted in $O(\log N)$ time.</li>
+<li>Highly efficient for exact lookups (<code>=</code>), range queries (<code>BETWEEN</code>, <code>&lt;</code>, <code>&gt;</code>), and sorting (<code>ORDER BY</code>).</li>
+<li>Keys are sorted lexicographically; queries must satisfy the <strong>Leftmost Prefix Rule</strong> for multi-column indexes.</li>
+</ul>
+<h3 id="2-composite-multi-column-index">2. Composite (Multi-Column) Index</h3>
+<ul>
+<li>Covers queries filtering across multiple fields:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> idx_user_status_created <span style="color:#66d9ef">ON</span> users (status, created_at);
+</span></span></code></pre></div></li>
+<li>Works for queries on <code>(status)</code> and <code>(status, created_at)</code>, but will <strong>not</strong> be used for queries filtering only on <code>(created_at)</code>.</li>
+</ul>
+<h3 id="3-partial-index-postgresql">3. Partial Index (PostgreSQL)</h3>
+<ul>
+<li>Indexes only a specific subset of rows matching a predicate:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> idx_active_users <span style="color:#66d9ef">ON</span> users (email) <span style="color:#66d9ef">WHERE</span> is_active <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>;
+</span></span></code></pre></div></li>
+<li>Saves substantial disk space and write I/O by ignoring archived or inactive records.</li>
+</ul>
+<h3 id="4-hash-index">4. Hash Index</h3>
+<ul>
+<li>Maps hash values directly to rows with $O(1)$ lookups.</li>
+<li>Only supports exact equality checks (<code>=</code>), does <strong>not</strong> support range queries (<code>&lt;</code>, <code>&gt;</code>) or sorting. Supported in MySQL Memory engine and Postgres.</li>
+</ul>
+<hr>
+<h2 id="partitioning">Partitioning</h2>
+<p>Splits large tables into smaller, manageable chunks within the same database instance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 1. Range Partitioning by Year
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> sales (
+</span></span><span style="display:flex;"><span>    id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    sale_date DATE <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    amount DECIMAL(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>) PARTITION <span style="color:#66d9ef">BY</span> RANGE (<span style="color:#66d9ef">YEAR</span>(sale_date)) (
+</span></span><span style="display:flex;"><span>    PARTITION p_2022 <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> (<span style="color:#ae81ff">2023</span>),
+</span></span><span style="display:flex;"><span>    PARTITION p_2023 <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> (<span style="color:#ae81ff">2024</span>),
+</span></span><span style="display:flex;"><span>    PARTITION p_future <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> <span style="color:#66d9ef">MAXVALUE</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2. List Partitioning by Category
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> products (
+</span></span><span style="display:flex;"><span>    id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    category_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    title VARCHAR(<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>) PARTITION <span style="color:#66d9ef">BY</span> LIST (category_id) (
+</span></span><span style="display:flex;"><span>    PARTITION p_electronics <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">IN</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>    PARTITION p_fashion <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">IN</span> (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>    PARTITION p_others <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">IN</span> (<span style="color:#66d9ef">DEFAULT</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 3. Hash Partitioning for Even Data Distribution
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> logs (
+</span></span><span style="display:flex;"><span>    id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    log_text TEXT
+</span></span><span style="display:flex;"><span>) PARTITION <span style="color:#66d9ef">BY</span> HASH (id) PARTITIONS <span style="color:#ae81ff">4</span>;
+</span></span></code></pre></div><hr>
+<h2 id="sharding">Sharding</h2>
+<p>Horizontal scaling across <strong>multiple physical database servers</strong>:</p>
+<ul>
+<li><strong>Range-Based Sharding</strong>: Shard 1 stores IDs 1–1,000,000; Shard 2 stores 1,000,001–2,000,000.
+<ul>
+<li><em>Risk</em>: Hotspots on newer ranges.</li>
 </ul>
 </li>
-<li>Pub/Sub messaging: Allows real-time communication by sending messages to multiple subscribers.</li>
-</ul>
-<p>Advantages:
-- Fast: Redis is extremely fast due to its in-memory storage, handling millions of operations per second.
-- Scalable: Redis supports clustering, enabling horizontal scaling for high availability and distributed workloads.
-- Simple to Use: Redis is easy to set up and integrates well with various programming languages.
-Disadvantages:
-- Memory-Intensive: Redis stores data in RAM, which means it can be costly for large datasets, as the memory must be scaled accordingly.
-- Single-threaded: Redis is single-threaded for command processing, which can be a bottleneck in CPU-bound workloads, although it handles high I/O operations well.</p>
+<li><strong>Hash-Based Sharding</strong>: Shard = <code>hash(user_id) % num_shards</code>.
 <ul>
-<li>token bucket: tạo token mỗi phút rồi mỗi request lấy 1 cái</li>
-<li>leaky bucket: giống queue sẽ chạy đều đều</li>
+<li><em>Risk</em>: Resharding requires migrating data unless Consistent Hashing is used.</li>
 </ul>
-<h2 id="sentinel-vs-cluster">Sentinel vs Cluster</h2>
-<h1 id="alt-textredispng"><img
+</li>
+<li><strong>Directory-Based Sharding</strong>: A lookup service maps shard keys to physical database endpoints.</li>
+<li><strong>Geo-Sharding</strong>: Route data based on user country to reduce latency and comply with data residency laws (GDPR).</li>
+</ul>
+<hr>
+<h1 id="in-memory--nosql-redis">In-Memory &amp; NoSQL (Redis)</h1>
+<h2 id="overview--core-data-structures">Overview &amp; Core Data Structures</h2>
+<p>Redis is an in-memory, key-value data store capable of sub-millisecond responses:</p>
+<ul>
+<li><strong>Strings</strong>: Text, JSON payloads, counters (<code>INCR</code>, <code>DECR</code>).</li>
+<li><strong>Lists</strong>: Linked lists / quicklists, perfect for queues (<code>LPUSH</code>, <code>RPOP</code>).</li>
+<li><strong>Hashes</strong>: Field-value mappings representing objects (<code>HSET</code>, <code>HGETALL</code>).</li>
+<li><strong>Sets</strong>: Unique unordered items; union/intersection operations (<code>SADD</code>, <code>SINTER</code>).</li>
+<li><strong>Sorted Sets (ZSet)</strong>: Sets ordered by floating-point score, ideal for leaderboards and rate limiters (<code>ZADD</code>, <code>ZRANGEBYSCORE</code>).</li>
+<li><strong>Streams &amp; Pub/Sub</strong>: Real-time event streaming and pub/sub message distribution.</li>
+</ul>
+<h3 id="rate-limiting-algorithms-in-redis">Rate Limiting Algorithms in Redis:</h3>
+<ul>
+<li><strong>Token Bucket</strong>: Tokens are continuously refilled at a fixed rate; each request consumes 1 token.</li>
+<li><strong>Leaky Bucket</strong>: Requests enter a queue and are processed at a steady, fixed rate to smooth out traffic spikes.</li>
+</ul>
+<hr>
+<h2 id="high-availability-sentinel-vs-cluster">High Availability: Sentinel vs Cluster</h2>
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="redis.png"
         data-srcset="redis.png, redis.png 1.5x, redis.png 2x"
         data-sizes="auto"
         alt="redis.png"
-        title="alt text" /></h1>
-<h2 id="redis-hashing">Redis Hashing</h2>
-<p>Redis Cluster distributes keys across multiple nodes using a technique called consistent hashing. Here&rsquo;s a simplified explanation of how it works:</p>
+        title="Redis Sentinel vs Cluster" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Aspect</th>
+<th style="text-align:left">Redis Sentinel</th>
+<th style="text-align:left">Redis Cluster</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Architecture</strong></td>
+<td style="text-align:left">Master-Replica with Sentinel monitoring nodes</td>
+<td style="text-align:left">Multi-Master distributed architecture</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Primary Goal</strong></td>
+<td style="text-align:left">High Availability &amp; Auto-failover</td>
+<td style="text-align:left">High Availability + <strong>Horizontal Sharding</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Data Partitioning</strong></td>
+<td style="text-align:left">No (Every node contains the entire dataset)</td>
+<td style="text-align:left">Yes (Data split across 16,384 hash slots)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Max Capacity</strong></td>
+<td style="text-align:left">Bound by the RAM of a single master</td>
+<td style="text-align:left">Distributed across all master nodes</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="consistent-hashing--16384-hash-slots">Consistent Hashing &amp; 16,384 Hash Slots</h2>
+<p>Redis Cluster avoids master bottlenecking by dividing the keyspace into <strong>16,384 hash slots</strong>:</p>
+<ol>
+<li><strong>Hashing Keys</strong>:
+$$\text{Slot} = \text{CRC16}(\text{key}) \pmod{16384}$$</li>
+<li><strong>Hash Tags</strong>: Wrapping part of a key in <code>{...}</code> ensures related keys land on the same slot:
 <ul>
-<li>
-<p>Hashing Keys: Each key that you insert into a Redis Cluster is hashed using a hash function. Redis uses CRC16 to hash keys by default.</p>
-</li>
-<li>
-<p>Determining Slots: The hash value produced by hashing the key is mapped to one of 16,384 hash slots (0-16383). These hash slots represent the entire keyspace in Redis Cluster.</p>
-</li>
-<li>
-<p>Assigning Slots to Nodes: Each Redis Cluster node is responsible for a subset of these hash slots. When a node joins the cluster or when the cluster is initialized, the hash slots are evenly distributed across the available nodes. Each node is assigned a range of hash slots to handle.</p>
-</li>
-<li>
-<p>Routing Keys: When a client sends a command to a Redis Cluster node, the node calculates the hash slot for the key involved in the command. Based on the hash slot, the node determines which other node in the cluster is responsible for that hash slot.</p>
-</li>
-<li>
-<p>Redirecting Commands: If the receiving node is not the owner of the hash slot for the key, it replies to the client with a redirection message containing the address of the correct node that owns the hash slot. The client then directly connects to the correct node to complete the operation.</p>
-</li>
-<li>
-<p>Data Distribution: Keys are distributed across nodes in a way that aims for a balanced distribution of hash slots across the cluster. This helps ensure that the load is evenly distributed and that each node has a roughly equal number of hash slots assigned to it.</p>
-</li>
-</ul>
-<p>By using consistent hashing and distributing hash slots among nodes, Redis Cluster achieves scalability, fault tolerance, and load balancing. It allows for horizontal scaling by adding or removing nodes dynamically while maintaining data consistency and availability.</p>
-<h2 id="redis-backup">Redis Backup</h2>
-<ul>
-<li>
-<p>AOF Persistence: With AOF enabled, Redis logs every write operation to an append-only file on disk. This ensures that every change made to the dataset is recorded in the AOF file.</p>
-</li>
-<li>
-<p>RDB Persistence: In addition to AOF, Redis can also periodically create point-in-time snapshots of the dataset using RDB. These snapshots capture the entire dataset at a specific moment in time and save it to a binary dump file on disk.</p>
-</li>
-<li>
-<p>Benefits</p>
-<ul>
-<li>Durability: AOF ensures that every write operation is persisted to disk before being executed in memory, providing durability in case of system failures or crashes.</li>
-<li>Fast Recovery: In the event of a crash or restart, Redis can use the AOF log to recover the dataset by replaying the logged commands. While AOF-based recovery may be slower than RDB, it provides more granular data recovery.</li>
-<li>Fast Startup: The periodic RDB snapshots provide a fast and efficient way to restore the dataset during Redis startup, as loading data from an RDB snapshot is generally faster than replaying the entire AOF log.</li>
-<li>Reduced Risk: Using both AOF and RDB together reduces the risk of data loss by providing multiple points of recovery. If one persistence mechanism encounters issues, Redis can fall back to the other method for data restoration.</li>
-</ul>
-</li>
-</ul>
-<p>======</p>
-<h1 id="processes">Processes</h1>
-<h2 id="concept">Concept</h2>
-<ul>
-<li>
-<p>A running instance of a program is called a process and it runs in its own memory space. Each time you execute a command, a new process starts. An active processs also includes the resources the program needs to run. These resources are are managed by the operating system(heap, process registers, program counters)</p>
-</li>
-<li>
-<p>Each process has its own memory adress space and one process cannot corrupt the memory space of another process.</p>
-</li>
-<li>
-<p>A process is an active entity as opposed to a program, which is considered to be a passive entity.</p>
-</li>
-<li>
-<p>A new process is created only when running an executable file (not when running Shell builtin commands).</p>
-</li>
-<li>
-<p>Process properties:</p>
-<ul>
-<li>PID (Process ID) - a unique positive integer number</li>
-<li>User</li>
-<li>Group</li>
-<li>Priority / Nice</li>
+<li><code>user:{1001}:profile</code> and <code>user:{1001}:orders</code> will share the same slot.</li>
 </ul>
 </li>
-<li>
-<p>Type of Processes:</p>
-</li>
-</ul>
+<li><strong>Smart Client Routing</strong>:
 <ul>
-<li>Parent</li>
-<li>Child</li>
-<li>Daemon</li>
-<li>Zombie (defunct): a terminated child process that remains in the system&rsquo;s process table while waiting for its parent process to collect its exit status</li>
-<li>Orphan: A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to terminate</li>
-</ul>
-<h2 id="thread">Thread</h2>
-<ul>
-<li>A Thread is a unit of execution within a process. A process has at least  one thread. It is called the main thread.</li>
-<li>Each has it own stack and it is possible to communicate between threads using shared memory space. However, a misheaving thread can bring down the entire process</li>
-</ul>
-<h2 id="how-cpu-run-a-thread-or-process-on-a-cpu">How CPU run a thread or process on a CPU</h2>
-<ul>
-<li>This is handled by context switching. When one process is switched out of the CPU so another process can run</li>
-<li>The operating system stores the state of the current running process so the process can be retored and resume execution at a later point</li>
-<li>In then restores the previously state of other process and resumes execution of that process.</li>
-<li>Context switching is really expensive. It involves saving and loading of registers, switching out memory of pages and updating various kernal data structures.</li>
-<li>Switching execution between threads also requires context switching but it&rsquo;s faster because there are few state to track and there is no need to switch out virtual memory pages which is one of the most expensive operations during a context switch.</li>
-<li>Some other mechanisms: fiber or coroutine</li>
-</ul>
-<h1 id="cron">Cron</h1>
-<h2 id="anacron">Anacron:</h2>
-<h1 id="mount-disk">Mount disk</h1>
-<h1 id="kafka-rabbitmq">Kafka rabbitmq</h1>
-<h2 id="apache-kafka">Apache Kafka</h2>
-<p>Kafka is a distributed event-streaming platform optimized for high throughput, durability, and scalability, log retention. It’s commonly used for real-time data processing and event-driven applications.</p>
-<p>Pros:</p>
-<ul>
-<li>High throughput: Kafka’s design is optimized for handling large volumes of data with minimal latency.</li>
-<li>Durability: Messages are written to disk, ensuring data persistence even in the event of a failure.</li>
-<li>Scalability: Kafka’s partitioned log model allows it to scale horizontally across multiple servers, handling massive data loads.</li>
-<li>Stream processing: Kafka’s integration with tools like Kafka Streams and Apache Flink allows for real-time data processing.</li>
-</ul>
-<p>Cons:</p>
-<ul>
-<li>Complex setup and maintenance: Kafka’s infrastructure requires more configuration and is harder to set up compared to simpler brokers like RabbitMQ.</li>
-<li>Higher resource requirements: Kafka needs substantial storage and memory, making it more demanding than lightweight solutions.</li>
-<li>Limited support for message acknowledgment: Kafka offers &ldquo;at least once&rdquo; and &ldquo;at most once&rdquo; delivery but lacks native support for &ldquo;exactly once&rdquo; delivery across distributed systems.</li>
-</ul>
-<h2 id="rabbitmq">RabbitMQ</h2>
-<p>RabbitMQ is a message broker that supports complex routing and message queueing, offering versatile options for message handling and delivery patterns.</p>
-<p>Pros:</p>
-<ul>
-<li>Ease of use: RabbitMQ is relatively easy to install, configure, and manage, with a lower learning curve for new users.</li>
-<li>Flexible message routing: RabbitMQ supports complex routing using exchanges and queues, ideal for applications needing multiple routing patterns.</li>
-<li>Supports multiple protocols: RabbitMQ supports protocols like AMQP, MQTT, and STOMP, making it versatile for various integrations.</li>
-<li>Reliability: RabbitMQ has built-in support for message acknowledgments, making it easier to implement &ldquo;exactly once&rdquo; or &ldquo;at least once&rdquo; delivery.</li>
-</ul>
-<p>Cons:</p>
-<ul>
-<li>
-<p>Lower throughput than Kafka: RabbitMQ is not optimized for handling extremely high message rates or large message sizes.</p>
-</li>
-<li>
-<p>Scaling challenges: RabbitMQ can scale, but it typically requires extra configuration and does not scale as easily as Kafka.</p>
-</li>
-<li>
-<p>Less suited for log aggregation and event streaming: RabbitMQ is designed more for traditional message queueing rather than high-throughput event streaming.</p>
-</li>
-<li>
-<p>Example usecase:</p>
-<ul>
-<li>
-<p>For the placing an order feature, I choose Kafka over RabbitMQ because we need to keep a history of order events, which is essential for auditing order lifecycles or retry it again. In contrast, RabbitMQ removes messages immediately after receiving acknowledgments, making it less suitable for our needs. Another reason is that Kafka allows multiple consumers to form a consumer group, where each consumer processes different partitions of the same topic and one topic allow only one consumer. it may reduce the risk of double spending money, for example.</p>
-</li>
-<li>
-<p>For simple job notifications or emails, I prefer RabbitMQ over Kafka because it supports complex routing patterns, making it easier to route messages to specific queues based on rules or criteria. RabbitMQ’s simplicity in setup and management makes it more straightforward to implement for these lighter, asynchronous tasks. Additionally, RabbitMQ is generally more resource-efficient for lower-throughput requirements, making it ideal for small jobs like notifications and emails.</p>
-</li>
+<li>Clients cache the node-to-slot mapping.</li>
+<li>If a client contacts the wrong node, the node responds with a <code>MOVED &lt;slot&gt; &lt;ip:port&gt;</code> redirection.</li>
 </ul>
 </li>
-</ul>
-<h1 id="push-vs-pull-model--">Push vs pull model  =======</h1>
-<h2 id="push-model">Push Model</h2>
-<p>In the push model, data is sent automatically from the producer to the consumer whenever an update is available.</p>
+</ol>
+<hr>
+<h2 id="persistence-aof-vs-rdb">Persistence: AOF vs RDB</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Feature</th>
+<th style="text-align:left">AOF (Append-Only File)</th>
+<th style="text-align:left">RDB (Redis Database Snapshot)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Mechanism</strong></td>
+<td style="text-align:left">Logs every write command sequentially to disk</td>
+<td style="text-align:left">Creates a point-in-time binary snapshot of memory</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Data Loss Window</strong></td>
+<td style="text-align:left">Very low (1 sec with <code>appendfsync everysec</code>)</td>
+<td style="text-align:left">Higher (minutes between scheduled snapshots)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>File Size</strong></td>
+<td style="text-align:left">Larger (command log)</td>
+<td style="text-align:left">Compact, optimized binary dump</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Recovery Speed</strong></td>
+<td style="text-align:left">Slower (replays all commands)</td>
+<td style="text-align:left">Very fast (loads memory snapshot directly)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Best Practice</strong></td>
+<td style="text-align:left"><strong>Use both</strong>: RDB for fast restarts and disaster backups; AOF for minimal data loss.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="message-brokers-kafka--rabbitmq">Message Brokers (Kafka &amp; RabbitMQ)</h1>
+<h2 id="architectural-comparison">Architectural Comparison</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Feature</th>
+<th style="text-align:left">Apache Kafka</th>
+<th style="text-align:left">RabbitMQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Architecture</strong></td>
+<td style="text-align:left">Distributed append-only commit log</td>
+<td style="text-align:left">Smart broker / Dumb consumer message queue</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Message Consumption</strong></td>
+<td style="text-align:left"><strong>Pull Model</strong> (Consumers poll by offset)</td>
+<td style="text-align:left"><strong>Push Model</strong> (Broker pushes messages to workers)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Throughput</strong></td>
+<td style="text-align:left">Ultra-high (millions of msgs/sec via batching &amp; Zero-Copy)</td>
+<td style="text-align:left">Moderate to high (tens of thousands msgs/sec)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Message Retention</strong></td>
+<td style="text-align:left">Messages persist on disk after consumption (configurable retention)</td>
+<td style="text-align:left">Messages are deleted immediately upon ACK</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Routing Flexibility</strong></td>
+<td style="text-align:left">Topic / Partition based</td>
+<td style="text-align:left">Complex routing (Direct, Fanout, Topic, Headers exchanges)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Message Ordering</strong></td>
+<td style="text-align:left">Strictly ordered <strong>within a single partition</strong></td>
+<td style="text-align:left">Ordered in queue until dead-letter/requeue</td>
+</tr>
+</tbody>
+</table>
+<h3 id="real-world-decision-guide">Real-world Decision Guide:</h3>
 <ul>
-<li>
-<p>Advantages:</p>
-<ul>
-<li>Low Latency: Data reaches consumers immediately, ideal for real-time applications where timely information is critical.
--Less Polling Overhead: Since the producer pushes data, there’s no need for the consumer to constantly check for updates, reducing unnecessary network traffic.</li>
-<li>Efficient for Small, Frequent Updates: Works well for scenarios with frequent, small updates, as data flows directly without delay.</li>
+<li><strong>Choose Kafka</strong>: When you need audit log history, event streaming, replayability, or high-throughput analytics (e.g. tracking order lifecycles or financial transaction feeds).</li>
+<li><strong>Choose RabbitMQ</strong>: When you need complex routing rules, priority queues, and granular task distributions (e.g. email notifications, image processing background workers).</li>
 </ul>
-</li>
-<li>
-<p>Disadvantages:</p>
-</li>
-</ul>
-<p>Backpressure Issues: If consumers can’t keep up with the data flow, they may become overwhelmed, leading to delays or data loss.
-Lack of Control for Consumers: Consumers have little control over when and how much data they receive, which can be problematic for applications with limited resources.
-Complex Error Handling: Handling failed deliveries or reconnection logic can be more complex, especially when pushing data to multiple consumers.</p>
-<h2 id="pull-model">Pull Model</h2>
-<p>In the pull model, consumers request data from the producer when they are ready.</p>
+<hr>
+<h2 id="messaging-models-push-vs-pull">Messaging Models: Push vs Pull</h2>
+<h3 id="push-model-eg-rabbitmq">Push Model (e.g. RabbitMQ)</h3>
 <ul>
-<li>
-<p>Advantages:</p>
-<ul>
-<li>Consumer-Controlled: Consumers control when they receive data, making it easier to manage resources and avoid overload.</li>
-<li>Better for Batch Processing: Consumers can pull data in batches, which is often more efficient for processing large amounts of data periodically.</li>
-<li>Error Resilience: Failed requests can be retried by the consumer, and the consumer can manage error handling and reconnections more easily.</li>
+<li>Broker pushes messages to consumers as soon as they arrive.</li>
+<li><strong>Pros</strong>: Immediate delivery, ultra-low latency, no client polling overhead.</li>
+<li><strong>Cons</strong>: Consumers can suffer from buffer overflow or backpressure if message volume exceeds consumption speed. (Mitigated via <code>basic.qos</code> prefetch limit).</li>
 </ul>
-</li>
-<li>
-<p>Disadvantages:</p>
+<h3 id="pull-model-eg-kafka">Pull Model (e.g. Kafka)</h3>
 <ul>
-<li>Higher Latency: Data may not be received immediately since it depends on the consumer’s polling interval, which can lead to delays.</li>
-<li>Increased Polling Overhead: Frequent polling can lead to unnecessary network traffic and increased load on the producer if the consumer checks too often.</li>
-</ul>
-</li>
+<li>Consumers poll the broker for batches of messages at their own pace.</li>
+<li><strong>Pros</strong>: Natural flow control, backpressure resistance, ideal for batching and maximizing I/O efficiency.</li>
+<li><strong>Cons</strong>: Potential polling latency if messages are sparse (mitigated using long-polling timeouts).</li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -641,7 +651,7 @@ Complex Error Handling: Handling failed deliveries or reconnection logic can be 
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ducthanh98" target="_blank">ThanhLD</a></span></div>
         </div>
     </footer></div>
 

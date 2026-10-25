@@ -7,16 +7,16 @@
     <title>Microservices Architecture &amp; Distributed System Design Patterns</title>
     <link>https://ducthanh98.github.io/posts/microservice/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/microservice/</guid>
-    <description><![CDATA[Monolith vs microservice Queue document Microservice design pattern document Deployment strategy Cách chia micro Compare mono micro Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
-Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system.]]></description>
+    <description><![CDATA[Monolith vs Microservices Architecture Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
+Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system. Microservices Architecture Pros: - Independent scalability: Scale each service based on need.]]></description>
 </item>
 <item>
     <title>OOP, SOLID Principles &amp; Design Patterns</title>
     <link>https://ducthanh98.github.io/posts/algorithms/</link>
     <pubDate>Mon, 01 May 2023 22:43:50 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/algorithms/</guid>
     <description><![CDATA[OOP Encapsulation: Grouping data and methods that operate on the data together, and restricting access to some components. Là quá trình ẩn đi các chi tiết bên trong của một đối tượng và chỉ cung cấp một giao diện rõ ràng cho người dùng (hay các đối tượng khác) để tương tác type Car struct { brand string speed int } func (c *Car) setSpeed(s int) { c.speed = s } func (c *Car) getSpeed() int { return c.]]></description>
 </item>

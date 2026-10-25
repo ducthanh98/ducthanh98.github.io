@@ -7,7 +7,7 @@
     <title>Generative AI: Chunking Strategies &amp; AWS Bedrock</title>
     <link>https://ducthanh98.github.io/posts/genai/</link>
     <pubDate>Thu, 01 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/genai/</guid>
     <description><![CDATA[Chunking strategy Standard chunking: Fixed size: Specify tokens per chunk and overlap percentage Default: 300tokens per chunk No chunk: very document is a chunk Hierarchical chunking Nested parent/child chunks Initial search hits the child chunk, and then we search back to parent chunk Semantic chunking Hits a foundation model to break up chunks based on semantic ontent and not just things like sentences or a fixed chunk Speifiy maximum tokens per chunk Buffer size: number of surrounding sentences per sentence to consider when embeddings Too large = too noise, too small = missing important context Breakpoint: How semantically chunk must be Too big: each chunk have a clearly context, number of chunk will be lower and size of each chunk will become bigger AWS Bedrock Guardrail contet filtẻing for prompts and responses works with text foundation models word filtering topic filtering profanities PII removal(masking) contextual grounding check: prevent halu, measure grounding configure blocked messsage erssponse Prompt Type of prompt Zero shot: No example given, relies only on large models Few shot: Provide some example, Chain of thought(COT) Bedrock Data Automation Extract structured data from pretty much anything SageMaker Data Wrangler imoprt daa visualize data transform data ]]></description>
 </item>

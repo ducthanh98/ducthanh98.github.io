@@ -7,14 +7,14 @@
         <title>JavaScript, TypeScript &amp; React Core Concepts - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="JavaScript, TypeScript &amp; React Core Concepts" />
-<meta property="og:description" content="Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed." />
+<meta property="og:description" content="JavaScript Fundamentals Closures A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed. This means that you can use variables and functions before they are declared in the code." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/javascript/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-20T10:00:00+07:00" />
 <meta property="article:modified_time" content="2024-01-20T10:00:00+07:00" /><meta property="og:site_name" content="ThanhLD site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JavaScript, TypeScript &amp; React Core Concepts"/>
-<meta name="twitter:description" content="Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed."/>
+<meta name="twitter:description" content="JavaScript Fundamentals Closures A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed. This means that you can use variables and functions before they are declared in the code."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,12 +29,12 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/javascript\/"
-        },"genre": "posts","keywords": "JavaScript, TypeScript, React, Frontend, Event Loop","wordcount":  1740 ,
+        },"genre": "posts","keywords": "JavaScript, TypeScript, React, Frontend, Event Loop","wordcount":  1705 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/javascript\/","datePublished": "2024-01-20T10:00:00+07:00","dateModified": "2024-01-20T10:00:00+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "Author"
+                "name": "ThanhLD"
             },"description": ""
     }
     </script></head>
@@ -70,8 +70,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JavaScript, TypeScript & React Core Concepts</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-20">2024-01-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1740 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-20">2024-01-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1705 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -80,26 +80,7 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#closure-function-documentclosure-function"><a href="#closure-function">Closure function document</a></a></li>
-    <li><a href="#hoisting-documenthoisting"><a href="#hoisting">Hoisting document</a></a></li>
-    <li><a href="#event-loop-stack-documenteventloop-stack"><a href="#eventloop-stack">Event loop stack document</a></a></li>
-  </ul>
-
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#operator-type-union-intersection-pick--omit-documentoperator-type"><a href="#operator-type">Operator Type (union, intersection, pick , omit) document</a></a></li>
-        <li><a href="#interface-type-documentinterface-type"><a href="#interface-type">Interface, type document</a></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#hooks-documenthooks"><a href="#hooks">Hooks document</a></a></li>
-    <li><a href="#life-cycles-documentlife-cycles"><a href="#life-cycles">Life cycles document</a></a></li>
-    <li><a href="#detect-changes-documentdetect-changes"><a href="#detect-changes">Detect changes document</a></a></li>
-    <li><a href="#memoization-documentmemoization"><a href="#memoization">Memoization document</a></a></li>
-    <li><a href="#lazy-load-documentlazy-load"><a href="#lazy-load">Lazy load document</a></a></li>
+    <li><a href="#closures">Closures</a></li>
   </ul>
 
   <ul>
@@ -127,20 +108,8 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="javascript">Javascript</h1>
-<h2 id="closure-function-documentclosure-function"><a href="#closure-function" rel="">Closure function document</a></h2>
-<h2 id="hoisting-documenthoisting"><a href="#hoisting" rel="">Hoisting document</a></h2>
-<h2 id="event-loop-stack-documenteventloop-stack"><a href="#eventloop-stack" rel="">Event loop stack document</a></h2>
-<h1 id="typescript">Typescript</h1>
-<h3 id="operator-type-union-intersection-pick--omit-documentoperator-type"><a href="#operator-type" rel="">Operator Type (union, intersection, pick , omit) document</a></h3>
-<h3 id="interface-type-documentinterface-type"><a href="#interface-type" rel="">Interface, type document</a></h3>
-<h1 id="react">React</h1>
-<h2 id="hooks-documenthooks"><a href="#hooks" rel="">Hooks document</a></h2>
-<h2 id="life-cycles-documentlife-cycles"><a href="#life-cycles" rel="">Life cycles document</a></h2>
-<h2 id="detect-changes-documentdetect-changes"><a href="#detect-changes" rel="">Detect changes document</a></h2>
-<h2 id="memoization-documentmemoization"><a href="#memoization" rel="">Memoization document</a></h2>
-<h2 id="lazy-load-documentlazy-load"><a href="#lazy-load" rel="">Lazy load document</a></h2>
-<h1 id="closure-function">Closure function</h1>
+            </div><div class="content" id="content"><h1 id="javascript-fundamentals">JavaScript Fundamentals</h1>
+<h2 id="closures">Closures</h2>
 <ul>
 <li>A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention.</li>
 </ul>
@@ -452,7 +421,7 @@ When a component is being removed from the DOM:</li>
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ducthanh98" target="_blank">ThanhLD</a></span></div>
         </div>
     </footer></div>
 

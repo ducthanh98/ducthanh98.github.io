@@ -7,7 +7,7 @@
     <title>Azure Administrator (AZ-104) Notes</title>
     <link>https://ducthanh98.github.io/posts/az-104/</link>
     <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/az-104/</guid>
     <description><![CDATA[Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD.]]></description>
 </item>

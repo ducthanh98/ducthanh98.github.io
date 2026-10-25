@@ -7,7 +7,7 @@
     <title>Azure Administrator (AZ-104) Notes</title>
     <link>https://ducthanh98.github.io/posts/az-104/</link>
     <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/az-104/</guid>
     <description><![CDATA[Entra ID Licences The feature can only be used with security groups (only), and Microsoft 365 groups that have securityEnabled=TRUE. Can delete all users whether a license is assigned directly or via inheritance from a group membership Groups with active license assignments cannot be deleted Users Azure (RBAC) and Azure AD roles are independent. AD roles do not grant access to resources and Azure roles do not grant access to Azure AD.]]></description>
 </item>
@@ -15,7 +15,7 @@
     <title>Behavioral &amp; HR Interview Questions &amp; Answers</title>
     <link>https://ducthanh98.github.io/posts/introduce/</link>
     <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/introduce/</guid>
     <description><![CDATA[Introduce about yourself Firstly, Thank you for taking the time to review my CV. Regarding myself, I graduated with a degree in Software Engineering. I have been working for about six years in software development, focusing primarily on backend technologies and cloud services. Throughout my career, I have focused not just on coding but also on mentoring junior developers and promoting best practices in code quality and version control. Most recently, I worked at VPBank, where I contributed to the development of their loyalty system.]]></description>
 </item>
@@ -23,7 +23,7 @@
     <title>Generative AI: Chunking Strategies &amp; AWS Bedrock</title>
     <link>https://ducthanh98.github.io/posts/genai/</link>
     <pubDate>Thu, 01 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/genai/</guid>
     <description><![CDATA[Chunking strategy Standard chunking: Fixed size: Specify tokens per chunk and overlap percentage Default: 300tokens per chunk No chunk: very document is a chunk Hierarchical chunking Nested parent/child chunks Initial search hits the child chunk, and then we search back to parent chunk Semantic chunking Hits a foundation model to break up chunks based on semantic ontent and not just things like sentences or a fixed chunk Speifiy maximum tokens per chunk Buffer size: number of surrounding sentences per sentence to consider when embeddings Too large = too noise, too small = missing important context Breakpoint: How semantically chunk must be Too big: each chunk have a clearly context, number of chunk will be lower and size of each chunk will become bigger AWS Bedrock Guardrail contet filtẻing for prompts and responses works with text foundation models word filtering topic filtering profanities PII removal(masking) contextual grounding check: prevent halu, measure grounding configure blocked messsage erssponse Prompt Type of prompt Zero shot: No example given, relies only on large models Few shot: Provide some example, Chain of thought(COT) Bedrock Data Automation Extract structured data from pretty much anything SageMaker Data Wrangler imoprt daa visualize data transform data ]]></description>
 </item>
@@ -31,23 +31,23 @@
     <title>JavaScript, TypeScript &amp; React Core Concepts</title>
     <link>https://ducthanh98.github.io/posts/javascript/</link>
     <pubDate>Sat, 20 Jan 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/javascript/</guid>
-    <description><![CDATA[Javascript Closure function document Hoisting document Event loop stack document Typescript Operator Type (union, intersection, pick , omit) document Interface, type document React Hooks document Life cycles document Detect changes document Memoization document Lazy load document Closure function A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed.]]></description>
+    <description><![CDATA[JavaScript Fundamentals Closures A closure in JavaScript allows the function to remember the variables from the enclosing function where it was created, enabling encapsulation and state retention. Hoisting Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their containing scope during the compile phase, before the code is executed. This means that you can use variables and functions before they are declared in the code.]]></description>
 </item>
 <item>
     <title>Python Core: Context Managers, Generators &amp; GIL</title>
     <link>https://ducthanh98.github.io/posts/python/</link>
     <pubDate>Mon, 15 Jan 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/python/</guid>
-    <description><![CDATA[Python Context Manager Yield keyword Context Context Manager giúp quản lý tài nguyên tự động, đảm bảo tài nguyên (file, database connection, network socket,&hellip;) được mở và đóng đúng cách. Đóng tài nguyên tự động, tránh lỗi quên close() Xử lý lỗi tự động, giảm code try-except-finally class FileManager: def __init__(self, filename): self.filename = filename def __enter__(self): self.file = open(self.filename, &#34;r&#34;) # Mở file return self.file # Trả về file để sử dụng trong `with` def __exit__(self, exc_type, exc_value, traceback): self.]]></description>
+    <description><![CDATA[Context Managers Context Manager giúp quản lý tài nguyên tự động, đảm bảo tài nguyên (file, database connection, network socket,&hellip;) được mở và đóng đúng cách. Đóng tài nguyên tự động, tránh lỗi quên close() Xử lý lỗi tự động, giảm code try-except-finally class FileManager: def __init__(self, filename): self.filename = filename def __enter__(self): self.file = open(self.filename, &#34;r&#34;) # Mở file return self.file # Trả về file để sử dụng trong `with` def __exit__(self, exc_type, exc_value, traceback): self.]]></description>
 </item>
 <item>
     <title>Computer Networking Fundamentals for Interviews</title>
     <link>https://ducthanh98.github.io/posts/networking/</link>
     <pubDate>Wed, 10 Jan 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/networking/</guid>
     <description><![CDATA[Computer Networking Fundamentals Table of Contents OSI 7 Layers vs TCP/IP Model TCP vs UDP TCP 3-Way Handshake &amp; 4-Way Teardown 3-Way Handshake (Connection Establishment) 4-Way Teardown (Connection Termination) The TIME_WAIT State HTTP Evolution: HTTP/1.1 vs HTTP/2 vs HTTP/3 HTTPS &amp; SSL/TLS Handshake What Happens When You Type a URL in Your Browser? API Protocols: REST vs gRPC vs WebSockets Load Balancing: Layer 4 vs Layer 7 OSI 7 Layers vs TCP/IP Model OSI Layer TCP/IP Layer Common Protocols / Devices Data Unit 7.]]></description>
 </item>
@@ -55,33 +55,34 @@
     <title>Golang Deep Dive: Concurrency, Runtime &amp; Architecture</title>
     <link>https://ducthanh98.github.io/posts/golang/</link>
     <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/golang/</guid>
-    <description><![CDATA[Channel Document Context document IO Reader Writer Mutex Lock, Sync package GC, Stack &amp; Heap Document Go routines document Go scheduler document Memory leak Generic document Test document Hexagonal document rest vs grapqh Git document Analyze code document Dependency injection Security consideration Channel unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication.]]></description>
+    <description><![CDATA[Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
+For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values.]]></description>
 </item>
 <item>
     <title>Microservices Architecture &amp; Distributed System Design Patterns</title>
     <link>https://ducthanh98.github.io/posts/microservice/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:37 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/microservice/</guid>
-    <description><![CDATA[Monolith vs microservice Queue document Microservice design pattern document Deployment strategy Cách chia micro Compare mono micro Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
-Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system.]]></description>
+    <description><![CDATA[Monolith vs Microservices Architecture Monolithic Architecture Pros: - Simpler to develop and deploy: Single codebase, fewer moving parts. - Easier testing: End-to-end tests are straightforward. - Lower operational overhead: One unit to manage and deploy. Cons:
+Limited scalability: Scaling requires scaling the entire app. - Harder to maintain: As the app grows, managing the codebase becomes difficult. - Tight coupling: Changes in one part can affect the entire system. Microservices Architecture Pros: - Independent scalability: Scale each service based on need.]]></description>
 </item>
 <item>
     <title>Database &amp; Message Brokers: SQL, NoSQL &amp; Queues</title>
     <link>https://ducthanh98.github.io/posts/database/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:02 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/database/</guid>
-    <description><![CDATA[SQL Delete AND Truncate Isolation level mysql vs postgres Execution order document Index document Partition document Sharding document NOSQL Redis document Redis backup document Message brokers kafka vs rabbitmq SQL vs Nosql ACID is a set of properties of relational database transactions.
-Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a chuyển đến b thì bắt buộc phải hoàn tất hoặc phải rollback) Consistency - Any transaction will bring the database from one valid state to another (ví dụ: nếu bản quản lí số lượng hàng, và số lượng hàng không bao giờ là âm, thì một giao dịch không được vi phạm quy tắc này) Isolation - Executing transactions concurrently has the same results as if the transactions were executed serially Durability - Once a transaction has been committed, it will remain so]]></description>
+    <description><![CDATA[Comprehensive notes on Relational Databases (SQL), In-Memory Caching (Redis), and Distributed Message Brokers (Kafka &amp; RabbitMQ) for technical interviews and system architecture design.
+Relational Databases (SQL) SQL vs NoSQL ACID Properties in Relational Databases Atomicity: All operations in a transaction succeed or fail together. If any operation fails, the entire transaction is rolled back. (e.g. transfer money from Account A to Account B). Consistency: Any transaction brings the database from one valid state to another, strictly obeying all schema rules, constraints, triggers, and cascades.]]></description>
 </item>
 <item>
     <title>Linux &amp; Operating System Internals</title>
     <link>https://ducthanh98.github.io/posts/linux/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:02 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/linux/</guid>
     <description><![CDATA[Operating System Internals &amp; Linux Table of Contents Processes Process Concept Process States &amp; Types Threads Process vs Thread Context Switching Memory Management (Stack vs Heap, Virtual Memory) Cron &amp; Scheduling Storage &amp; Mount Disk Essential Linux Troubleshooting Commands Processes Process Concept A running instance of a program is called a process and it runs in its own memory space. Each time you execute a command, a new process starts. An active process also includes the resources the program needs to run.]]></description>
 </item>

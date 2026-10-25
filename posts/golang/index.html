@@ -7,14 +7,16 @@
         <title>Golang Deep Dive: Concurrency, Runtime &amp; Architecture - ThanhLD Site</title><meta name="Description" content="Hi, My name&#39;s Thanh 
  Skype: live:fushion48 
  PhoneNumber: &#43;84918279888"><meta property="og:title" content="Golang Deep Dive: Concurrency, Runtime &amp; Architecture" />
-<meta property="og:description" content="Channel Document Context document IO Reader Writer Mutex Lock, Sync package GC, Stack &amp; Heap Document Go routines document Go scheduler document Memory leak Generic document Test document Hexagonal document rest vs grapqh Git document Analyze code document Dependency injection Security consideration Channel unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication." />
+<meta property="og:description" content="Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
+For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ducthanh98.github.io/posts/golang/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-23T09:40:49+07:00" />
 <meta property="article:modified_time" content="2023-12-23T09:40:49+07:00" /><meta property="og:site_name" content="ThanhLD site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang Deep Dive: Concurrency, Runtime &amp; Architecture"/>
-<meta name="twitter:description" content="Channel Document Context document IO Reader Writer Mutex Lock, Sync package GC, Stack &amp; Heap Document Go routines document Go scheduler document Memory leak Generic document Test document Hexagonal document rest vs grapqh Git document Analyze code document Dependency injection Security consideration Channel unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication."/>
+<meta name="twitter:description" content="Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
+For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values."/>
 <meta name="application-name" content="ThanhLD site">
 <meta name="apple-mobile-web-app-title" content="ThanhLD site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,12 +31,12 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/golang\/"
-        },"genre": "posts","keywords": "Golang, Concurrency, Goroutines, Memory, Hexagonal Architecture, Interview","wordcount":  4881 ,
+        },"genre": "posts","keywords": "Golang, Concurrency, Goroutines, Memory, Hexagonal Architecture, Interview","wordcount":  4843 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/golang\/","datePublished": "2023-12-23T09:40:49+07:00","dateModified": "2023-12-23T09:40:49+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "Author"
+                "name": "ThanhLD"
             },"description": ""
     }
     </script></head>
@@ -70,8 +72,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang Deep Dive: Concurrency, Runtime & Architecture</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4881 words&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming-languages/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Programming Languages</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4843 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;23 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -80,7 +82,7 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#channel">Channel</a>
+    <li><a href="#channel-types">Channel Types</a>
       <ul>
         <li><a href="#unbuffered-channel">unbuffered channel</a></li>
         <li><a href="#buffer-channel">buffer channel</a></li>
@@ -129,23 +131,8 @@
     <li><a href="#man-in-the-middle">Man-in-the-Middle</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="channel-documentchannel"><a href="#channel" rel="">Channel Document</a></h1>
-<h1 id="context-documentcontext"><a href="#context" rel="">Context document</a></h1>
-<h1 id="io-reader-writerreader-writer"><a href="#reader-writer" rel="">IO Reader Writer</a></h1>
-<h1 id="mutex-lock-sync-packagemutex-sync"><a href="#mutex-sync" rel="">Mutex Lock, Sync package</a></h1>
-<h1 id="gc-stack--heap-documentgc-stack-heap"><a href="#gc-stack-heap" rel="">GC, Stack &amp; Heap Document</a></h1>
-<h1 id="go-routines-documentgo-routine"><a href="#go-routine" rel="">Go routines document</a></h1>
-<h1 id="go-scheduler-documentgo-scheduler"><a href="#go-scheduler" rel="">Go scheduler document</a></h1>
-<h1 id="memory-leakprofiling-memory"><a href="#profiling-memory" rel="">Memory leak</a></h1>
-<h1 id="generic-documentgeneric"><a href="#generic" rel="">Generic document</a></h1>
-<h1 id="test-documenttest"><a href="#test" rel="">Test document</a></h1>
-<h1 id="hexagonal-documenthexagonal"><a href="#hexagonal" rel="">Hexagonal document</a></h1>
-<h1 id="rest-vs-grapqhrest"><a href="#rest" rel="">rest vs grapqh</a></h1>
-<h1 id="git-documentgit"><a href="#git" rel="">Git document</a></h1>
-<h1 id="analyze-code-documentanalyze-code"><a href="#analyze-code" rel="">Analyze code document</a></h1>
-<h1 id="dependency-injectiondi"><a href="#di" rel="">Dependency injection</a></h1>
-<h1 id="security-considerationcommon-security-considerations"><a href="#common-security-considerations" rel="">Security consideration</a></h1>
-<h2 id="channel">Channel</h2>
+            </div><div class="content" id="content"><h1 id="concurrency--channels">Concurrency &amp; Channels</h1>
+<h2 id="channel-types">Channel Types</h2>
 <h3 id="unbuffered-channel">unbuffered channel</h3>
 <pre><code>An unbuffered channel does not have any capacity to store values. 
 </code></pre>
@@ -1039,7 +1026,7 @@ Consumer phải idempotent bằng:</p>
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ducthanh98" target="_blank">ThanhLD</a></span></div>
         </div>
     </footer></div>
 

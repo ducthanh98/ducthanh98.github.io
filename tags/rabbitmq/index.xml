@@ -7,10 +7,10 @@
     <title>Database &amp; Message Brokers: SQL, NoSQL &amp; Queues</title>
     <link>https://ducthanh98.github.io/posts/database/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:02 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/database/</guid>
-    <description><![CDATA[SQL Delete AND Truncate Isolation level mysql vs postgres Execution order document Index document Partition document Sharding document NOSQL Redis document Redis backup document Message brokers kafka vs rabbitmq SQL vs Nosql ACID is a set of properties of relational database transactions.
-Atomicity - Each transaction is all or nothing( ví dụ giao dịch rút từ a chuyển đến b thì bắt buộc phải hoàn tất hoặc phải rollback) Consistency - Any transaction will bring the database from one valid state to another (ví dụ: nếu bản quản lí số lượng hàng, và số lượng hàng không bao giờ là âm, thì một giao dịch không được vi phạm quy tắc này) Isolation - Executing transactions concurrently has the same results as if the transactions were executed serially Durability - Once a transaction has been committed, it will remain so]]></description>
+    <description><![CDATA[Comprehensive notes on Relational Databases (SQL), In-Memory Caching (Redis), and Distributed Message Brokers (Kafka &amp; RabbitMQ) for technical interviews and system architecture design.
+Relational Databases (SQL) SQL vs NoSQL ACID Properties in Relational Databases Atomicity: All operations in a transaction succeed or fail together. If any operation fails, the entire transaction is rolled back. (e.g. transfer money from Account A to Account B). Consistency: Any transaction brings the database from one valid state to another, strictly obeying all schema rules, constraints, triggers, and cascades.]]></description>
 </item>
 </channel>
 </rss>

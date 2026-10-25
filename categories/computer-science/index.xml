@@ -7,7 +7,7 @@
     <title>Computer Networking Fundamentals for Interviews</title>
     <link>https://ducthanh98.github.io/posts/networking/</link>
     <pubDate>Wed, 10 Jan 2024 10:00:00 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/networking/</guid>
     <description><![CDATA[Computer Networking Fundamentals Table of Contents OSI 7 Layers vs TCP/IP Model TCP vs UDP TCP 3-Way Handshake &amp; 4-Way Teardown 3-Way Handshake (Connection Establishment) 4-Way Teardown (Connection Termination) The TIME_WAIT State HTTP Evolution: HTTP/1.1 vs HTTP/2 vs HTTP/3 HTTPS &amp; SSL/TLS Handshake What Happens When You Type a URL in Your Browser? API Protocols: REST vs gRPC vs WebSockets Load Balancing: Layer 4 vs Layer 7 OSI 7 Layers vs TCP/IP Model OSI Layer TCP/IP Layer Common Protocols / Devices Data Unit 7.]]></description>
 </item>
@@ -15,7 +15,7 @@
     <title>Linux &amp; Operating System Internals</title>
     <link>https://ducthanh98.github.io/posts/linux/</link>
     <pubDate>Sun, 12 Nov 2023 22:53:02 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/linux/</guid>
     <description><![CDATA[Operating System Internals &amp; Linux Table of Contents Processes Process Concept Process States &amp; Types Threads Process vs Thread Context Switching Memory Management (Stack vs Heap, Virtual Memory) Cron &amp; Scheduling Storage &amp; Mount Disk Essential Linux Troubleshooting Commands Processes Process Concept A running instance of a program is called a process and it runs in its own memory space. Each time you execute a command, a new process starts. An active process also includes the resources the program needs to run.]]></description>
 </item>
@@ -23,7 +23,7 @@
     <title>OOP, SOLID Principles &amp; Design Patterns</title>
     <link>https://ducthanh98.github.io/posts/algorithms/</link>
     <pubDate>Mon, 01 May 2023 22:43:50 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/algorithms/</guid>
     <description><![CDATA[OOP Encapsulation: Grouping data and methods that operate on the data together, and restricting access to some components. Là quá trình ẩn đi các chi tiết bên trong của một đối tượng và chỉ cung cấp một giao diện rõ ràng cho người dùng (hay các đối tượng khác) để tương tác type Car struct { brand string speed int } func (c *Car) setSpeed(s int) { c.speed = s } func (c *Car) getSpeed() int { return c.]]></description>
 </item>

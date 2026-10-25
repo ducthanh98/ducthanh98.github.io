@@ -7,15 +7,16 @@
     <title>Golang Deep Dive: Concurrency, Runtime &amp; Architecture</title>
     <link>https://ducthanh98.github.io/posts/golang/</link>
     <pubDate>Sat, 23 Dec 2023 09:40:49 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/golang/</guid>
-    <description><![CDATA[Channel Document Context document IO Reader Writer Mutex Lock, Sync package GC, Stack &amp; Heap Document Go routines document Go scheduler document Memory leak Generic document Test document Hexagonal document rest vs grapqh Git document Analyze code document Dependency injection Security consideration Channel unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication.]]></description>
+    <description><![CDATA[Concurrency &amp; Channels Channel Types unbuffered channel An unbuffered channel does not have any capacity to store values. It requires both a sender and a receiver to be ready at the same time to complete the communication. A send operation will block until another goroutine is ready to receive, and vice versa.
+For example, I have a long-running task on the database. Running multiple tasks at once can cause an overload, so I can use a buffered channel to ensure that only one task can run at a time buffer channel A buffered channel has a capacity that allows it to store a specified number of values.]]></description>
 </item>
 <item>
     <title>OOP, SOLID Principles &amp; Design Patterns</title>
     <link>https://ducthanh98.github.io/posts/algorithms/</link>
     <pubDate>Mon, 01 May 2023 22:43:50 &#43;0700</pubDate>
-    <author>Author</author>
+    <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/posts/algorithms/</guid>
     <description><![CDATA[OOP Encapsulation: Grouping data and methods that operate on the data together, and restricting access to some components. Là quá trình ẩn đi các chi tiết bên trong của một đối tượng và chỉ cung cấp một giao diện rõ ràng cho người dùng (hay các đối tượng khác) để tương tác type Car struct { brand string speed int } func (c *Car) setSpeed(s int) { c.speed = s } func (c *Car) getSpeed() int { return c.]]></description>
 </item>
