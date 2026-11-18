@@ -3,7 +3,55 @@
         <title>Tags - Tag - ThanhLD Site</title>
         <link>https://ducthanh98.github.io/tags/</link>
         <description>Tags - Tag - ThanhLD Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</lastBuildDate><atom:link href="https://ducthanh98.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>AWS</title>
+    <link>https://ducthanh98.github.io/tags/aws/</link>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</pubDate>
+    <author>ThanhLD</author>
+    <guid>https://ducthanh98.github.io/tags/aws/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Certification</title>
+    <link>https://ducthanh98.github.io/tags/certification/</link>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</pubDate>
+    <author>ThanhLD</author>
+    <guid>https://ducthanh98.github.io/tags/certification/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>IAM</title>
+    <link>https://ducthanh98.github.io/tags/iam/</link>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</pubDate>
+    <author>ThanhLD</author>
+    <guid>https://ducthanh98.github.io/tags/iam/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>KMS</title>
+    <link>https://ducthanh98.github.io/tags/kms/</link>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</pubDate>
+    <author>ThanhLD</author>
+    <guid>https://ducthanh98.github.io/tags/kms/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>SCS-C03</title>
+    <link>https://ducthanh98.github.io/tags/scs-c03/</link>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</pubDate>
+    <author>ThanhLD</author>
+    <guid>https://ducthanh98.github.io/tags/scs-c03/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Security</title>
+    <link>https://ducthanh98.github.io/tags/security/</link>
+    <pubDate>Wed, 18 Nov 2026 09:00:00 &#43;0700</pubDate>
+    <author>ThanhLD</author>
+    <guid>https://ducthanh98.github.io/tags/security/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>AZ-104</title>
     <link>https://ducthanh98.github.io/tags/az-104/</link>
     <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
@@ -33,54 +81,6 @@
     <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
     <author>ThanhLD</author>
     <guid>https://ducthanh98.github.io/tags/entra-id/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Networking</title>
-    <link>https://ducthanh98.github.io/tags/networking/</link>
-    <pubDate>Mon, 19 Feb 2024 22:57:18 &#43;0700</pubDate>
-    <author>ThanhLD</author>
-    <guid>https://ducthanh98.github.io/tags/networking/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Behavioral</title>
-    <link>https://ducthanh98.github.io/tags/behavioral/</link>
-    <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>ThanhLD</author>
-    <guid>https://ducthanh98.github.io/tags/behavioral/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Career</title>
-    <link>https://ducthanh98.github.io/tags/career/</link>
-    <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>ThanhLD</author>
-    <guid>https://ducthanh98.github.io/tags/career/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>HR</title>
-    <link>https://ducthanh98.github.io/tags/hr/</link>
-    <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>ThanhLD</author>
-    <guid>https://ducthanh98.github.io/tags/hr/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Interview</title>
-    <link>https://ducthanh98.github.io/tags/interview/</link>
-    <pubDate>Sat, 10 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>ThanhLD</author>
-    <guid>https://ducthanh98.github.io/tags/interview/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>AWS Bedrock</title>
-    <link>https://ducthanh98.github.io/tags/aws-bedrock/</link>
-    <pubDate>Thu, 01 Feb 2024 10:00:00 &#43;0700</pubDate>
-    <author>ThanhLD</author>
-    <guid>https://ducthanh98.github.io/tags/aws-bedrock/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

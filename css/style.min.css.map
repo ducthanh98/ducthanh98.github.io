@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "/Users/thanhld/Desktop/18/ducthanh98-hugo/web",
+	"sourceRoot": "/home/thanhld29/Documents/projects/ducthanh98-hugo/web",
 	"sources": [
 		"themes/LoveIt/assets/css/style.scss",
 		"themes/LoveIt/assets/lib/normalize/normalize.css",
