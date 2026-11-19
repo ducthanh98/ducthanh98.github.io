@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ducthanh98.github.io\/posts\/aws-scs-c03\/"
-        },"genre": "posts","keywords": "AWS, SCS-C03, Security, Certification, IAM, KMS","wordcount":  172054 ,
+        },"genre": "posts","keywords": "AWS, SCS-C03, Security, Certification, IAM, KMS","wordcount":  172057 ,
         "url": "https:\/\/ducthanh98.github.io\/posts\/aws-scs-c03\/","datePublished": "2026-11-18T09:00:00+07:00","dateModified": "2026-11-18T09:00:00+07:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -71,7 +71,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">AWS Certified Security – Specialty (SCS-C03) Notes</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ducthanh98" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ThanhLD</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cloud-devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Cloud & DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-11-18">2026-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;172054 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-11-18">2026-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;172057 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;808 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -3862,8 +3862,8 @@ temporary credentials (access key ID + secret access key + <strong>session token
     </figure></p>
 <p>The Roles page (23 roles in the demo member account) shows each role&rsquo;s trusted entity: <a href="https://youtu.be/kPgSsv0hFj0?t=70" target="_blank" rel="noopener noreffer ">▶ #20 01:10</a></p>
 <ul>
-<li><code>AWSReservedSSO_AdministratorAccess_…</code>, <code>_ReadOnly_…</code>, <code>_SecurityBreakGlass_…</code>, <code>_SecurityDeploy_…</code> → <strong>Identity Provider: arn:aws:iam::<acct>:saml-provider/…</strong> (Identity Center permission sets).</li>
-<li><code>AWSServiceRoleForAccessAnalyzer</code>, <code>…ForCloudTrail</code>, <code>…ForConfig</code>, <code>…ForIncidentManager</code>, <code>…ForOrganizations</code>, <code>…ForSSO</code>, <code>…ForSupport</code>, <code>…ForTrustedAdvisor</code>, <code>…ForCloudFormationStackSetsOrgMember</code> → <strong>AWS Service: <service> (Service-Linked Role)</strong>.</li>
+<li><code>AWSReservedSSO_AdministratorAccess_…</code>, <code>_ReadOnly_…</code>, <code>_SecurityBreakGlass_…</code>, <code>_SecurityDeploy_…</code> → <strong>Identity Provider: arn:aws:iam::&lt;acct&gt;:saml-provider/…</strong> (Identity Center permission sets).</li>
+<li><code>AWSServiceRoleForAccessAnalyzer</code>, <code>…ForCloudTrail</code>, <code>…ForConfig</code>, <code>…ForIncidentManager</code>, <code>…ForOrganizations</code>, <code>…ForSSO</code>, <code>…ForSupport</code>, <code>…ForTrustedAdvisor</code>, <code>…ForCloudFormationStackSetsOrgMember</code> → <strong>AWS Service: &lt;service&gt; (Service-Linked Role)</strong>.</li>
 <li>&ldquo;Last activity&rdquo; helps spot unused roles.</li>
 </ul>
 <p><strong>Example: <code>AWSServiceRoleForOrganizations</code></strong> (&ldquo;Service-linked role used by AWS Organizations to enable integration of
@@ -8566,7 +8566,7 @@ delegated admin (or the management account). Storage: <strong>Use existing S3 bu
 <code>AWSLogs/</code> directory. <strong>Log file SSE-KMS encryption</strong> needs a KMS key/alias (not enabled in the demo). <a href="https://youtu.be/xZHPVtLSpLQ?t=460" target="_blank" rel="noopener noreffer ">▶ #40 07:40</a> The demo
 trail <code>org-management-events</code> is <strong>multi-Region</strong>, <strong>enabled for all accounts</strong>, management events only (KMS and RDS Data API
 events not excluded), no data or Insights events.</p>
-<p><figure><a class="lightgallery" href="/posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg" title="S3 layout after the org trail runs" data-thumbnail="/posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg" data-sub-html="<h2>AWSLogs/&lt;org-id&gt;/ holds one folder per account, each with CloudTrail/ and CloudTrail-Digest/ by Region/year/month/day.</h2><p>S3 layout after the org trail runs</p>">
+<p><figure><a class="lightgallery" href="/posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg" title="S3 layout after the org trail runs" data-thumbnail="/posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg" data-sub-html="<h2>AWSLogs/{org-id}/ holds one folder per account, each with CloudTrail/ and CloudTrail-Digest/ by Region/year/month/day.</h2><p>S3 layout after the org trail runs</p>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -8574,7 +8574,7 @@ events not excluded), no data or Insights events.</p>
             data-srcset="/posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg, /posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg 1.5x, /posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg 2x"
             data-sizes="auto"
             alt="/posts/aws-scs-c03/images/040-5-org-trail-s3-layout.jpg" width="1280" height="720" />
-    </a><figcaption class="image-caption">AWSLogs/<org-id>/ holds one folder per account, each with CloudTrail/ and CloudTrail-Digest/ by Region/year/month/day.</figcaption>
+    </a><figcaption class="image-caption">AWSLogs/{org-id}/ holds one folder per account, each with CloudTrail/ and CloudTrail-Digest/ by Region/year/month/day.</figcaption>
     </figure></p>
 <p><strong>Resulting layout:</strong> <code>AWSLogs/&lt;management-account-id&gt;/</code> and <code>AWSLogs/&lt;org-id&gt;/&lt;each-account-id&gt;/</code>. Each account has
 <code>CloudTrail/</code> (compressed <code>.json.gz</code> log files) and <code>CloudTrail-Digest/</code> (for <strong>log file validation</strong>), both split by
@@ -13174,7 +13174,7 @@ transitions such as <strong>Standard-IA</strong> after N days. <a href="https://
         </div>
         <div class="details-content">
             <div class="admonition-content"><ol>
-<li><strong>Management account</strong> → Security Lake → <strong>Get started</strong> → &ldquo;Delegate administration to your Log Archive account&rdquo; → enter the 12-digit account ID (from the access portal) → <strong>Delegate</strong>. Banner: &ldquo;<id> is now the delegated administrator of Security Lake&rdquo;. <a href="https://youtu.be/hZQG0naBmZQ?t=21" target="_blank" rel="noopener noreffer ">▶ #117 00:21</a></li>
+<li><strong>Management account</strong> → Security Lake → <strong>Get started</strong> → &ldquo;Delegate administration to your Log Archive account&rdquo; → enter the 12-digit account ID (from the access portal) → <strong>Delegate</strong>. Banner: &ldquo;&lt;id&gt; is now the delegated administrator of Security Lake&rdquo;. <a href="https://youtu.be/hZQG0naBmZQ?t=21" target="_blank" rel="noopener noreffer ">▶ #117 00:21</a></li>
 <li><strong>Log Archive account</strong> → Security Lake → Get started → <strong>Ingest specific AWS sources</strong>: demo picks CloudTrail management events, Security Hub, VPC Flow Logs (Lambda and EKS deselected). <a href="https://youtu.be/hZQG0naBmZQ?t=101" target="_blank" rel="noopener noreffer ">▶ #117 01:41</a></li>
 <li><strong>Regions:</strong> all supported (recommended) or specific. Demo: <strong>US East (N. Virginia)</strong> only. <a href="https://youtu.be/hZQG0naBmZQ?t=121" target="_blank" rel="noopener noreffer ">▶ #117 02:01</a></li>
 <li><strong>Accounts:</strong> all accounts in the org / specific accounts / this account. Demo: <strong>all accounts</strong> + <strong>automatically enable for new accounts</strong>. <a href="https://youtu.be/hZQG0naBmZQ?t=142" target="_blank" rel="noopener noreffer ">▶ #117 02:22</a></li>
@@ -13264,7 +13264,7 @@ the database itself</strong>, so queries would fail. Possibly fixed since. Fix i
 <li>Principal type: <strong>Principals</strong> (not &ldquo;Principals by attributes&rdquo;).</li>
 <li>Principals: <strong>External accounts</strong> → paste the Security Tooling account ID and <strong>press Enter</strong>. Clicking doesn&rsquo;t add it (UI quirk). <a href="https://youtu.be/hZQG0naBmZQ?t=530" target="_blank" rel="noopener noreffer ">▶ #117 08:50</a></li>
 <li>Resources: <strong>Named Data Catalog resources</strong> (not LF-Tags) → catalog = this account → <strong>Database</strong> = the Security Lake database. No tables/views needed (already configured). <a href="https://youtu.be/hZQG0naBmZQ?t=551" target="_blank" rel="noopener noreffer ">▶ #117 09:11</a></li>
-<li>Permissions: <strong>Describe</strong> only → Grant → &ldquo;Granting catalog permissions to ARNs: <security tooling account>&rdquo;. <a href="https://youtu.be/hZQG0naBmZQ?t=561" target="_blank" rel="noopener noreffer ">▶ #117 09:21</a></li>
+<li>Permissions: <strong>Describe</strong> only → Grant → &ldquo;Granting catalog permissions to ARNs: &lt;security tooling account&gt;&rdquo;. <a href="https://youtu.be/hZQG0naBmZQ?t=561" target="_blank" rel="noopener noreffer ">▶ #117 09:21</a></li>
 <li><strong>Security Tooling</strong> account → <strong>RAM → Shared with me → Resource shares</strong>: two shares, one with tables/views (from subscriber creation) and one for the <strong>database</strong>. <a href="https://youtu.be/hZQG0naBmZQ?t=590" target="_blank" rel="noopener noreffer ">▶ #117 09:50</a></li>
 <li>Normally you must <strong>Accept</strong> them (select → Accept resource share). Here they were already <strong>Active</strong> (auto-accepted, unexpected). <a href="https://youtu.be/hZQG0naBmZQ?t=601" target="_blank" rel="noopener noreffer ">▶ #117 10:01</a></li>
 </ol>
@@ -34734,7 +34734,7 @@ Resilience Hub answers &ldquo;will we meet RTO/RPO?&rdquo;; FIS answers &ldquo;w
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/ducthanh98" target="_blank">ThanhLD</a></span></div>
         </div>
     </footer></div>
